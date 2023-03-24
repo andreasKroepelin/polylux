@@ -57,7 +57,7 @@ These are your options:
 
 - `#(tools.only)(13)[content]`: shows content only on the 13th subslide
 - `#(tools.only-first)[content]`, `#(tools.only-second)[content]`, and
-  `#(tools.only-first)[content]`: convenience abbreviations for `only`
+  `#(tools.only-third)[content]`: convenience abbreviations for `only`
 - `#(tools.until)(5)[content]`: shows content for the subslides 1 to 5
 - `#(tools.beginning(2)[content]`: shows content from the 2nd subslide on
 - `#(tools.one-by-one-list)[one][two][three]`: shows bullet list with items `one`,
