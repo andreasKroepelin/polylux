@@ -79,3 +79,10 @@ Use it as follows:
     slide content
 ])
 ```
+
+Note that in the produces slides in the PDF the page number does not change during
+a multislide.
+
+## Expample
+An example document using this template can be found [here](examples/doc.typ).
+Its output should look like this:
