@@ -86,3 +86,7 @@ a multislide.
 ## Expample
 An example document using this template can be found [here](examples/doc.typ).
 Its output should look like this:
+
+![title slide](assets/title-slide.png)
+![first slide](assets/first-slide.png)
+![multislide](assets/multislide.png)
