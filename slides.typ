@@ -2,7 +2,7 @@
 
 #let multislide(amount, mode: "hide", fn) = {
     let modes = ("hide", "mute")
-    assert(modes.contains(mode), message: "`mode` must be on of " + repr(modes))
+    assert(modes.contains(mode), message: "`mode` must be one of " + repr(modes))
         
     let conditional-display(i) = {
         (subslides, body) => if subslides.contains(i) {
