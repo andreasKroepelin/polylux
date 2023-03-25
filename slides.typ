@@ -3,23 +3,24 @@
 #let multislide(amount, mode: "hide", fn) = {
     let modes = ("hide", "mute")
     assert(modes.contains(mode), message: "`mode` must be one of " + repr(modes))
-        
+
+    // avoid "#set" interferences
+    let full_box(obj) = {
+      box(
+        width: 100%, height: auto, baseline: 0%, fill: none,
+        stroke: none, radius: 0%, inset: 0%, outset: 0%,
+        obj)
+    }
+
     let conditional-display(i) = {
         (subslides, body) => if subslides.contains(i) {
-            body
+            full_box(body)
         } else {
-            // avoid "#set" interferences
-            let default_box(obj) = {
-              box(
-                width: auto, height: auto, baseline: 0%, fill: none,
-                stroke: none, radius: 0%, inset: 0%, outset: 0%,
-                obj)
-            }
             // wrap in box to avoid hiding issues with list, equation and other types
             if mode == "hide" {
-                hide(default_box(body))
+                hide(full_box(body))
             } else {
-                text(gray.lighten(50%), default_box(body))
+                text(gray.lighten(50%), full_box(body))
             }
         }
     }
