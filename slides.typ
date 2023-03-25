@@ -19,14 +19,9 @@
         let cd = conditional-display(i)
         let only(v, body) = cd((v,), body)
         let beginning(v, body) = cd(range(v, amount+1), body)
-        let one-by-one-list(start: 1, ..children) = {
+        let one-by-one(start: 1, ..children) = {
             for idx, child in children.pos() {
-                beginning(start + idx, [- #child])
-            }
-        }
-        let one-by-one-enum(start: 1, ..children) = {
-            for idx, child in children.pos() {
-                beginning(start + idx, [+ #child])
+                beginning(start + idx, child)
             }
         }
         (
@@ -37,8 +32,7 @@
             until: (v, body) => cd(range(1, v+1), body),
             beginning: beginning,
             amount: amount,
-            one-by-one-list: one-by-one-list,
-            one-by-one-enum: one-by-one-enum,
+            one-by-one: one-by-one,
         )
     }
 

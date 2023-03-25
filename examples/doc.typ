@@ -38,10 +38,11 @@
     == A multislide with list items appearing one by one
 
     #grid(
-        columns: (1fr, 1fr),
+        columns: (1fr, 1fr, 1fr),
         gutter: 1em,
-        (tools.one-by-one-list)[abc][def][ghi],
-        (tools.one-by-one-enum)(start: 2)[jkl][mno][pqr],
+        (tools.one-by-one)[- abc][- def][- ghi],
+        (tools.one-by-one)(start: 2)[+ jkl][+ mno][+ pqr],
+        (tools.one-by-one)(start: 1)[#sym.dot.c stu ][#sym.dot.c vwx ][#sym.dot.c yza],
     )
 
     This slide also demonstrates a variant for "hidden" text: `mode: "mute"`.
