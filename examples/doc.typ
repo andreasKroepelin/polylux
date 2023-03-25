@@ -22,28 +22,25 @@
 
 = Multislides
 
-#multislide(5, tools => [
+#slide[
     == A multislide
-    This slide consists of #tools.amount subslides.
     Note how the page number does not increase while we are here.
 
-    #(tools.only-first)[This is only visible on the first subslide.]
+    #only(1)[This is only visible on the first subslide.]
 
-    #(tools.until)(3)[Hurry reading this, it disappears after subslide 3!]
+    #until(3)[Hurry reading this, it disappears after subslide 3!]
 
-    #(tools.beginning)(4)[Huh, pretty empty here #sym.dots.h]
-])
+    #beginning(4)[Huh, pretty empty here #sym.dots.h]
+]
 
-#multislide(4, mode: "mute", tools => [
+#slide[
     == A multislide with list items appearing one by one
 
     #grid(
         columns: (1fr, 1fr, 1fr),
         gutter: 1em,
-        (tools.one-by-one)[- abc][- def][- ghi],
-        (tools.one-by-one)(start: 2)[+ jkl][+ mno][+ pqr],
-        (tools.one-by-one)(start: 1)[#sym.dot.c stu ][#sym.dot.c vwx ][#sym.dot.c yza],
+        one-by-one[- abc][- def][- ghi],
+        one-by-one(start: 2)[1. jkl][2. mno][3. pqr],
+        one-by-one(start: 1)[#sym.dot.c stu ][#sym.dot.c vwx ][#sym.dot.c yza],
     )
-
-    This slide also demonstrates a variant for "hidden" text: `mode: "mute"`.
-])
+]

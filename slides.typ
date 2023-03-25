@@ -1,52 +1,73 @@
 #let section = state("section", none)
+#let subslide = counter("subslide")
+#let repetitions = counter("repetitions")
 
-#let multislide(amount, mode: "hide", fn) = {
-    let modes = ("hide", "mute")
-    assert(modes.contains(mode), message: "`mode` must be one of " + repr(modes))
-        
-    let conditional-display(i) = {
-        (subslides, body) => if subslides.contains(i) {
-            body
-        } else {
-            if mode == "hide" {
-                hide(body)
-            } else {
-                text(gray.lighten(50%), body)
-            }
-        }
+#let slides-custom-hide(mode: "hide", body) = {
+    if mode == "hide" {
+        hide(body)
+    } else {
+        text(gray.lighten(50%), body)
     }
-    let tools(i) = {
-        let cd = conditional-display(i)
-        let only(v, body) = cd((v,), body)
-        let beginning(v, body) = cd(range(v, amount+1), body)
-        let one-by-one(start: 1, ..children) = {
-            for idx, child in children.pos() {
-                beginning(start + idx, child)
-            }
-        }
-        (
-            only-first: body => only(1, body), 
-            only-second: body => only(2, body), 
-            only-third: body => only(3, body), 
-            only: only,
-            until: (v, body) => cd(range(1, v+1), body),
-            beginning: beginning,
-            amount: amount,
-            one-by-one: one-by-one,
-        )
-    }
+}
 
+#let slide(max-repetitions: 10, cover-mode: "hide", body) = {
     locate( loc => {
+        subslide.update(1)
+        repetitions.update(1)
         let page_before = counter(page).at(loc)
         show heading.where(level: 2): h => h
-        for i in range(1, amount + 1) {
-            [
-                #pagebreak(weak: true)
-                #fn(tools(i))
-            ]
+
+        for _ in range(max-repetitions) {
+            locate( loc-inner => {
+                if subslide.at(loc-inner).first() <= repetitions.at(loc-inner).first() {
+                    pagebreak(weak: true)
+                    body
+                }
+            })
+            subslide.step()
             counter(page).update(page_before)
         }
     })
+}
+
+#let only(visible-slide-number, body) = {
+    repetitions.update(rep => calc.max(rep, visible-slide-number))
+    locate( loc => {
+        if subslide.at(loc).first() == visible-slide-number {
+            body
+        } else {
+            slides-custom-hide(body)
+        }
+    })
+}
+
+#let beginning(first-visible-slide-number, body) = {
+    repetitions.update(rep => calc.max(rep, first-visible-slide-number))
+    locate( loc => {
+        if subslide.at(loc).first() >= first-visible-slide-number {
+            body
+        } else {
+            slides-custom-hide(body)
+        }
+    })
+}
+
+#let until(last-visible-slide-number, body) = {
+    repetitions.update(rep => calc.max(rep, last-visible-slide-number))
+    locate( loc => {
+        if subslide.at(loc).first() <= last-visible-slide-number {
+            body
+        } else {
+            slides-custom-hide(body)
+        }
+    })
+}
+
+#let one-by-one(start: 1, ..children) = {
+    repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
+    for idx, child in children.pos() {
+        beginning(start + idx, child)
+    }
 }
 
 #let slides(
