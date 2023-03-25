@@ -81,7 +81,7 @@
     )
 
     let decoration(position, body) = {
-        let border = 1mm + teal
+        let border = 1mm + color
         let strokes = (
             header: ( bottom: border ),
             footer: ( top: border )
@@ -118,7 +118,7 @@
 
     [
         #align(center + horizon,
-            block(fill: teal, inset: 1em, radius: 1em, breakable: false,
+            block(fill: color, inset: 1em, radius: 1em, breakable: false,
                 [
                     #text(2em)[*#title*] \
                     #v(1em)
