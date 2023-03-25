@@ -60,12 +60,13 @@ These are your options:
   `#(tools.only-third)[content]`: convenience abbreviations for `only`
 - `#(tools.until)(5)[content]`: shows content for the subslides 1 to 5
 - `#(tools.beginning(2)[content]`: shows content from the 2nd subslide on
-- `#(tools.one-by-one-list)[one][two][three]`: shows bullet list with items `one`,
-  `two`, and `three` and uncovers one at a time
-- `#(tools.one-by-one-enum)[one][two][three]`: like the one above, but produces
-   an enumeration (Both implicitly uncover the first item on the first subslide,
-   you can specify `#(tools.one-by-one-enum)(start: 3)[one][two][three]`) to make
-   the first item be uncovered on the third subslide.)
+- `#(tools.one-by-one)[one][two][three]`: contents `one`, `two`, and `three` are
+   uncovered one at a time.
+   Especially useful for bullet list or enumeration items,
+   so you write `- one` etc. or `+ one`, respectively. 
+   Implicitly uncovers the first item on the first subslide, you can specify
+   `#(tools.one-by-one)(start: 3)[one][two][three]`) to make the first item be
+   uncovered on the third subslide.
 - `#tools.amount`: returns the total number of subslides in this multislide as
    specified by the user
 
