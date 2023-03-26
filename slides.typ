@@ -7,13 +7,22 @@
 #let cover-mode-hide = cover-mode.update("hide")
 #let cover-mode-mute = cover-mode.update("mute")
 
+// avoid "#set" interferences
+#let full-box(obj) = {
+    box(
+        width: 100%, height: auto, baseline: 0%, fill: none,
+        stroke: none, radius: 0%, inset: 0%, outset: 0%,
+        obj
+    )
+}
+
 #let slide(max-repetitions: 10, body) = {
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
-        show heading.where(level: 2): h => h.body
+        show heading.where(level: 2): h => full-box(h.body)
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
@@ -26,15 +35,6 @@
             subslide.step()
         }
     })
-}
-
-// avoid "#set" interferences
-#let full-box(obj) = {
-    box(
-        width: 100%, height: auto, baseline: 0%, fill: none,
-        stroke: none, radius: 0%, inset: 0%, outset: 0%,
-        obj
-    )
 }
 
 #let slides-custom-hide(body) = {
