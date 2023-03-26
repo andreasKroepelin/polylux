@@ -26,21 +26,22 @@
     == A multislide
     Note how the page number does not increase while we are here.
 
-    #only(1)[This is only visible on the first subslide.]
+    #only(2)[
+        $ integral exp(-(mu - x)^2 / (2 sigma^2) ) dif x $
+    ]
 
     #until(3)[Hurry reading this, it disappears after subslide 3!]
 
-    #beginning(4)[Huh, pretty empty here #sym.dots.h]
+    // #beginning(4)[Huh, pretty empty here #sym.dots.h]
 ]
 
 #slide[
     == A multislide with list items appearing one by one
 
     #grid(
-        columns: (1fr, 1fr, 1fr),
+        columns: (1fr, 1fr),
         gutter: 1em,
         one-by-one[- abc][- def][- ghi],
         one-by-one(start: 2)[1. jkl][2. mno][3. pqr],
-        one-by-one(start: 1)[#sym.dot.c stu ][#sym.dot.c vwx ][#sym.dot.c yza],
     )
 ]
