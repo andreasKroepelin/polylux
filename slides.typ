@@ -27,7 +27,7 @@
 }
 
 // avoid "#set" interferences
-let full-box(obj) = {
+#let full-box(obj) = {
     box(
         width: 100%, height: auto, baseline: 0%, fill: none,
         stroke: none, radius: 0%, inset: 0%, outset: 0%,
@@ -46,7 +46,7 @@ let full-box(obj) = {
         } else {
             panic("Illegal `cover-mode`: " + mode)
         }
-    }
+    })
 }
 
 #let only(visible-slide-number, body) = {
