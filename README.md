@@ -1,6 +1,8 @@
 # Slides in Typst
 This is a template for creating slides in [Typst](https://typst.app/).
 
+![Book badge](https://img.shields.io/badge/docs-book-green)
+
 ## Quickstart
 ```typ
 #import "slides.typ": *
