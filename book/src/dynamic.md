@@ -27,3 +27,12 @@ converted two depends on the highest subslide index you specified content to
 appear or disappear.
 
 Note that the same page number is displayed for all subslides of a logical slide.
+
+## Cover mode
+You can decide if you want covered content to be completely hidden (the default)
+or if you want it to be visible but muted (printed in a light gray).
+Switch between the two modes by using
+```typ
+#cover-mode-hide // covered content is hidden completely
+#cover-mode-mute // covered content is visible but muted
+```
