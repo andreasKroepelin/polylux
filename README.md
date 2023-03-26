@@ -1,7 +1,7 @@
 # Slides in Typst
 This is a template for creating slides in [Typst](https://typst.app/).
 
-It is pretty easy to get started:
+## Quickstart
 ```typ
 #import "slides.typ": *
 
@@ -13,20 +13,13 @@ It is pretty easy to get started:
     date: "March 2023",
     color: teal // teal is the default value, you can use any other color
 )
-```
-With that setup, you can create slides in two ways:
-### 2nd level headings:
-```typ
+
 == A slide
 Some text
 
 == Another slide
 More text
-```
-Every heading of level 2 starts a new slide, simple as that.
 
-### `#slide` function
-```typ
 #slide[
   We do not need a special heading here.
   == But we can ...
@@ -37,51 +30,17 @@ Every heading of level 2 starts a new slide, simple as that.
   Another slide
 ]
 ```
+As you can see, there are two ways of creating slides: using 2nd level headings
+and using the `#slide` function.
 So far, both options behave just the same.
 
-And that's all in principle!
-If you'd like, there are two more features for you to use, however.
+That's all to get you started!
+For more details and to see how you can
 
-## Sections
+- display the current section in the slide header
+- create dynamic slides (think _overlays_ in LaTeX beamer)
 
-To give your audience some orientation where you currently are in your talk,
-you can use 1st level headings to introduce sections:
-```typ
-= Introduction
-```
-These are not displayed themselves but update a small text on each slide's header.
-
-## Dynamic slides
-This template offers basic support for dynamic slides with changing content.
-That means you can show or hide parts of a slide at different points in time.
-Using this feature requires using the `#slide` function.
-To restrict the visiblity of content to certain "subslides", use one of the
-following function:
-
-- `#only(2)[content]`: content is only visible on 2nd subslide
-- `#until(3)[content]`: content is only visible on 1st, 2nd, and 3rd subslide
-- `#beginning(2)[content]`: content is visible from the 2nd subslide onwards
-- `#one-by-one(start: 2)[one][two][three]`: uncover `one` on the 2nd slide, then
-  `two` on the 3rd slide, and then `three` on the 4th slide. You can specify an
-   arbitrary number of contents. The `start` argument is optional.
-   `#one-by-one[x][y]` will uncover `x` on the first subslide.
-
-Let's see this in action:
-```typ
-#slide[
-  always visible
-  #only(1)[only visible on the first subslide]
-  #beginning(2)[only visible on the second subslide]
-]
-```
-
-The number of subslides (number of PDF pages produced) one logical slide is
-converted two depends on the highest subslide index you specified content to
-appear or disappear.
-
-
-Note that in the produces slides in the PDF the page number does not change during
-a multislide.
+visit the [book](https://andreaskroepelin.github.io/typst-slides/)!
 
 ## Expample
 An example document using this template can be found [here](examples/doc.typ).
