@@ -14,7 +14,8 @@ It is pretty easy to get started:
     color: teal // teal is the default value, you can use any other color
 )
 ```
-With that setup, you can create slides by defining 2nd level headings:
+With that setup, you can create slides in two ways:
+### 2nd level headings:
 ```typ
 == A slide
 Some text
@@ -22,8 +23,23 @@ Some text
 == Another slide
 More text
 ```
+Every heading of level 2 starts a new slide, simple as that.
 
-That's all in principle!
+### `#slide` function
+```typ
+#slide[
+  We do not need a special heading here.
+  == But we can ...
+  ... and it doesn't produce new slides here.
+]
+
+#slide[
+  Another slide
+]
+```
+So far, both options behave just the same.
+
+And that's all in principle!
 If you'd like, there are two more features for you to use, however.
 
 ## Sections
@@ -35,51 +51,34 @@ you can use 1st level headings to introduce sections:
 ```
 These are not displayed themselves but update a small text on each slide's header.
 
-## Multislides
-This template even offers basic support for dynamic slides with changing content.
+## Dynamic slides
+This template offers basic support for dynamic slides with changing content.
 That means you can show or hide parts of a slide at different points in time.
-To create such a "multislide" (named as such because one logical slides is compiled
-into multiple PDF pages), you can use the `#multislide` function:
+Using this feature requires using the `#slide` function.
+To restrict the visiblity of content to certain "subslides", use one of the
+following function:
+
+- `#only(2)[content]`: content is only visible on 2nd subslide
+- `#until(3)[content]`: content is only visible on 1st, 2nd, and 3rd subslide
+- `#beginning(2)[content]`: content is visible from the 2nd subslide onwards
+- `#one-by-one(start: 2)[one][two][three]`: uncover `one` on the 2nd slide, then
+  `two` on the 3rd slide, and then `three` on the 4th slide. You can specify an
+   arbitrary number of contents. The `start` argument is optional.
+   `#one-by-one[x][y]` will uncover `x` on the first subslide.
+
+Let's see this in action:
 ```typ
-#multislide(2, tools => [
-    == A multislide
-
-    #(tools.only-first)[This is only visible on the first subslide.]
-    #(tools.only-second)[This is only visible on the second subslide.]
-])
+#slide[
+  always visible
+  #only(1)[only visible on the first subslide]
+  #beginning(2)[only visible on the second subslide]
+]
 ```
-The first argument to `#multislide` is the number of "subslides" you want it to
-produce (`2` in this case).
-Afterwards you specify an anonymous function that returns the slide's content.
-Its argument (which you can call as you like, I find `tools` sensible) provides
-you with different functions that you can use to define the visibility of elements.
-These are your options:
 
-- `#(tools.only)(13)[content]`: shows content only on the 13th subslide
-- `#(tools.only-first)[content]`, `#(tools.only-second)[content]`, and
-  `#(tools.only-third)[content]`: convenience abbreviations for `only`
-- `#(tools.until)(5)[content]`: shows content for the subslides 1 to 5
-- `#(tools.beginning(2)[content]`: shows content from the 2nd subslide on
-- `#(tools.one-by-one)[one][two][three]`: contents `one`, `two`, and `three` are
-   uncovered one at a time.
-   Especially useful for bullet list or enumeration items,
-   so you write `- one` etc. or `+ one`, respectively. 
-   Implicitly uncovers the first item on the first subslide, you can specify
-   `#(tools.one-by-one)(start: 3)[one][two][three]`) to make the first item be
-   uncovered on the third subslide.
-- `#tools.amount`: returns the total number of subslides in this multislide as
-   specified by the user
+The number of subslides (number of PDF pages produced) one logical slide is
+converted two depends on the highest subslide index you specified content to
+appear or disappear.
 
-`#multislide` has an optional argument `mode` that can be either `"hide"` (default)
-or `"mute"`.
-With `mode` set to `"mute"` the hidden content is not really hidden but instead
-displayed in a light gray.
-Use it as follows:
-```typ
-#multislide(3, mode: "mute", tools => [
-    slide content
-])
-```
 
 Note that in the produces slides in the PDF the page number does not change during
 a multislide.
