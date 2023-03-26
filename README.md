@@ -28,14 +28,14 @@ More text
   == But we can ...
   ... and it doesn't produce new slides here.
 ]
-
-#slide[
-  Another slide
-]
 ```
 As you can see, there are two ways of creating slides: using 2nd level headings
 and using the `#slide` function.
 So far, both options behave just the same.
+
+This code produces these PDF pages:
+![title slide](assets/simple.png)
+
 
 That's all to get you started!
 For more details and to see how you can
