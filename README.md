@@ -2,6 +2,7 @@
 This is a template for creating slides in [Typst](https://typst.app/).
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/)
+![GitHub](https://img.shields.io/github/license/andreasKroepelin/typst-slides)
 
 ## Quickstart
 ```typ
