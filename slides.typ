@@ -1,8 +1,12 @@
 #let section = state("section", none)
 #let subslide = counter("subslide")
 #let repetitions = counter("repetitions")
+#let cover-mode = state("cover-mode", "hide")
 
-#let slide(max-repetitions: 10, cover-mode: "hide", body) = {
+#let cover-mode-hide = cover-mode.update("hide")
+#let cover-mode-mute = cover-mode.update("mute")
+
+#let slide(max-repetitions: 10, body) = {
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
@@ -31,12 +35,17 @@ let full-box(obj) = {
     )
 }
 
-#let slides-custom-hide(mode: "hide", body) = {
-    // wrap in box to avoid hiding issues with list, equation and other types
-    if mode == "hide" {
-        hide(full-box(body))
-    } else {
-        text(gray.lighten(50%), full-box(body))
+#let slides-custom-hide(body) = {
+    locate( loc => {
+        let mode = cover-mode.at(loc)
+        // wrap in box to avoid hiding issues with list, equation and other types
+        if mode == "hide" {
+            hide(full-box(body))
+        } else if mode == "mute" {
+            text(gray.lighten(50%), full-box(body))
+        } else {
+            panic("Illegal `cover-mode`: " + mode)
+        }
     }
 }
 
