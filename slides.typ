@@ -1,5 +1,6 @@
 #let section = state("section", none)
 #let subslide = counter("subslide")
+#let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let cover-mode = state("cover-mode", "hide")
 
@@ -7,21 +8,22 @@
 #let cover-mode-mute = cover-mode.update("mute")
 
 #let slide(max-repetitions: 10, body) = {
+    pagebreak(weak: true)
+    logical-slide.step()
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
-        let page_before = counter(page).at(loc)
-        show heading.where(level: 2): h => h
+        show heading.where(level: 2): h => h.body
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
-                if subslide.at(loc-inner).first() <= repetitions.at(loc-inner).first() {
-                    pagebreak(weak: true)
+                let curr-subslide = subslide.at(loc-inner).first()
+                if curr-subslide <= repetitions.at(loc-inner).first() {
+                    if curr-subslide > 1 { pagebreak(weak: true) }
                     body
                 }
             })
             subslide.step()
-            counter(page).update(page_before)
         }
     })
 }
@@ -104,6 +106,7 @@
 
     show heading.where(level: 2): h => [
         #pagebreak(weak: true)
+        #logical-slide.step()
         #h
     ]
 
@@ -140,7 +143,7 @@
                     #short-author #h(10fr)
                     #short-title #h(1fr)
                     #date #h(10fr)
-                    #counter(page).display()
+                    #logical-slide.display()
                 ]
             }
         } ),
