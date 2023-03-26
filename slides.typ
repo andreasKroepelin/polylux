@@ -2,14 +2,6 @@
 #let subslide = counter("subslide")
 #let repetitions = counter("repetitions")
 
-#let slides-custom-hide(mode: "hide", body) = {
-    if mode == "hide" {
-        hide(body)
-    } else {
-        text(gray.lighten(50%), body)
-    }
-}
-
 #let slide(max-repetitions: 10, cover-mode: "hide", body) = {
     locate( loc => {
         subslide.update(1)
@@ -30,11 +22,29 @@
     })
 }
 
+// avoid "#set" interferences
+let full-box(obj) = {
+    box(
+        width: 100%, height: auto, baseline: 0%, fill: none,
+        stroke: none, radius: 0%, inset: 0%, outset: 0%,
+        obj
+    )
+}
+
+#let slides-custom-hide(mode: "hide", body) = {
+    // wrap in box to avoid hiding issues with list, equation and other types
+    if mode == "hide" {
+        hide(full-box(body))
+    } else {
+        text(gray.lighten(50%), full-box(body))
+    }
+}
+
 #let only(visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, visible-slide-number))
     locate( loc => {
         if subslide.at(loc).first() == visible-slide-number {
-            body
+            full-box(body)
         } else {
             slides-custom-hide(body)
         }
@@ -45,7 +55,7 @@
     repetitions.update(rep => calc.max(rep, first-visible-slide-number))
     locate( loc => {
         if subslide.at(loc).first() >= first-visible-slide-number {
-            body
+            full-box(body)
         } else {
             slides-custom-hide(body)
         }
@@ -56,7 +66,7 @@
     repetitions.update(rep => calc.max(rep, last-visible-slide-number))
     locate( loc => {
         if subslide.at(loc).first() <= last-visible-slide-number {
-            body
+            full-box(body)
         } else {
             slides-custom-hide(body)
         }
