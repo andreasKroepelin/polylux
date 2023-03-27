@@ -1,7 +1,7 @@
 # Slides in Typst
 This is a template for creating slides in [Typst](https://typst.app/).
 
-[![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/)
+[![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/typst-slides)
 
 ## Quickstart
@@ -43,4 +43,4 @@ For more details and to see how you can
 - display the current section in the slide header
 - create dynamic slides (think _overlays_ in LaTeX beamer)
 
-visit the [book](https://andreaskroepelin.github.io/typst-slides/)!
+visit the [book](https://andreaskroepelin.github.io/typst-slides/book)!

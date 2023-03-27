@@ -6,4 +6,4 @@ src = "src"
 title = "Slides in Typst"
 
 [output.html]
-site-url = "/typst-slides/"
+site-url = "/typst-slides/book/"
