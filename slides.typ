@@ -104,11 +104,11 @@
         section.update(h.body)
     }
 
-    show heading.where(level: 2): h => [
-        #pagebreak(weak: true)
-        #logical-slide.step()
-        #h
-    ]
+    show heading.where(level: 2): h => {
+        pagebreak(weak: true)
+        logical-slide.step()
+        h
+    }
 
     set text(
         size: 25pt,
