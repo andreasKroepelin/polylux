@@ -1,11 +1,5 @@
-#let base_theme(
-    __type : "theme",
-    color : teal,
-    text-size : 25pt,
-    author-text-space : 1.5em,
-    title-text-size : 2em,
-    title-text-space : 1em,
-    decoration : (position, body, color : red) => {
+
+#let decoration(position, body, color : red) = {
             let border = 1mm + color
             let strokes = (
                 header: ( bottom: border ),
@@ -16,37 +10,74 @@
                 width: 100%,
                 inset: .3em,
                 text(.5em, body)
-            )},
+            )}
+    
+
+#let data(
+    author : none,
+    title : none,
+    short-author : none, 
+    short-title : none, 
+    date : none, 
+)= {
+    if none in (short-author,short-title,date,title) {panic()}
+    (
+    short-author: short-author, 
+    short-title: short-title, 
+    date: date, 
+    author : author,
+    title : title,
+)}
+
+#let current-slide(
+    section : none, 
+    logical-slide : none,
+    subslide : none,
+) = {
+    if none in (section, logical-slide, subslide) {panic()}
+    (
+    section: section, 
+    logical-slide: logical-slide,
+    subslide : subslide,
+)}
+
+
+#let base_theme(
+    __type : "theme",
+    color : teal,
+    text-size : 25pt,
+    author-text-space : 1.5em,
+    title-text-size : 2em,
+    title-text-space : 1em,
     margin: ( x: 1em, y: 4em ),
     header-ascent: 3em,
-    header: (decoration, section) => locate( loc => {
+    header: (data, current-slide) => locate( loc => {
         if counter(page).at(loc).first() > 1 {
-            decoration("header", section.at(loc))
+            decoration("header", current-slide.section.at(loc))
         }
     }),
-    footer: (decoration, section, short-author, short-title, date, logical-slide) => locate( loc => {
+    footer: (data, current-slide) => locate( loc => {
             if counter(page).at(loc).first() > 1 {
                 decoration("footer")[
-                    #short-author #h(10fr)
-                    #short-title #h(1fr)
-                    #date #h(10fr)
-                    #logical-slide.display()
+                    #data.short-author #h(10fr)
+                    #data.short-title #h(1fr)
+                    #data.date #h(10fr)
+                    #current-slide.logical-slide.display()
                 ]
             }
         } ),
     footer-descent: 3em,
-    max-repetitions : 10,
     inset : 1em,
     radius : 1em,
 ) = {
-        assert(type(color) == type(teal))
-        assert(type(text-size) == type(25pt))
-        assert(type(decoration ) == "function")
-        assert(type(margin) == "dictionary")
+        //assert(type(color) == type(teal))
+        //assert(type(text-size) == type(25pt))
+        //assert(type(decoration ) == "function")
+        //assert(type(margin) == "dictionary")
         //assert(type(header) == )
         //assert(type(footer) == )
-        assert(type(footer-descent) == type(3em) )
-        assert(type(max-repetitions) == type(10) )
+        //assert(type(footer-descent) == type(3em) )
+        //assert(type(max-repetitions) == type(10) )
 
         (
         __type : __type,
@@ -57,11 +88,10 @@
         title-text-space : title-text-space,
         decoration : decoration.with(color : color),
         margin: margin,
-        header: header.with(decoration),
+        header: header,
         header-ascent: header-ascent,
-        footer: footer.with(decoration),
+        footer: footer,
         footer-descent: footer-descent,
-        max-repetitions : max-repetitions,
         inset : inset,
         radius : radius,
     )}

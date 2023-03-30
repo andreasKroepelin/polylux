@@ -5,11 +5,13 @@
 )
 
 #show: slides.with(
+    data : data(
     author: "Jon Doe and Jane Doe",
     short-author: "J+J Doe",
     title: "Demonstration of a new Typst template for slides",
     short-title: "Slides template demo",
     date: "March 2023"
+    )
 )
 
 = Introduction

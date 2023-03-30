@@ -1,12 +1,16 @@
 #import "../slides.typ": *
 
 #show: slides.with(
+  data : data(
     author: "Names of author(s)",
     short-author: "Shorter version for slide footer",
     title: "Title of the presentation",
     short-title: "Shorter version for slide footer",
     date: "March 2023",
-    color: teal // teal is the default value, you can use any other color
+  ),
+  theme : base_theme(
+    color: teal
+  ),
 )
 
 == A slide

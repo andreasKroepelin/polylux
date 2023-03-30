@@ -1,11 +1,11 @@
 #import "../slides.typ": *
 
 #show: slides.with(
-    data : data(
-    author: [Joan Doe],
+    data : data(  
+    author: [Astrale],
     short-author: "J.D",
-    title: [A showcase of what #strike[beamer] themes can accomplish.],
-    short-title: "Shorter version for slide footer",
+    title: [A visualisation of the inner values of slides.],
+    short-title: "",
     date: [March 2023],
     ),
     theme : base_theme(
