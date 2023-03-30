@@ -1,3 +1,5 @@
+#import "theme.typ": base_theme, assert_theme
+
 #let section = state("section", none)
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
@@ -16,7 +18,7 @@
     )
 }
 
-#let slide(max-repetitions: 10, body) = {
+#let slide(theme: base_theme(), body) = {
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
@@ -24,7 +26,7 @@
         repetitions.update(1)
         show heading.where(level: 2): h => full-box(h.body)
 
-        for _ in range(max-repetitions) {
+        for _ in range(theme.max-repetitions) {
             locate( loc-inner => {
                 let curr-subslide = subslide.at(loc-inner).first()
                 if curr-subslide <= repetitions.at(loc-inner).first() {
@@ -97,6 +99,7 @@
     short-title: none,
     short-author: none,
     date: none,
+    theme : base_theme(),
     color: teal,
     document_body
 ) = {
@@ -111,11 +114,11 @@
     }
 
     set text(
-        size: 25pt,
+        size: theme.text-size,
     )
 
     let decoration(position, body) = {
-        let border = 1mm + color
+        let border = 1mm + theme.color
         let strokes = (
             header: ( bottom: border ),
             footer: ( top: border )
@@ -130,34 +133,21 @@
 
     set page(
         paper: "presentation-16-9",
-        margin: ( x: 1em, y: 4em ),
-        header: locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("header", section.at(loc))
-            }
-        } ),
-        header-ascent: 3em,
-        footer: locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("footer")[
-                    #short-author #h(10fr)
-                    #short-title #h(1fr)
-                    #date #h(10fr)
-                    #logical-slide.display()
-                ]
-            }
-        } ),
-        footer-descent: 3em,
+        margin: theme.margin,
+        header: theme.header.with(section)(),
+        header-ascent: theme.header-ascent,
+        footer: theme.footer.with(section, short-author, short-title, date, logical-slide)(),
+        footer-descent: theme.footer-descent,
     )
 
     [
         #align(center + horizon,
-            block(fill: color, inset: 1em, radius: 1em, breakable: false,
+            block(fill: theme.color, inset: theme.inset, radius: theme.radius, breakable: false,
                 [
-                    #text(2em)[*#title*] \
-                    #v(1em)
-                    #text(1.5em)[#author] \
-                    #v(1em)
+                    #text(theme.title-text-size)[*#title*] \
+                    #v(theme.title-text-space)
+                    #text(theme.author-text-space)[#author] \
+                    #v(theme.title-text-space)
                     #date
                 ]
             )
