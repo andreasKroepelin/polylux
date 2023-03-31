@@ -9,7 +9,6 @@
           short-title : #data.short-title\
           short-author : #data.short-author\
           date : #data.date\
-
           ]
       ],
       color : red,
@@ -54,16 +53,12 @@ Some text
 == Another slide
 More text
 
-#slide(theme : theme_visualise)[
-  We do not need a special heading here.
-  == But we can ...
-  ... and it doesn't produce new slides here.
-]
+#slide(theme : make_theme())[You can override the theme for only one slide]
 
 
 = Multislides
 
-#slide(theme : theme_visualise)[
+#slide[
     == A multislide
     Multislide
 
@@ -76,7 +71,7 @@ More text
     // #beginning(4)[Huh, pretty empty here #sym.dots.h]
 ]
 
-#slide(theme : theme_visualise)[
+#slide[
     == A multislide with list items appearing one by one
 
     #grid(

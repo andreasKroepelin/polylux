@@ -100,7 +100,6 @@
         title-slide: title-slide,
         title-text-size: title-text-size,
         title-text-space: title-text-space,
-        decoration: decoration.with(color : color),
         margin: margin,
         header: header,
         header-ascent: header-ascent,
@@ -109,6 +108,8 @@
         inset: inset,
         radius: radius,
     )}
+
+#let is_theme(theme) = theme.__type == "theme"
 
 #let assert_theme(theme) = assert(theme.__type == "theme")
 #assert_theme(make_theme())

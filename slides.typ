@@ -1,13 +1,19 @@
 #import "theme.typ": make_theme, data, assert_theme, current-slide
 
-#let section = state("section", none)
-#let subslide = counter("subslide")
-#let logical-slide = counter("logical-slide")
+
 #let repetitions = counter("repetitions")
 #let cover-mode = state("cover-mode", "hide")
 
 #let cover-mode-hide = cover-mode.update("hide")
 #let cover-mode-mute = cover-mode.update("mute")
+
+#let theme-state = state("theme", none)
+#let this-slide = current-slide(
+        section: state("section", none),
+        logical-slide: counter("logical-slide"),
+        subslide: counter("subslide"),
+    )
+
 
 // avoid "#set" interferences
 #let full-box(obj) = {
@@ -18,25 +24,24 @@
     )
 }
 
-#let slide(theme: none, max-repetitions : 10, body) = {
-    if theme == none {panic("slide must be called with a theme parameter.")}
-    
+#let slide(theme: none, max-repetitions : 10, body) = {    
     pagebreak(weak: true)
-    logical-slide.step()
+    this-slide.logical-slide.step()
     locate( loc => {
-        subslide.update(1)
+        this-slide.subslide.update(1)
         repetitions.update(1)
+        let theme = if theme == none {theme-state.at(loc)} else {theme}
         show heading.where(level: 2): h => full-box(h.body)
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
-                let curr-subslide = subslide.at(loc-inner).first()
+                let curr-subslide = this-slide.subslide.at(loc-inner).first()
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
                     body
                 }
             })
-            subslide.step()
+            this-slide.subslide.step()
         }
     })
 }
@@ -58,7 +63,7 @@
 #let only(visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, visible-slide-number))
     locate( loc => {
-        if subslide.at(loc).first() == visible-slide-number {
+        if this-slide.subslide.at(loc).first() == visible-slide-number {
             full-box(body)
         } else {
             slides-custom-hide(body)
@@ -69,7 +74,7 @@
 #let beginning(first-visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, first-visible-slide-number))
     locate( loc => {
-        if subslide.at(loc).first() >= first-visible-slide-number {
+        if this-slide.subslide.at(loc).first() >= first-visible-slide-number {
             full-box(body)
         } else {
             slides-custom-hide(body)
@@ -80,7 +85,7 @@
 #let until(last-visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, last-visible-slide-number))
     locate( loc => {
-        if subslide.at(loc).first() <= last-visible-slide-number {
+        if this-slide.subslide.at(loc).first() <= last-visible-slide-number {
             full-box(body)
         } else {
             slides-custom-hide(body)
@@ -103,32 +108,29 @@
     if data == none {
         panic("data is none, use data() to provide this slide information.")
     }
+    locate(loc => theme-state.update(theme))
+    
     show heading.where(level: 1): h => {
-        section.update(h.body)
+        this-slide.section.update(h.body)
     }
 
     show heading.where(level: 2): h => {
         pagebreak(weak: true)
-        logical-slide.step()
+        this-slide.logical-slide.step()
         h
     }
 
     set text(
         size: theme.text-size,
     )
-    let this-slide = current-slide(
-        section: section,
-        logical-slide: logical-slide,
-        subslide: subslide,
-    )
 
     set page(
-        paper: "presentation-16-9",
-        margin: theme.margin,
-        header: theme.header.with(data, theme, this-slide)(),
-        header-ascent: theme.header-ascent,
-        footer: theme.footer.with(data, theme, this-slide)(),
-        footer-descent: theme.footer-descent,
+        //paper: "presentation-16-9",
+        //margin: theme.margin,
+        //header: theme.header.with(data, theme, this-slide)(),
+        //header-ascent: theme.header-ascent,
+        //footer: theme.footer.with(data, theme, this-slide)(),
+        //footer-descent: theme.footer-descent,
     )
 
     [

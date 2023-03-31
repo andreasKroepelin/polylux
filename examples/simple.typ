@@ -19,7 +19,7 @@ Some text
 == Another slide
 More text
 
-#slide(theme : make_theme())[
+#slide[
   We do not need a special heading here.
   == But we can ...
   ... and it doesn't produce new slides here.
