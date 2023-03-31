@@ -24,7 +24,7 @@
 
 = Multislides
 
-#slide[
+#slide(theme : make_theme())[
     == A multislide
     Note how the page number does not increase while we are here.
 
@@ -37,7 +37,7 @@
     // #beginning(4)[Huh, pretty empty here #sym.dots.h]
 ]
 
-#slide[
+#slide(theme : make_theme())[
     == A multislide with list items appearing one by one
 
     #grid(

@@ -1,4 +1,4 @@
-#import "theme.typ": base_theme,data, assert_theme, current-slide
+#import "theme.typ": make_theme, data, assert_theme, current-slide
 
 #let section = state("section", none)
 #let subslide = counter("subslide")
@@ -18,7 +18,9 @@
     )
 }
 
-#let slide(theme: base_theme(),max-repetitions : 10, body) = {
+#let slide(theme: none, max-repetitions : 10, body) = {
+    if theme == none {panic("slide must be called with a theme parameter.")}
+    
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
@@ -95,7 +97,7 @@
 
 #let slides(
     data : none,
-    theme : base_theme(),
+    theme : make_theme(),
     document_body
 ) = {
     if data == none {
@@ -116,31 +118,21 @@
     )
     let this-slide = current-slide(
         section: section,
-        logical-slide : logical-slide,
-        subslide : subslide,
+        logical-slide: logical-slide,
+        subslide: subslide,
     )
 
     set page(
         paper: "presentation-16-9",
         margin: theme.margin,
-        header: theme.header.with(data, this-slide)(),
+        header: theme.header.with(data, theme, this-slide)(),
         header-ascent: theme.header-ascent,
-        footer: theme.footer.with(data, this-slide)(),
+        footer: theme.footer.with(data, theme, this-slide)(),
         footer-descent: theme.footer-descent,
     )
 
     [
-        #align(center + horizon,
-            block(fill: theme.color, inset: theme.inset, radius: theme.radius, breakable: false,
-                [
-                    #text(theme.title-text-size)[*#data.title*] \
-                    #v(theme.title-text-space)
-                    #text(theme.author-text-space)[#data.author] \
-                    #v(theme.title-text-space)
-                    #data.date
-                ]
-            )
-        )
+        #theme.title-slide.with(theme,data)()
         #document_body
     ]
 }

@@ -5,23 +5,25 @@
 )
 
 #show: slides.with(
-    author: "Carl Friedrich Gauß",
-    short-author: "CF Gauß",
-    title: "On a revolutionary way to sum up natural numbers",
-    short-title: "Sum of natural numbers",
-    date: "1784"
+	data : data(
+		author: "Carl Friedrich Gauß",
+		short-author: "CF Gauß",
+		title: "On a revolutionary way to sum up natural numbers",
+		short-title: "Sum of natural numbers",
+		date: "1784"
+	)
 )
 
 = Introduction
 
-#slide[
+#slide(theme : make_theme())[
 	== Problem statement
 	Let $n in NN$.
 	We are interested in sums of the form
 	$ 1 + ... + n = sum_(i=1)^n i $
 ]
 
-#slide[
+#slide(theme : make_theme())[
 	== The theorem
 
 	I disvovered that
@@ -32,7 +34,7 @@
 
 = Prove
 
-#slide[
+#slide(theme : make_theme())[
 	== Method of proof
 	We will prove the theorem by induction, following these steps:
 
@@ -41,7 +43,7 @@
 	+ induction step
 ]
 
-#slide[
+#slide(theme : make_theme())[
 	#set text(.7em)
 	== Proof
 
@@ -64,7 +66,7 @@
 
 = Conclusion
 
-#slide[
+#slide(theme : make_theme())[
 	== That's it!
 
 	Now you know how to calculate those sums more quickly, nice!

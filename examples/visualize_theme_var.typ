@@ -1,18 +1,22 @@
 #import "../slides.typ": *
 
-#show: slides.with(
-    data : data(  
-    author: [Astrale],
-    short-author: "J.D",
-    title: [A visualisation of the inner values of slides.],
-    short-title: "",
-    date: [March 2023],
-    ),
-    theme : base_theme(
+#let theme_visualise = make_theme(
+      title-slide : (theme, data) => [
+        #align(center + top)[
+          This is a title slide for blank visualisation purposes.
+          
+          title : #data.title\
+          short-title : #data.short-title\
+          short-author : #data.short-author\
+          date : #data.date\
+
+          ]
+      ],
       color : red,
       margin: ( x: 1em, y: 4.5em ),
       footer-descent : 3em,
-      footer: (data, current-slide) => locate( loc => {
+      header: (x,theme,y) => [],
+      footer: (data, theme, current-slide) => locate( loc => {
       if counter(page).at(loc).first() > 1 {
       let value = []
       if current-slide.section.at(loc) != none {
@@ -25,12 +29,24 @@
         value += [subslide : #current-slide.subslide.at(loc)]
       }
       block(
-        stroke: (top: 1mm + red),
+        stroke : (top : 1mm),
         width: 100%,
         inset: .3em,
-        place(right + horizon,rect(inset: .3em, stroke: 1mm, value)) 
+        place(left + horizon, value) 
       )}
-})))
+}))
+
+
+#show: slides.with(
+    data : data(  
+    author: [Astrale],
+    short-author: "J.D",
+    title: [A visualisation of the inner values of slides.],
+    short-title: "visualisation",
+    date: [March 2023],
+    ),
+    theme : theme_visualise
+)
 
 == A slide
 Some text
@@ -38,8 +54,35 @@ Some text
 == Another slide
 More text
 
-#slide[
+#slide(theme : theme_visualise)[
   We do not need a special heading here.
   == But we can ...
   ... and it doesn't produce new slides here.
+]
+
+
+= Multislides
+
+#slide(theme : theme_visualise)[
+    == A multislide
+    Multislide
+
+    #only(2)[
+        Only 2
+    ]
+
+    #until(3)[Until 3]
+
+    // #beginning(4)[Huh, pretty empty here #sym.dots.h]
+]
+
+#slide(theme : theme_visualise)[
+    == A multislide with list items appearing one by one
+
+    #grid(
+        columns: (1fr, 1fr),
+        gutter: 1em,
+        one-by-one[- abc][- def][- ghi],
+        one-by-one(start: 2)[1. jkl][2. mno][3. pqr],
+    )
 ]

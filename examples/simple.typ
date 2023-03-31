@@ -1,14 +1,14 @@
 #import "../slides.typ": *
 
 #show: slides.with(
-  data : data(
+  data: data(
     author: "Names of author(s)",
     short-author: "Shorter version for slide footer",
     title: "Title of the presentation",
     short-title: "Shorter version for slide footer",
     date: "March 2023",
   ),
-  theme : base_theme(
+  theme: make_theme(
     color: teal
   ),
 )
@@ -19,7 +19,7 @@ Some text
 == Another slide
 More text
 
-#slide[
+#slide(theme : make_theme())[
   We do not need a special heading here.
   == But we can ...
   ... and it doesn't produce new slides here.
