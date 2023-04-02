@@ -24,13 +24,23 @@
     )
 }
 
-#let slide(theme: none, max-repetitions : 10, body) = {    
+#let slide(theme: make_theme(), max-repetitions : 10, body) = {    
     pagebreak(weak: true)
     this-slide.logical-slide.step()
+    // should be overriden then
     locate( loc => {
         this-slide.subslide.update(1)
         repetitions.update(1)
-        let theme = if theme == none {theme-state.at(loc)} else {theme}
+        let theme = if false {
+        //if theme == none {
+            //return [none]
+            theme-state.at(loc)
+            } else {
+                theme
+            }
+
+        let _ = theme-state.update(theme)
+        // should be set back
         show heading.where(level: 2): h => full-box(h.body)
 
         for _ in range(max-repetitions) {
@@ -108,7 +118,8 @@
     if data == none {
         panic("data is none, use data() to provide this slide information.")
     }
-    locate(loc => theme-state.update(theme))
+    // ignore or cause page break
+    let _ = locate(loc => theme-state.update(theme))
     
     show heading.where(level: 1): h => {
         this-slide.section.update(h.body)
@@ -125,12 +136,12 @@
     )
 
     set page(
-        //paper: "presentation-16-9",
-        //margin: theme.margin,
-        //header: theme.header.with(data, theme, this-slide)(),
-        //header-ascent: theme.header-ascent,
-        //footer: theme.footer.with(data, theme, this-slide)(),
-        //footer-descent: theme.footer-descent,
+        paper: "presentation-16-9",
+        margin: theme.margin,
+        header: theme.header.with(data, theme, this-slide)(),
+        header-ascent: theme.header-ascent,
+        footer: theme.footer.with(data, theme, this-slide)(),
+        footer-descent: theme.footer-descent,
     )
 
     [

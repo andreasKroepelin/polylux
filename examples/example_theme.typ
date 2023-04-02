@@ -37,8 +37,8 @@ Some text
 == Another slide
 More text
 
-#slide(theme : example-theme)[
-  We do not need a special heading here.
-  == But we can ...
-  ... and it doesn't produce new slides here.
+#slide(theme : make_theme())[
+Theme override for this slide only
 ]
+
+== Another normal slide
