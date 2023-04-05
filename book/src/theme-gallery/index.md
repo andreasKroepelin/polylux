@@ -41,3 +41,51 @@ You can specify it explicitly by referring to `slides-default-theme`:
 ]
 ```
 ![default theme screenshot](./default.png)
+
+---
+
+## Bipartite
+This theme is inspired by
+[Modern Annual Report](https://slidesgo.com/theme/modern-annual-report).
+It features a dominant partition of space into a bright and a dark side.
+```typ
+#import "themes/bipartite.typ": *
+#show: slides(
+  // ...
+  theme: bipartite-theme(),
+)
+```
+### Options
+- *none*
+
+### Variants
+- `"east"`: same as default variant, but dark side on the right, text is right
+  aligned
+
+### Extra keyword arguments
+- `title`: a title for that slide
+
+### Showcase
+```typ
+#import "slides.typ": *
+#import "themes/bipartite.typ": *
+
+#show: slides.with(
+    author: "Author", short-author: "Short author",
+    title: "Title", short-title: "Short title", subtitle: "Subtitle",
+    date: "Date",
+    theme: bipartite-theme(),
+)
+
+#new-section("section name")
+
+#slide(title: "A longer slide title")[
+  #lorem(40)
+]
+
+#slide(theme-variant: "east", title: "On the right!")[
+  #lorem(40)
+]
+```
+![bipartite theme screenshot](./bipartite.png)
+
