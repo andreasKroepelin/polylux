@@ -169,6 +169,7 @@
 #let slides(
     title: none,
     author: none,
+    subtitle: none,
     short-title: none,
     short-author: none,
     date: none,
@@ -187,6 +188,7 @@
     let data = (
         title: title,
         author: author,
+        subtitle: subtitle,
         short-title: short-title,
         short-author: short-author,
         date: date,

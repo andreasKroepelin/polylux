@@ -53,6 +53,7 @@ set in the initial `slides` function, i.e. it has the following structure:
 (
   author: ...,
   title: ...,
+  subtitle: ...,
   short-author: ...,
   short-title: ...,
   date: ...,
