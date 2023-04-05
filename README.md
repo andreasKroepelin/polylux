@@ -18,14 +18,13 @@ This is a template for creating slides in [Typst](https://typst.app/).
 
 #new-section("My section name")
 
-#slide[
-  == A boring static slide
-  Some boring static text
+#slide(title: "A boring static slide")[
+  Some boring static text.
 ]
 
 #slide[
-  == A fancy dynamic slide
-  More text
+  A fancy dynamic slide without a title.
+  More text.
   #only(2)[This appears later!]
 ]
 ```

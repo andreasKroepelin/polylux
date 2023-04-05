@@ -14,20 +14,18 @@
 
 #new-section("Introduction")
 
-#slide[
-    == First Slide
+#slide(title: "First slide")[
     #lorem(10)
 ]
 
 #slide[
-    == Second slide
+    Second slide, without a title
     #lorem(10)
 ]
 
 #new-section("Multislides")
 
-#slide[
-    == A multislide
+#slide(title: "A multislide")[
     Note how the page number does not increase while we are here.
 
     #only(2)[
@@ -39,8 +37,7 @@
     #beginning(4)[Huh, pretty empty here #sym.dots.h]
 ]
 
-#slide[
-    == A multislide with list items appearing one by one
+#slide(title: "A multislide with list items appearing one by one")[
 
     #grid(
         columns: (1fr, 1fr),

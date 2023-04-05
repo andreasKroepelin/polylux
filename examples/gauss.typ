@@ -14,17 +14,15 @@
 
 #new-section("Introduction")
 
-#slide[
-	== Problem statement
+#slide(title: "Problem statement")[
 	Let $n in NN$.
 	We are interested in sums of the form
 	$ 1 + ... + n = sum_(i=1)^n i $
 ]
 
-#slide[
-	== The theorem
+#slide(title: "The theorem")[
 
-	I disvovered that
+	I discovered that
 	$ sum_(i=1)^n = n(n+1)/2 $
 
 	Let's prove that!
@@ -32,8 +30,7 @@
 
 #new-section("Proof")
 
-#slide[
-	== Method of proof
+#slide(title: "Method of proof")[
 	We will prove the theorem by induction, following these steps:
 
 	+ base case
@@ -41,9 +38,8 @@
 	+ induction step
 ]
 
-#slide[
+#slide(title: "Proof")[
 	#set text(.7em)
-	== Proof
 
 	#one-by-one[
 		*base case:* Let $n = 1$. Then $sum_(i=1)^1 i = (1 dot.c 2)/2 = 1$ #emoji.checkmark.heavy
@@ -68,8 +64,7 @@
 
 #new-section("Conclusion")
 
-#slide[
-	== That's it!
+#slide(title: "That's it!")[
 
 	Now you know how to calculate those sums more quickly, nice!
 ]
