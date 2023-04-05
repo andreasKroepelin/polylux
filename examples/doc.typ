@@ -12,15 +12,19 @@
     date: "March 2023"
 )
 
-= Introduction
+#new-section("Introduction")
 
-== First Slide
-#lorem(10)
+#slide[
+    == First Slide
+    #lorem(10)
+]
 
-== Second slide
-#lorem(10)
+#slide[
+    == Second slide
+    #lorem(10)
+]
 
-= Multislides
+#new-section("Multislides")
 
 #slide[
     == A multislide
@@ -32,7 +36,7 @@
 
     #until(3)[Hurry reading this, it disappears after subslide 3!]
 
-    // #beginning(4)[Huh, pretty empty here #sym.dots.h]
+    #beginning(4)[Huh, pretty empty here #sym.dots.h]
 ]
 
 #slide[
