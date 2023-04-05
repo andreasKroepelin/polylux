@@ -1,7 +1,6 @@
 # Dynamic slides
 This template offers basic support for dynamic slides with changing content.
 That means you can show or hide parts of a slide at different points in time.
-Using this feature requires using the `#slide` function.
 To restrict the visiblity of content to certain "subslides", use one of the
 following function:
 
@@ -23,7 +22,7 @@ Let's see this in action:
 ```
 
 The number of subslides (number of PDF pages produced) one logical slide is
-converted two depends on the highest subslide index you specified content to
+converted to depends on the highest subslide index you specified content to
 appear or disappear.
 
 Note that the same page number is displayed for all subslides of a logical slide.
