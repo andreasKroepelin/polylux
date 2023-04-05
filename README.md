@@ -10,37 +10,36 @@ This is a template for creating slides in [Typst](https://typst.app/).
 
 #show: slides.with(
     author: "Names of author(s)",
-    short-author: "Shorter version for slide footer",
+    short-author: "Shorter author for slide footer",
     title: "Title of the presentation",
-    short-title: "Shorter version for slide footer",
+    short-title: "Shorter title for slide footer",
     date: "March 2023",
-    color: teal // teal is the default value, you can use any other color
 )
 
-== A slide
-Some text
-
-== Another slide
-More text
+#new-section("My section name")
 
 #slide[
-  We do not need a special heading here.
-  == But we can ...
-  ... and it doesn't produce new slides here.
+  == A boring static slide
+  Some boring static text
+]
+
+#slide[
+  == A fancy dynamic slide
+  More text
+  #only(2)[This appears later!]
 ]
 ```
-As you can see, there are two ways of creating slides: using 2nd level headings
-and using the `#slide` function.
-So far, both options behave just the same.
+As you can see, creating slides is as simple as using the `#slide` function.
+(You do not need to care about stuff like `#new-section` or `#only` in the
+beginning.)
 
 This code produces these PDF pages:
 ![title slide](assets/simple.png)
 
-
 That's all to get you started!
-For more details and to see how you can
+For more details, visit the
+[book](https://andreaskroepelin.github.io/typst-slides/book)!
 
-- display the current section in the slide header
-- create dynamic slides (think _overlays_ in LaTeX beamer)
-
-visit the [book](https://andreaskroepelin.github.io/typst-slides/book)!
+**⚠ This template is in active development.
+While I try to make sure that the `master`-branch always is in a usable state,
+there are no compatibility guarantees!**
