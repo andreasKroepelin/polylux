@@ -3,9 +3,11 @@
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let cover-mode = state("cover-mode", "hide")
+#let global-theme = state("global-theme", none)
 
 #let cover-mode-hide = cover-mode.update("hide")
 #let cover-mode-mute = cover-mode.update("mute")
+#let new-section(name) = section.update(name)
 
 // avoid "#set" interferences
 #let full-box(obj) = {
@@ -16,20 +18,93 @@
     )
 }
 
-#let slide(max-repetitions: 10, body) = {
+#let slides-default-theme(color: teal) = data => {
+    let title-slide = {
+        align(center + horizon,
+            block(fill: color, inset: 1em, radius: 1em, breakable: false,
+                [
+                    #text(1.7em)[*#data.title*] \
+                    #v(1em)
+                    #text(1.5em)[#data.author] \
+                    #v(1em)
+                    #data.date
+                ]
+            )
+        )
+    }
+
+    let default(body) = {
+        let decoration(position, body) = {
+            let border = 1mm + color
+            let strokes = (
+                header: ( bottom: border ),
+                footer: ( top: border )
+            )
+            block(
+                stroke: strokes.at(position),
+                width: 100%,
+                inset: .3em,
+                text(.5em, body)
+            )
+        }
+
+
+        // header
+        locate( loc => {
+            if counter(page).at(loc).first() > 1 {
+                decoration("header", section.at(loc))
+            }
+        } )
+
+        v(1fr)
+        block(
+            width: 100%, inset: 2em, breakable: false, outset: 0em,
+            body
+        )
+        v(1fr)
+
+        // footer
+        locate( loc => {
+            if counter(page).at(loc).first() > 1 {
+                decoration("footer")[
+                    #data.short-author #h(10fr)
+                    #data.short-title #h(1fr)
+                    #data.date #h(10fr)
+                    #logical-slide.display()
+                ]
+            }
+        } )
+    }
+
+    let wake-up(body) = {
+        block(
+            width: 100%, height: 100%, inset: 2em, breakable: false, outset: 0em,
+            fill: color,
+            text(size: 1.5em, fill: white, {v(1fr); body; v(1fr)})
+        )
+    }
+
+    (
+        title-slide: title-slide,
+        variants: ( "default": default, "wake up": wake-up, ),
+    )
+}
+
+#let slide(max-repetitions: 10, theme-variant: "default", body) = {
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
-        show heading.where(level: 2): h => full-box(h.body)
+
+        let slide-content = global-theme.at(loc).variants.at(theme-variant)
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
                 let curr-subslide = subslide.at(loc-inner).first()
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
-                    body
+                    slide-content(body)
                 }
             })
             subslide.step()
@@ -97,71 +172,28 @@
     short-title: none,
     short-author: none,
     date: none,
-    color: teal,
-    document_body
+    theme: slides-default-theme(),
+    body
 ) = {
-    show heading.where(level: 1): h => {
-        section.update(h.body)
-    }
-
-    show heading.where(level: 2): h => {
-        pagebreak(weak: true)
-        logical-slide.step()
-        h
-    }
-
     set text(
         size: 25pt,
     )
 
-    let decoration(position, body) = {
-        let border = 1mm + color
-        let strokes = (
-            header: ( bottom: border ),
-            footer: ( top: border )
-        )
-        block(
-            stroke: strokes.at(position),
-            width: 100%,
-            inset: .3em,
-            text(.5em, body)
-        )
-    }
-
     set page(
         paper: "presentation-16-9",
-        margin: ( x: 1em, y: 4em ),
-        header: locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("header", section.at(loc))
-            }
-        } ),
-        header-ascent: 3em,
-        footer: locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("footer")[
-                    #short-author #h(10fr)
-                    #short-title #h(1fr)
-                    #date #h(10fr)
-                    #logical-slide.display()
-                ]
-            }
-        } ),
-        footer-descent: 3em,
+        margin: 0pt,
     )
 
-    [
-        #align(center + horizon,
-            block(fill: color, inset: 1em, radius: 1em, breakable: false,
-                [
-                    #text(2em)[*#title*] \
-                    #v(1em)
-                    #text(1.5em)[#author] \
-                    #v(1em)
-                    #date
-                ]
-            )
-        )
-        #document_body
-    ]
+    let data = (
+        title: title,
+        author: author,
+        short-title: short-title,
+        short-author: short-author,
+        date: date,
+    )
+    let the-theme = theme(data)
+    global-theme.update(the-theme)
+
+    the-theme.title-slide
+    body
 }

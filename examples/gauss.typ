@@ -12,7 +12,7 @@
     date: "1784"
 )
 
-= Introduction
+#new-section("Introduction")
 
 #slide[
 	== Problem statement
@@ -30,7 +30,7 @@
 	Let's prove that!
 ]
 
-= Prove
+#new-section("Proof")
 
 #slide[
 	== Method of proof
@@ -62,7 +62,11 @@
 	]
 ]
 
-= Conclusion
+#slide(theme-variant: "wake up")[
+	= Proof is over, wake up!
+]
+
+#new-section("Conclusion")
 
 #slide[
 	== That's it!
