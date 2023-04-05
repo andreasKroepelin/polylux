@@ -72,11 +72,34 @@ For example, you could define the title slide in the following way:
 ```
 
 On to the actual slides.
-Their appearance is defined by functions that accept some content (the last
-argument to `#slide`, essentially) and return some richer content, somehow
-styling that slide.
+Their appearance is defined by functions that accept some meta data, some
+content (the last argument to `#slide`, essentially) and return some richer
+content, somehow styling that slide.
 You can define an arbitrary amount of such functions as values of the `variants`
 dictionary, but one of them must be stored under the key `"default"`.
+
+The meta data referred to above are a dictionary containing any extra keyword-
+arguments that the user has specified in their call to `#slide`.
+As a theme author, you should inform your users what kind of arguments you will
+respect.
+You should access that data defensively and not expect that users provide any
+of the extra arguments you can consume.
+Similarly, you should not expect that the meta data exclusively contains keys
+you respect.
+For example, if a user states
+```typ
+#slide(funny-kwarg: "some value", theme-variant: "a variant", something-else: "wohoo")[
+  ...
+]
+```
+then your styling function will be provided the following dictionary:
+```typ
+(
+  funny-kwarg: "some value",
+  something-else: "wohoo",
+)
+```
+especially not containing a `theme-variant` item!
 
 To make use of some of the functionality this template offers, you can access
 - the counter `logical-slide`, telling you the "page number" of a slide, but
@@ -90,14 +113,14 @@ Let us define two variants:
   (
     title-slide: align(center + horizon, data.title),
     variants: (
-      "default": body => {
-        text(.7em, [current section: #section.display()])
+      "default": (slide-info, body) => {
+        text(.7em, [#slide-info.title (current section: #section.display())])
         v(1fr)
         body
         v(1fr)
         text(.7em, [#h(1fr) #logical-slide.display()])
       },
-      "australia": body => {
+      "australia": (slide-info, body) => {
         text(.7em, [current section: #section.display()])
         v(1fr)
         scale(y: -100%, body)
@@ -108,6 +131,14 @@ Let us define two variants:
   )
 }
 ```
+We can see that the `"default"` variant expects that users provide a `title`
+keyword argument to `#slide`.
+(Note again that this is bad practise and you should provide some fallback
+behaviour if some arguments you expect are not provided.)
+The `"australia"` variant does not make use of the `slide-info` argument at all.
+That is completely fine, it must have this argument for formal reasons, anyway,
+though.
+
 And that's it already!
 Have fun creating your own theme and maybe consider opening a pull request
 at [the GitHub repository](https://github.com/andreasKroepelin/typst-slides)

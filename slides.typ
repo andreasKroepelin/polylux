@@ -33,7 +33,7 @@
         )
     }
 
-    let default(body) = {
+    let default(slide-info, body) = {
         let decoration(position, body) = {
             let border = 1mm + color
             let strokes = (
@@ -56,12 +56,20 @@
             }
         } )
 
+        if "title" in slide-info {
+            block(
+                width: 100%, inset: (x: 2em), breakable: false,
+                outset: 0em,
+                heading(level: 1, slide-info.title)
+            )
+        }
+        
         v(1fr)
         block(
-            width: 100%, inset: 2em, breakable: false, outset: 0em,
+            width: 100%, inset: (x: 2em), breakable: false, outset: 0em,
             body
         )
-        v(1fr)
+        v(2fr)
 
         // footer
         locate( loc => {
@@ -76,7 +84,7 @@
         } )
     }
 
-    let wake-up(body) = {
+    let wake-up(slide-info, body) = {
         block(
             width: 100%, height: 100%, inset: 2em, breakable: false, outset: 0em,
             fill: color,
@@ -90,7 +98,7 @@
     )
 }
 
-#let slide(max-repetitions: 10, theme-variant: "default", body) = {
+#let slide(max-repetitions: 10, theme-variant: "default", ..kwargs, body) = {
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
@@ -98,13 +106,14 @@
         repetitions.update(1)
 
         let slide-content = global-theme.at(loc).variants.at(theme-variant)
+        let slide-info = kwargs.named()
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
                 let curr-subslide = subslide.at(loc-inner).first()
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
-                    slide-content(body)
+                    slide-content(slide-info, body)
                 }
             })
             subslide.step()

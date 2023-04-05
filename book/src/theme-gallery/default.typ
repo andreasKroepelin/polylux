@@ -8,7 +8,7 @@
 
 #new-section("section name")
 
-#slide[
+#slide(title: "Slide title")[
   A slide
 ]
 

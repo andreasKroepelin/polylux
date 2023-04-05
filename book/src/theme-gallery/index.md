@@ -17,6 +17,9 @@ You can specify it explicitly by referring to `slides-default-theme`:
 ### Variants
 - `"wake up"`: no decoration, colored background, enlarged text
 
+### Extra keyword arguments
+- `title`: a title for that slide
+
 ### Showcase
 ```typ
 #import "slides.typ": *
@@ -29,7 +32,7 @@ You can specify it explicitly by referring to `slides-default-theme`:
 
 #new-section("section name")
 
-#slide[
+#slide(title: "Slide title")[
   A slide
 ]
 
