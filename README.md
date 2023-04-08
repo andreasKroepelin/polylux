@@ -40,5 +40,5 @@ For more details, visit the
 [book](https://andreaskroepelin.github.io/typst-slides/book)!
 
 **⚠ This template is in active development.
-While I try to make sure that the `master`-branch always is in a usable state,
+While I try to make sure that the `main`-branch always is in a usable state,
 there are no compatibility guarantees!**
