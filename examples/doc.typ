@@ -5,8 +5,8 @@
 )
 
 #show: slides.with(
-    author: "Jon Doe and Jane Doe",
-    short-author: "J+J Doe",
+    authors: ("John Doe", "Jane Doe"),
+    short-authors: "J+J Doe",
     title: "Demonstration of a new Typst template for slides",
     short-title: "Slides template demo",
     date: "March 2023"

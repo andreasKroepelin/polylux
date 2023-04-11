@@ -9,9 +9,10 @@ This is a template for creating slides in [Typst](https://typst.app/).
 #import "slides.typ": *
 
 #show: slides.with(
-    author: "Names of author(s)",
-    short-author: "Shorter author for slide footer",
+    authors: "Names of author(s)",
+    short-authors: "Shorter author for slide footer",
     title: "Title of the presentation",
+    subtitle: "Subtitle of the presentation",
     short-title: "Shorter title for slide footer",
     date: "March 2023",
 )
@@ -38,6 +39,12 @@ This code produces these PDF pages:
 That's all to get you started!
 For more details, visit the
 [book](https://andreaskroepelin.github.io/typst-slides/book)!
+
+There are also different
+[themes](https://andreaskroepelin.github.io/typst-slides/book/theme-gallery/index.html)
+to choose from!
+If you like, you can even
+[create your own](https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme).
 
 **⚠ This template is in active development.
 While I try to make sure that the `main`-branch always is in a usable state,

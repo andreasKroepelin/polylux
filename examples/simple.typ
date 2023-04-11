@@ -1,9 +1,10 @@
 #import "../slides.typ": *
 
 #show: slides.with(
-    author: "Names of author(s)",
-    short-author: "Shorter author for slide footer",
+    authors: "Names of author(s)",
+    short-authors: "Shorter author for slide footer",
     title: "Title of the presentation",
+    subtitle: "Subtitle of the presentation",
     short-title: "Shorter title for slide footer",
     date: "March 2023",
 )
