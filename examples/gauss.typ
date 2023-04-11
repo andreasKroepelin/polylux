@@ -1,39 +1,34 @@
 #import "../slides.typ": *    
 
-#set text(
-    font: "DejaVu Sans",
-)
 
 #show: slides.with(
-    author: "Carl Friedrich Gauß",
-    short-author: "CF Gauß",
+    authors: "Carl Friedrich Gauß",
+    short-authors: "CF Gauß",
     title: "On a revolutionary way to sum up natural numbers",
+		subtitle: "What they won't teach you in school",
     short-title: "Sum of natural numbers",
-    date: "1784"
+    date: "1784",
 )
 
-= Introduction
+#new-section("Introduction")
 
-#slide[
-	== Problem statement
+#slide(title: "Problem statement")[
 	Let $n in NN$.
 	We are interested in sums of the form
 	$ 1 + ... + n = sum_(i=1)^n i $
 ]
 
-#slide[
-	== The theorem
+#slide(title: "The theorem")[
 
-	I disvovered that
-	$ sum_(i=1)^n = n(n+1)/2 $
+	I discovered that
+	$ sum_(i=1)^n i = n(n+1)/2 $
 
 	Let's prove that!
 ]
 
-= Prove
+#new-section("Proof")
 
-#slide[
-	== Method of proof
+#slide(title: "Method of proof")[
 	We will prove the theorem by induction, following these steps:
 
 	+ base case
@@ -41,14 +36,15 @@
 	+ induction step
 ]
 
-#slide[
+#slide(title: "Proof")[
 	#set text(.7em)
-	== Proof
 
 	#one-by-one[
 		*base case:* Let $n = 1$. Then $sum_(i=1)^1 i = (1 dot.c 2)/2 = 1$ #emoji.checkmark.heavy
+		#v(1em)
 	][
 		*ind. hypothesis:* Let $sum_(i=1)^k i = k(k+1)/2$ for some $k >= 1$.
+		#v(1em)
 	][
 		*ind. step:* Show that $sum_(i=1)^(k+1) i = ((k+1)(k+2))/2$
 		$
@@ -62,10 +58,13 @@
 	]
 ]
 
-= Conclusion
+#slide(theme-variant: "wake up")[
+	= Proof is over, wake up!
+]
 
-#slide[
-	== That's it!
+#new-section("Conclusion")
+
+#slide(title: "That's it!")[
 
 	Now you know how to calculate those sums more quickly, nice!
 ]

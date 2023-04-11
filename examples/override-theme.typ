@@ -11,12 +11,14 @@
 
 #new-section("My section name")
 
-#slide(title: "A boring static slide")[
-  Some boring static text.
+#slide(title: "Slide title")[
+  #lorem(40)
 ]
 
-#slide[
-  A fancy dynamic slide without a title.
-  More text.
-  #only(2)[This appears later!]
+#let special-purpose-theme(slide-info, body) = align(horizon)[
+  #rotate(45deg, heading(level: 2, slide-info.title))
+  #scale(x: -100%, body)
+]
+#slide(override-theme: special-purpose-theme, title: "This is rotated")[
+  #lorem(40)
 ]
