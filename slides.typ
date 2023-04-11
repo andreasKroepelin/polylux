@@ -183,14 +183,39 @@
     short-author: none,
     date: none,
     theme: slides-default-theme(),
+    typography: (:),
     body
 ) = {
+    if "text-size" not in typography {
+        typography.text-size = 25pt
+    }
+    if "paper" not in typography {
+        typography.paper = "presentation-16-9"
+    }
+    if "text-font" not in typography {
+        typography.text-font = (
+            "Inria Sans",
+            "Libertinus Sans",
+            "Latin Modern Sans",
+        )
+    }
+    if "math-font" not in typography {
+        typography.math-font = (
+            "GFS Neohellenic Math",
+            "Fira Math",
+            "TeX Gyre Pagella Math",
+            "Libertinus Math",
+        )
+    }
+
     set text(
-        size: 25pt,
+        size: typography.text-size,
+        font: typography.text-font,
     )
+    show math.equation: set text(font: typography.math-font)
 
     set page(
-        paper: "presentation-16-9",
+        paper: typography.paper,
         margin: 0pt,
     )
 
