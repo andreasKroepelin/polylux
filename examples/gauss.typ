@@ -2,9 +2,10 @@
 
 
 #show: slides.with(
-    author: "Carl Friedrich Gauß",
-    short-author: "CF Gauß",
+    authors: "Carl Friedrich Gauß",
+    short-authors: "CF Gauß",
     title: "On a revolutionary way to sum up natural numbers",
+		subtitle: "What they won't teach you in school",
     short-title: "Sum of natural numbers",
     date: "1784",
 )

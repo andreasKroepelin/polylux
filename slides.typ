@@ -20,17 +20,31 @@
 
 #let slides-default-theme(color: teal) = data => {
     let title-slide = {
-        align(center + horizon,
-            block(fill: color, inset: 1em, radius: 1em, breakable: false,
+        align(center + horizon)[
+            #block(
+                stroke: ( y: 1mm + color ),
+                inset: 1em,
+                breakable: false,
                 [
-                    #text(1.7em)[*#data.title*] \
-                    #v(1em)
-                    #text(1.5em)[#data.author] \
-                    #v(1em)
-                    #data.date
+                    #text(1.3em)[*#data.title*] \
+                    #{
+                        if data.subtitle != none {
+                            parbreak()
+                            text(.9em)[#data.subtitle]
+                        }
+                    }
                 ]
             )
-        )
+            #set text(size: .8em)
+            #grid(
+                columns: (1fr,) * calc.min(data.authors.len(), 3),
+                column-gutter: 1em,
+                row-gutter: 1em,
+                ..data.authors
+            )
+            #v(1em)
+            #data.date
+        ]
     }
 
     let default(slide-info, body) = {
@@ -75,7 +89,7 @@
         locate( loc => {
             if counter(page).at(loc).first() > 1 {
                 decoration("footer")[
-                    #data.short-author #h(10fr)
+                    #data.short-authors #h(10fr)
                     #data.short-title #h(1fr)
                     #data.date #h(10fr)
                     #logical-slide.display()
@@ -177,10 +191,10 @@
 
 #let slides(
     title: none,
-    author: none,
+    authors: none,
     subtitle: none,
     short-title: none,
-    short-author: none,
+    short-authors: none,
     date: none,
     theme: slides-default-theme(),
     typography: (:),
@@ -221,10 +235,16 @@
 
     let data = (
         title: title,
-        author: author,
+        authors: if type(authors) == "array" {
+            authors
+        } else if type(authors) in ("string", "content") {
+            (authors, )
+        } else {
+            panic("authors must be an array, string, or content.")
+        },
         subtitle: subtitle,
         short-title: short-title,
-        short-author: short-author,
+        short-authors: short-authors,
         date: date,
     )
     let the-theme = theme(data)
