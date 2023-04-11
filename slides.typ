@@ -112,7 +112,13 @@
     )
 }
 
-#let slide(max-repetitions: 10, theme-variant: "default", ..kwargs, body) = {
+#let slide(
+    max-repetitions: 10,
+    theme-variant: "default",
+    override-theme: none,
+    ..kwargs,
+    body
+) = {
     pagebreak(weak: true)
     logical-slide.step()
     locate( loc => {
@@ -120,6 +126,9 @@
         repetitions.update(1)
 
         let slide-content = global-theme.at(loc).variants.at(theme-variant)
+        if override-theme != none {
+            slide-content = override-theme
+        }
         let slide-info = kwargs.named()
 
         for _ in range(max-repetitions) {
