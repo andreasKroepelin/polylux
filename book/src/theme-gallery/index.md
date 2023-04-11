@@ -2,6 +2,11 @@
 
 Here you can find an overview over all themes shipped with this template.
 
+- [Default](#default)
+- [Bipartite](#bipartite)
+
+---
+
 ## Default
 If you do not specify a theme, the default one will be used.
 You can specify it explicitly by referring to `slides-default-theme`:

@@ -4,7 +4,7 @@ By default, the theme `slides-default-theme` is used.
 You can specify the use of another one in the initial `slides` statement:
 ```typ
 #show: slides(
-  author: "...",
+  authors: "...",
   title: "...",
   // ...
   theme: your-fancy-theme(with, some, options),
@@ -143,3 +143,26 @@ And that's it already!
 Have fun creating your own theme and maybe consider opening a pull request
 at [the GitHub repository](https://github.com/andreasKroepelin/typst-slides)
 to share your creations!
+
+## Per-slide escape hatch
+In some exceptional situations, the machinery of themes and theme variants might
+be too limited for what you need.
+Sometimes, you might find yourself needing a very special purpose design _just_
+for a couple of slides.
+For that case, you can use the `override-theme` argument of the `#slide` function.
+It accepts a function of the form `(slide-info, body) => [slide content]`, just
+as if you would define a theme variant (see details above).
+
+For example, you might write something like this:
+```typ
+#let special-purpose-theme(slide-info, body) = align(horizon)[
+  #rotate(45deg, heading(level: 2, slide-info.title))
+  #scale(x: -100%, body)
+]
+#slide(override-theme: special-purpose-theme, title: "This is rotated")[
+  #lorem(40)
+]
+```
+
+If you feel like your use of this feature becomes more than exceptional, consider
+contributing a variant to the theme you use, or a new theme entirely.
