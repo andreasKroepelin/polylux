@@ -25,7 +25,7 @@ You can specify it explicitly by referring to `slides-default-theme`:
 #import "slides.typ": *
 
 #show: slides.with(
-    author: "Author", short-author: "Short author",
+    authors: ("Author A", "Author B"), short-authors: "Short author",
     title: "Title", short-title: "Short title", subtitle: "Subtitle",
     date: "Date",
 )
@@ -71,7 +71,7 @@ It features a dominant partition of space into a bright and a dark side.
 #import "themes/bipartite.typ": *
 
 #show: slides.with(
-    author: "Author", short-author: "Short author",
+    authors: ("Author A", "Author B"), short-authors: "Short author",
     title: "Title", short-title: "Short title", subtitle: "Subtitle",
     date: "Date",
     theme: bipartite-theme(),

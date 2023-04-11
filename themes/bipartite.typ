@@ -19,7 +19,7 @@
         #text(size: 1.2em, data.subtitle)
         // #v(.0em)
         
-        #text(size: .9em)[ #data.author #h(1em) #sym.dot.c #h(1em) #data.date ]
+        #text(size: .9em)[ #data.authors.join(", ") #h(1em) #sym.dot.c #h(1em) #data.date ]
       ])
     )
     place(

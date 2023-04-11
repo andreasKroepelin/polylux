@@ -2,7 +2,7 @@
 #import "../../../themes/bipartite.typ": *
 
 #show: slides.with(
-    author: "Author", short-author: "Short author",
+    authors: ("Author A", "Author B"), short-authors: "Short author",
     title: "Title", short-title: "Short title", subtitle: "Subtitle",
     date: "Date",
     theme: bipartite-theme(),
