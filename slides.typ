@@ -64,11 +64,7 @@
 
 
         // header
-        locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("header", section.at(loc))
-            }
-        } )
+        decoration("header", section.display())
 
         if "title" in slide-info {
             block(
@@ -86,16 +82,12 @@
         v(2fr)
 
         // footer
-        locate( loc => {
-            if counter(page).at(loc).first() > 1 {
-                decoration("footer")[
-                    #data.short-authors #h(10fr)
-                    #data.short-title #h(1fr)
-                    #data.date #h(10fr)
-                    #logical-slide.display()
-                ]
-            }
-        } )
+        decoration("footer")[
+            #data.short-authors #h(10fr)
+            #data.short-title #h(1fr)
+            #data.date #h(10fr)
+            #logical-slide.display()
+        ]
     }
 
     let wake-up(slide-info, body) = {
