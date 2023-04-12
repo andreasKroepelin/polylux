@@ -11,11 +11,12 @@
 
 // avoid "#set" interferences
 #let full-box(obj) = {
-    box(
+    /* box(
         width: 100%, height: auto, baseline: 0%, fill: none,
         stroke: none, radius: 0%, inset: 0%, outset: 0%,
         obj
-    )
+    ) */
+    obj
 }
 
 #let slides-default-theme(color: teal) = data => {
@@ -161,6 +162,15 @@
     })
 }
 
+#let only-non-occupying(visible-slide-number, body) = {
+    repetitions.update(rep => calc.max(rep, visible-slide-number))
+    locate( loc => {
+        if subslide.at(loc).first() == visible-slide-number {
+            body
+        }
+    })
+}
+
 #let beginning(first-visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, first-visible-slide-number))
     locate( loc => {
@@ -188,6 +198,22 @@
     for (idx, child) in children.pos().enumerate() {
         beginning(start + idx, child)
     }
+}
+
+#let alternatives(start: 1, ..children) = {
+    repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
+    style(styles => {
+        let sizes = children.pos().map(c => measure(c, styles))
+        let max-width = calc.max(..sizes.map(sz => sz.width))
+        let max-height = calc.max(..sizes.map(sz => sz.height))
+        for (idx, child) in children.pos().enumerate() {
+            only-non-occupying(start + idx, box(
+                width: max-width,
+                height: max-height,
+                child
+            ))
+        }
+    })
 }
 
 #let slides(
