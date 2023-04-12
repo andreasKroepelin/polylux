@@ -2,7 +2,8 @@
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
-#let cover-mode = state("cover-mode", "hide")
+#let cover-mode = state("cover-mode", "invisible")
+#let pause-counter = counter("pause-counter")
 #let global-theme = state("global-theme", none)
 
 #let cover-mode-invisible = cover-mode.update("invisible")
@@ -107,6 +108,7 @@
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
+        pause-counter.update(1)
 
         let slide-content = global-theme.at(loc).variants.at(theme-variant)
         if override-theme != none {
@@ -141,74 +143,79 @@
 }
 
 #let _parse-subslide-indices(s) = {
-    let parts = s.split(",")
+    let parts = s.split(",").map(p => p.trim())
     let parse-part(part) = {
-        let match-until = part.match("^-([[:digit:]]+)$")
-        let match-beginning = part.match("^([[:digit:]]+)-$")
-        let match-range = part.match("^([[:digit:]]+)-([[:digit:]]+)$")
-        let match-single = part.match("^([[:digit:]]+)$")
+        let match-until = part.match(regex("^-([[:digit:]]+)$"))
+        let match-beginning = part.match(regex("^([[:digit:]]+)-$"))
+        let match-range = part.match(regex("^([[:digit:]]+)-([[:digit:]]+)$"))
+        let match-single = part.match(regex("^([[:digit:]]+)$"))
         if match-until != none {
             let parsed = int(match-until.captures.first())
-            assert(parsed > 0, "parsed idx is non-positive")
+            // assert(parsed > 0, "parsed idx is non-positive")
             ( until: parsed )
         } else if match-beginning != none {
             let parsed = int(match-beginning.captures.first())
-            assert(parsed > 0, "parsed idx is non-positive")
+            // assert(parsed > 0, "parsed idx is non-positive")
             ( beginning: parsed )
         } else if match-range != none {
             let parsed-first = int(match-range.captures.first())
             let parsed-last = int(match-range.captures.last())
-            assert(parsed-first > 0, "parsed idx is non-positive")
-            assert(parsed-last > 0, "parsed idx is non-positive")
+            // assert(parsed-first > 0, "parsed idx is non-positive")
+            // assert(parsed-last > 0, "parsed idx is non-positive")
             ( beginning: parsed-first, until: parsed-last )
         } else if match-single != none {
             let parsed = int(match-single.captures.first())
-            assert(parsed > 0, "parsed idx is non-positive")
+            // assert(parsed > 0, "parsed idx is non-positive")
             parsed
         } else {
-            panic("failed to parse visible slide idx")
+            panic("failed to parse visible slide idx:" + part)
         }
     }
     parts.map(parse-part)
 }
 
-#let _check-visible(idx, visible-slides) = {
-    if type(visible-slides) == "integer" {
-        idx == visible-slides
-    } else if type(visible-slides) == "array" {
-        visible-slides.any(s => _check-visible(idx, s))
-    } else if type(visible-slides) == "string" {
+#let _check-visible(idx, visible-subslides) = {
+    if type(visible-subslides) == "integer" {
+        idx == visible-subslides
+    } else if type(visible-subslides) == "array" {
+        visible-subslides.any(s => _check-visible(idx, s))
+    } else if type(visible-subslides) == "string" {
         let parts = _parse-subslide-indices(visible-subslides)
         _check-visible(idx, parts)
-    } else if type(visible-slides) == "dictionary" {
-        let vis = true
-        if "beginning" in visible-slides {
-            vis = vis or visible-slides.beginning <= idx
+    } else if type(visible-subslides) == "dictionary" {
+        let lower-okay = if "beginning" in visible-subslides {
+            visible-subslides.beginning <= idx
+        } else {
+            true
         }
-        if "until" in visible-slides {
-            vis = vis or visible-slides.until >= idx
+
+        let upper-okay = if "until" in visible-subslides {
+            visible-subslides.until >= idx
+        } else {
+            true
         }
-        vis
+
+        lower-okay and upper-okay
     } else {
         panic("you may only provide a single integer, an array of integers, or a string")
     }
 }
 
-#let _last-required-subslide(visible-slides) = {
-    if type(visible-slides) == "integer" {
-        idx
-    } else if type(visible-slides) == "array" {
-        calc.max(..visible-slides.map(s => _last-required-subslide(s)))
-    } else if type(visible-slides) == "string" {
+#let _last-required-subslide(visible-subslides) = {
+    if type(visible-subslides) == "integer" {
+        visible-subslides
+    } else if type(visible-subslides) == "array" {
+        calc.max(..visible-subslides.map(s => _last-required-subslide(s)))
+    } else if type(visible-subslides) == "string" {
         let parts = _parse-subslide-indices(visible-subslides)
         _last-required-subslide(parts)
-    } else if type(visible-slides) == "dictionary" {
+    } else if type(visible-subslides) == "dictionary" {
         let last = 0
-        if "beginning" in visible-slides {
-            last = calc.max(last, visible-slides.beginning)
+        if "beginning" in visible-subslides {
+            last = calc.max(last, visible-subslides.beginning)
         }
-        if "until" in visible-slides {
-            last = calc.max(last, visible-slides.until)
+        if "until" in visible-subslides {
+            last = calc.max(last, visible-subslides.until)
         }
         last
     } else {
@@ -216,47 +223,60 @@
     }
 }
 
-#let uncover(visible-slides, body) = {
-    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-slides)))
+#let only(visible-subslides, reserve-space: false, body) = {
+    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-subslides)))
     locate( loc => {
-        if _check-visible(subslide.at(loc).first(), visible-slides) {
+        if _check-visible(subslide.at(loc).first(), visible-subslides) {
             body
-        } else {
+        } else if reserve-space {
             _slides-cover(body)
         }
     })
 }
 
-#let only(visible-slides, body) = {
-    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-slides)))
-    locate( loc => {
-        if _check-visible(subslide.at(loc).first(), visible-slides) {
-            body
-        }
-    })
+#let uncover(visible-subslides, body) = {
+    only(visible-subslides, reserve-space: true, body)
 }
 
 #let one-by-one(start: 1, ..children) = {
     repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
     for (idx, child) in children.pos().enumerate() {
-        beginning(start + idx, child)
+        uncover((beginning: start + idx), child)
     }
 }
 
-#let alternatives(start: 1, ..children) = {
+#let alternatives(start: 1, position: bottom + left, ..children) = {
     repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
     style(styles => {
         let sizes = children.pos().map(c => measure(c, styles))
         let max-width = calc.max(..sizes.map(sz => sz.width))
         let max-height = calc.max(..sizes.map(sz => sz.height))
         for (idx, child) in children.pos().enumerate() {
-            only-non-occupying(start + idx, box(
+            only(start + idx, box(
                 width: max-width,
                 height: max-height,
-                child
+                align(position, child)
             ))
         }
     })
+}
+
+#let line-by-line(start: 1, body) = {
+    let items = if repr(body.func()) == "sequence" {
+        body.children
+    } else {
+        ( body, )
+    }
+
+    let idx = start
+    for item in items {
+        if repr(item.func()) != "space" {
+            uncover((beginning: idx), item)
+            idx += 1
+        } else {
+            item
+        }
+    }
 }
 
 #let slides(
