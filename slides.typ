@@ -150,12 +150,12 @@
     })
 }
 
-#let only(visible-slide-number, body) = {
+#let only(reserve: true, visible-slide-number, body) = {
     repetitions.update(rep => calc.max(rep, visible-slide-number))
     locate( loc => {
         if subslide.at(loc).first() == visible-slide-number {
             full-box(body)
-        } else {
+        } else if (reserve) {
             slides-custom-hide(body)
         }
     })
