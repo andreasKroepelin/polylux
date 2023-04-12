@@ -77,15 +77,31 @@
         c => repr(c.func()) != "space"
     )
 
+    enum(
+        ..items.enumerate().map((idx_item) => beginning(idx_item.first() + 1, idx_item.last().body))
+    )
+
+    /*
     for (idx, item) in items.enumerate() {
         beginning(idx + 1, item)
     }
+    */
 }
 
 #slide(title: "Simpler lists")[
     #obo-list[
-        - abc def
-        - ghi
-        - jkl
+        + abc def
+        + ghi
+        + jkl
     ]
+
+    #v(1em)
+    #block(width: 100%, fill: teal.lighten(50%), inset: 1em)[
+        - hi
+        #only(2)[- hello]
+    ]
+
+    - one
+    #hide[- two]
+    - three
 ]

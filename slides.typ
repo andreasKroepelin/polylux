@@ -5,19 +5,9 @@
 #let cover-mode = state("cover-mode", "hide")
 #let global-theme = state("global-theme", none)
 
-#let cover-mode-hide = cover-mode.update("hide")
-#let cover-mode-mute = cover-mode.update("mute")
+#let cover-mode-invisible = cover-mode.update("invisible")
+#let cover-mode-transparent = cover-mode.update("transparent")
 #let new-section(name) = section.update(name)
-
-// avoid "#set" interferences
-#let full-box(obj) = {
-    /* box(
-        width: 100%, height: auto, baseline: 0%, fill: none,
-        stroke: none, radius: 0%, inset: 0%, outset: 0%,
-        obj
-    ) */
-    obj
-}
 
 #let slides-default-theme(color: teal) = data => {
     let title-slide = {
@@ -137,58 +127,111 @@
     })
 }
 
-#let slides-custom-hide(body) = {
+#let _slides-cover(body) = {
     locate( loc => {
         let mode = cover-mode.at(loc)
-        // wrap in box to avoid hiding issues with list, equation and other types
-        if mode == "hide" {
-            hide(full-box(body))
-        } else if mode == "mute" {
-            text(gray.lighten(50%), full-box(body))
+        if mode == "invisible" {
+            hide(body)
+        } else if mode == "transparent" {
+            text(gray.lighten(50%), body)
         } else {
-            panic("Illegal `cover-mode`: " + mode)
+            panic("Illegal cover mode: " + mode)
         }
     })
 }
 
-#let only(visible-slide-number, body) = {
-    repetitions.update(rep => calc.max(rep, visible-slide-number))
-    locate( loc => {
-        if subslide.at(loc).first() == visible-slide-number {
-            full-box(body)
+#let _parse-subslide-indices(s) = {
+    let parts = s.split(",")
+    let parse-part(part) = {
+        let match-until = part.match("^-([[:digit:]]+)$")
+        let match-beginning = part.match("^([[:digit:]]+)-$")
+        let match-range = part.match("^([[:digit:]]+)-([[:digit:]]+)$")
+        let match-single = part.match("^([[:digit:]]+)$")
+        if match-until != none {
+            let parsed = int(match-until.captures.first())
+            assert(parsed > 0, "parsed idx is non-positive")
+            ( until: parsed )
+        } else if match-beginning != none {
+            let parsed = int(match-beginning.captures.first())
+            assert(parsed > 0, "parsed idx is non-positive")
+            ( beginning: parsed )
+        } else if match-range != none {
+            let parsed-first = int(match-range.captures.first())
+            let parsed-last = int(match-range.captures.last())
+            assert(parsed-first > 0, "parsed idx is non-positive")
+            assert(parsed-last > 0, "parsed idx is non-positive")
+            ( beginning: parsed-first, until: parsed-last )
+        } else if match-single != none {
+            let parsed = int(match-single.captures.first())
+            assert(parsed > 0, "parsed idx is non-positive")
+            parsed
         } else {
-            slides-custom-hide(body)
+            panic("failed to parse visible slide idx")
         }
-    })
+    }
+    parts.map(parse-part)
 }
 
-#let only-non-occupying(visible-slide-number, body) = {
-    repetitions.update(rep => calc.max(rep, visible-slide-number))
+#let _check-visible(idx, visible-slides) = {
+    if type(visible-slides) == "integer" {
+        idx == visible-slides
+    } else if type(visible-slides) == "array" {
+        visible-slides.any(s => _check-visible(idx, s))
+    } else if type(visible-slides) == "string" {
+        let parts = _parse-subslide-indices(visible-subslides)
+        _check-visible(idx, parts)
+    } else if type(visible-slides) == "dictionary" {
+        let vis = true
+        if "beginning" in visible-slides {
+            vis = vis or visible-slides.beginning <= idx
+        }
+        if "until" in visible-slides {
+            vis = vis or visible-slides.until >= idx
+        }
+        vis
+    } else {
+        panic("you may only provide a single integer, an array of integers, or a string")
+    }
+}
+
+#let _last-required-subslide(visible-slides) = {
+    if type(visible-slides) == "integer" {
+        idx
+    } else if type(visible-slides) == "array" {
+        calc.max(..visible-slides.map(s => _last-required-subslide(s)))
+    } else if type(visible-slides) == "string" {
+        let parts = _parse-subslide-indices(visible-subslides)
+        _last-required-subslide(parts)
+    } else if type(visible-slides) == "dictionary" {
+        let last = 0
+        if "beginning" in visible-slides {
+            last = calc.max(last, visible-slides.beginning)
+        }
+        if "until" in visible-slides {
+            last = calc.max(last, visible-slides.until)
+        }
+        last
+    } else {
+        panic("you may only provide a single integer, an array of integers, or a string")
+    }
+}
+
+#let uncover(visible-slides, body) = {
+    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-slides)))
     locate( loc => {
-        if subslide.at(loc).first() == visible-slide-number {
+        if _check-visible(subslide.at(loc).first(), visible-slides) {
             body
+        } else {
+            _slides-cover(body)
         }
     })
 }
 
-#let beginning(first-visible-slide-number, body) = {
-    repetitions.update(rep => calc.max(rep, first-visible-slide-number))
+#let only(visible-slides, body) = {
+    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-slides)))
     locate( loc => {
-        if subslide.at(loc).first() >= first-visible-slide-number {
-            full-box(body)
-        } else {
-            slides-custom-hide(body)
-        }
-    })
-}
-
-#let until(last-visible-slide-number, body) = {
-    repetitions.update(rep => calc.max(rep, last-visible-slide-number))
-    locate( loc => {
-        if subslide.at(loc).first() <= last-visible-slide-number {
-            full-box(body)
-        } else {
-            slides-custom-hide(body)
+        if _check-visible(subslide.at(loc).first(), visible-slides) {
+            body
         }
     })
 }
