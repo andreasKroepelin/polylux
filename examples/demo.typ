@@ -49,16 +49,17 @@
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
-    #show: pause(2)
+    #show: pause
 
     That's what the `pause` function is there for!
     Use it as
     ```typ
-    #show: pause(n)
+    #show: pause
     ```
-    #show: pause(3)
+    #show: pause
 
-    It makes everything after it appear at the `n`-th subslide.
+    It makes everything after it appear later, just as if you would write
+    #raw("\\pause", block: false, lang: "latex") in beamer.
 
     #text(.6em)[(Also note that the slide number does not change while we are here.)]
 ]
@@ -242,15 +243,14 @@
 
     However, you can also just display it in light gray by using the
     `mode` argument with the value `"transparent"`:
-    #show: pause(2, mode: "transparent")
+    #show: pause.with(mode: "transparent")
 
     Covered content is then displayed differently.
-    #show: pause(3, mode: "transparent")
+    #show: pause.with(mode: "transparent")
 
     Every `uncover`-based function has an optional `mode` argument:
-    - `#show: pause(...)`
+    - `#show: pause.with(...)`
     - `#uncover(...)[...]`
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
 ]
-

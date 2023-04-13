@@ -6,6 +6,7 @@
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
+#let pause-counter = counter("pause-counter")
 #let global-theme = state("global-theme", none)
 
 #let new-section(name) = section.update(name)
@@ -165,78 +166,14 @@
     }
 }
 
-// #let pause = raw(
-//     "PAUSE SIGNAL",
-//     block: false,
-//     lang: "terrible hack"
-// )
-
-#let pause(beginning, mode: "invisible") = body => uncover((beginning: beginning), mode: mode, body)
-
-#let _parse-pauses(body) = {
-    let check-for-pauses(it) = {
-        if it == pause {
-            true
-        } else if repr(it.func()) == "sequence" {
-            it.children.any(check-for-pauses)
-        } else if repr(it.func()) == "styled" {
-            check-for-pauses(it.child)
-        } else {
-            false
-        }
-    }
-    let check-for-styled(it) = {
-        if repr(it.func()) == "sequence" {
-            it.children.any(check-for-styled)
-        } else {
-            repr(it.func()) == "styled" 
-        }
-    }
-    let find-pauses-sequence(seq) = {
-        seq.children.enumerate().filter( idx-item => {
-            let (idx, item) = idx-item
-            item == pause
-        }).map(idx-item => {
-            let (idx, item) = idx-item
-            idx
-        })
-    }
-
-    let split-sequence-at-pauses(seq) = {
-        let pause-idcs = find-pauses-sequence(seq)
-        pause-idcs.insert(0, 0)
-        pause-idcs.push(seq.children.len())
-
-        let chunks = ()
-        for i in range(pause-idcs.len() - 1) {
-            let lo = pause-idcs.at(i)
-            let hi = pause-idcs.at(i + 1)
-            chunks.push(
-                seq.children.slice(lo + 1, hi)
-            )
-        }
-        chunks
-    }
-
-    if check-for-pauses(body) and check-for-styled(body) {
-        panic("Using #pause does not work on slides with #set ... rules.")
-    }
-
-    let items = if repr(body.func()) == "sequence" {
-        let chunks = split-sequence-at-pauses(body)
-        chunks.map(chunk => {
-            for thing in chunk {
-                thing
-            }
-        })
-    } else {
-        (body,)
-    }
-
-    for (idx, item) in items.enumerate() {
-        uncover((beginning: idx + 1), item)
-    }
+#let pause(mode: "invisible", body) = {
+    pause-counter.step()
+    locate(loc => {
+        let beginning = pause-counter.at(loc).first()
+        uncover((beginning: beginning), mode: mode, body)
+    })
 }
+
 
 // ================================
 // ======== SLIDE CREATION ========
@@ -260,7 +197,6 @@
             slide-content = override-theme
         }
         let slide-info = kwargs.named()
-        // let paused-body = _parse-pauses(body)
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
@@ -268,6 +204,7 @@
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
 
+                    pause-counter.update(1)
                     slide-content(slide-info, body)
                 }
             })
