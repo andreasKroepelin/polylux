@@ -1,100 +1,21 @@
+// ==============================
+// ======== GLOBAL STATE ========
+// ==============================
+
 #let section = state("section", none)
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let cover-mode = state("cover-mode", "invisible")
-#let pause-counter = counter("pause-counter")
 #let global-theme = state("global-theme", none)
 
 #let cover-mode-invisible = cover-mode.update("invisible")
 #let cover-mode-transparent = cover-mode.update("transparent")
 #let new-section(name) = section.update(name)
 
-#let slides-default-theme(color: teal) = data => {
-    let title-slide = {
-        align(center + horizon)[
-            #block(
-                stroke: ( y: 1mm + color ),
-                inset: 1em,
-                breakable: false,
-                [
-                    #text(1.3em)[*#data.title*] \
-                    #{
-                        if data.subtitle != none {
-                            parbreak()
-                            text(.9em)[#data.subtitle]
-                        }
-                    }
-                ]
-            )
-            #set text(size: .8em)
-            #grid(
-                columns: (1fr,) * calc.min(data.authors.len(), 3),
-                column-gutter: 1em,
-                row-gutter: 1em,
-                ..data.authors
-            )
-            #v(1em)
-            #data.date
-        ]
-    }
-
-    let default(slide-info, body) = {
-        let decoration(position, body) = {
-            let border = 1mm + color
-            let strokes = (
-                header: ( bottom: border ),
-                footer: ( top: border )
-            )
-            block(
-                stroke: strokes.at(position),
-                width: 100%,
-                inset: .3em,
-                text(.5em, body)
-            )
-        }
-
-
-        // header
-        decoration("header", section.display())
-
-        if "title" in slide-info {
-            block(
-                width: 100%, inset: (x: 2em), breakable: false,
-                outset: 0em,
-                heading(level: 1, slide-info.title)
-            )
-        }
-        
-        v(1fr)
-        block(
-            width: 100%, inset: (x: 2em), breakable: false, outset: 0em,
-            body
-        )
-        v(2fr)
-
-        // footer
-        decoration("footer")[
-            #data.short-authors #h(10fr)
-            #data.short-title #h(1fr)
-            #data.date #h(10fr)
-            #logical-slide.display()
-        ]
-    }
-
-    let wake-up(slide-info, body) = {
-        block(
-            width: 100%, height: 100%, inset: 2em, breakable: false, outset: 0em,
-            fill: color,
-            text(size: 1.5em, fill: white, {v(1fr); body; v(1fr)})
-        )
-    }
-
-    (
-        title-slide: title-slide,
-        variants: ( "default": default, "wake up": wake-up, ),
-    )
-}
+// =================================
+// ======== DYNAMIC CONTENT ========
+// =================================
 
 #let _slides-cover(body) = {
     locate( loc => {
@@ -296,6 +217,10 @@
     }
 }
 
+// ================================
+// ======== SLIDE CREATION ========
+// ================================
+
 #let slide(
     max-repetitions: 10,
     theme-variant: "default",
@@ -308,7 +233,6 @@
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
-        pause-counter.update(1)
 
         let slide-content = global-theme.at(loc).variants.at(theme-variant)
         if override-theme != none {
@@ -330,6 +254,100 @@
         }
     })
 }
+
+// ===============================
+// ======== DEFAULT THEME ========
+// ===============================
+
+#let slides-default-theme(color: teal) = data => {
+    let title-slide = {
+        align(center + horizon)[
+            #block(
+                stroke: ( y: 1mm + color ),
+                inset: 1em,
+                breakable: false,
+                [
+                    #text(1.3em)[*#data.title*] \
+                    #{
+                        if data.subtitle != none {
+                            parbreak()
+                            text(.9em)[#data.subtitle]
+                        }
+                    }
+                ]
+            )
+            #set text(size: .8em)
+            #grid(
+                columns: (1fr,) * calc.min(data.authors.len(), 3),
+                column-gutter: 1em,
+                row-gutter: 1em,
+                ..data.authors
+            )
+            #v(1em)
+            #data.date
+        ]
+    }
+
+    let default(slide-info, body) = {
+        let decoration(position, body) = {
+            let border = 1mm + color
+            let strokes = (
+                header: ( bottom: border ),
+                footer: ( top: border )
+            )
+            block(
+                stroke: strokes.at(position),
+                width: 100%,
+                inset: .3em,
+                text(.5em, body)
+            )
+        }
+
+
+        // header
+        decoration("header", section.display())
+
+        if "title" in slide-info {
+            block(
+                width: 100%, inset: (x: 2em), breakable: false,
+                outset: 0em,
+                heading(level: 1, slide-info.title)
+            )
+        }
+        
+        v(1fr)
+        block(
+            width: 100%, inset: (x: 2em), breakable: false, outset: 0em,
+            body
+        )
+        v(2fr)
+
+        // footer
+        decoration("footer")[
+            #data.short-authors #h(10fr)
+            #data.short-title #h(1fr)
+            #data.date #h(10fr)
+            #logical-slide.display()
+        ]
+    }
+
+    let wake-up(slide-info, body) = {
+        block(
+            width: 100%, height: 100%, inset: 2em, breakable: false, outset: 0em,
+            fill: color,
+            text(size: 1.5em, fill: white, {v(1fr); body; v(1fr)})
+        )
+    }
+
+    (
+        title-slide: title-slide,
+        variants: ( "default": default, "wake up": wake-up, ),
+    )
+}
+
+// ===================================
+// ======== TEMPLATE FUNCTION ========
+// ===================================
 
 #let slides(
     title: none,
