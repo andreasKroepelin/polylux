@@ -17,7 +17,7 @@ To define the current section, simply use `#new-section`:
   Header hasn't changed.
 ]
 
-#new-slide("Motivation")
+#new-section("Motivation")
 
 #slide(title: "And now?")[
   Now, we are in the _motivation_ section.
