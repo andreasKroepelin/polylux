@@ -6,28 +6,22 @@
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
-#let cover-mode = state("cover-mode", "invisible")
 #let global-theme = state("global-theme", none)
 
-#let cover-mode-invisible = cover-mode.update("invisible")
-#let cover-mode-transparent = cover-mode.update("transparent")
 #let new-section(name) = section.update(name)
 
 // =================================
 // ======== DYNAMIC CONTENT ========
 // =================================
 
-#let _slides-cover(body) = {
-    locate( loc => {
-        let mode = cover-mode.at(loc)
-        if mode == "invisible" {
-            hide(body)
-        } else if mode == "transparent" {
-            text(gray.lighten(50%), body)
-        } else {
-            panic("Illegal cover mode: " + mode)
-        }
-    })
+#let _slides-cover(mode, body) = {
+    if mode == "invisible" {
+        hide(body)
+    } else if mode == "transparent" {
+        text(gray.lighten(50%), body)
+    } else {
+        panic("Illegal cover mode: " + mode)
+    }
 }
 
 #let _parse-subslide-indices(s) = {
@@ -111,25 +105,29 @@
     }
 }
 
-#let only(visible-subslides, reserve-space: false, body) = {
+#let _conditional-display(visible-subslides, reserve-space, mode, body) = {
     repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-subslides)))
     locate( loc => {
         if _check-visible(subslide.at(loc).first(), visible-subslides) {
             body
         } else if reserve-space {
-            _slides-cover(body)
+            _slides-cover(mode, body)
         }
     })
 }
 
-#let uncover(visible-subslides, body) = {
-    only(visible-subslides, reserve-space: true, body)
+#let uncover(visible-subslides, mode: "invisible", body) = {
+    _conditional-display(visible-subslides, true, mode, body)
 }
 
-#let one-by-one(start: 1, ..children) = {
+#let only(visible-subslides, body) = {
+    _conditional-display(visible-subslides, false, "doesn't even matter", body)
+}
+
+#let one-by-one(start: 1, mode: "invisible", ..children) = {
     repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
     for (idx, child) in children.pos().enumerate() {
-        uncover((beginning: start + idx), child)
+        uncover((beginning: start + idx), mode: mode, child)
     }
 }
 
@@ -149,7 +147,7 @@
     })
 }
 
-#let line-by-line(start: 1, body) = {
+#let line-by-line(start: 1, mode: "invisible", body) = {
     let items = if repr(body.func()) == "sequence" {
         body.children
     } else {
@@ -159,7 +157,7 @@
     let idx = start
     for item in items {
         if repr(item.func()) != "space" {
-            uncover((beginning: idx), item)
+            uncover((beginning: idx), mode: mode, item)
             idx += 1
         } else {
             item
@@ -167,13 +165,33 @@
     }
 }
 
-#let pause = raw(
-    "PAUSE SIGNAL",
-    block: false,
-    lang: "terrible hack"
-)
+// #let pause = raw(
+//     "PAUSE SIGNAL",
+//     block: false,
+//     lang: "terrible hack"
+// )
+
+#let pause(beginning, mode: "invisible") = body => uncover((beginning: beginning), mode: mode, body)
 
 #let _parse-pauses(body) = {
+    let check-for-pauses(it) = {
+        if it == pause {
+            true
+        } else if repr(it.func()) == "sequence" {
+            it.children.any(check-for-pauses)
+        } else if repr(it.func()) == "styled" {
+            check-for-pauses(it.child)
+        } else {
+            false
+        }
+    }
+    let check-for-styled(it) = {
+        if repr(it.func()) == "sequence" {
+            it.children.any(check-for-styled)
+        } else {
+            repr(it.func()) == "styled" 
+        }
+    }
     let find-pauses-sequence(seq) = {
         seq.children.enumerate().filter( idx-item => {
             let (idx, item) = idx-item
@@ -200,6 +218,9 @@
         chunks
     }
 
+    if check-for-pauses(body) and check-for-styled(body) {
+        panic("Using #pause does not work on slides with #set ... rules.")
+    }
 
     let items = if repr(body.func()) == "sequence" {
         let chunks = split-sequence-at-pauses(body)
@@ -239,7 +260,7 @@
             slide-content = override-theme
         }
         let slide-info = kwargs.named()
-        let paused-body = _parse-pauses(body)
+        // let paused-body = _parse-pauses(body)
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
@@ -247,7 +268,7 @@
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
 
-                    slide-content(slide-info, paused-body)
+                    slide-content(slide-info, body)
                 }
             })
             subslide.step()

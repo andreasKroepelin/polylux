@@ -49,14 +49,16 @@
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
-    #pause
+    #show: pause(2)
 
-    That's what the `#pause` command is there for!
-    #pause
+    That's what the `pause` function is there for!
+    Use it as
+    ```typ
+    #show: pause(n)
+    ```
+    #show: pause(3)
 
-    It makes everything after it appear later.
-
-    It works just as in LaTeX beamer.
+    It makes everything after it appear at the `n`-th subslide.
 
     #text(.6em)[(Also note that the slide number does not change while we are here.)]
 ]
@@ -78,7 +80,7 @@
 #let example = block.with(
     width: 100%,
     inset: .5em,
-    fill: gray.lighten(50%),
+    fill: aqua.lighten(80%),
     radius: .5em
 )
 
@@ -141,25 +143,6 @@
         ```
         #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
     ]
-]
-
-#slide(title: "Different ways of covering content")[
-    When content is covered, it is completely invisible by default.
-
-    However, you can also just display it in light gray by using\
-    `#cover-mode-transparent`
-    #cover-mode-transparent
-    #pause
-
-    Afterwards, covered content is displayed differently.
-    #pause
-
-    You can switch back to invisibility by using\
-    `#cover-mode-invisible`
-    #cover-mode-invisible
-    #pause
-
-    See?
 ]
 
 #slide(title: [`#only`: Reserving no space])[
@@ -252,5 +235,22 @@
     ]
 
     `start` is again optional and defaults to `1`.
+]
+
+#slide(title: "Different ways of covering content")[
+    When content is covered, it is completely invisible by default.
+
+    However, you can also just display it in light gray by using the
+    `mode` argument with the value `"transparent"`:
+    #show: pause(2, mode: "transparent")
+
+    Covered content is then displayed differently.
+    #show: pause(3, mode: "transparent")
+
+    Every `uncover`-based function has an optional `mode` argument:
+    - `#show: pause(...)`
+    - `#uncover(...)[...]`
+    - `#one-by-one(...)[...][...]`
+    - `#line-by-line(...)[...][...]`
 ]
 
