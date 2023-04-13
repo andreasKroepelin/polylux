@@ -93,3 +93,14 @@
     #alternatives(..range(1, 10).map(str))
 ]
 
+#slide(title: "Pauses")[
+    Some text.
+    #pause
+    More text.
+
+    1. abc
+    #pause
+    2. def
+    #pause
+    3. ghi
+]

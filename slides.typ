@@ -96,39 +96,6 @@
     )
 }
 
-#let slide(
-    max-repetitions: 10,
-    theme-variant: "default",
-    override-theme: none,
-    ..kwargs,
-    body
-) = {
-    pagebreak(weak: true)
-    logical-slide.step()
-    locate( loc => {
-        subslide.update(1)
-        repetitions.update(1)
-        pause-counter.update(1)
-
-        let slide-content = global-theme.at(loc).variants.at(theme-variant)
-        if override-theme != none {
-            slide-content = override-theme
-        }
-        let slide-info = kwargs.named()
-
-        for _ in range(max-repetitions) {
-            locate( loc-inner => {
-                let curr-subslide = subslide.at(loc-inner).first()
-                if curr-subslide <= repetitions.at(loc-inner).first() {
-                    if curr-subslide > 1 { pagebreak(weak: true) }
-                    slide-content(slide-info, body)
-                }
-            })
-            subslide.step()
-        }
-    })
-}
-
 #let _slides-cover(body) = {
     locate( loc => {
         let mode = cover-mode.at(loc)
@@ -277,6 +244,91 @@
             item
         }
     }
+}
+
+#let pause = raw(
+    "PAUSE SIGNAL",
+    block: false,
+    lang: "terrible hack"
+)
+
+#let _parse-pauses(body) = {
+    let find-pauses-sequence(seq) = {
+        seq.children.enumerate().filter( idx-item => {
+            let (idx, item) = idx-item
+            item == pause
+        }).map(idx-item => {
+            let (idx, item) = idx-item
+            idx
+        })
+    }
+
+    let split-sequence-at-pauses(seq) = {
+        let pause-idcs = find-pauses-sequence(seq)
+        pause-idcs.insert(0, 0)
+        pause-idcs.push(seq.children.len())
+
+        let chunks = ()
+        for i in range(pause-idcs.len() - 1) {
+            let lo = pause-idcs.at(i)
+            let hi = pause-idcs.at(i + 1)
+            chunks.push(
+                seq.children.slice(lo + 1, hi)
+            )
+        }
+        chunks
+    }
+
+
+    let items = if repr(body.func()) == "sequence" {
+        let chunks = split-sequence-at-pauses(body)
+        chunks.map(chunk => {
+            for thing in chunk {
+                thing
+            }
+        })
+    } else {
+        (body,)
+    }
+
+    for (idx, item) in items.enumerate() {
+        uncover((beginning: idx + 1), item)
+    }
+}
+
+#let slide(
+    max-repetitions: 10,
+    theme-variant: "default",
+    override-theme: none,
+    ..kwargs,
+    body
+) = {
+    pagebreak(weak: true)
+    logical-slide.step()
+    locate( loc => {
+        subslide.update(1)
+        repetitions.update(1)
+        pause-counter.update(1)
+
+        let slide-content = global-theme.at(loc).variants.at(theme-variant)
+        if override-theme != none {
+            slide-content = override-theme
+        }
+        let slide-info = kwargs.named()
+        let paused-body = _parse-pauses(body)
+
+        for _ in range(max-repetitions) {
+            locate( loc-inner => {
+                let curr-subslide = subslide.at(loc-inner).first()
+                if curr-subslide <= repetitions.at(loc-inner).first() {
+                    if curr-subslide > 1 { pagebreak(weak: true) }
+
+                    slide-content(slide-info, paused-body)
+                }
+            })
+            subslide.step()
+        }
+    })
 }
 
 #let slides(
