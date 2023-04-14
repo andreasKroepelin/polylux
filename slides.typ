@@ -6,7 +6,6 @@
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
-#let pause-counter = counter("pause-counter")
 #let global-theme = state("global-theme", none)
 
 #let new-section(name) = section.update(name)
@@ -166,12 +165,8 @@
     }
 }
 
-#let pause(mode: "invisible", body) = {
-    pause-counter.step()
-    locate(loc => {
-        let beginning = pause-counter.at(loc).first()
-        uncover((beginning: beginning), mode: mode, body)
-    })
+#let pause(beginning, mode: "invisible") = body => {
+    uncover((beginning: beginning), mode: mode, body)
 }
 
 
@@ -204,7 +199,6 @@
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
 
-                    pause-counter.update(1)
                     slide-content(slide-info, body)
                 }
             })
