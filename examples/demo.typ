@@ -9,9 +9,19 @@
     date: "April 2023"
 )
 
+#show link: set text(blue)
+
 #new-section("Introduction")
 
-#slide(title: "First slide")[
+#slide(title: "About this presentation")[
+    This presentation is supposed to briefly showcase what you can do with this
+    template.
+
+    For a full documentation, read the
+    #link("https://andreaskroepelin.github.io/typst-slides/book/")[online book].
+]
+
+#slide(title: "A title")[
     Let's explore what we have here.
 
     On the top of this slide, you can see the slide title.
@@ -254,4 +264,41 @@
     - `#uncover(...)[...]`
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
+]
+
+#new-section("Themes")
+
+#slide(title: "How a slide looks...")[
+    ... is defined by the _theme_ of the presentation.
+
+    This demo uses the default theme.
+
+    Because of it, the title slide and the decoration on each slide (with
+    section name, short title, slide number etc.) look the way they do.
+
+    Themes can also provide variants, for example ...
+]
+
+#slide(theme-variant: "wake up")[
+    ... this one!
+
+    It's very minimalist and helps the audience focus on an important point.
+]
+
+#slide(title: "Your own theme?")[
+    If you want to create your own design for slides, you can define custom
+    themes!
+
+    #link("https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme")[The book]
+    explains how to do so.
+]
+
+#new-section("Conclusion")
+
+#slide(title: "That's it!")[
+    Hopefully you now have some kind of idea what you can do with this template.
+
+    Consider giving it
+    #link("https://github.com/andreasKroepelin/typst-slides")[a GitHub star #text(font: "OpenMoji")[#emoji.star]]
+    or open an issue if you run into bugs or have feature requests.
 ]
