@@ -17,3 +17,9 @@
 #slide(theme-variant: "east", title: "On the right!")[
   #lorem(40)
 ]
+
+#slide(theme-variant: "center split")[
+  #lorem(40)
+][
+  #lorem(40)
+]

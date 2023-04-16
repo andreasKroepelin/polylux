@@ -15,9 +15,9 @@
   #lorem(40)
 ]
 
-#let special-purpose-theme(slide-info, body) = align(horizon)[
+#let special-purpose-theme(slide-info, bodies) = align(horizon)[
   #rotate(45deg, heading(level: 2, slide-info.title))
-  #scale(x: -100%, body)
+  #scale(x: -100%, bodies.first())
 ]
 #slide(override-theme: special-purpose-theme, title: "This is rotated")[
   #lorem(40)

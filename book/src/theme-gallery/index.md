@@ -8,6 +8,8 @@ Here you can find an overview over all themes shipped with this template.
 ---
 
 ## Default
+_[go to top](#theme-gallery)_
+
 If you do not specify a theme, the default one will be used.
 You can specify it explicitly by referring to `slides-default-theme`:
 ```typ
@@ -50,6 +52,8 @@ You can specify it explicitly by referring to `slides-default-theme`:
 ---
 
 ## Bipartite
+_[go to top](#theme-gallery)_
+
 This theme is inspired by
 [Modern Annual Report](https://slidesgo.com/theme/modern-annual-report).
 It features a dominant partition of space into a bright and a dark side.
@@ -66,6 +70,8 @@ It features a dominant partition of space into a bright and a dark side.
 ### Variants
 - `"east"`: same as default variant, but dark side on the right, text is right
   aligned
+- `"center split"`: bright left and dark right half of equal size, requires two
+  content bodies, one for each half (does not display a slide title)
 
 ### Extra keyword arguments
 - `title`: a title for that slide
@@ -89,6 +95,12 @@ It features a dominant partition of space into a bright and a dark side.
 ]
 
 #slide(theme-variant: "east", title: "On the right!")[
+  #lorem(40)
+]
+
+#slide(theme-variant: "center split")[
+  #lorem(40)
+][
   #lorem(40)
 ]
 ```
