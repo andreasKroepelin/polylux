@@ -54,7 +54,7 @@ You can also use different
 [create your own](https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme)!)
 
 For dynamic content, the template also provides [a convenient API for complex
-overlays](https://andreaskroepelin.github.io/typst-slides/book/dynamic.html)
+overlays](https://andreaskroepelin.github.io/typst-slides/book/dynamic.html).
 
 For more details, visit the
 [book](https://andreaskroepelin.github.io/typst-slides/book)!
