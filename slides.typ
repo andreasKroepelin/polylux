@@ -178,8 +178,7 @@
     max-repetitions: 10,
     theme-variant: "default",
     override-theme: none,
-    ..kwargs,
-    body
+    ..args
 ) = {
     pagebreak(weak: true)
     logical-slide.step()
@@ -191,7 +190,8 @@
         if override-theme != none {
             slide-content = override-theme
         }
-        let slide-info = kwargs.named()
+        let slide-info = args.named()
+        let bodies = args.pos()
 
         for _ in range(max-repetitions) {
             locate( loc-inner => {
@@ -199,7 +199,7 @@
                 if curr-subslide <= repetitions.at(loc-inner).first() {
                     if curr-subslide > 1 { pagebreak(weak: true) }
 
-                    slide-content(slide-info, body)
+                    slide-content(slide-info, bodies)
                 }
             })
             subslide.step()
@@ -240,7 +240,12 @@
         ]
     }
 
-    let default(slide-info, body) = {
+    let default(slide-info, bodies) = {
+        if bodies.len() != 1 {
+            panic("default variant of default theme only supports one body per slide")
+        }
+        let body = bodies.first()
+
         let decoration(position, body) = {
             let border = 1mm + color
             let strokes = (
@@ -283,7 +288,12 @@
         ]
     }
 
-    let wake-up(slide-info, body) = {
+    let wake-up(slide-info, bodies) = {
+        if bodies.len() != 1 {
+            panic("wake up variant of default theme only supports one body per slide")
+        }
+        let body = bodies.first()
+
         block(
             width: 100%, height: 100%, inset: 2em, breakable: false, outset: 0em,
             fill: color,

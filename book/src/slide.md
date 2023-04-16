@@ -25,3 +25,20 @@ These are:
 - additional information used by the theme, see the [gallery](./theme-gallery/index.html)
   to find out which they are under your theme's "Extra keyword arguments" section
   (typically, you can at least specify a slide title as `title`)
+
+## Slides with multiple content bodies
+In the vast majority of cases, you will call `#slide` the way described above
+with one content block.
+However, some [themes](./themes.html) (or some of their
+[variants](./themes.html#theme-variants-per-slide)) sometimes require or allow
+more than one such content.
+In that case, you will write:
+```typ
+#slide[
+  The first piece of content
+][
+  Even more content
+][
+  Who knows how much content we can come up with?
+]
+```
