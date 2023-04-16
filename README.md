@@ -3,6 +3,8 @@ This is a template for creating slides in [Typst](https://typst.app/).
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/typst-slides)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/typst-slides)
+[![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/typst-slides/releases/latest/download/demo.pdf)
 
 ## Quickstart
 ```typ
@@ -56,8 +58,11 @@ You can also use different
 For dynamic content, the template also provides [a convenient API for complex
 overlays](https://andreaskroepelin.github.io/typst-slides/book/dynamic.html).
 
-For more details, visit the
-[book](https://andreaskroepelin.github.io/typst-slides/book)!
+Visit the
+[book](https://andreaskroepelin.github.io/typst-slides/book)
+for more details or take a look at the
+[demo PDF](https://github.com/andreasKroepelin/typst-slides/releases/latest/download/demo.pdf)
+where you can see the features of this template in action.
 
 **⚠ This template is in active development.
 While I try to make sure that the `main`-branch always is in a usable state,
