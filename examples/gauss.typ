@@ -41,10 +41,12 @@
 
 	#one-by-one[
 		*base case:* Let $n = 1$. Then $sum_(i=1)^1 i = (1 dot.c 2)/2 = 1$ #emoji.checkmark.heavy
-		#v(1em)
+		// #v(1em)
+
 	][
 		*ind. hypothesis:* Let $sum_(i=1)^k i = k(k+1)/2$ for some $k >= 1$.
-		#v(1em)
+		// #v(1em)
+
 	][
 		*ind. step:* Show that $sum_(i=1)^(k+1) i = ((k+1)(k+2))/2$
 		$

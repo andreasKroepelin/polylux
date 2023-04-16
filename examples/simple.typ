@@ -13,10 +13,25 @@
 
 #slide(title: "A boring static slide")[
   Some boring static text.
+
+  #lorem(20)
 ]
 
 #slide[
   A fancy dynamic slide without a title.
-  More text.
-  #only(2)[This appears later!]
+  #uncover("2-")[This appears later!]
+]
+
+#slide(theme-variant: "wake up")[
+  Focus!
+]
+
+#new-section("Conclusion")
+
+#slide(title: "Take home message")[
+  Read the book!
+
+  Try it out!
+
+  Create themes!
 ]

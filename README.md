@@ -21,30 +21,43 @@ This is a template for creating slides in [Typst](https://typst.app/).
 
 #slide(title: "A boring static slide")[
   Some boring static text.
+
+  #lorem(20)
 ]
 
 #slide[
   A fancy dynamic slide without a title.
-  More text.
-  #only(2)[This appears later!]
+  #uncover("2-")[This appears later!]
+]
+
+#slide(theme-variant: "wake up")[
+  Focus!
+]
+
+#new-section("Conclusion")
+
+#slide(title: "Take home message")[
+  Read the book!
+
+  Try it out!
+
+  Create themes!
 ]
 ```
-As you can see, creating slides is as simple as using the `#slide` function.
-(You do not need to care about stuff like `#new-section` or `#only` in the
-beginning.)
-
 This code produces these PDF pages:
 ![title slide](assets/simple.png)
 
-That's all to get you started!
+As you can see, creating slides is as simple as using the `#slide` function.
+You can also use different
+[themes](https://andreaskroepelin.github.io/typst-slides/book/theme-gallery/index.html)
+(contributions welcome if you happen to
+[create your own](https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme)!)
+
+For dynamic content, the template also provides [a convenient API for complex
+overlays](https://andreaskroepelin.github.io/typst-slides/book/dynamic.html).
+
 For more details, visit the
 [book](https://andreaskroepelin.github.io/typst-slides/book)!
-
-There are also different
-[themes](https://andreaskroepelin.github.io/typst-slides/book/theme-gallery/index.html)
-to choose from!
-If you like, you can even
-[create your own](https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme).
 
 **⚠ This template is in active development.
 While I try to make sure that the `main`-branch always is in a usable state,
