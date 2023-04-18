@@ -5,13 +5,7 @@
 // https://github.com/dawbarton/UoB-beamer-theme
 // =============================================
 
-#let section = state("section", none)
-#let subslide = counter("subslide")
-#let logical-slide = counter("logical-slide")
-#let repetitions = counter("repetitions")
-#let global-theme = state("global-theme", none)
-
-#let new-section(name) = section.update(name)
+#import "../../slides.typ": *
 
 #let uob-theme(
       color: rgb(171, 31, 45), watermark: "watermark.svg", logo: "logo.svg", secondlogo: "secondlogo.svg"
