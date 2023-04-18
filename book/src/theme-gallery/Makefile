@@ -1,4 +1,4 @@
-all: default bipartite bristol
+all: default bipartite bristol university
 
 default:
 	pdftoppm ./default.pdf ./default -png
