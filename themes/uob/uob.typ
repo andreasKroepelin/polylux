@@ -58,7 +58,7 @@
 
     let default(slide-info, bodies) = {
         if bodies.len() != 1 {
-            panic("default variant of default theme only supports one body per slide")
+            panic("default variant of uob theme only supports one body per slide")
         }
         let body = bodies.first()
 
@@ -116,7 +116,7 @@
 
     let wake-up(slide-info, bodies) = {
         if bodies.len() != 1 {
-            panic("wake up variant of default theme only supports one body per slide")
+            panic("wake up variant of uob theme only supports one body per slide")
         }
         let body = bodies.first()
 
