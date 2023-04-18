@@ -64,7 +64,7 @@
             #v(1em)
             #{
                 parbreak()
-                text(.9em)[UniversityName]
+                text(.9em)[#university-name]
             }
             #{
                 parbreak()
