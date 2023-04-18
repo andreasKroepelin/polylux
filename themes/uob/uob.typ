@@ -13,16 +13,19 @@
 
 #let new-section(name) = section.update(name)
 
-#let uob-theme(color: rgb(171, 31, 45)) = data => {
+#let uob-theme(
+      color: rgb(171, 31, 45), watermark: "watermark.svg", logo: "logo.svg", secondlogo: "secondlogo.svg"
+   ) = data => {
+
     let title-slide = {
 
-     	place(image("UoB-watermark.svg", width:100%))
+     	place(image(watermark, width:100%))
 
         v(5%)
 	grid(columns: (5%, 1fr, 1fr, 5%),
 	    [],
-	    align(bottom + left)[#image("UoB-logo.svg", width:40%)],
-	    align(bottom + right)[#image("UoB-url.svg", width:40%)],
+	    align(bottom + left)[#image(logo, width:40%)],
+	    align(bottom + right)[#image(secondlogo, width:40%)],
 	    [])
 
         v(-10%)
@@ -78,7 +81,7 @@
 
         // header
         decoration("header", grid(columns: (1fr, 1fr),
-	            align(left, image("UoB-logo.svg", width:35%)),
+	            align(left, image(logo, width:35%)),
 		    align(right, grid(rows: (.5em, .5em),
 		        text(color, .7em)[#data.short-title],
 			[],
@@ -94,7 +97,7 @@
                 outset: 0em,
                 heading(level: 1, text(color)[#slide-info.title])
             )
-	    v(.3em)
+	    v(.7em)
         }
         
         v(1fr)
