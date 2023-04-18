@@ -1,4 +1,5 @@
 #import "../slides.typ": *
+#import "../themes/uob.typ": *
 
 #show: slides.with(
     authors: "Names of author(s)",
@@ -7,6 +8,7 @@
     subtitle: "Subtitle of the presentation",
     short-title: "Shorter title for slide footer",
     date: "March 2023",
+    theme: uob-theme(),
 )
 
 #new-section("My section name")

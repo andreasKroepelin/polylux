@@ -1,4 +1,5 @@
 #import "../slides.typ": *    
+#import "../themes/uob.typ": *
 
 
 #show: slides.with(
@@ -8,6 +9,7 @@
 		subtitle: "What they won't teach you in school",
     short-title: "Sum of natural numbers",
     date: "1784",
+    theme: uob-theme(),
 )
 
 #new-section("Introduction")
