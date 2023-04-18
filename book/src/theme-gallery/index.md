@@ -188,3 +188,26 @@ This is a quite a wide column
 ![UoB theme screenshot](./bristol.png)
 
 ---
+
+## University
+_[go to top](#theme-gallery)_
+
+This theme is a simple and configurable theme.
+
+### Options
+- `university-name`: The University name
+- `color-a`: A color of your choice
+- `color-b`: A color of your choice
+- `color-c`: A color of your choice
+- `logo`: A file path for a logo image to appear on the title slide only
+
+### Variants
+- `"wake up"`: no decoration, colored background, enlarged text
+- `"wake up a"`: no decoration, colored background with `color-a`, enlarged text
+- `"wake up b"`: no decoration, colored background with `color-b`, enlarged text
+- `"wake up c"`: no decoration, colored background with `color-c`, enlarged text
+- `"split 2 v"`: split a slide vertically in two parts
+- `"split 2 h"`: split a slide horizontally in two parts
+- `"four split"`: divide the slide in four area
+
+![university theme screenshot](./university.png)
