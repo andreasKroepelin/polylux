@@ -5,6 +5,7 @@ Here you can find an overview over all themes shipped with this template.
 - [Default](#default)
 - [Bipartite](#bipartite)
 - [Bristol](#bristol)
+- [University](#university)
 
 ---
 

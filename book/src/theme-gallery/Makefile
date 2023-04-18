@@ -14,3 +14,8 @@ bristol:
 	pdftoppm ./bristol.pdf ./bristol -png
 	montage ./bristol-* -geometry +50+50 -background LightGray ./bristol.png
 	rm ./bristol-*
+
+university:
+	pdftoppm ./university.pdf ./university -png
+	montage ./university-* -geometry +50+50 -background LightGray ./university.png
+	rm ./university-*

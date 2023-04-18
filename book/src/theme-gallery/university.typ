@@ -1,5 +1,5 @@
-#import "../slides.typ": *
-#import "../themes/university.typ": *
+#import "../../../slides.typ": *
+#import "../../../themes/university.typ": *
 
 #let color-a = rgb("#0C6291")
 #let color-b = rgb("#A63446")
@@ -17,7 +17,7 @@
         color-a: color-a,
         color-b: color-b,
         color-c: color-c,
-        logo: "../examples/300x200.svg"
+        logo: "../book/src/theme-gallery/300x200.svg"
     )
 )
 
@@ -39,6 +39,8 @@
 
     It's very minimalist and helps the audience focus on an important point.
 ]
+
+#new-section("Variants")
 
 #slide(theme-variant: "split 2 v")[
       #box(
@@ -138,20 +140,4 @@
     ]
 ]
 
-#slide(title: "Your own theme?")[
-    If you want to create your own design for slides, you can define custom
-    themes!
-
-    #link("https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme")[The book]
-    explains how to do so.
-]
-
 #new-section("Conclusion")
-
-#slide(title: "That's it!")[
-    Hopefully you now have some kind of idea what you can do with this template.
-
-    Consider giving it
-    #link("https://github.com/andreasKroepelin/typst-slides")[a GitHub star #text(font: "OpenMoji")[#emoji.star]]
-    or open an issue if you run into bugs or have feature requests.
-]
