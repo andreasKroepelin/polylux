@@ -94,6 +94,7 @@
                 outset: 0em,
                 heading(level: 1, text(color)[#slide-info.title])
             )
+	    v(.3em)
         }
         
         v(1fr)
