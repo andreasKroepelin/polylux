@@ -4,6 +4,7 @@ Here you can find an overview over all themes shipped with this template.
 
 - [Default](#default)
 - [Bipartite](#bipartite)
+- [UoB](#uob)
 
 ---
 
@@ -106,3 +107,55 @@ It features a dominant partition of space into a bright and a dark side.
 ```
 ![bipartite theme screenshot](./bipartite.png)
 
+
+## UoB
+_[go to top](#theme-gallery)_
+
+This is a variation of the default theme, to feature academic branding. It is inspired by an old version of David Barton's
+[Beamer theme](https://github.com/dawbarton/UoB-beamer-theme).
+It features a University of Bristol branding by default, however the logos and colour choices can easily be swapped, to tailor the theme to any institution of your choice.
+```typ
+#import "themes/bipartite.typ": *
+#show: slides(
+  // ...
+  theme: uob-theme(),
+)
+```
+
+### Options
+- `color`: the colour to use for decorative elements, default University of Bristol red
+- `watermark`: file path for a watermark image to span the title slide, default "watermark.svg"
+- `logo`: file path for a logo image to appear on every slide, default "logo.svg"
+- `secondlogo`: file path for an additional logo image, to appear on the first slide only, default "secondlogo.svg"
+
+### Variants
+- `"wake up"`: no decoration, colored background, enlarged text
+
+### Extra keyword arguments
+- `title`: a title for that slide
+
+### Showcase
+```typ
+#import "../../../slides.typ": *
+#import "../../../themes/uob/uob.typ": *
+
+#show: slides.with(
+    authors: ("Author A", "Author B"), short-authors: "Short author",
+    title: "Title", short-title: "Short title", subtitle: "Subtitle",
+    date: "Date",
+    theme: uob-theme(),
+)
+
+#new-section("section name")
+
+#slide(title: "Slide title")[
+  A slide
+]
+
+#slide(theme-variant: "wake up")[
+  Wake up!
+]
+```
+![UoB theme screenshot](./uob.png)
+
+---

@@ -1,4 +1,4 @@
-all: default bipartite
+all: default bipartite uob
 
 default:
 	pdftoppm ./default.pdf ./default -png
@@ -9,3 +9,8 @@ bipartite:
 	pdftoppm ./bipartite.pdf ./bipartite -png
 	montage ./bipartite-* -geometry +50+50 -background LightGray ./bipartite.png
 	rm ./bipartite-*
+
+uob:
+	pdftoppm ./uob.pdf ./uob -png
+	montage ./uob-* -geometry +50+50 -background LightGray ./uob.png
+	rm ./uob-*
