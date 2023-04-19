@@ -180,8 +180,7 @@
     }
 
     let split-v(slide-info, bodies) = {
-        if "columns" in slide-info {
-        } else {
+        if not "columns" in slide-info {
             slide-info.columns = bodies.len()
         }
 
@@ -193,31 +192,42 @@
             stroke: none
         )
 
-        grid(
-            columns: slide-info.columns,
-            ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
-        )
+        box(
+            fill: slide-info.color
+        )[
+            #grid(
+                columns: slide-info.columns,
+                ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
+            )
+        ]
     }
 
     let split-h(slide-info, bodies) = {
-        if "rows" in slide-info {
-        } else {
+        if not "rows" in slide-info {
             slide-info.rows = bodies.len()
+        }
+
+        if not "color" in slide-info {
+            slide-info.color = none
         }
 
         let grid-box = box.with(
             width: auto,
-            height: 100%,
+            height: 50%,
             outset: 0em,
             inset: (x: 0em),
             baseline: 0em,
             stroke: none
         )
 
-        grid(
-            rows: slide-info.rows,
-            ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
-        )
+        box(
+            fill: slide-info.color
+        )[
+            #grid(
+                rows: slide-info.rows,
+                ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
+            )
+        ]
     }
 
     let four-split(slide-info, bodies) = {
