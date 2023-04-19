@@ -43,7 +43,7 @@
 #new-section("Variants")
 
 #slide(theme-variant: "split 2 v")[
-      #box(
+    #box(
         width: auto,
         height: 100%,
         fill: color-a,
@@ -51,7 +51,7 @@
         #image("1080x1920.svg", fit: "stretch")
     ]
 ][
-      #box(
+    #box(
         width: 100%,
         height: 100%,
         inset: 2em,
@@ -65,7 +65,7 @@
 ]
 
 #slide(theme-variant: "split 2 v")[
-      #box(
+    #box(
         width: 100%,
         height: 100%,
         inset: 2em,
@@ -76,7 +76,7 @@
         ])
     ]
 ][
-      #box(
+    #box(
         width: auto,
         height: 100%,
         fill: color-a,
@@ -86,7 +86,7 @@
 ]
 
 #slide(theme-variant: "split 2 h")[
-      #box(
+    #box(
         width: 100%,
         height: 100%,
         fill: color-a,

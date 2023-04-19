@@ -163,7 +163,7 @@
 
     let wake-up(slide-info, bodies) = {
         if bodies.len() != 1 {
-            panic("wake-up-a variant of university theme only supports one body per slide")
+            panic("wake-up variant of university theme only supports one body per slide")
         }
 
         let body = bodies.first()
@@ -198,12 +198,8 @@
 
         grid(
             rows: (1fr, 1fr),
-            gridBox(
-                align(center + horizon, body-top)
-            ),
-            gridBox(
-                align(center + horizon, body-bottom)
-            ),
+            gridBox[#body-top],
+            gridBox[#body-bottom],
         )
     }
 
@@ -226,12 +222,8 @@
 
         grid(
             columns: (auto, auto),
-            gridBox(
-                body-left
-            ),
-            gridBox(
-                body-right
-            ),
+            gridBox[#body-left],
+            gridBox[#body-right]
         )
     }
 
@@ -257,18 +249,10 @@
         grid(
             columns: (1fr, 1fr),
             rows: (1fr, 1fr),
-            gridBox(
-                align(center + horizon, body-top-left)
-            ),
-            gridBox(
-                align(center + horizon, body-top-right)
-            ),
-            gridBox(
-                align(center + horizon, body-bottom-left)
-            ),
-            gridBox(
-                align(center + horizon, body-bottom-right)
-            )
+            gridBox[#body-top-left],
+            gridBox[#body-top-right],
+            gridBox[#body-bottom-left],
+            gridBox[#body-bottom-right]
         )
     }
 
