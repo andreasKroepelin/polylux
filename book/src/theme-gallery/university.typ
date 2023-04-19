@@ -44,7 +44,6 @@
 
 #slide(theme-variant: "split v", columns: 2)[
     #box(
-        width: 100%,
         height: 100%,
         fill: color-a,
     )[
@@ -77,7 +76,6 @@
     ]
 ][
     #box(
-        width: 100%,
         height: 100%,
         fill: color-c,
     )[

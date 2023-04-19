@@ -186,7 +186,6 @@
         }
 
         let grid-box = box.with(
-            width: 100%,
             height: 100%,
             outset: 0em,
             inset: (x: 0em),
