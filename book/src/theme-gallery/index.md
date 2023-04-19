@@ -192,10 +192,10 @@ This is a quite a wide column
 ## University
 _[go to top](#theme-gallery)_
 
-This theme is a simple and configurable theme.
+TODO! This theme is a simple and configurable theme.
 
 ### Options
-- `university-name`: The University name
+- `institution-name`: The institution name
 - `color-a`: A color of your choice
 - `color-b`: A color of your choice
 - `color-c`: A color of your choice
@@ -211,6 +211,6 @@ This theme is a simple and configurable theme.
 - `"split h"`: split a slide horizontally in `rows` parts
   Available options:
     - `rows`: auto,integer,relative length,fraction,array: Defines the columns amount and size
-- `"four split"`: divide the slide in four area
+- `"four split"`: divide the slide in four areas
 
 ![university theme screenshot](./university.png)

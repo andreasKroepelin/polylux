@@ -6,7 +6,7 @@
 // by submitting a PR in https://github.com/andreasKroepelin/typst-slides
 //
 #let university-theme(
-    university-name: "University",
+    institution-name: "University",
     color-a: none,
     color-b: none,
     color-c: none,
@@ -64,7 +64,7 @@
             #v(1em)
             #{
                 parbreak()
-                text(.9em)[#university-name]
+                text(.9em)[#institution-name]
             }
             #{
                 parbreak()
@@ -185,7 +185,7 @@
             slide-info.columns = (auto,) * bodies.len()
         }
 
-        let gridBox = box.with(
+        let grid-box = box.with(
             width: 100%,
             height: 100%,
             outset: 0em,
@@ -196,7 +196,7 @@
 
         grid(
             columns: slide-info.columns,
-            ..range(0, bodies.len()).map(i => gridBox(bodies.at(bodies.len() - i - 1)))
+            ..range(0, bodies.len()).map(i => grid-box(bodies.at(bodies.len() - i - 1)))
         )
     }
 
@@ -206,7 +206,7 @@
             slide-info.rows = (auto,) * bodies.len()
         }
 
-        let gridBox = box.with(
+        let grid-box = box.with(
             width: auto,
             height: 100%,
             outset: 0em,
@@ -217,7 +217,7 @@
 
         grid(
             rows: slide-info.rows,
-            ..range(0, bodies.len()).map(i => gridBox(bodies.at(bodies.len() - i - 1)))
+            ..range(0, bodies.len()).map(i => grid-box(bodies.at(bodies.len() - i - 1)))
         )
     }
 
@@ -231,7 +231,7 @@
         let body-bottom-left = bodies.at(2)
         let body-bottom-right = bodies.at(3)
 
-        let gridBox = box.with(
+        let grid-box = box.with(
             width: 100%,
             height: 100%,
             outset: 0em,
@@ -243,10 +243,10 @@
         grid(
             columns: (1fr, 1fr),
             rows: (1fr, 1fr),
-            gridBox[#body-top-left],
-            gridBox[#body-top-right],
-            gridBox[#body-bottom-left],
-            gridBox[#body-bottom-right]
+            grid-box(body-top-left),
+            grid-box(body-top-right),
+            grid-box(body-bottom-left),
+            grid-box(body-bottom-right)
         )
     }
 

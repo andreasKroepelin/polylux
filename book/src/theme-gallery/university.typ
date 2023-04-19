@@ -13,7 +13,7 @@
     short-title: "Slides template demo",
     date: "April 2023",
     theme: university-theme(
-        university-name: "UniversityName",
+        institution-name: "UniversityName",
         color-a: color-a,
         color-b: color-b,
         color-c: color-c,
