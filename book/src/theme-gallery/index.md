@@ -205,8 +205,12 @@ This theme is a simple and configurable theme.
 - `"wake up"`: no decoration, colored background, enlarged text
   Available options:
     - `color`: The background color
-- `"split 2 v"`: split a slide vertically in two parts
-- `"split 2 h"`: split a slide horizontally in two parts
+- `"split v"`: split a slide vertically in two parts
+  Available options:
+    - `columns`: integer, amount of columns
+- `"split h"`: split a slide horizontally in two parts
+  Available options:
+    - `rows`: integer, amount of rows
 - `"four split"`: divide the slide in four area
 
 ![university theme screenshot](./university.png)

@@ -179,13 +179,15 @@
         )
     }
 
-    let split-2-h(slide-info, bodies) = {
-        if bodies.len() != 2 {
-            panic("split-2-h variant of theme only supports 2 bodies per slide")
+    let split-v(slide-info, bodies) = {
+        if "columns" in slide-info {
+        } else {
+            slide-info.column = 2
         }
 
-        let body-top = bodies.first()
-        let body-bottom = bodies.last()
+        if bodies.len() != slide-info.columns {
+            panic("Invalid amound of slide bodies.")
+        }
 
         let gridBox = box.with(
             width: 100%,
@@ -193,23 +195,24 @@
             outset: 0em,
             inset: (x: 0em),
             baseline: 0em,
-            stroke: none,
+            stroke: none
         )
 
         grid(
-            rows: (1fr, 1fr),
-            gridBox[#body-top],
-            gridBox[#body-bottom],
+            columns: (auto,) * slide-info.columns,
+            ..range(0, slide-info.columns).map(i => gridBox(bodies.at(slide-info.columns - i - 1)))
         )
     }
 
-    let split-2-v(slide-info, bodies) = {
-        if bodies.len() != 2 {
-            panic("split-2-v variant of theme only supports 2 bodies per slide")
+    let split-h(slide-info, bodies) = {
+        if "rows" in slide-info {
+        } else {
+            slide-info.rows = 2
         }
 
-        let body-left = bodies.first()
-        let body-right = bodies.last()
+        if bodies.len() != slide-info.rows {
+            panic("Invalid amound of slide bodies.")
+        }
 
         let gridBox = box.with(
             width: auto,
@@ -217,13 +220,12 @@
             outset: 0em,
             inset: (x: 0em),
             baseline: 0em,
-            stroke: none,
+            stroke: none
         )
 
         grid(
-            columns: (auto, auto),
-            gridBox[#body-left],
-            gridBox[#body-right]
+            rows: (1fr,) * slide-info.rows,
+            ..range(0, slide-info.rows).map(i => gridBox(bodies.at(slide-info.rows - i - 1)))
         )
     }
 
@@ -261,8 +263,8 @@
         variants: (
             "default": default,
             "wake up": wake-up,
-            "split 2 h": split-2-h,
-            "split 2 v": split-2-v,
+            "split h": split-h,
+            "split v": split-v,
             "four split": four-split
         ),
     )

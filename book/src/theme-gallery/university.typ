@@ -42,9 +42,9 @@
 
 #new-section("Variants")
 
-#slide(theme-variant: "split 2 v")[
+#slide(theme-variant: "split v", columns: 2)[
     #box(
-        width: auto,
+        width: 100%,
         height: 100%,
         fill: color-a,
     )[
@@ -64,12 +64,12 @@
     ]
 ]
 
-#slide(theme-variant: "split 2 v")[
+#slide(theme-variant: "split v", columns: 2)[
     #box(
         width: 100%,
         height: 100%,
         inset: 2em,
-        fill: color-a,
+        fill: color-c,
     )[
         #align(center + horizon, text(fill: white)[
             Or on the other direction...
@@ -77,15 +77,15 @@
     ]
 ][
     #box(
-        width: auto,
+        width: 100%,
         height: 100%,
-        fill: color-a,
+        fill: color-c,
     )[
         #image("1080x1920.svg", fit: "stretch")
     ]
 ]
 
-#slide(theme-variant: "split 2 h")[
+#slide(theme-variant: "split h", rows: 2)[
     #box(
         width: 100%,
         height: 100%,
