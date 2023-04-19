@@ -184,6 +184,10 @@
             slide-info.columns = bodies.len()
         }
 
+        if not "color" in slide-info {
+            slide-info.color = none
+        }
+
         let grid-box = box.with(
             height: 100%,
             outset: 0em,
