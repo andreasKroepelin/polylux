@@ -203,9 +203,8 @@ This theme is a simple and configurable theme.
 
 ### Variants
 - `"wake up"`: no decoration, colored background, enlarged text
-- `"wake up a"`: no decoration, colored background with `color-a`, enlarged text
-- `"wake up b"`: no decoration, colored background with `color-b`, enlarged text
-- `"wake up c"`: no decoration, colored background with `color-c`, enlarged text
+  Available options:
+    - `color`: The background color
 - `"split 2 v"`: split a slide vertically in two parts
 - `"split 2 h"`: split a slide horizontally in two parts
 - `"four split"`: divide the slide in four area

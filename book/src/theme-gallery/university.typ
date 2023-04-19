@@ -34,7 +34,7 @@
     Themes can also provide variants, for example ...
 ]
 
-#slide(theme-variant: "wake up")[
+#slide(theme-variant: "wake up", color: color-b)[
     ... this one!
 
     It's very minimalist and helps the audience focus on an important point.
@@ -106,6 +106,7 @@
         ])
     ]
 ]
+
 #slide(theme-variant: "four split")[
     #box(
         width: 100%,
@@ -141,3 +142,7 @@
 ]
 
 #new-section("Conclusion")
+
+#slide(theme-variant: "wake up", color: color-c)[
+    Enjoy this theme!
+]

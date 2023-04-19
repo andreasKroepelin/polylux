@@ -161,7 +161,7 @@
         footer-deco()
     }
 
-    let wake-up-a(slide-info, bodies) = {
+    let wake-up(slide-info, bodies) = {
         if bodies.len() != 1 {
             panic("wake-up-a variant of university theme only supports one body per slide")
         }
@@ -174,43 +174,7 @@
             inset: 2em,
             breakable: false,
             outset: 0em,
-            fill: color-a,
-            text(size: 2em, fill: white, {v(1fr); body; v(1fr)})
-        )
-    }
-
-    let wake-up-b(slide-info, bodies) = {
-        if bodies.len() != 1 {
-            panic("wake-up-b variant of university theme only supports one body per slide")
-        }
-
-        let body = bodies.first()
-
-        block(
-            width: 100%,
-            height: 100%,
-            inset: 2em,
-            breakable: false,
-            outset: 0em,
-            fill: color-b,
-            text(size: 2em, fill: white, {v(1fr); body; v(1fr)})
-        )
-    }
-
-    let wake-up-c(slide-info, bodies) = {
-        if bodies.len() != 1 {
-            panic("wake-up-c variant of university theme only supports one body per slide")
-        }
-
-        let body = bodies.first()
-
-        block(
-            width: 100%,
-            height: 100%,
-            inset: 2em,
-            breakable: false,
-            outset: 0em,
-            fill: color-c,
+            fill: if "color" in slide-info {slide-info.color} else {black},
             text(size: 2em, fill: white, {v(1fr); body; v(1fr)})
         )
     }
@@ -312,10 +276,7 @@
         title-slide: title-slide,
         variants: (
             "default": default,
-            "wake up": wake-up-a,
-            "wake up a": wake-up-a,
-            "wake up b": wake-up-b,
-            "wake up c": wake-up-c,
+            "wake up": wake-up,
             "split 2 h": split-2-h,
             "split 2 v": split-2-v,
             "four split": four-split
