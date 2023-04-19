@@ -207,10 +207,10 @@ This theme is a simple and configurable theme.
     - `color`: The background color
 - `"split v"`: split a slide vertically in `columns` parts
   Available options:
-    - `columns`: integer, amount of columns
+    - `columns`: auto,integer,relative length,fraction,array: Defines the columns amount and size
 - `"split h"`: split a slide horizontally in `rows` parts
   Available options:
-    - `rows`: integer, amount of rows
+    - `rows`: auto,integer,relative length,fraction,array: Defines the columns amount and size
 - `"four split"`: divide the slide in four area
 
 ![university theme screenshot](./university.png)

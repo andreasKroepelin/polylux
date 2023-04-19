@@ -182,7 +182,7 @@
     let split-v(slide-info, bodies) = {
         if "columns" in slide-info {
         } else {
-            slide-info.column = 2
+            slide-info.columns = (auto,) * bodies.len()
         }
 
         let gridBox = box.with(
@@ -196,14 +196,14 @@
 
         grid(
             columns: slide-info.columns,
-            ..range(0, bodies.len()).map(i => gridBox(bodies.at(slide-info.columns - i - 1)))
+            ..range(0, bodies.len()).map(i => gridBox(bodies.at(bodies.len() - i - 1)))
         )
     }
 
     let split-h(slide-info, bodies) = {
         if "rows" in slide-info {
         } else {
-            slide-info.rows = 2
+            slide-info.rows = (auto,) * bodies.len()
         }
 
         let gridBox = box.with(
@@ -217,7 +217,7 @@
 
         grid(
             rows: slide-info.rows,
-            ..range(0, bodies.len()).map(i => gridBox(bodies.at(slide-info.rows - i - 1)))
+            ..range(0, bodies.len()).map(i => gridBox(bodies.at(bodies.len() - i - 1)))
         )
     }
 
