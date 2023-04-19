@@ -205,10 +205,10 @@ This theme is a simple and configurable theme.
 - `"wake up"`: no decoration, colored background, enlarged text
   Available options:
     - `color`: The background color
-- `"split v"`: split a slide vertically in two parts
+- `"split v"`: split a slide vertically in `columns` parts
   Available options:
     - `columns`: integer, amount of columns
-- `"split h"`: split a slide horizontally in two parts
+- `"split h"`: split a slide horizontally in `rows` parts
   Available options:
     - `rows`: integer, amount of rows
 - `"four split"`: divide the slide in four area
