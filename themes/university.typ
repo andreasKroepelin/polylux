@@ -185,10 +185,6 @@
             slide-info.column = 2
         }
 
-        if bodies.len() != slide-info.columns {
-            panic("Invalid amound of slide bodies.")
-        }
-
         let gridBox = box.with(
             width: 100%,
             height: 100%,
@@ -199,8 +195,8 @@
         )
 
         grid(
-            columns: (auto,) * slide-info.columns,
-            ..range(0, slide-info.columns).map(i => gridBox(bodies.at(slide-info.columns - i - 1)))
+            columns: slide-info.columns,
+            ..range(0, bodies.len()).map(i => gridBox(bodies.at(slide-info.columns - i - 1)))
         )
     }
 
@@ -208,10 +204,6 @@
         if "rows" in slide-info {
         } else {
             slide-info.rows = 2
-        }
-
-        if bodies.len() != slide-info.rows {
-            panic("Invalid amound of slide bodies.")
         }
 
         let gridBox = box.with(
@@ -224,8 +216,8 @@
         )
 
         grid(
-            rows: (1fr,) * slide-info.rows,
-            ..range(0, slide-info.rows).map(i => gridBox(bodies.at(slide-info.rows - i - 1)))
+            rows: slide-info.rows,
+            ..range(0, bodies.len()).map(i => gridBox(bodies.at(slide-info.rows - i - 1)))
         )
     }
 
