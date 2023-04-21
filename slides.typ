@@ -381,6 +381,5 @@
     let the-theme = theme(data)
     global-theme.update(the-theme)
 
-    // the-theme.title-slide
     body
 }
