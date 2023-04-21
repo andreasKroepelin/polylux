@@ -201,7 +201,7 @@
         )[
             #grid(
                 columns: slide-info.columns,
-                ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
+                ..bodies
             )
         ]
     }
@@ -229,7 +229,7 @@
         )[
             #grid(
                 rows: slide-info.rows,
-                ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
+                ..bodies
             )
         ]
     }
