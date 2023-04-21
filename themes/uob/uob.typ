@@ -51,10 +51,23 @@
     }
 
     let default(slide-info, bodies) = {
-        if bodies.len() != 1 {
-            panic("default variant of uob theme only supports one body per slide")
-        }
-        let body = bodies.first()
+        let body = []
+        if bodies.len() == 1 {
+	    body = bodies.first()
+	}
+	else if bodies.len() == 2{
+	    body = grid(
+	        columns: (1fr, 1fr),
+		bodies.first(),
+		bodies.last()
+	    )
+	}
+	else if bodies.len() == 3{
+             panic("Either one or two bodies is required, but three were received. Perhaps 'title: ' keyword is missing in function call?")
+	}
+	else {
+             panic("default variant of uob theme requires either one or two bodies per slide")
+	}
 
         let decoration(position, body) = {
             let border = 1mm + color
