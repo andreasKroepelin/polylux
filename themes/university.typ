@@ -185,7 +185,7 @@
 
     let split-v(slide-info, bodies) = {
         if not "columns" in slide-info {
-            slide-info.columns = bodies.len()
+            slide-info.columns = (1fr, ) * bodies.len()
         }
 
         if not "color" in slide-info {
@@ -212,21 +212,12 @@
 
     let split-h(slide-info, bodies) = {
         if not "rows" in slide-info {
-            slide-info.rows = bodies.len()
+            slide-info.rows = (1fr,) * bodies.len()
         }
 
         if not "color" in slide-info {
             slide-info.color = none
         }
-
-        let grid-box = box.with(
-            width: auto,
-            height: 50%,
-            outset: 0em,
-            inset: (x: 0em),
-            baseline: 0em,
-            stroke: none
-        )
 
         box(
             fill: slide-info.color

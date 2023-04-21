@@ -73,7 +73,7 @@
     ]
 ]
 
-#slide(theme-variant: "split v", columns: 2)[
+#slide(theme-variant: "split v")[
     #box(
         width: 100%,
         height: 100%,
@@ -93,10 +93,10 @@
     ]
 ]
 
-#slide(theme-variant: "split h", rows: 2)[
+#slide(theme-variant: "split h")[
     #box(
         width: 100%,
-        height: 50%,
+        height: 100%,
         fill: color-a,
     )[
       #align(center + horizon, text(fill: white)[
@@ -106,7 +106,7 @@
 ][
     #box(
         width: 100%,
-        height: 50%,
+        height: 100%,
         fill: color-b,
     )[
         #align(center + horizon, text(fill: white)[
