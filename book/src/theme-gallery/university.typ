@@ -34,6 +34,26 @@
     Themes can also provide variants, for example ...
 ]
 
+#slide(title: "How a slide looks...")[
+    ... is defined by the _theme_ of the presentation.
+
+    This demo uses the `university` theme.
+
+    Because of it, the title slide and the decoration on each slide (with
+    section name, short title, slide number etc.) look the way they do.
+
+    Themes can also provide variants, for example ...
+][
+    ... is defined by the _theme_ of the presentation.
+
+    This demo uses the `university` theme.
+
+    Because of it, the title slide and the decoration on each slide (with
+    section name, short title, slide number etc.) look the way they do.
+
+    Themes can also provide variants, for example ...
+]
+
 #slide(theme-variant: "wake up", color: color-b)[
     ... this one!
 

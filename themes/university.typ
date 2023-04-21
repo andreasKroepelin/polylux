@@ -74,10 +74,9 @@
     }
 
     let default(slide-info, bodies) = {
-        if bodies.len() != 1 {
-            panic("default variant of university theme only supports one body per slide")
+        if not "columns" in slide-info {
+            slide-info.columns = bodies.len()
         }
-        let body = bodies.first()
 
         let header-deco() = {
             let cell = rect.with(
@@ -151,10 +150,15 @@
         header-deco()
 
         v(1fr)
+
         block(
-            width: 100%, inset: (x: 1em), breakable: false, outset: 0em,
-            body
+            width: 100%, inset: (x: .5em), breakable: false, outset: 0em,
+            grid(
+                columns: slide-info.columns,
+                ..bodies
+            )
         )
+
         v(2fr)
 
         // footer
