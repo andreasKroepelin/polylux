@@ -51,22 +51,25 @@
     }
 
     let default(slide-info, bodies) = {
-        let body = []
+        let body = none
         if bodies.len() == 1 {
 	    body = bodies.first()
 	}
-	else if bodies.len() == 2{
+	else{
+	    let colwidths = none
+	    if "colwidths" in slide-info{
+	        colwidths = slide-info.colwidths
+		if colwidths.len() != bodies.len(){
+		    panic("Provided colwidths must be of same length as bodies")
+		}
+	    }
+	    else{
+	        colwidths = (1fr,) * bodies.len()
+	    }
 	    body = grid(
-	        columns: (1fr, 1fr),
-		bodies.first(),
-		bodies.last()
+	        columns: colwidths,
+		 ..bodies
 	    )
-	}
-	else if bodies.len() == 3{
-             panic("Either one or two bodies is required, but three were received. Perhaps 'title: ' keyword is missing in function call?")
-	}
-	else {
-             panic("default variant of uob theme requires either one or two bodies per slide")
 	}
 
         let decoration(position, body) = {
