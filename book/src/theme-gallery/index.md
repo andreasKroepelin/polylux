@@ -192,7 +192,22 @@ This is a quite a wide column
 ## University
 _[go to top](#theme-gallery)_
 
-TODO! This theme is a simple and configurable theme.
+This theme offers a simple yet versatile design, allowing for easy customization
+and flexibility.
+
+By default, this theme utilizes multiple body attachments for every slide type,
+with each additional body creating a new column on the slide. Columns are
+equally sized by default, but you can modify their dimensions by providing a
+columns parameter to the slide or the variant.
+
+By default, the theme supports the addition of multiple bodies on every slide
+type. Each added body creates a new column within the slide.
+Although the columns have equal dimensions by default, their sizes can be easily
+adjusted by supplying a `columns` parameter to either the slide or the variant.
+
+The `columns` parameter can be configured similarly to the `columns` grid
+parameter. For detailed instructions on customization, please consult the
+official documentation.
 
 ### Options
 - `institution-name`: The institution name
