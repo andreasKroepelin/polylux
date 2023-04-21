@@ -9,7 +9,7 @@
     institution-name: "University",
     color-a: rgb("#0C6291"),
     color-b: rgb("#A63446"),
-    color-c: rgb("#7E1946"),
+    color-c: rgb("#AAAAAA"),
     logo: none
 ) = data => {
     let color-title = color-a
@@ -72,7 +72,7 @@
 
     let default(slide-info, bodies) = {
         if not "columns" in slide-info {
-            slide-info.columns = bodies.len()
+            slide-info.columns = (1fr, ) * bodies.len()
         }
 
         let header-deco() = {
@@ -110,30 +110,48 @@
         }
 
         let footer-deco() = {
+            set text(
+                size: 10pt
+            )
+            set align(center)
             let cell = rect.with(
                 width: 100%,
                 inset: 1mm,
                 outset: 0mm
             )
-            set text(
-                size: 10pt
-            )
-            set align(center)
             grid(
                 columns: (25%, 1fr, 15%, 10%),
                 rows: (5mm, auto),
                 cell(
                     height: 100%,
                     fill: color-footer-fill-short-authors
-                )[#text(color-footer-short-authors)[#data.short-authors]],
+                )[#text(color-footer-short-authors)[
+                    #if "short-authors" in slide-info {
+                        slide-info.short-authors
+                    } else {
+                        data.short-authors
+                    }
+                ]],
                 cell(
                     height: 100%,
                     fill: color-footer-fill-short-title
-                )[#text(color-footer-short-title)[#data.short-title]],
+                )[#text(color-footer-short-title)[
+                    #if "short-title" in slide-info {
+                        slide-info.short-title
+                    } else {
+                        data.short-title
+                    }
+                ]],
                 cell(
                     height: 100%,
                     fill: color-footer-fill-date
-                )[#text(color-footer-date)[#data.date]],
+                )[#text(color-footer-date)[
+                    #if "date" in slide-info {
+                        slide-info.date
+                    } else {
+                        data.date
+                    }
+                ]],
                 cell(
                     height: 100%,
                     fill: color-footer-fill-slide-counter
@@ -156,10 +174,13 @@
             )
         )
 
-        v(2fr)
+        if "footer-deco" in slide-info {
+            slide-info.footer-deco
+        } else {
+            v(2fr)
 
-        // footer
-        footer-deco()
+            footer-deco()
+        }
     }
 
     let wake-up(slide-info, bodies) = {

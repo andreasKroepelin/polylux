@@ -3,7 +3,7 @@
 
 #let color-a = rgb("#0C6291")
 #let color-b = rgb("#A63446")
-#let color-c = rgb("#7E1946")
+#let color-c = rgb("#AAAAAA")
 
 #show: slides.with(
     authors: "Andreas Kröpelin",
@@ -75,7 +75,7 @@
         width: 100%,
         height: 100%,
         inset: 2em,
-        fill: color-c,
+        fill: color-b,
     )[
         #align(center + horizon, text(fill: white)[
             Or on the other direction...
