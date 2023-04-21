@@ -75,7 +75,7 @@
             slide-info.columns = (1fr, ) * bodies.len()
         }
 
-        let header-deco() = {
+        let header() = {
             let cell = rect.with(
                 width: 100%,
                 stroke: none,
@@ -109,7 +109,7 @@
             )
         }
 
-        let footer-deco() = {
+        let footer() = {
             set text(
                 size: 10pt
             )
@@ -160,8 +160,12 @@
         }
 
         // header
-        if "title" in slide-info {
-            header-deco()
+        if "header" in slide-info {
+            slide-info.header
+        } else {
+            if "title" in slide-info {
+                header()
+            }
         }
 
         v(1fr)
@@ -174,12 +178,11 @@
             )
         )
 
-        if "footer-deco" in slide-info {
-            slide-info.footer-deco
+        if "footer" in slide-info {
+            slide-info.footer
         } else {
             v(2fr)
-
-            footer-deco()
+            footer()
         }
     }
 

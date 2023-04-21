@@ -209,7 +209,7 @@ The `columns` parameter can be configured similarly to the `columns` grid
 parameter. For detailed instructions on customization, please consult the
 official documentation.
 
-### Options
+### Theme options
 - `institution-name`: The institution name
 - `color-a`: The main color
 - `color-b`: The accent accent
@@ -217,7 +217,19 @@ official documentation.
 - `logo`: An element that will be on the top right of the first slide. Usually
   an image element, like a logo.
 
-### Variants
+### Default slide options
+
+It is possible to override the default theme option parameters by providing
+them in the `#slide` function. It is also possible to override other parameters
+for more customization options. These parameters are:
+
+- `short-authors`
+- `short-title`
+- `date`
+- `footer`
+- `header`
+
+### Variants slide options
 - `"wake up"`: no decoration, colored background, enlarged text
   Available options:
     - `color`: The background color
