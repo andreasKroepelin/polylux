@@ -23,17 +23,16 @@ that this specific slide will look different.
 
 ## Create your own theme
 On a high level, a theme is nothing more than a piece of code that defines how
-the title slide looks and at least one variant defining how the content slides
-look.
+the slides look.
 
 On one level deeper, a theme is a function that takes a `data` dictionary and
-returns a dictionary with the keys `title-slide` and `variants`.
+returns a dictionary with one key for each _variant_.
 Let us build a very simple one for demonstration purposes:
 ```typ
 #let dumb-theme = data => {
   (
-    title-slide: ...,
-    variants: ...,
+    "variant 1": ...,
+    "variant 2": ...,
   )
 }
 ```
@@ -41,8 +40,8 @@ Note that you can easily introduce parameters to your theme:
 ```typ
 #let dumb-theme(parameter) = data => {
   (
-    title-slide: ...,
-    variants: ...,
+    "variant 1": ...,
+    "variant 2": ...,
   )
 }
 ```
@@ -61,16 +60,6 @@ set in the initial `slides` function, i.e. it has the following structure:
 ```
 Use these information however you please.
 
-For example, you could define the title slide in the following way:
-```typ
-#let dumb-theme = data => {
-  (
-    title-slide: align(center + horizon, data.title),
-    variants: ...,
-  )
-}
-```
-
 On to the actual slides.
 Their appearance is defined by functions that accept some meta data, some
 array of contents (the last argument(s) to `#slide`, essentially) and return
@@ -78,8 +67,9 @@ some richer content, somehow styling that slide:
 ```typ
 (dictionary, array of content) => content
 ```
-You can define an arbitrary amount of such functions as values of the `variants`
-dictionary, but one of them must be stored under the key `"default"`.
+We call these functions the _variants_ of the theme.
+You can define an arbitrary amount of them but one must be stored under the key
+`"default"` in your theme.
 
 The meta data referred to above are a dictionary containing any extra keyword
 arguments that the user has specified in their call to `#slide`.
@@ -124,33 +114,43 @@ To make use of some of the functionality this template offers, you can access
 - the state `section`, telling you what the user has currently set as the
   section name.
 
-Let us define two variants:
+Let us define a few variants variants.
+You should probably add a variant for a title slide to your theme.
+By convention, this variant is called `"title slide"`.
 ```typ
 #let dumb-theme = data => {
   (
-    title-slide: align(center + horizon, data.title),
-    variants: (
-      "default": (slide-info, bodies) => {
-        text(.7em, [#slide-info.title (current section: #section.display())])
-        v(1fr)
-        for body in bodies {
-          body
-          v(1em)
-        }
-        v(1fr)
-        text(.7em, [#h(1fr) #logical-slide.display()])
-      },
-      "australia": (slide-info, bodies) => {
-        if bodies.len() != 1 {
-          panic("australia variant expected exactly one body")
-        }
-        text(.7em, [current section: #section.display()])
-        v(1fr)
-        scale(y: -100%, bodies.first())
-        v(1fr)
-        text(.7em, [#h(1fr) #logical-slide.display()])
-      },
-    ),
+    "title slide": (slide-info, bodies) => align(center + horizon, data.title),
+    "variant 2": ...,
+  )
+}
+```
+As noted above, one of the variants must have the name `"default"`.
+
+```typ
+#let dumb-theme = data => {
+  (
+    "title slide": (slide-info, bodies) => align(center + horizon, data.title),
+    "default": (slide-info, bodies) => {
+      text(.7em, [#slide-info.title (current section: #section.display())])
+      v(1fr)
+      for body in bodies {
+        body
+        v(1em)
+      }
+      v(1fr)
+      text(.7em, [#h(1fr) #logical-slide.display()])
+    },
+    "australia": (slide-info, bodies) => {
+      if bodies.len() != 1 {
+        panic("australia variant expected exactly one body")
+      }
+      text(.7em, [current section: #section.display()])
+      v(1fr)
+      scale(y: -100%, bodies.first())
+      v(1fr)
+      text(.7em, [#h(1fr) #logical-slide.display()])
+    },
   )
 }
 ```
@@ -165,6 +165,10 @@ though.
 Also, the `"default"` variant displays all the content blocks provided to `#slide`
 while the `"australia"` variant errors if more or less than one such block is
 given.
+
+The `"title slide"` variant uses neither the `slide-info` nor the `bodies`.
+That is a usual behaviour, as title slides normally only depend on the general
+information like author, presentation title, etc.
 
 And that's it already!
 Have fun creating your own theme and maybe consider opening a pull request

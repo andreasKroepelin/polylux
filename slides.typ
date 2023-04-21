@@ -180,13 +180,17 @@
     override-theme: none,
     ..args
 ) = {
-    pagebreak(weak: true)
+    locate( loc => {
+        if counter(page).at(loc).first() > 1 {
+            pagebreak(weak: true)
+        }
+    })
     logical-slide.step()
     locate( loc => {
         subslide.update(1)
         repetitions.update(1)
 
-        let slide-content = global-theme.at(loc).variants.at(theme-variant)
+        let slide-content = global-theme.at(loc).at(theme-variant)
         if override-theme != none {
             slide-content = override-theme
         }
@@ -212,7 +216,11 @@
 // ===============================
 
 #let slides-default-theme(color: teal) = data => {
-    let title-slide = {
+    let title-slide(slide-info, bodies) = {
+        if bodies.len() != 0 {
+            panic("title slide of default theme does not support any bodies")
+        }
+
         align(center + horizon)[
             #block(
                 stroke: ( y: 1mm + color ),
@@ -302,8 +310,9 @@
     }
 
     (
-        title-slide: title-slide,
-        variants: ( "default": default, "wake up": wake-up, ),
+        "title slide": title-slide,
+        "default": default,
+        "wake up": wake-up,
     )
 }
 
@@ -372,6 +381,6 @@
     let the-theme = theme(data)
     global-theme.update(the-theme)
 
-    the-theme.title-slide
+    // the-theme.title-slide
     body
 }
