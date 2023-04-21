@@ -100,9 +100,7 @@
                     #grid(
                         columns: (60%, 40%),
                         cell[
-                            #if "title" in slide-info {
-                              heading(level: 2, text(color-title)[#slide-info.title])
-                            }
+                            #heading(level: 2, text(color-title)[#slide-info.title])
                         ],
                         cell[
                             #align(right)[
@@ -147,7 +145,9 @@
         }
 
         // header
-        header-deco()
+        if "title" in slide-info {
+            header-deco()
+        }
 
         v(1fr)
 

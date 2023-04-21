@@ -23,44 +23,34 @@
 
 #new-section("Themes")
 
-#slide(title: "How a slide looks...")[
+#slide(title: "How a simple slide looks...")[
     ... is defined by the _theme_ of the presentation.
 
     This demo uses the `university` theme.
 
     Because of it, the title slide and the decoration on each slide (with
     section name, short title, slide number etc.) look the way they do.
-
-    Themes can also provide variants, for example ...
 ]
 
-#slide(title: "How a slide looks...")[
-    ... is defined by the _theme_ of the presentation.
-
-    This demo uses the `university` theme.
-
-    Because of it, the title slide and the decoration on each slide (with
-    section name, short title, slide number etc.) look the way they do.
-
-    Themes can also provide variants, for example ...
+#slide(title: "How another simple slide looks...")[
+    When providing multiple bodies, the slide will be automaticalled divided in
+    columns of the same size by default...
 ][
-    ... is defined by the _theme_ of the presentation.
-
-    This demo uses the `university` theme.
-
-    Because of it, the title slide and the decoration on each slide (with
-    section name, short title, slide number etc.) look the way they do.
-
-    Themes can also provide variants, for example ...
+    However, you can specify the columns size by providing the `columns`
+    parameter. The `columns` parameter behave just like the `columns` parameter
+    of the `grid`. Please refer to the official documentation to learn how to
+    use it.
 ]
 
-#slide(theme-variant: "wake up", color: color-b)[
-    ... this one!
-
-    It's very minimalist and helps the audience focus on an important point.
+#slide[
+    This slide is without `title`, just in time to introduce the theme variants...
 ]
 
 #new-section("Variants")
+
+#slide(theme-variant: "wake up", color: color-b)[
+    This one is very minimalist and helps the audience focus on an important point.
+]
 
 #slide(theme-variant: "split v", columns: 2)[
     #box(
@@ -106,7 +96,7 @@
 #slide(theme-variant: "split h", rows: 2)[
     #box(
         width: 100%,
-        height: 100%,
+        height: 50%,
         fill: color-a,
     )[
       #align(center + horizon, text(fill: white)[
@@ -116,7 +106,7 @@
 ][
     #box(
         width: 100%,
-        height: 100%,
+        height: 50%,
         fill: color-b,
     )[
         #align(center + horizon, text(fill: white)[
@@ -131,6 +121,7 @@
         height: 100%,
         fill: color-a,
     )[
+        #set align(center + horizon)
         #text(fill: white)[Or even...]
     ]
 ][
@@ -139,6 +130,7 @@
         height: 100%,
         fill: color-c,
     )[
+        #set align(center + horizon)
         #text(fill: white)[...some]
     ]
 ][
@@ -147,6 +139,7 @@
         height: 100%,
         fill: color-c,
     )[
+        #set align(center + horizon)
         #text(fill: white)[...other]
     ]
 ][
@@ -155,12 +148,7 @@
         height: 100%,
         fill: color-b,
     )[
+        #set align(center + horizon)
         #text(fill: white)[...fantasies]
     ]
-]
-
-#new-section("Conclusion")
-
-#slide(theme-variant: "wake up", color: color-c)[
-    Enjoy this theme!
 ]
