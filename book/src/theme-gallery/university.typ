@@ -3,7 +3,7 @@
 
 #let color-a = rgb("#0C6291")
 #let color-b = rgb("#A63446")
-#let color-c = rgb("#AAAAAA")
+#let color-c = rgb("#FBFEF9")
 
 #show: slides.with(
     authors: "Andreas Kröpelin",
@@ -128,7 +128,7 @@
         fill: color-c,
     )[
         #set align(center + horizon)
-        #text(fill: white)[...some]
+        #text(fill: black)[...some]
     ]
 ][
     #box(
@@ -137,7 +137,7 @@
         fill: color-c,
     )[
         #set align(center + horizon)
-        #text(fill: white)[...other]
+        #text(fill: black)[...other]
     ]
 ][
     #box(

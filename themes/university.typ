@@ -9,7 +9,7 @@
     institution-name: "University",
     color-a: rgb("#0C6291"),
     color-b: rgb("#A63446"),
-    color-c: rgb("#AAAAAA"),
+    color-c: rgb("#FBFEF9"),
     logo: none
 ) = data => {
     let color-title = color-a
@@ -34,9 +34,11 @@
     let last-slide-number = locate(loc => logical-slide.final(loc).first())
 
     let title-slide = {
-        align(right)[
-            #logo
-        ]
+        if logo != none {
+            align(right)[
+                #logo
+            ]
+        }
         align(center + horizon)[
             #block(
                 inset: 0em,
