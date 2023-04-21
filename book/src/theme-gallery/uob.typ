@@ -14,6 +14,20 @@
   A slide
 ]
 
+#slide(title: "Two column")[
+Column A goes on the left...
+][
+And column B goes on the right!
+]
+
+#slide(title: "Variable column sizes", colwidths: (2fr, 1fr, 3fr))[
+This is a medium-width column
+][
+This is a rather narrow column
+][
+This is a quite a wide column
+]
+
 #slide(theme-variant: "wake up")[
   Wake up!
 ]

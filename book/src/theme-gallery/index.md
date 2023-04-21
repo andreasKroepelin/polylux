@@ -133,6 +133,7 @@ It features a University of Bristol branding by default, however the logos and c
 
 ### Extra keyword arguments
 - `title`: a title for that slide
+- `colwidths` : array specifying width of each column; default `1fr` per column
 
 ### Showcase
 ```typ
@@ -150,6 +151,20 @@ It features a University of Bristol branding by default, however the logos and c
 
 #slide(title: "Slide title")[
   A slide
+]
+
+#slide(title: "Two column")[
+Column A goes on the left...
+][
+And column B goes on the right!
+]
+
+#slide(title: "Variable column sizes", colwidths: (2fr, 1fr, 3fr))[
+This is a medium-width column
+][
+This is a rather narrow column
+][
+This is a quite a wide column
 ]
 
 #slide(theme-variant: "wake up")[
