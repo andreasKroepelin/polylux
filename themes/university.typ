@@ -242,16 +242,7 @@
         ]
     }
 
-    let four-split(slide-info, bodies) = {
-        if bodies.len() != 4 {
-            panic("four-split variant of theme only supports 4 bodies per slide")
-        }
-
-        let body-top-left = bodies.at(0)
-        let body-top-right = bodies.at(1)
-        let body-bottom-left = bodies.at(2)
-        let body-bottom-right = bodies.at(3)
-
+    let split-matrix(slide-info, bodies) = {
         let grid-box = box.with(
             width: 100%,
             height: 100%,
@@ -262,12 +253,9 @@
         )
 
         grid(
-            columns: (1fr, 1fr),
-            rows: (1fr, 1fr),
-            grid-box(body-top-left),
-            grid-box(body-top-right),
-            grid-box(body-bottom-left),
-            grid-box(body-bottom-right)
+            columns: (1fr,) * int(calc.sqrt(bodies.len())),
+            rows: (1fr,)  * int(calc.sqrt(bodies.len())),
+            ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
         )
     }
 
@@ -278,7 +266,7 @@
             "wake up": wake-up,
             "split h": split-h,
             "split v": split-v,
-            "four split": four-split
+            "split matrix": split-matrix
         ),
     )
 }

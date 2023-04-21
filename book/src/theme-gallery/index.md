@@ -235,11 +235,14 @@ for more customization options. These parameters are:
     - `color`: The background color
 - `"split v"`: split a slide vertically in `columns` parts
   Available options:
-    - `columns`: auto,integer,relative length,fraction,array: Defines the columns amount and size
+    - `columns`: auto,integer,relative length,fraction,array: Defines the
+      columns amount and size
 - `"split h"`: split a slide horizontally in `rows` parts
   Available options:
-    - `rows`: auto,integer,relative length,fraction,array: Defines the columns amount and size
-- `"four split"`: divide the slide in four areas
+    - `rows`: auto,integer,relative length,fraction,array: Defines the columns
+      amount and size
+- `"split matrix"`: divide the slide in columns and rows of same size based on
+  the amount of bodies.
 
 ### Showcase
 
@@ -286,7 +289,7 @@ for more customization options. These parameters are:
   bottom side
 ]
 
-#slide(theme-variant: "four split")[
+#slide(theme-variant: "split matrix")[
   top left box
 ][
   top right box

@@ -112,7 +112,7 @@
     ]
 ]
 
-#slide(theme-variant: "four split")[
+#slide(theme-variant: "split matrix")[
     #box(
         width: 100%,
         height: 100%,
