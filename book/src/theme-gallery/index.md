@@ -229,4 +229,60 @@ official documentation.
     - `rows`: auto,integer,relative length,fraction,array: Defines the columns amount and size
 - `"four split"`: divide the slide in four areas
 
+### Showcase
+
+```typ
+#import "slides.typ": *
+#import "themes/university.typ": *
+
+#show: slides.with(
+    authors: "Authors", short-authors: "A.",
+    title: [`typst-slides`: Easily creating slides in Typst ],
+    subtitle: "An overview over all the features",
+    short-title: "Slides template demo",
+    date: "April 2023",
+    theme: university-theme(
+        institution-name: "UniversityName",
+        color-a: rgb("ff0000"),
+        color-b: rgb("00ff00"),
+        color-c: rgb("0000ff"),
+        logo: image("300x200.svg", width: 60mm)
+    )
+)
+
+#new-section("section name")
+
+#slide(title: "A longer slide title")[
+  #lorem(40)
+]
+
+#slide(title: "A longer slide title with 2 columns")[
+  #lorem(40)
+][
+  #lorem(40)
+]
+
+#slide(theme-variant: "split v")[
+  left side
+][
+  right side
+]
+
+#slide(theme-variant: "split h")[
+  top side
+][
+  bottom side
+]
+
+#slide(theme-variant: "four split")[
+  top left box
+][
+  top right box
+][
+  bottom left box
+][
+  bottom right box
+]
+```
+
 ![university theme screenshot](./university.png)
