@@ -211,10 +211,11 @@ official documentation.
 
 ### Options
 - `institution-name`: The institution name
-- `color-a`: A color of your choice
-- `color-b`: A color of your choice
+- `color-a`: The main color
+- `color-b`: The accent accent
 - `color-c`: A color of your choice
-- `logo`: A file path for a logo image to appear on the title slide only
+- `logo`: An element that will be on the top right of the first slide. Usually
+  an image element, like a logo.
 
 ### Variants
 - `"wake up"`: no decoration, colored background, enlarged text

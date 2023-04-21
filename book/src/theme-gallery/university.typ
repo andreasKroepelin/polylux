@@ -17,7 +17,7 @@
         color-a: color-a,
         color-b: color-b,
         color-c: color-c,
-        logo: "../book/src/theme-gallery/300x200.svg"
+        logo: image("300x200.svg", width: 60mm)
     )
 )
 
@@ -73,7 +73,7 @@
     ]
 ]
 
-#slide(theme-variant: "split v")[
+#slide(theme-variant: "split v", columns: 2)[
     #box(
         width: 100%,
         height: 100%,

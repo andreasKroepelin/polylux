@@ -35,10 +35,7 @@
 
     let title-slide = {
         align(right)[
-            #block(
-            )[
-                #image(logo, width: 60mm)
-            ]
+            #logo
         ]
         align(center + horizon)[
             #block(
