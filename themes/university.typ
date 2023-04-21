@@ -7,9 +7,9 @@
 //
 #let university-theme(
     institution-name: "University",
-    color-a: none,
-    color-b: none,
-    color-c: none,
+    color-a: rgb("#0C6291"),
+    color-b: rgb("#A63446"),
+    color-c: rgb("#7E1946"),
     logo: none
 ) = data => {
     let color-title = color-a
@@ -188,14 +188,6 @@
         if not "color" in slide-info {
             slide-info.color = none
         }
-
-        let grid-box = box.with(
-            height: 100%,
-            outset: 0em,
-            inset: (x: 0em),
-            baseline: 0em,
-            stroke: none
-        )
 
         box(
             fill: slide-info.color

@@ -14,9 +14,6 @@
     date: "April 2023",
     theme: university-theme(
         institution-name: "UniversityName",
-        color-a: color-a,
-        color-b: color-b,
-        color-c: color-c,
         logo: image("300x200.svg", width: 60mm)
     )
 )
