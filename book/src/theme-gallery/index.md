@@ -193,15 +193,16 @@ This is a quite a wide column
 _[go to top](#theme-gallery)_
 
 This theme offers a simple yet versatile design, allowing for easy customization
-and flexibility.
+and flexibility. Additionally, it incorporates a progress bar at the top, which
+displays the current status of the presentation.
 
 By default, this theme utilizes multiple body attachments for every slide type,
 with each additional body creating a new column on the slide. Columns are
 equally sized by default, but you can modify their dimensions by providing a
 columns parameter to the slide or the variant.
 
-By default, the theme supports the addition of multiple bodies on every slide
-type. Each added body creates a new column within the slide.
+The theme supports the addition of multiple bodies on every slide type. Each
+added body creates a new column within the slide.
 Although the columns have equal dimensions by default, their sizes can be easily
 adjusted by supplying a `columns` parameter to either the slide or the variant.
 
@@ -241,8 +242,7 @@ for more customization options. These parameters are:
   Available options:
     - `rows`: auto,integer,relative length,fraction,array: Defines the columns
       amount and size
-- `"split matrix"`: divide the slide in columns and rows of same size based on
-  the amount of bodies.
+- `"split matrix"`: divide the slide in the same amount of columns and rows.
 
 ### Showcase
 
