@@ -18,6 +18,8 @@
     )
 )
 
+#slide(theme-variant: "title slide")
+
 #new-section("Themes")
 
 #slide(title: "How a simple slide looks...")[

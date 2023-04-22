@@ -33,7 +33,7 @@
     let total-slides = counter("slide")
     let last-slide-number = locate(loc => logical-slide.final(loc).first())
 
-    let title-slide = {
+    let title-slide(slide-info, bodies) = {
         if logo != none {
             align(right)[
                 #logo
@@ -262,13 +262,11 @@
     }
 
     (
-        title-slide: title-slide,
-        variants: (
-            "default": default,
-            "wake up": wake-up,
-            "split h": split-h,
-            "split v": split-v,
-            "split matrix": split-matrix
-        ),
+        "title slide": title-slide,
+        "default": default,
+        "wake up": wake-up,
+        "split h": split-h,
+        "split v": split-v,
+        "split matrix": split-matrix
     )
 }
