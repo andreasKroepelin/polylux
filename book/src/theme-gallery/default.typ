@@ -6,6 +6,8 @@
     date: "Date",
 )
 
+#slide(theme-variant: "title slide")
+
 #new-section("section name")
 
 #slide(title: "Slide title")[

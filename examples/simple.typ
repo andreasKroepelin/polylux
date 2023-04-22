@@ -9,6 +9,8 @@
     date: "March 2023",
 )
 
+#slide(theme-variant: "title slide")
+
 #new-section("My section name")
 
 #slide(title: "A boring static slide")[
