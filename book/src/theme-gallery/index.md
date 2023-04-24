@@ -138,8 +138,8 @@ It features a University of Bristol branding by default, however the logos and c
 
 ### Showcase
 ```typ
-#import "../../../slides.typ": *
-#import "../../../themes/uob/uob.typ": *
+#import "slides.typ": *
+#import "themes/uob.typ": *
 
 #show: slides.with(
     authors: ("Author A", "Author B"), short-authors: "Short author",
