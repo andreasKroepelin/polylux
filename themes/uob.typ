@@ -5,10 +5,10 @@
 // https://github.com/dawbarton/UoB-beamer-theme
 // =============================================
 
-#import "../../slides.typ": *
+#import "../slides.typ": *
 
 #let uob-theme(
-      color: rgb(171, 31, 45), watermark: "watermark.svg", logo: "logo.svg", secondlogo: "secondlogo.svg"
+      color: rgb(171, 31, 45), watermark: "uob/watermark.svg", logo: "uob/logo.svg", secondlogo: "uob/secondlogo.svg"
    ) = data => {
 
     let title-slide = {

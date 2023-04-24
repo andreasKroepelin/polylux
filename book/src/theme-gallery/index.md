@@ -124,9 +124,9 @@ It features a University of Bristol branding by default, however the logos and c
 
 ### Options
 - `color`: the colour to use for decorative elements, default University of Bristol red
-- `watermark`: file path for a watermark image to span the title slide, default "watermark.svg"
-- `logo`: file path for a logo image to appear on every slide, default "logo.svg"
-- `secondlogo`: file path for an additional logo image, to appear on the first slide only, default "secondlogo.svg"
+- `watermark`: file path for a watermark image to span the title slide, default "uob/watermark.svg"
+- `logo`: file path for a logo image to appear on every slide, default "uob/logo.svg"
+- `secondlogo`: file path for an additional logo image, to appear on the first slide only, default "uob/secondlogo.svg"
 
 ### Variants
 - `"wake up"`: no decoration, colored background, enlarged text
