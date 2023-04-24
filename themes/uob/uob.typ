@@ -57,6 +57,7 @@
 	}
 	else{
 	    let colwidths = none
+	    let thisgutter = .2em
 	    if "colwidths" in slide-info{
 	        colwidths = slide-info.colwidths
 		if colwidths.len() != bodies.len(){
@@ -66,8 +67,12 @@
 	    else{
 	        colwidths = (1fr,) * bodies.len()
 	    }
+	    if "gutter" in slide-info{
+	        thisgutter = slide-info.gutter
+            }
 	    body = grid(
 	        columns: colwidths,
+		gutter: thisgutter,
 		 ..bodies
 	    )
 	}
