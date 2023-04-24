@@ -7,8 +7,8 @@
 
 #import "../slides.typ": *
 
-#let uob-theme(
-      color: rgb(171, 31, 45), watermark: "uob/watermark.svg", logo: "uob/logo.svg", secondlogo: "uob/secondlogo.svg"
+#let bristol-theme(
+      color: rgb(171, 31, 45), watermark: "bristol/watermark.svg", logo: "bristol/logo.svg", secondlogo: "bristol/secondlogo.svg"
    ) = data => {
 
     let title-slide = {
@@ -131,7 +131,7 @@
 
     let wake-up(slide-info, bodies) = {
         if bodies.len() != 1 {
-            panic("wake up variant of uob theme only supports one body per slide")
+            panic("wake up variant of bristol theme only supports one body per slide")
         }
         let body = bodies.first()
 

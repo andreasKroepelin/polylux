@@ -1,4 +1,4 @@
-all: default bipartite uob
+all: default bipartite bristol
 
 default:
 	pdftoppm ./default.pdf ./default -png
@@ -10,7 +10,7 @@ bipartite:
 	montage ./bipartite-* -geometry +50+50 -background LightGray ./bipartite.png
 	rm ./bipartite-*
 
-uob:
-	pdftoppm ./uob.pdf ./uob -png
-	montage ./uob-* -geometry +50+50 -background LightGray ./uob.png
-	rm ./uob-*
+bristol:
+	pdftoppm ./bristol.pdf ./bristol -png
+	montage ./bristol-* -geometry +50+50 -background LightGray ./bristol.png
+	rm ./bristol-*
