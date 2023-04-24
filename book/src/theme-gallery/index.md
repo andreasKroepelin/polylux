@@ -132,8 +132,9 @@ It features a University of Bristol branding by default, however the logos and c
 - `"wake up"`: no decoration, colored background, enlarged text
 
 ### Extra keyword arguments
-- `title`: a title for that slide
-- `colwidths` : array specifying width of each column; default `1fr` per column
+- `title`: optional, a title for that slide
+- `colwidths` : optional, array specifying width of each column; default `1fr` per column
+- `gutter` : optional, integer, relative length, fraction, or array, specifying the gap between columns if a multicolumn (multi-body) slide is chosen; default 0.2em
 
 ### Showcase
 ```typ
@@ -153,7 +154,7 @@ It features a University of Bristol branding by default, however the logos and c
   A slide
 ]
 
-#slide(title: "Two column")[
+#slide(title: "Two column", gutter: .5em)[
 Column A goes on the left...
 ][
 And column B goes on the right!
