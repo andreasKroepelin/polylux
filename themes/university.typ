@@ -193,15 +193,23 @@
             panic("wake-up variant of university theme only supports one body per slide")
         }
 
+        if not "inset" in slide-info {
+            slide-info.inset = 2em
+        }
+
+        if not "fill" in slide-info {
+            slide-info.fill = white
+        }
+
         let body = bodies.first()
 
         block(
             width: 100%,
             height: 100%,
-            inset: 2em,
+            inset: slide-info.inset,
             breakable: false,
             outset: 0em,
-            fill: if "color" in slide-info {slide-info.color} else {black},
+            fill: slide-info.fill,
             text(size: 2em, fill: white, {v(1fr); body; v(1fr)})
         )
     }
