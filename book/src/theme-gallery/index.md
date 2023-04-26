@@ -233,16 +233,23 @@ for more customization options. These parameters are:
 ### Variants slide options
 - `"wake up"`: no decoration, colored background, enlarged text
   Available options:
-    - `color`: The background color
+    - `fill`: The background color (default: `none`)
+    - `background`: The path to a background image (default: `none`)
 - `"split v"`: split a slide vertically in `columns` parts
   Available options:
+    - `fill`: The background color (default: `none`)
     - `columns`: auto,integer,relative length,fraction,array: Defines the
       columns amount and size
+    - `background`: The path to a background image (default: `none`)
 - `"split h"`: split a slide horizontally in `rows` parts
   Available options:
+    - `fill`: The background color (default: `none`)
     - `rows`: auto,integer,relative length,fraction,array: Defines the columns
       amount and size
+    - `background`: The path to a background image (default: `none`)
 - `"split matrix"`: divide the slide in the same amount of columns and rows.
+    - `fill`: The background color (default: `none`)
+    - `background`: The path to a background image (default: `none`)
 
 ### Showcase
 

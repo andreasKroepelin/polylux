@@ -198,7 +198,18 @@
         }
 
         if not "fill" in slide-info {
-            slide-info.fill = white
+            slide-info.fill = none
+        }
+
+        if "background" in slide-info {
+            place(center+horizon)[
+                #image(
+                    slide-info.background,
+                    fit: "stretch",
+                    width: 100%,
+                    height: 100%
+                )
+            ]
         }
 
         let body = bodies.first()
@@ -219,12 +230,23 @@
             slide-info.columns = (1fr, ) * bodies.len()
         }
 
-        if not "color" in slide-info {
-            slide-info.color = none
+        if not "fill" in slide-info {
+            slide-info.fill = none
+        }
+
+        if "background" in slide-info {
+            place(center+horizon)[
+                #image(
+                    slide-info.background,
+                    fit: "stretch",
+                    width: 100%,
+                    height: 100%
+                )
+            ]
         }
 
         box(
-            fill: slide-info.color
+            fill: slide-info.fill
         )[
             #grid(
                 columns: slide-info.columns,
@@ -238,12 +260,23 @@
             slide-info.rows = (1fr,) * bodies.len()
         }
 
-        if not "color" in slide-info {
-            slide-info.color = none
+        if not "fill" in slide-info {
+            slide-info.fill = none
+        }
+
+        if "background" in slide-info {
+            place(center+horizon)[
+                #image(
+                    slide-info.background,
+                    fit: "stretch",
+                    width: 100%,
+                    height: 100%
+                )
+            ]
         }
 
         box(
-            fill: slide-info.color
+            fill: slide-info.fill
         )[
             #grid(
                 rows: slide-info.rows,
@@ -253,6 +286,21 @@
     }
 
     let split-matrix(slide-info, bodies) = {
+        if not "fill" in slide-info {
+            slide-info.fill = none
+        }
+
+        if "background" in slide-info {
+            place(center+horizon)[
+                #image(
+                    slide-info.background,
+                    fit: "stretch",
+                    width: 100%,
+                    height: 100%
+                )
+            ]
+        }
+
         let grid-box = box.with(
             width: 100%,
             height: 100%,
@@ -262,11 +310,15 @@
             stroke: none,
         )
 
-        grid(
-            columns: (1fr,) * int(calc.sqrt(bodies.len())),
-            rows: (1fr,)  * int(calc.sqrt(bodies.len())),
-            ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
-        )
+        box(
+            fill: slide-info.fill
+        )[
+            #grid(
+                columns: (1fr,) * int(calc.sqrt(bodies.len())),
+                rows: (1fr,)  * int(calc.sqrt(bodies.len())),
+                ..range(0, bodies.len()).map(i => grid-box(bodies.at(i)))
+            )
+        ]
     }
 
     (
