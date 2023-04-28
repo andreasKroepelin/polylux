@@ -23,6 +23,8 @@ You can specify it explicitly by referring to `slides-default-theme`:
 - `color`: the color to use for decorative elements, default `teal`
 
 ### Variants
+- `"title slide"`: displays presentation title and subtitle between horziontal
+  lines above horizontally positioned authors and the date
 - `"wake up"`: no decoration, colored background, enlarged text
 
 ### Extra keyword arguments
@@ -37,6 +39,8 @@ You can specify it explicitly by referring to `slides-default-theme`:
     title: "Title", short-title: "Short title", subtitle: "Subtitle",
     date: "Date",
 )
+
+#slide(theme-variant: "title slide")
 
 #new-section("section name")
 
@@ -69,6 +73,8 @@ It features a dominant partition of space into a bright and a dark side.
 - *none*
 
 ### Variants
+- `"title slide"`: displays presentation title on a large bright portion above
+  the subtitle, the authors and the date
 - `"east"`: same as default variant, but dark side on the right, text is right
   aligned
 - `"center split"`: bright left and dark right half of equal size, requires two
@@ -88,6 +94,8 @@ It features a dominant partition of space into a bright and a dark side.
     date: "Date",
     theme: bipartite-theme(),
 )
+
+#slide(theme-variant: "title slide")
 
 #new-section("section name")
 

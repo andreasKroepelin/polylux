@@ -10,6 +10,8 @@
     date: "1784",
 )
 
+#slide(theme-variant: "title slide")
+
 #new-section("Introduction")
 
 #slide(title: "Problem statement")[

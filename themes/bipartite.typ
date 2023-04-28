@@ -6,7 +6,11 @@
   let my-bright = rgb("#fafafa")
   let my-accent = rgb("#fc9278")
 
-  let title-slide = {
+  let title-slide(slide-info, bodies) = {
+    if bodies.len() != 0 {
+        panic("title slide of bipartite theme does not support any bodies")
+    }
+
     block(
       width: 100%, height: 60%, outset: 0em, inset: 0em, breakable: false,
       stroke: none, spacing: 0em, fill: my-bright,
@@ -90,7 +94,9 @@
   }
 
   (
-    title-slide: title-slide,
-    variants: ( "default": west, "east": east, "center split": center-split ),
+    "title slide": title-slide,
+    "default": west,
+    "east": east,
+    "center split": center-split,
   )
 }

@@ -11,6 +11,8 @@
 
 #show link: set text(blue)
 
+#slide(theme-variant: "title slide")
+
 #new-section("Introduction")
 
 #slide(title: "About this presentation")[
