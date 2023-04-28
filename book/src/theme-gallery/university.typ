@@ -51,8 +51,8 @@
     This one is very minimalist and helps the audience focus on an important point.
 ]
 
-#slide(theme-variant: "wake up", background: "../book/src/theme-gallery/MilkyWay.svg")[
-    Another variant with an image in background...
+#slide(theme-variant: "wake up", background: "../book/src/theme-gallery/background.svg")[
+    *Another variant with an image in background...*
 ]
 
 #slide(theme-variant: "split v", columns: 2)[
