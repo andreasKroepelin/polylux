@@ -199,24 +199,22 @@ displays the current status of the presentation.
 By default, this theme utilizes multiple body attachments for every slide type,
 with each additional body creating a new column on the slide. Columns are
 equally sized by default, but you can modify their dimensions by providing a
-columns parameter to the slide or the variant.
-
-The theme supports the addition of multiple bodies on every slide type. Each
-added body creates a new column within the slide.
-Although the columns have equal dimensions by default, their sizes can be easily
-adjusted by supplying a `columns` parameter to either the slide or the variant.
+`columns` parameter to the slide or the variant.
 
 The `columns` parameter can be configured similarly to the `columns` grid
 parameter. For detailed instructions on customization, please consult the
 official documentation.
 
+The theme supports the addition of multiple bodies on every slide type. Each
+added body creates a new column within the slide.
+
 ### Theme options
 - `institution-name`: The institution name
-- `color-a`: The main color
-- `color-b`: The accent accent
-- `color-c`: A color of your choice
+- `color-a`: The main color (default: `rgb("#0C6291")`)
+- `color-b`: The accent accent (default: `rgb("#A63446")`)
+- `color-c`: A color of your choice (default: `rgb("#FBFEF9")`)
 - `logo`: An element that will be on the top right of the first slide. Usually
-  an image element, like a logo.
+  an image element, like a logo. (default: `none`)
 
 ### Default slide options
 
@@ -238,13 +236,13 @@ for more customization options. These parameters are:
 - `"split v"`: split a slide vertically in `columns` parts
   Available options:
     - `fill`: The background color (default: `none`)
-    - `columns`: auto,integer,relative length,fraction,array: Defines the
+    - `columns`: auto, integer, relative length, fraction, array: Defines the
       columns amount and size
     - `background`: The path to a background image (default: `none`)
 - `"split h"`: split a slide horizontally in `rows` parts
   Available options:
     - `fill`: The background color (default: `none`)
-    - `rows`: auto,integer,relative length,fraction,array: Defines the columns
+    - `rows`: auto, integer, relative length, fraction, array: Defines the columns
       amount and size
     - `background`: The path to a background image (default: `none`)
 - `"split matrix"`: divide the slide in the same amount of columns and rows.
@@ -271,6 +269,8 @@ for more customization options. These parameters are:
         logo: image("300x200.svg", width: 60mm)
     )
 )
+
+#slide(theme-variant: "title slide")
 
 #new-section("section name")
 
