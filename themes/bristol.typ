@@ -143,7 +143,6 @@
     }
 
     (
-        title-slide: title-slide,
-        variants: ( "title slide": title-slide, "default": default, "wake up": wake-up, ),
+        "title slide": title-slide, "default": default, "wake up": wake-up,
     )
 }
