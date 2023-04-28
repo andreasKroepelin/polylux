@@ -8,6 +8,8 @@
     theme: bipartite-theme(),
 )
 
+#slide(theme-variant: "title slide")
+
 #new-section("section name")
 
 #slide(title: "A longer slide title")[
