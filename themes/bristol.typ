@@ -11,7 +11,7 @@
       color: rgb(171, 31, 45), watermark: "bristol/watermark.svg", logo: "bristol/logo.svg", secondlogo: "bristol/secondlogo.svg"
    ) = data => {
 
-    let title-slide = {
+    let title-slide(slide-info, bodies) = {
 
      	place(image(watermark, width:100%))
 
@@ -144,6 +144,6 @@
 
     (
         title-slide: title-slide,
-        variants: ( "default": default, "wake up": wake-up, ),
+        variants: ( "title slide": title-slide, "default": default, "wake up": wake-up, ),
     )
 }

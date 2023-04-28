@@ -129,7 +129,8 @@ It features a University of Bristol branding by default, however the logos and c
 - `secondlogo`: file path for an additional logo image, to appear on the first slide only, default "bristol/secondlogo.svg"
 
 ### Variants
-- `"wake up"`: no decoration, colored background, enlarged text
+- `title slide`: shows a nicely formatted title slide
+- `wake up`: no decoration, colored background, enlarged text
 
 ### Extra keyword arguments
 - `title`: optional, a title for that slide
@@ -147,6 +148,8 @@ It features a University of Bristol branding by default, however the logos and c
     date: "Date",
     theme: bristol-theme(),
 )
+
+#slide(theme-variant: "title")
 
 #new-section("section name")
 
