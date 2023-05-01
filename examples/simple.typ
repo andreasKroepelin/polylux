@@ -9,6 +9,8 @@
     date: "March 2023",
 )
 
+#set text(font: "Inria Sans")
+
 #slide(theme-variant: "title slide")
 
 #new-section("My section name")

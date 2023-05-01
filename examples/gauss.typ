@@ -10,6 +10,9 @@
     date: "1784",
 )
 
+#set text(font: "GFS Neohellenic")
+#show math.equation: set text(font: "GFS Neohellenic Math")
+
 #slide(theme-variant: "title slide")
 
 #new-section("Introduction")
@@ -42,23 +45,23 @@
 	#set text(.7em)
 
 	#one-by-one[
-		*base case:* Let $n = 1$. Then $sum_(i=1)^1 i = (1 dot.c 2)/2 = 1$ #emoji.checkmark.heavy
-		// #v(1em)
+		*base case:* Let $n = 1$. Then $sum_(i=1)^1 i = (1 dot.c 2)/2 = 1$ $checkmark$
 
 	][
 		*ind. hypothesis:* Let $sum_(i=1)^k i = k(k+1)/2$ for some $k >= 1$.
-		// #v(1em)
 
 	][
-		*ind. step:* Show that $sum_(i=1)^(k+1) i = ((k+1)(k+2))/2$
-		$
-			sum_(i=1)^(k+1) i &= sum_(i=1)^k i quad + quad (k+1) \
-			&= k(k+1)/2 + (k+1)
-			&= (k+1) dot.c (k/2 + 1)
-			&= (k+1) dot.c (k/2 + 2/2)
-			&= ((k+1)(k+2))/2
-			#h(1em) #emoji.checkmark.heavy
-		$
+		*ind. step:* Show that
+		$sum_(i=1)^(k+1) i = ((k+1)(k+2))/2$
+
+		$sum_(i=1)^(k+1) i = sum_(i=1)^k i quad + quad (k+1)$
+	][
+		$= k(k+1)/2 + (k+1)$
+	][
+		$= (k+1) dot.c (k/2 + 1)
+		= (k+1) dot.c (k/2 + 2/2)
+		= ((k+1)(k+2))/2
+		#h(1em) checkmark$
 	]
 ]
 

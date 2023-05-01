@@ -19,6 +19,8 @@ This is a template for creating slides in [Typst](https://typst.app/).
     date: "March 2023",
 )
 
+#set text(font: "Inria Sans", size: 25pt)
+
 #slide(theme-variant: "title slide")
 
 #new-section("My section name")

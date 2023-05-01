@@ -20,19 +20,19 @@ don't have to) provide the following arguments in the form of
 - `date`: some kind of spatio-temporal information about when or where your talk
   takes place
 - `theme`: set a theme other than the default, see [this section](./themes.html)
-- `typography`: an optional dictionary that can have any of the following entries:
-  - `paper`: this value is propagated to a `#set page(paper: ...)` command, use
-     if to specify another paper size than the default `"presentation-16-9"`
-     (probably only `"presentation-4-3"` makes sense, though)
-  - `text-size`: the baseline font size of text on your slides, headings etc.
-    will have sizes relative to that (default is `25pt`)
-  - `text-font`: the font to use for text on your slides, you can also specify
-    an array of fonts
-    ([see the Typs docs](https://typst.app/docs/reference/text/text/#parameters--font)).
-    The default array is `( "Inria Sans", "Libertinus Sans", "Latin Modern Sans" )`.
-  - `math-font`: similar to `text-font` above, but for math typesetting.
-    The default array is `( "GFS Neohellenic Math", "Fira Math", "TeX Gyre Pagella Math", "Libertinus Math" )`.
+- `aspect-ratio`: either `"16-9"` (default) or `"4-3"` to specify if you want
+  PDF pages with aspect ratio 16:9 or 4:3
 
 The data you provide in this configuration is propagated to the
 [theme](./themes.html) which then decides how to display all that.
 
+## A note on the font size
+Typst-slides will use a default font size of 25 pt.
+If you want to use another one, specify that _after_ the template show-rule, i.e.:
+```typ
+#show: slides.with(
+  // ...
+)
+#set text(size: 20pt)
+```
+It is overwritten if you put the `#set text(...)` before.
