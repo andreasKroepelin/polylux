@@ -10,6 +10,9 @@
 )
 
 #show link: set text(blue)
+#set text(font: "Inria Sans")
+#show heading: set text(font: "Vollkorn")
+#show raw: set text(font: "JuliaMono")
 
 #slide(theme-variant: "title slide")
 
@@ -90,11 +93,12 @@
     Let's explore them in more detail!
 ]
 
-#let example = block.with(
+#let example(body) = block(
     width: 100%,
     inset: .5em,
     fill: aqua.lighten(80%),
-    radius: .5em
+    radius: .5em,
+    text(size: .8em, body)
 )
 
 #slide(title: [`#uncover`: Reserving space])[
@@ -117,7 +121,6 @@
 
     We can also use arrays of numbers...
     #example[
-        #set text(size: .8em)
         ```typ
         #uncover((1, 3, 4))[Visible on subslides 1, 3, and 4]
         ```
@@ -126,7 +129,6 @@
 
     ...or a dictionary with `beginning` and/or `until` keys:
     #example[
-        #set text(size: .8em)
         ```typ
         #uncover((beginning: 2, until: 4))[Visible on subslides 2, 3, and 4]
         ```
@@ -150,7 +152,6 @@
         [`3`], [only on subslide 3],
     )
     #example[
-        #set text(.8em)
         ```typ
         #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
         ```
@@ -177,7 +178,6 @@
 #slide(title: [`#alternatives`: Substituting content])[
     You might be tempted to try
     #example[
-        #set text(.8em)
         ```typ
         #only(1)[Ann] #only(2)[Bob] #only(3)[Christopher] likes #only(1)[chocolate] #only(2)[strawberry] #only(3)[vanilla] ice cream.
         ```
@@ -191,7 +191,6 @@
     moves around.
     Better:
     #example[
-        #set text(.8em)
         ```typ
         #alternatives[Ann][Bob][Christopher] likes #alternatives[chocolate][strawberry][vanilla] ice cream.
         ```
@@ -205,7 +204,6 @@
     `#one-by-one` behaves similar to using `#pause` but you can additionally
     state when uncovering should start.
     #example[
-        #set text(.8em)
         ```typ
         #one-by-one(start: 2)[one ][by ][one]
         ```
@@ -214,7 +212,6 @@
 
     `start` can also be omitted, then it starts with the first subside:
     #example[
-        #set text(.8em)
         ```typ
         #one-by-one[one ][by ][one]
         ```
@@ -228,7 +225,6 @@
 
     This comes in especially handy for bullet lists, enumerations, and term lists.
     #example[
-        #set text(.8em)
         #grid(
             columns: (1fr, 1fr),
             gutter: 1em,

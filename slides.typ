@@ -354,5 +354,7 @@
     let the-theme = theme(data)
     global-theme.update(the-theme)
 
+    set text(size: 25pt)
+
     body
 }
