@@ -7,6 +7,7 @@
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let global-theme = state("global-theme", none)
+#let handout-mode = state("handout-mode", false)
 
 #let new-section(name) = section.update(name)
 
@@ -106,8 +107,10 @@
 }
 
 #let _conditional-display(visible-subslides, reserve-space, mode, body) = {
-    repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-subslides)))
     locate( loc => {
+        if reserve-space and not handout-mode.at(loc) {
+            repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-subslides)))
+        }
         if _check-visible(subslide.at(loc).first(), visible-subslides) {
             body
         } else if reserve-space {
@@ -329,6 +332,7 @@
     date: none,
     theme: slides-default-theme(),
     aspect-ratio: "16-9",
+    handout: false,
     body
 ) = {
 
@@ -353,6 +357,7 @@
     )
     let the-theme = theme(data)
     global-theme.update(the-theme)
+    handout-mode.update(handout)
 
     set text(size: 25pt)
 
