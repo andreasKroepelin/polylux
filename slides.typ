@@ -108,10 +108,13 @@
 
 #let _conditional-display(visible-subslides, reserve-space, mode, body) = {
     locate( loc => {
-        if reserve-space and not handout-mode.at(loc) {
-            repetitions.update(rep => calc.max(rep, _last-required-subslide(visible-subslides)))
+        let vs = if reserve-space and handout-mode.at(loc) {
+            (:)
+        } else {
+            visible-subslides
         }
-        if _check-visible(subslide.at(loc).first(), visible-subslides) {
+        repetitions.update(rep => calc.max(rep, _last-required-subslide(vs)))
+        if _check-visible(subslide.at(loc).first(), vs) {
             body
         } else if reserve-space {
             _slides-cover(mode, body)
@@ -128,14 +131,12 @@
 }
 
 #let one-by-one(start: 1, mode: "invisible", ..children) = {
-    repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
     for (idx, child) in children.pos().enumerate() {
         uncover((beginning: start + idx), mode: mode, child)
     }
 }
 
 #let alternatives(start: 1, position: bottom + left, ..children) = {
-    repetitions.update(rep => calc.max(rep, start + children.pos().len() - 1))
     style(styles => {
         let sizes = children.pos().map(c => measure(c, styles))
         let max-width = calc.max(..sizes.map(sz => sz.width))
