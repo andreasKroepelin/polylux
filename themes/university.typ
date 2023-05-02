@@ -1,3 +1,5 @@
+#import "../slides.typ": *
+
 // University theme
 //
 // By Pol Dellaiera - https://github.com/drupol
@@ -27,10 +29,6 @@
     let color-footer-date = white
     let color-footer-slide-counter = white
 
-    let section = state("section", none)
-    let logical-slide = counter("logical-slide")
-    let subslide = counter("subslide")
-    let total-slides = counter("slide")
     let last-slide-number = locate(loc => logical-slide.final(loc).first())
 
     let title-slide(slide-info, bodies) = {
