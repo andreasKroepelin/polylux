@@ -1,17 +1,10 @@
 #import "../../../slides.typ": *
 #import "../../../themes/university.typ": *
 
-#let color-a = rgb("#0C6291")
-#let color-b = rgb("#A63446")
-#let color-c = rgb("#FBFEF9")
-
 #show: slides.with(
-    authors: "Andreas Kröpelin",
-    short-authors: "A. Kröpelin",
-    title: [`typst-slides`: Easily creating slides in Typst ],
-    subtitle: "An overview over all the features",
-    short-title: "Slides template demo",
-    date: "April 2023",
+    authors: ("Author A", "Author B"), short-authors: "Short author",
+    title: "Title", short-title: "Short title", subtitle: "Subtitle",
+    date: "Date",
     theme: university-theme(
         institution-name: "UniversityName",
         logo: image("300x200.svg", width: 60mm)
@@ -20,45 +13,25 @@
 
 #slide(theme-variant: "title slide")
 
-#new-section("Themes")
+#new-section("section name")
 
-#slide(title: "How a simple slide looks...")[
-    ... is defined by the _theme_ of the presentation.
-
-    This demo uses the `university` theme.
-
-    Because of it, the title slide and the decoration on each slide (with
-    section name, short title, slide number etc.) look the way they do.
+#slide(title: "A longer slide title")[
+  #lorem(40)
 ]
 
-#slide(title: "How another simple slide looks...")[
-    When providing multiple bodies, the slide will be automaticalled divided in
-    columns of the same size by default...
+#slide(title: "A longer slide title with 2 columns")[
+  #lorem(40)
 ][
-    However, you can specify the columns size by providing the `columns`
-    parameter. The `columns` parameter behave just like the `columns` parameter
-    of the `grid`. Please refer to the official documentation to learn how to
-    use it.
-]
-
-#slide[
-    This slide is without `title`, just in time to introduce the theme variants...
-]
-
-#new-section("Variants")
-
-#slide(theme-variant: "wake up", fill: color-a)[
-    This one is very minimalist and helps the audience focus on an important point.
+  #lorem(40)
 ]
 
 #slide(theme-variant: "wake up", background: "../book/src/theme-gallery/background.svg")[
     *Another variant with an image in background...*
 ]
 
-#slide(theme-variant: "split v", columns: 2)[
+#slide(theme-variant: "split v", columns: 2, fill: rgb("#0000ff"))[
     #box(
         height: 100%,
-        fill: color-a,
     )[
         #image("1080x1920.svg", fit: "stretch")
     ]
@@ -67,7 +40,7 @@
         width: 100%,
         height: 100%,
         inset: 2em,
-        fill: color-a,
+        fill: rgb("#ff0000"),
     )[
         #align(center + horizon, text(fill: white)[
             Or a split slide with some content on the left and some on the
@@ -76,82 +49,24 @@
     ]
 ]
 
-#slide(theme-variant: "split v", columns: 2)[
-    #box(
-        width: 100%,
-        height: 100%,
-        inset: 2em,
-        fill: color-b,
-    )[
-        #align(center + horizon, text(fill: white)[
-            Or on the other direction...
-        ])
-    ]
+#slide(theme-variant: "split v")[
+  left side
 ][
-    #box(
-        height: 100%,
-        fill: color-c,
-    )[
-        #image("1080x1920.svg", fit: "stretch")
-    ]
+  right side
 ]
 
 #slide(theme-variant: "split h")[
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-a,
-    )[
-      #align(center + horizon, text(fill: white)[
-        Or even some content on the top...
-      ])
-    ]
+  top side
 ][
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-b,
-    )[
-        #align(center + horizon, text(fill: white)[
-            ...and some in the bottom!
-        ])
-    ]
+  bottom side
 ]
 
 #slide(theme-variant: "split matrix")[
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-a,
-    )[
-        #set align(center + horizon)
-        #text(fill: white)[Or even...]
-    ]
+  top left box
 ][
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-c,
-    )[
-        #set align(center + horizon)
-        #text(fill: black)[...some]
-    ]
+  top right box
 ][
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-c,
-    )[
-        #set align(center + horizon)
-        #text(fill: black)[...other]
-    ]
+  bottom left box
 ][
-    #box(
-        width: 100%,
-        height: 100%,
-        fill: color-b,
-    )[
-        #set align(center + horizon)
-        #text(fill: white)[...fantasies]
-    ]
+  bottom right box
 ]
