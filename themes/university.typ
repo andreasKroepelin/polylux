@@ -58,7 +58,7 @@
                 columns: (1fr,) * calc.min(data.authors.len(), 3),
                 column-gutter: 1em,
                 row-gutter: 1em,
-                text(color-authors)[#data.authors.join()]
+                ..data.authors.map(author => text(color-authors)[#author])
             )
             #v(1em)
             #{
