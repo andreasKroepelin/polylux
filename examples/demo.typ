@@ -6,7 +6,7 @@
     title: [`typst-slides`: Easily creating slides in Typst ],
     subtitle: "An overview over all the features",
     short-title: "Slides template demo",
-    date: "April 2023"
+    date: "April 2023",
 )
 
 #show link: set text(blue)
