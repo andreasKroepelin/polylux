@@ -256,11 +256,9 @@ for more customization options. These parameters are:
 #import "themes/university.typ": *
 
 #show: slides.with(
-    authors: "Authors", short-authors: "A.",
-    title: [`typst-slides`: Easily creating slides in Typst ],
-    subtitle: "An overview over all the features",
-    short-title: "Slides template demo",
-    date: "April 2023",
+    authors: ("Author A", "Author B"), short-authors: "Short author",
+    title: "Title", short-title: "Short title", subtitle: "Subtitle",
+    date: "Date",
     theme: university-theme(
         institution-name: "UniversityName",
         color-a: rgb("ff0000"),
