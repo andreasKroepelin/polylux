@@ -22,6 +22,8 @@ don't have to) provide the following arguments in the form of
 - `theme`: set a theme other than the default, see [this section](./themes.html)
 - `aspect-ratio`: either `"16-9"` (default) or `"4-3"` to specify if you want
   PDF pages with aspect ratio 16:9 or 4:3
+- `handout`: either `true` or `false` (default), set whether you want to produce
+  a handout version of these slides (see [this section](./dynamic.html#handout-mode))
 
 The data you provide in this configuration is propagated to the
 [theme](./themes.html) which then decides how to display all that.

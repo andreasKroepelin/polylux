@@ -352,3 +352,32 @@ argument of the `#slide` function:
 ```
 
 Again, use this feature sparingly, as it decreases typesetting performance.
+
+## Handout mode
+If you to distribute your slides after your talk for further reference, you might
+not want to keep in all the dynamic content.
+Imagine using `one-by-one` on a bullet point list and readers having to scroll
+through endless pages when they just want to see the full list.
+
+You can use `handout: true` in your slides' configuration to achieve this:
+```typ
+#show: slides.with(
+  // ...
+  handout: true
+)
+```
+
+It has the effect that all dynamic visibility of elements _that reserve space_
+is switched off.
+So
+```typ
+Some text. #uncover("3-")[you cannot always see this] ...or can you?
+```
+behaves as
+```typ
+Some text. you cannot always see this ...or can you?
+```
+in handout mode, for example.
+
+Note that `only` and `alternatives` are **not** affected as there is no obvious
+way to unify their content to one slide.
