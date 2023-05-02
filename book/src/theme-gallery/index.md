@@ -123,7 +123,7 @@ This is a variation of the default theme, to feature academic branding. It is in
 [Beamer theme](https://github.com/dawbarton/UoB-beamer-theme).
 It features a University of Bristol branding by default, however the logos and colour choices can easily be swapped, to tailor the theme to any institution of your choice.
 ```typ
-#import "themes/bipartite.typ": *
+#import "themes/bristol.typ": *
 #show: slides(
   // ...
   theme: bristol-theme(),
@@ -135,6 +135,7 @@ It features a University of Bristol branding by default, however the logos and c
 - `watermark`: file path for a watermark image to span the title slide, default "bristol/watermark.svg"
 - `logo`: file path for a logo image to appear on every slide, default "bristol/logo.svg"
 - `secondlogo`: file path for an additional logo image, to appear on the first slide only, default "bristol/secondlogo.svg"
+Default logos are shipped with the theme, however they can be swapped out for another institution's branding by changing the `watermark`, `logo`, and `secondlogo` file paths when instantiating the theme.
 
 ### Variants
 - `title slide`: shows a nicely formatted title slide
@@ -143,7 +144,7 @@ It features a University of Bristol branding by default, however the logos and c
 ### Extra keyword arguments
 - `title`: optional, a title for that slide
 - `colwidths` : optional, array specifying width of each column; default `1fr` per column
-- `gutter` : optional, integer, relative length, fraction, or array, specifying the gap between columns if a multicolumn (multi-body) slide is chosen; default 0.2em
+- `gutter` : optional, integer, relative length, fraction, or array, specifying the gap between columns if a multicolumn (multi-body) slide is chosen; default `0.2em`
 
 ### Showcase
 ```typ
