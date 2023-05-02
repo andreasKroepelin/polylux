@@ -184,6 +184,6 @@ This is a quite a wide column
   Wake up!
 ]
 ```
-![UoB theme screenshot](./uob.png)
+![UoB theme screenshot](./bristol.png)
 
 ---
