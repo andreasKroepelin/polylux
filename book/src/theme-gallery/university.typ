@@ -16,57 +16,119 @@
 #new-section("section name")
 
 #slide(title: "A longer slide title")[
-  #lorem(40)
+  #box(
+    inset: 1em
+  )[
+    #lorem(40)
+  ]
 ]
 
 #slide(title: "A longer slide title with 2 columns")[
-  #lorem(40)
+  #block(
+    inset: 1em,
+    outset: 0pt,
+    fill: rgb("#eeeeee"),
+    width:100%,
+    height: 100%,
+    lorem(30)
+  )
 ][
-  #lorem(40)
+  #block(
+    inset: 1em,
+    outset: 0pt,
+    fill: rgb("#555555"),
+    width:100%,
+    height: 100%,
+    text(fill:white)[#lorem(30)]
+  )
 ]
 
 #slide(theme-variant: "wake up", background: "../book/src/theme-gallery/background.svg")[
-    *Another variant with an image in background...*
+  *Another variant with an image in background...*
 ]
 
-#slide(theme-variant: "split v", columns: 2, fill: rgb("#0000ff"))[
-    #box(
-        height: 100%,
-    )[
-        #image("1080x1920.svg", fit: "stretch")
-    ]
+#slide(theme-variant: "split v", columns: 2, fill: rgb("#ff0000"))[
+  #box(
+    height: 100%,
+  )[
+    #image("1080x1920.svg", fit: "stretch")
+  ]
 ][
-    #box(
-        width: 100%,
-        height: 100%,
-        inset: 2em,
-        fill: rgb("#ff0000"),
-    )[
-        #align(center + horizon, text(fill: white)[
-            Or a split slide with some content on the left and some on the
-            right...
-        ])
-    ]
+  #set align(center + horizon)
+  #set text(fill: white);
+  #box(
+    inset: 1em,
+  )[
+    Or a split slide with an image on the left and some text on the right...
+  ]
 ]
 
 #slide(theme-variant: "split v")[
-  left side
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+    height: 100%,
+    fill: rgb("#dddddd")
+  )[
+    left
+  ]
 ][
-  right side
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+  )[
+    right
+  ]
 ]
 
 #slide(theme-variant: "split h")[
-  top side
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+    height: 100%,
+    fill: rgb("#dddddd")
+  )[
+    top
+  ]
 ][
-  bottom side
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+  )[
+    bottom
+  ]
 ]
 
 #slide(theme-variant: "split matrix")[
-  top left box
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+    height: 100%,
+    fill: rgb("#dddddd")
+  )[
+    top left
+  ]
 ][
-  top right box
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+  )[
+    top right
+  ]
 ][
-  bottom left box
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+  )[
+    bottom left
+  ]
 ][
-  bottom right box
+  #set align(center+horizon)
+  #box(
+    width: 100%,
+    height: 100%,
+    fill: rgb("#dddddd")
+  )[
+    bottom right
+  ]
 ]

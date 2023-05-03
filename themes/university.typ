@@ -79,34 +79,40 @@
             let cell = rect.with(
                 width: 100%,
                 stroke: none,
-                outset: 2mm
+                outset: 0mm
             )
-            grid(
-                rows: (1mm, auto),
-                block(fill: color-b, width:100%)[
-                    #locate(loc => {
-                        let ratio = logical-slide.at(loc).first() / logical-slide.final(loc).first() * 100%
-                        grid(
-                            columns: (ratio, auto),
-                            cell(fill: color-a, height: 1mm)[],
-                        )
-                    }
-                    )
-                ],
-                block(fill: color-c.lighten(90%))[
-                    #grid(
-                        columns: (60%, 40%),
-                        cell[
-                            #heading(level: 2, text(color-title)[#slide-info.title])
+            if "header" in slide-info {
+                slide-info.header
+            } else {
+                if "title" in slide-info {
+                    grid(
+                        rows: (1mm, auto),
+                        block(fill: color-b, width:100%)[
+                            #locate(loc => {
+                                let ratio = logical-slide.at(loc).first() / logical-slide.final(loc).first() * 100%
+                                grid(
+                                    columns: (ratio, auto),
+                                    cell(fill: color-a, height: 1mm)[],
+                                )
+                            }
+                            )
                         ],
-                        cell[
-                            #align(right)[
-                                #heading(level: 2, text(color-section)[#section.display()])
-                            ]
-                        ]
+                        block(fill: color-c.lighten(90%))[
+                            #grid(
+                                columns: (60%, 40%),
+                                cell[
+                                    #heading(level: 3, text(color-title)[#slide-info.title])
+                                ],
+                                cell[
+                                    #align(right)[
+                                        #heading(level: 2, text(color-section)[#section.display()])
+                                    ]
+                                ]
+                            )
+                        ],
                     )
-                ],
-            )
+                }
+            }
         }
 
         let footer() = {
@@ -119,71 +125,64 @@
                 inset: 1mm,
                 outset: 0mm
             )
-            grid(
-                columns: (25%, 1fr, 15%, 10%),
-                rows: (5mm, auto),
-                cell(
-                    height: 100%,
-                    fill: color-footer-fill-short-authors
-                )[#text(color-footer-short-authors)[
-                    #if "short-authors" in slide-info {
-                        slide-info.short-authors
-                    } else {
-                        data.short-authors
-                    }
-                ]],
-                cell(
-                    height: 100%,
-                    fill: color-footer-fill-short-title
-                )[#text(color-footer-short-title)[
-                    #if "short-title" in slide-info {
-                        slide-info.short-title
-                    } else {
-                        data.short-title
-                    }
-                ]],
-                cell(
-                    height: 100%,
-                    fill: color-footer-fill-date
-                )[#text(color-footer-date)[
-                    #if "date" in slide-info {
-                        slide-info.date
-                    } else {
-                        data.date
-                    }
-                ]],
-                cell(
-                    height: 100%,
-                    fill: color-footer-fill-slide-counter
-                )[#text(color-footer-slide-counter)[#logical-slide.display() / #last-slide-number]]
-            )
-        }
-
-        // header
-        if "header" in slide-info {
-            slide-info.header
-        } else {
-            if "title" in slide-info {
-                header()
+            if "footer" in slide-info {
+                slide-info.footer
+            } else {
+                grid(
+                    columns: (25%, 1fr, 15%, 10%),
+                    rows: (5mm, auto),
+                    cell(
+                        height: 100%,
+                        fill: color-footer-fill-short-authors
+                    )[#text(color-footer-short-authors)[
+                        #if "short-authors" in slide-info {
+                            slide-info.short-authors
+                        } else {
+                            data.short-authors
+                        }
+                    ]],
+                    cell(
+                        height: 100%,
+                        fill: color-footer-fill-short-title
+                    )[#text(color-footer-short-title)[
+                        #if "short-title" in slide-info {
+                            slide-info.short-title
+                        } else {
+                            data.short-title
+                        }
+                    ]],
+                    cell(
+                        height: 100%,
+                        fill: color-footer-fill-date
+                    )[#text(color-footer-date)[
+                        #if "date" in slide-info {
+                            slide-info.date
+                        } else {
+                            data.date
+                        }
+                    ]],
+                    cell(
+                        height: 100%,
+                        fill: color-footer-fill-slide-counter
+                    )[#text(color-footer-slide-counter)[#logical-slide.display() / #last-slide-number]]
+                )
             }
         }
 
-        v(1fr)
-
-        block(
-            width: 100%, inset: (x: .5em), breakable: false, outset: 0em,
+        grid(
+            gutter: 0pt,
+            rows: (auto, 1fr, auto),
+            header(),
             grid(
-                columns: slide-info.columns,
-                ..bodies
-            )
-        )
-
-        if "footer" in slide-info {
-            slide-info.footer
-        } else {
-            v(2fr)
+                gutter: 0pt,
+                columns: (1fr,) * bodies.len(),
+                ..bodies.map(body => {
+                    set align(horizon)
+                    block(height: 100%, body)
+                })
+            ),
             footer()
-        }
+        )
     }
 
     let wake-up(slide-info, bodies) = {
@@ -248,7 +247,10 @@
         )[
             #grid(
                 columns: slide-info.columns,
-                ..bodies
+                ..bodies.map(body => {
+                    set align(horizon)
+                    block(height: 100%, body)
+                })
             )
         ]
     }
