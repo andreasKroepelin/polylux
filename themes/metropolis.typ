@@ -87,9 +87,9 @@ Consider using:
     place(bottom+right,dx:-1em,dy:-1em)[#text(fill:m-dark-teal,size:0.8em)[#counter("logical-slide").display()]]
   }
 
-  let standout(slide-info, bodies) = {
+  let wake-up(slide-info, bodies) = {
     if bodies.len() != 1 {
-      panic("standout variant of metropolis theme only supports one body per slide")
+      panic("wake up variant of metropolis theme only supports one body per slide")
     }
     grid(
       rows: (0.2em,1fr),
@@ -109,6 +109,6 @@ Consider using:
   (
     "title slide": title-slide,
     "default": default,
-    "standout": standout
+    "wake up": wake-up
   )
 }
