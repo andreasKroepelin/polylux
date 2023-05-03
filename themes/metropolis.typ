@@ -12,7 +12,6 @@ Consider using:
   let m-dark-teal = rgb("#23373b")
   let m-light-brown = rgb("#eb811b")
   let m-lighter-brown = rgb("#d6c6b7")
-  let m-light-green = rgb("#14b03d")
   let m-extra-light-gray = white.darken(2%)
 
   let cell = block.with(
