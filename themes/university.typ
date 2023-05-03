@@ -12,7 +12,8 @@
     color-a: rgb("#0C6291"),
     color-b: rgb("#A63446"),
     color-c: rgb("#FBFEF9"),
-    logo: none
+    logo: none,
+    progress-bar: true
 ) = data => {
     let color-title = color-a
     let color-subtitle = color-a
@@ -85,32 +86,19 @@
                 slide-info.header
             } else {
                 if "title" in slide-info {
-                    grid(
-                        rows: (1mm, auto),
-                        block(fill: color-b, width:100%)[
-                            #locate(loc => {
-                                let ratio = logical-slide.at(loc).first() / logical-slide.final(loc).first() * 100%
-                                grid(
-                                    columns: (ratio, auto),
-                                    cell(fill: color-a, height: 1mm)[],
-                                )
-                            }
-                            )
-                        ],
-                        block(fill: color-c.lighten(90%))[
-                            #grid(
-                                columns: (60%, 40%),
-                                cell[
-                                    #heading(level: 3, text(color-title)[#slide-info.title])
-                                ],
-                                cell[
-                                    #align(right)[
-                                        #heading(level: 2, text(color-section)[#section.display()])
-                                    ]
+                    block(fill: color-c.lighten(90%))[
+                        #grid(
+                            columns: (60%, 40%),
+                            cell[
+                                #heading(level: 3, text(color-title)[#slide-info.title])
+                            ],
+                            cell[
+                                #align(right)[
+                                    #heading(level: 2, text(color-section)[#section.display()])
                                 ]
-                            )
-                        ],
-                    )
+                            ]
+                        )
+                    ]
                 }
             }
         }
@@ -169,9 +157,28 @@
             }
         }
 
+
+        let progress-barline() = locate(loc => {
+            if (progress-bar == true) {
+                let cell = block.with(
+                    width:100%,
+                    height:100%,
+                    above:0pt,
+                    below:0pt,
+                    breakable:false
+                )
+
+                let filled = counter("logical-slide").at(loc).first() / counter("logical-slide").final(loc).first()*100%
+                grid(rows: 2pt, columns: (filled,1fr),cell(fill:color-a),cell(fill:color-b))
+            } else {
+                none
+            }
+        })
+
         grid(
             gutter: 0pt,
-            rows: (auto, 1fr, auto),
+            rows: (auto, auto, 1fr, auto),
+            progress-barline(),
             header(),
             grid(
                 gutter: 0pt,

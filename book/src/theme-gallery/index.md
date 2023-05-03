@@ -215,6 +215,8 @@ added body creates a new column within the slide.
 - `color-c`: A color of your choice (default: `rgb("#FBFEF9")`)
 - `logo`: An element that will be on the top right of the first slide. Usually
   an image element, like a logo. (default: `none`)
+- `progress-bar`: A boolean value to enable or disable the progress bar on the
+  top. (default: `true`)
 
 ### Default slide options
 

@@ -28,7 +28,7 @@
     inset: 1em,
     outset: 0pt,
     fill: rgb("#eeeeee"),
-    width:100%,
+    width: 100%,
     height: 100%,
     lorem(30)
   )
@@ -37,7 +37,7 @@
     inset: 1em,
     outset: 0pt,
     fill: rgb("#555555"),
-    width:100%,
+    width: 100%,
     height: 100%,
     text(fill:white)[#lorem(30)]
   )
