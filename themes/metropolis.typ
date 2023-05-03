@@ -1,4 +1,4 @@
-// This theme is inspired by https://slidesgo.com/theme/modern-annual-report
+// This theme is inspired by https://github.com/matze/mtheme
 
 #let metropolis-theme(extra: none) = data => {
   //let m-dark-brown = rgb("#604c38")
@@ -82,6 +82,17 @@
     ]
   }
 
+  let standout(slide-info, bodies) = {
+    if bodies.len() != 1 {
+      panic("standout variant of metropolis theme only supports one body per slide")
+    }
+    cell(fill: m-dark-teal,inset: (x: 2em))[
+      #align(center + horizon)[
+        #text(fill: m-extra-light-gray,size:1.2em)[*#bodies.first()*]
+      ]
+    ]
+  }
+
   let east(slide-info, bodies) = {
     if bodies.len() != 1 {
       panic("east variant of bipartite theme only supports one body per slide")
@@ -122,6 +133,7 @@
   (
     "title slide": title-slide,
     "default": default,
+    "standout": standout,
     "east": east,
     "center split": center-split,
   )
