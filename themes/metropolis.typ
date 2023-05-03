@@ -66,17 +66,19 @@ Consider using:
     }
     let body = bodies.first()
     grid(
-      rows: (0.2em,2em,1fr),
+      rows: (0.2em,if "title" in slide-info and slide-info.title != none {2em} else {0em},1fr),
       column-gutter: 0pt,
       row-gutter: 0pt
     )[
       #progress-bar()
     ][
-      #cell(fill:m-dark-teal,inset: (left:.5em))[
-        #align(horizon)[
-          #text(fill: m-extra-light-gray,size:1.2em)[*#slide-info.title*]
+      #if "title" in slide-info and slide-info.title != none {
+        cell(fill:m-dark-teal,inset: (left:.5em))[
+          #align(horizon)[
+            #text(fill: m-extra-light-gray,size:1.2em)[*#slide-info.title*]
+          ]
         ]
-      ]
+      }
     ][
       #cell(fill: m-extra-light-gray,inset: 2em)[
         #align(horizon)[
@@ -86,20 +88,29 @@ Consider using:
     ]
     place(bottom+right,dx:-1em,dy:-1em)[#text(fill:m-dark-teal,size:0.8em)[#counter("logical-slide").display()]]
   }
-
+  
   let wake-up(slide-info, bodies) = {
     if bodies.len() != 1 {
       panic("wake up variant of metropolis theme only supports one body per slide")
     }
+    let body = bodies.first()
     grid(
-      rows: (0.2em,1fr),
-      column-gutter:0pt,
-      row-gutter:0pt
+      rows: (0.2em,if "title" in slide-info and slide-info.title != none {2em} else {0em},1fr),
+      column-gutter: 0pt,
+      row-gutter: 0pt
     )[
       #progress-bar()
     ][
-      #cell(fill: m-dark-teal,inset: (x: 2em))[
-        #align(center + horizon)[
+      #if "title" in slide-info and slide-info.title != none {
+        cell(fill:m-dark-teal,inset: (left:.5em))[
+          #align(horizon)[
+            #text(fill: m-extra-light-gray,size:1.2em)[*#slide-info.title*]
+          ]
+        ]
+      }
+    ][
+      #cell(fill: m-dark-teal,inset: 2em)[
+        #align(horizon+center)[
           #text(fill: m-extra-light-gray,size:1.2em)[*#bodies.first()*]
         ]
       ]
