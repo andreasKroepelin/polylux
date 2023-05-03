@@ -40,11 +40,17 @@ Consider using:
             text(0.9em)[#data.subtitle]
           }
           #line(length:100%, stroke: .05em + m-light-brown)
-          #text(size: .8em)[#data.authors.join(", ")]
-          #if extra != none {
-            linebreak()
-            extra
+          #text(size: .8em)[
+          #if data.authors != none {
+              block(spacing:1em,data.authors.join(", "))
           }
+          #if data.date != none {
+              block(spacing:1em,data.date)
+          }
+          #if extra != none {
+              block(spacing:1em,extra)
+          }
+          ]
         ]
       ]
     ]
@@ -79,6 +85,7 @@ Consider using:
         ]
       ]
     ]
+    place(bottom+right,dx:-1em,dy:-1em)[#text(fill:m-dark-teal,size:0.8em)[#counter("logical-slide").display()]]
   }
 
   let standout(slide-info, bodies) = {
