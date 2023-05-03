@@ -12,18 +12,20 @@
   let my-bright = rgb("#fafafa")
   let my-accent = rgb("#fc9278")
 
-  let cell = block.with(width:100%,height:100%,above:0pt,below:0pt,breakable:false)
+  let cell = block.with(
+    width:100%,
+    height:100%,
+    above:0pt,
+    below:0pt,
+    breakable:false
+  )
 
   let title-slide(slide-info, bodies) = {
     if bodies.len() != 0 {
         panic("title slide of bipartite theme does not support any bodies")
     }
     set text(fill: m-dark-teal)
-    block(
-      width:      100%,
-      height:     100%,
-      breakable:  false,
-      fill:       m-extra-light-gray)[
+    cell(fill: m-extra-light-gray)[
       #align(horizon)[
         #block(
           width:100%,
@@ -34,7 +36,7 @@
             linebreak()
             text(0.9em)[#data.subtitle]
           }
-          #line(length:100%, stroke: 1pt + m-light-brown)
+          #line(length:100%, stroke: .05em + m-light-brown)
           #text(size: .8em)[#data.authors.join(", ")]
           #if extra != none {
             linebreak()
@@ -53,32 +55,30 @@
 
   let default(slide-info, bodies) = {
     if bodies.len() != 1 {
-      panic("default variant of bipartite theme only supports one body per slide")
+      panic("default variant of metropolis theme only supports one body per slide")
     }
     let body = bodies.first()
-    /*locate(loc => {
-      let filled = counter("logical-slide").at(loc).first() / counter("logical-slide").final(loc).first()
-      box(height:0.8%)[#block(width:filled*100%,height:100%,fill:m-light-brown)]
-      box(height:0.8%)[#block(width:(1-filled)*100%,height:100%,fill:m-lighter-brown)]
-    })
-    block(width:100%,height:8%,fill:m-dark-teal,above:0pt,below:0pt)[test]
-    block(width:100%,height:90%,above:0pt,below:0pt,fill:m-extra-light-gray)[test]
-    */
-    grid(rows: (1%,9%,90%),column-gutter: 0pt,row-gutter: 0pt)[
+    grid(
+      rows: (0.2em,2em,1fr),
+      column-gutter: 0pt,
+      row-gutter: 0pt
+    )[
       #locate(loc => {
-        let filled = counter("logical-slide").at(loc).first() / counter("logical-slide").final(loc).first()
-        grid(columns: (filled*100%,(1-filled)*100%))[
-          #cell(fill:m-light-brown)
-        ][
-          #cell(fill:m-lighter-brown)
-        ]
+        let filled = counter("logical-slide").at(loc).first() / counter("logical-slide").final(loc).first()*100%
+        grid(columns: (filled,1fr),cell(fill:m-light-brown),cell(fill:m-lighter-brown))
       })
     ][
-      #cell(fill:m-dark-teal)[
-        #text(fill: m-extra-light-gray)[#heading(level: 1, slide-info.title)]
+      #cell(fill:m-dark-teal,inset: (left:.5em))[
+        #align(horizon)[
+          #text(fill: m-extra-light-gray,size:1.2em)[*#slide-info.title*]
+        ]
       ]
     ][
-      #cell()[fdsffsdaf]
+      #cell(fill: m-extra-light-gray,inset: 2em)[
+        #align(horizon)[
+          #text(fill: m-dark-teal)[#bodies.first()]
+        ]
+      ]
     ]
   }
 
