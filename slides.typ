@@ -346,10 +346,10 @@
         title: title,
         authors: if type(authors) == "array" {
             authors
-        } else if type(authors) in ("string", "content") {
+        } else if type(authors) in ("string", "content", "none") {
             (authors, )
         } else {
-            panic("authors must be an array, string, or content.")
+            panic("if not none, authors must be an array, string, or content.")
         },
         subtitle: subtitle,
         short-title: short-title,
