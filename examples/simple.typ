@@ -1,21 +1,21 @@
 #import "../slides.typ": *
 
 #show: slides.with(
-    authors: "Names of author(s)",
-    short-authors: "Shorter author for slide footer",
-    title: "Title of the presentation",
-    subtitle: "Subtitle of the presentation",
-    short-title: "Shorter title for slide footer",
-    date: "March 2023",
+    authors: [Names of author(s)],
+    short-authors: [Shorter author for slide footer],
+    title: [Title of the presentation],
+    subtitle: [Subtitle of the presentation],
+    short-title: [Shorter title for slide footer],
+    date: [March 2023],
 )
 
 #set text(font: "Inria Sans")
 
 #slide(theme-variant: "title slide")
 
-#new-section("My section name")
+#new-section([My section name])
 
-#slide(title: "A boring static slide")[
+#slide(title: [A boring static slide])[
   Some boring static text.
 
   #lorem(20)
@@ -30,9 +30,9 @@
   Focus!
 ]
 
-#new-section("Conclusion")
+#new-section([Conclusion])
 
-#slide(title: "Take home message")[
+#slide(title: [Take home message])[
   Read the book!
 
   Try it out!

@@ -4,7 +4,7 @@ don't have to) provide the following arguments in the form of
 ```typ
 #show: slides.with(
   title: "some string",
-  subtitle: [contents are also possible],
+  subtitle: [*content* is also valid here],
   // ...
 )
 ```
