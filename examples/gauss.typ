@@ -2,12 +2,12 @@
 
 
 #show: slides.with(
-    authors: "Carl Friedrich Gauß",
-    short-authors: "CF Gauß",
-    title: "On a revolutionary way to sum up natural numbers",
-		subtitle: "What they won't teach you in school",
-    short-title: "Sum of natural numbers",
-    date: "1784",
+    authors: [Carl Friedrich Gauß],
+    short-authors: [CF Gauß],
+    title: [On a revolutionary way to sum up natural numbers],
+		subtitle: [What they won't teach you in school],
+    short-title: [Sum of natural numbers],
+    date: [1784],
 )
 
 #set text(font: "GFS Neohellenic")
@@ -15,15 +15,15 @@
 
 #slide(theme-variant: "title slide")
 
-#new-section("Introduction")
+#new-section([Introduction])
 
-#slide(title: "Problem statement")[
+#slide(title: [Problem statement])[
 	Let $n in NN$.
 	We are interested in sums of the form
 	$ 1 + ... + n = sum_(i=1)^n i $
 ]
 
-#slide(title: "The theorem")[
+#slide(title: [The theorem])[
 
 	I discovered that
 	$ sum_(i=1)^n i = n(n+1)/2 $
@@ -31,9 +31,9 @@
 	Let's prove that!
 ]
 
-#new-section("Proof")
+#new-section([Proof])
 
-#slide(title: "Method of proof")[
+#slide(title: [Method of proof])[
 	We will prove the theorem by induction, following these steps:
 
 	+ base case
@@ -41,7 +41,7 @@
 	+ induction step
 ]
 
-#slide(title: "Proof")[
+#slide(title: [Proof])[
 	#set text(.7em)
 
 	#one-by-one[
@@ -65,13 +65,13 @@
 	]
 ]
 
-#slide(theme-variant: "wake up")[
+#slide(theme-variant: [wake up])[
 	= Proof is over, wake up!
 ]
 
-#new-section("Conclusion")
+#new-section([Conclusion])
 
-#slide(title: "That's it!")[
+#slide(title: [That's it!])[
 
 	Now you know how to calculate those sums more quickly, nice!
 ]

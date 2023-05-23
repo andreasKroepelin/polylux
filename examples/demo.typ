@@ -1,12 +1,12 @@
 #import "../slides.typ": *    
 
 #show: slides.with(
-    authors: "Andreas Kröpelin",
-    short-authors: "A. Kröpelin",
+    authors: [Andreas Kröpelin],
+    short-authors: [A. Kröpelin],
     title: [`typst-slides`: Easily creating slides in Typst ],
-    subtitle: "An overview over all the features",
-    short-title: "Slides template demo",
-    date: "April 2023",
+    subtitle: [An overview over all the features],
+    short-title: [Slides template demo],
+    date: [April 2023],
 )
 
 #show link: set text(blue)
@@ -16,9 +16,9 @@
 
 #slide(theme-variant: "title slide")
 
-#new-section("Introduction")
+#new-section([Introduction])
 
-#slide(title: "About this presentation")[
+#slide(title: [About this presentation])[
     This presentation is supposed to briefly showcase what you can do with this
     template.
 
@@ -26,14 +26,14 @@
     #link("https://andreaskroepelin.github.io/typst-slides/book/")[online book].
 ]
 
-#slide(title: "A title")[
+#slide(title: [A title])[
     Let's explore what we have here.
 
     On the top of this slide, you can see the slide title.
 
     We used the `title` argument of the `#slide` function for that:
     ```typ
-    #slide(title: "First slide")[
+    #slide(title: [First slide])[
         ...
     ]
     ```
@@ -51,7 +51,7 @@
     This helps our audience with not getting lost after a microsleep.
 ]
 
-#slide(title: "The bottom of the slide")[
+#slide(title: [The bottom of the slide])[
     Now, look down!
 
     There we have some general info for the audience about what talk they are
@@ -60,7 +60,7 @@
     You can also see the slide number there.
 ]
 
-#new-section("Dynamic content")
+#new-section([Dynamic content])
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
@@ -79,7 +79,7 @@
     #text(.6em)[(Also note that the slide number does not change while we are here.)]
 ]
 
-#slide(title: "Fine-grained control")[
+#slide(title: [Fine-grained control])[
     When `#pause` does not suffice, you can use more advanced commands to show
     or hide content.
 
@@ -116,7 +116,7 @@
     ]
 ]
 
-#slide(title: "Complex display rules")[
+#slide(title: [Complex display rules])[
     So far, we only used single subslide indices to define when to show something.
 
     We can also use arrays of numbers...
@@ -136,7 +136,7 @@
     ]
 ]
 
-#slide(title: "Convenient rules as strings")[
+#slide(title: [Convenient rules as strings])[
     As as short hand option, you can also specify rules as strings in a special
     syntax.
 
@@ -246,7 +246,7 @@
     `start` is again optional and defaults to `1`.
 ]
 
-#slide(title: "Different ways of covering content")[
+#slide(title: [Different ways of covering content])[
     When content is covered, it is completely invisible by default.
 
     However, you can also just display it in light gray by using the
@@ -266,7 +266,7 @@
 
 #new-section("Themes")
 
-#slide(title: "How a slide looks...")[
+#slide(title: [How a slide looks...])[
     ... is defined by the _theme_ of the presentation.
 
     This demo uses the default theme.
@@ -277,13 +277,13 @@
     Themes can also provide variants, for example ...
 ]
 
-#slide(theme-variant: "wake up")[
+#slide(theme-variant: [wake up])[
     ... this one!
 
     It's very minimalist and helps the audience focus on an important point.
 ]
 
-#slide(title: "Your own theme?")[
+#slide(title: [Your own theme?])[
     If you want to create your own design for slides, you can define custom
     themes!
 
@@ -291,9 +291,9 @@
     explains how to do so.
 ]
 
-#new-section("Conclusion")
+#new-section([Conclusion])
 
-#slide(title: "That's it!")[
+#slide(title: [That's it!])[
     Hopefully you now have some kind of idea what you can do with this template.
 
     Consider giving it

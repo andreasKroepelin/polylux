@@ -35,16 +35,19 @@ You can specify it explicitly by referring to `slides-default-theme`:
 #import "slides.typ": *
 
 #show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
+    authors: ("Author A (eg. string)", [Author B (eg. content)]),
+	short-authors: [Short author],
+    title: [Title],
+	short-title: [Short title],
+	subtitle: [Subtitle],
+    date: [Date],
 )
 
 #slide(theme-variant: "title slide")
 
-#new-section("section name")
+#new-section([section name])
 
-#slide(title: "Slide title")[
+#slide(title: [Slide title])[
   A slide
 ]
 
@@ -89,21 +92,24 @@ It features a dominant partition of space into a bright and a dark side.
 #import "themes/bipartite.typ": *
 
 #show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
+    authors: ("Author A (eg. string)", [Author B (eg. content)]),
+	short-authors: [Short author],
+    title: [Title],
+	short-title: [Short title],
+	subtitle: [Subtitle],
+    date: [Date],
     theme: bipartite-theme(),
 )
 
 #slide(theme-variant: "title slide")
 
-#new-section("section name")
+#new-section([section name])
 
-#slide(title: "A longer slide title")[
+#slide(title: [A longer slide title])[
   #lorem(40)
 ]
 
-#slide(theme-variant: "east", title: "On the right!")[
+#slide(theme-variant: "east", title: [On the right!])[
   #lorem(40)
 ]
 
@@ -152,27 +158,30 @@ Default logos are shipped with the theme, however they can be swapped out for an
 #import "themes/bristol.typ": *
 
 #show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
+    authors: ("Author A (eg. string)", [Author B (eg. content)]),
+	short-authors: [Short author],
+    title: [Title],
+	short-title: [Short title],
+	subtitle: [Subtitle],
+    date: [Date],
     theme: bristol-theme(),
 )
 
 #slide(theme-variant: "title")
 
-#new-section("section name")
+#new-section([section name])
 
-#slide(title: "Slide title")[
+#slide(title: [Slide title])[
   A slide
 ]
 
-#slide(title: "Two column", gutter: .5em)[
+#slide(title: [Two column], gutter: .5em)[
 Column A goes on the left...
 ][
 And column B goes on the right!
 ]
 
-#slide(title: "Variable column sizes", colwidths: (2fr, 1fr, 3fr))[
+#slide(title: [Variable column sizes], colwidths: (2fr, 1fr, 3fr))[
 This is a medium-width column
 ][
 This is a rather narrow column

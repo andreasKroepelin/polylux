@@ -2,27 +2,30 @@
 #import "../../../themes/bristol.typ": *
 
 #show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
+    authors: ([Author A], [Author B]),
+	short-authors: [Short author],
+    title: [Title],
+	short-title: [Short title],
+	subtitle: [Subtitle],
+    date: [Date],
     theme: bristol-theme(),
 )
 
 #slide(theme-variant: "title slide")
 
-#new-section("section name")
+#new-section([section name])
 
-#slide(title: "Slide title")[
+#slide(title: [Slide title])[
   A slide
 ]
 
-#slide(title: "Two column")[
+#slide(title: [Two column])[
 Column A goes on the left...
 ][
 And column B goes on the right!
 ]
 
-#slide(title: "Variable column sizes", colwidths: (2fr, 1fr, 3fr))[
+#slide(title: [Variable column sizes], colwidths: (2fr, 1fr, 3fr))[
 This is a medium-width column
 ][
 This is a rather narrow column
