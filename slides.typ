@@ -268,7 +268,7 @@
                 stroke: strokes.at(position),
                 width: 100%,
                 inset: .3em,
-                text(.5em, body)
+                text(.5em, [body])
             )
         }
 
