@@ -2,7 +2,7 @@
 // ======== GLOBAL STATE ========
 // ==============================
 
-#let section = state("section", none)
+#let section = state("section", "")
 #let subslide = counter("subslide")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
