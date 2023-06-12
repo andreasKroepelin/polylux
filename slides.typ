@@ -13,7 +13,7 @@
 
 #let new-section(name) = {
     section.update(name)
-    section-changed.update(true)
+    section-changed.update(name != none)
 }
 
 // =================================
