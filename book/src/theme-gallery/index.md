@@ -158,7 +158,7 @@ Default logos are shipped with the theme, however they can be swapped out for an
     theme: bristol-theme(),
 )
 
-#slide(theme-variant: "title")
+#slide(theme-variant: "title slide")
 
 #new-section("section name")
 
