@@ -1,4 +1,4 @@
-# Slides in Typst
+# Polylux
 This is a template for creating slides in [Typst](https://typst.app/).
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/book)
@@ -8,7 +8,7 @@ This is a template for creating slides in [Typst](https://typst.app/).
 
 ## Quickstart
 ```typ
-#import "slides.typ": *
+#import "polylux.typ": *
 
 #show: slides.with(
     authors: "Names of author(s)",
