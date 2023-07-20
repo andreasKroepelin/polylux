@@ -1,17 +1,11 @@
 #import "../slides.typ": logical-slide
 
-#let void-theme(dark: false) = data => {
-  let my-dark = rgb(20, 20, 20)
-  let my-bright = rgb(250, 250, 250)
-  let my-in-between = rgb(120, 120, 120)
+#let void-theme(text-color: black, background-color: white) = data => {
 
   let color-setup(body) = {
-    let fg-color = if dark { my-bright } else { my-dark }
-    let bg-color = if dark { my-dark } else { my-bright }
-
-    set text(fill: fg-color)
+    set text(fill: text-color)
     block(
-      width: 100%, height: 100%, inset: 2em, clip: true, fill: bg-color,
+      width: 100%, height: 100%, inset: 2em, clip: true, fill: background-color,
       body
     )
   }
@@ -39,8 +33,10 @@
   let default(slide-info, bodies) = {
     show: color-setup
 
-    heading(level: 2, slide-info.title)
+    if "title" in slide-info {
+      heading(level: 2, slide-info.title)
 
+    }
     v(1fr)
     grid(
       columns: (1fr,) * bodies.len(),
@@ -49,7 +45,9 @@
     )
     v(2fr)
     
-    align(right, text(size: 10pt, fill: my-in-between, logical-slide.display()))
+    if "number" not in slide-info or slide-info.number {
+      align(right, text(size: 10pt, fill: text-color.lighten(50%), logical-slide.display()))
+    }
   }
 
   ( "title slide": title-slide, "default": default )
