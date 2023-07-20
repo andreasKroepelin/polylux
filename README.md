@@ -1,10 +1,10 @@
 # Polylux
 This is a template for creating slides in [Typst](https://typst.app/).
 
-[![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/typst-slides/book)
-![GitHub](https://img.shields.io/github/license/andreasKroepelin/typst-slides)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/typst-slides)
-[![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/typst-slides/releases/latest/download/demo.pdf)
+[![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
+![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
+[![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 
 ## Quickstart
 ```typ
@@ -55,17 +55,17 @@ This code produces these PDF pages:
 
 As you can see, creating slides is as simple as using the `#slide` function.
 You can also use different
-[themes](https://andreaskroepelin.github.io/typst-slides/book/theme-gallery/index.html)
+[themes](https://andreaskroepelin.github.io/polylux/book/theme-gallery/index.html)
 (contributions welcome if you happen to
-[create your own](https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme)!)
+[create your own](https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme)!)
 
 For dynamic content, the template also provides [a convenient API for complex
-overlays](https://andreaskroepelin.github.io/typst-slides/book/dynamic.html).
+overlays](https://andreaskroepelin.github.io/polylux/book/dynamic.html).
 
 Visit the
-[book](https://andreaskroepelin.github.io/typst-slides/book)
+[book](https://andreaskroepelin.github.io/polylux/book)
 for more details or take a look at the
-[demo PDF](https://github.com/andreasKroepelin/typst-slides/releases/latest/download/demo.pdf)
+[demo PDF](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 where you can see the features of this template in action.
 
 **⚠ This template is in active development.

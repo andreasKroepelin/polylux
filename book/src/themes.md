@@ -1,5 +1,5 @@
 # Themes
-The `typst-slides` template also supports theming.
+The `polylux` template also supports theming.
 By default, the theme `slides-default-theme` is used.
 You can specify the use of another one in the initial `slides` statement:
 ```typ
@@ -172,7 +172,7 @@ information like author, presentation title, etc.
 
 And that's it already!
 Have fun creating your own theme and maybe consider opening a pull request
-at [the GitHub repository](https://github.com/andreasKroepelin/typst-slides)
+at [the GitHub repository](https://github.com/andreasKroepelin/polylux)
 to share your creations!
 
 ## Per-slide escape hatch

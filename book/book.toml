@@ -3,7 +3,7 @@ authors = ["Andreas Kröpelin"]
 language = "en"
 multilingual = false
 src = "src"
-title = "Slides in Typst"
+title = "Polylux"
 
 [output.html]
-site-url = "/typst-slides/book/"
+site-url = "/polylux/book/"

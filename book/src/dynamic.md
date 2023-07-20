@@ -338,7 +338,7 @@ subslides for one slide.
 Therefore, ten is the default value for how often we try to create a new subslide.
 This should not produce noticable lag.
 (If it does for you, consider
-[creating an issue](https://github.com/andreasKroepelin/typst-slides/issues)
+[creating an issue](https://github.com/andreasKroepelin/polylux/issues)
 so we can discuss this.)
 
 For those hopefully rare occasions where you do, in fact, need more than ten

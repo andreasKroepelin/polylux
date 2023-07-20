@@ -3,7 +3,7 @@
 #show: slides.with(
     authors: "Andreas Kröpelin",
     short-authors: "A. Kröpelin",
-    title: [`typst-slides`: Easily creating slides in Typst ],
+    title: [`Polylux`: Easily creating slides in Typst ],
     subtitle: "An overview over all the features",
     short-title: "Slides template demo",
     date: "April 2023",
@@ -23,7 +23,7 @@
     template.
 
     For a full documentation, read the
-    #link("https://andreaskroepelin.github.io/typst-slides/book/")[online book].
+    #link("https://andreaskroepelin.github.io/polylux/book/")[online book].
 ]
 
 #slide(title: "A title")[
@@ -287,7 +287,7 @@
     If you want to create your own design for slides, you can define custom
     themes!
 
-    #link("https://andreaskroepelin.github.io/typst-slides/book/themes.html#create-your-own-theme")[The book]
+    #link("https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme")[The book]
     explains how to do so.
 ]
 
@@ -297,6 +297,6 @@
     Hopefully you now have some kind of idea what you can do with this template.
 
     Consider giving it
-    #link("https://github.com/andreasKroepelin/typst-slides")[a GitHub star #text(font: "OpenMoji")[#emoji.star]]
+    #link("https://github.com/andreasKroepelin/polylux")[a GitHub star #text(font: "OpenMoji")[#emoji.star]]
     or open an issue if you run into bugs or have feature requests.
 ]
