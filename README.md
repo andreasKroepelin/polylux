@@ -1,5 +1,5 @@
 # Polylux
-This is a template for creating slides in [Typst](https://typst.app/).
+This is a package for creating presentation slides in [Typst](https://typst.app/).
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)

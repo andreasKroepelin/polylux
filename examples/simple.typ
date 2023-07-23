@@ -1,41 +1,77 @@
-#import "../slides.typ": *
+#import "../polylux.typ": *
 
-#show: slides.with(
-    authors: "Names of author(s)",
-    short-authors: "Shorter author for slide footer",
-    title: "Title of the presentation",
-    subtitle: "Subtitle of the presentation",
-    short-title: "Shorter title for slide footer",
-    date: "March 2023",
-)
+#import themes.simple: *
 
 #set text(font: "Inria Sans")
 
-#slide(theme-variant: "title slide")
+#show: simple-theme.with(
+  footer: [Simple slides],
+)
 
-#new-section("My section name")
+#title-slide[
+  = A fascinating presentation
+  #v(2em)
 
-#slide(title: "A boring static slide")[
-  Some boring static text.
+  Anton #footnote[Uni Augsburg] <uaachen> #h(1em)
+  Berta #footnote[Uni Bayreuth] #h(1em)
+  Caesar #footnote[Uni Chemnitz] #h(1em)
+  Anette @uaachen
+
+  July 23
+]
+
+#slide[
+  #heading(outlined: false, level: 2)[Outline]
+  #outline()
+]
+
+#slide[
+  == First slide
 
   #lorem(20)
 ]
 
+#focus-slide[
+  _Focus!_
+
+  This is very important.
+]
+
+#centered-slide[
+  = Next part
+]
+
 #slide[
-  A fancy dynamic slide without a title.
-  #uncover("2-")[This appears later!]
+  == Let's see some sources
+  Where have they gone?
+
+  #uncover(2)[
+    Ahh here they are:
+    @A @B @C @D @E @F @G @H
+  ]
 ]
 
-#slide(theme-variant: "wake up")[
-  Focus!
+#slide[
+  == Two columns
+  #grid(columns: (1fr, 1fr),
+    [
+      Here we can see content that is
+    ],
+    [
+      split into two columns using `#grid`.
+    ]
+  )
 ]
 
-#new-section("Conclusion")
+#centered-slide[
+  = Appendix
 
-#slide(title: "Take home message")[
-  Read the book!
-
-  Try it out!
-
-  Create themes!
+  ... what no one wants to see.
 ]
+
+
+#slide[
+  == Bibliography
+  #bibliography(title: none, "literature.bib")
+]
+

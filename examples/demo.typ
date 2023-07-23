@@ -1,26 +1,29 @@
-#import "../slides.typ": *    
-
-#show: slides.with(
-    authors: "Andreas Kröpelin",
-    short-authors: "A. Kröpelin",
-    title: [`Polylux`: Easily creating slides in Typst ],
-    subtitle: "An overview over all the features",
-    short-title: "Slides template demo",
-    date: "April 2023",
-)
+#import "../polylux.typ": *    
+#import themes.clean: *
 
 #show link: set text(blue)
 #set text(font: "Inria Sans")
-#show heading: set text(font: "Vollkorn")
+// #show heading: set text(font: "Vollkorn")
 #show raw: set text(font: "JuliaMono")
 
-#slide(theme-variant: "title slide")
+#show: clean-theme.with(
+    footer: [Polylux demo, A. Kröpelin],
+)
+
+#set text(size: 20pt)
+
+#title-slide(
+    title: [`Polylux`: Easily creating slides in Typst],
+    subtitle: "An overview over all the features",
+    authors: "Andreas Kröpelin",
+    date: "April 2023",
+)
 
 #new-section("Introduction")
 
 #slide(title: "About this presentation")[
     This presentation is supposed to briefly showcase what you can do with this
-    template.
+    package.
 
     For a full documentation, read the
     #link("https://andreaskroepelin.github.io/polylux/book/")[online book].
@@ -58,9 +61,10 @@
     actually attending right now.
 
     You can also see the slide number there.
+
+    #new-section("Dynamic content")
 ]
 
-#new-section("Dynamic content")
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
@@ -262,14 +266,15 @@
     - `#uncover(...)[...]`
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
+
+    #new-section("Themes")
 ]
 
-#new-section("Themes")
 
 #slide(title: "How a slide looks...")[
     ... is defined by the _theme_ of the presentation.
 
-    This demo uses the default theme.
+    This demo uses the `clean` theme.
 
     Because of it, the title slide and the decoration on each slide (with
     section name, short title, slide number etc.) look the way they do.
@@ -277,7 +282,7 @@
     Themes can also provide variants, for example ...
 ]
 
-#slide(theme-variant: "wake up")[
+#focus-slide[
     ... this one!
 
     It's very minimalist and helps the audience focus on an important point.
@@ -289,9 +294,10 @@
 
     #link("https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme")[The book]
     explains how to do so.
+
+    #new-section("Conclusion")
 ]
 
-#new-section("Conclusion")
 
 #slide(title: "That's it!")[
     Hopefully you now have some kind of idea what you can do with this template.
