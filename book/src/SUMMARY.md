@@ -1,6 +1,7 @@
 # Summary
 
-- [Basics](./basics.md)
+[Polylux](./polylux.md)
+- [Getting started](./getting-started.md)
   - [Configuration](./config.md)
   - [Creating slides](./slide.md)
   - [Sections](./section.md)
