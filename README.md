@@ -96,6 +96,9 @@ It is still very unintrusive but gives you some sensible defaults:
   ]
 ]
 ```
+This time, we obtain these PDF pages:
+![simple example](assets/simple.png)
+
 As you can see, a theme can introduce its own types of slides (here: `title-slide`,
 `slide`, `focus-slide`, `centered-slide`) to let you quickly switch between
 different layouts.
