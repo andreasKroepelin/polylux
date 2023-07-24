@@ -20,6 +20,8 @@
   show footnote.entry: set text(size: .6em)
   show heading.where(level: 2): set block(below: 2em)
   set outline(target: heading.where(level: 1), title: none, fill: none)
+  show outline.entry: it => it.body
+  show outline: it => block(inset: (x: 1em), it)
 
   simple-footer.update(footer)
 

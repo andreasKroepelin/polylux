@@ -7,7 +7,7 @@
 #show raw: set text(font: "JuliaMono")
 
 #show: clean-theme.with(
-    footer: [Polylux demo],
+    footer: [Andreas Kröpelin, July 2023],
     short-title: [Polylux demo],
     logo: "../assets/logo.png",
 )
@@ -21,7 +21,7 @@
     date: "April 2023",
 )
 
-#new-section("Introduction")
+#new-section-slide("Introduction")
 
 #slide(title: "About this presentation")[
     This presentation is supposed to briefly showcase what you can do with this
@@ -42,6 +42,7 @@
         ...
     ]
     ```
+    (This works because we utilise the `clean` theme; more on that later.)
 ]
 
 #slide[
@@ -51,9 +52,11 @@
     top line?
 
     We defined it using
-    #raw("#new-section(\"Introduction\")", lang: "typst", block: false).
+    #raw("#new-section-slide(\"Introduction\")", lang: "typst", block: false).
 
     This helps our audience with not getting lost after a microsleep.
+
+    You can also spot a short title above that.
 ]
 
 #slide(title: "The bottom of the slide")[
@@ -63,9 +66,9 @@
     actually attending right now.
 
     You can also see the slide number there.
-
-    #new-section("Dynamic content")
 ]
+
+#new-section-slide("Dynamic content")
 
 
 #slide(title: [A dynamic slide with `pause`s])[
@@ -268,9 +271,9 @@
     - `#uncover(...)[...]`
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
-
-    #new-section("Themes")
 ]
+
+#new-section-slide("Themes")
 
 
 #slide(title: "How a slide looks...")[
@@ -290,16 +293,37 @@
     It's very minimalist and helps the audience focus on an important point.
 ]
 
+#slide(
+    title: [The `clean` theme also makes multiple colums very easy!],
+    lorem(20), lorem(30), lorem(25)
+)
+
 #slide(title: "Your own theme?")[
     If you want to create your own design for slides, you can define custom
     themes!
 
     #link("https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme")[The book]
     explains how to do so.
-
-    #new-section("Conclusion")
 ]
 
+#new-section-slide("Typst features")
+
+#slide(title: "Use Typst!")[
+    Typst gives us so many cool things #footnote[For example footnotes!].
+    Use them!
+]
+
+#slide(title: "Outline")[
+    Why not include an outline?
+    #outline()
+]
+
+#slide(title: "Bibliography")[
+    Let us cite something so we can have a bibliography: @A @B @C
+    #bibliography(title: none, "literature.bib")
+]
+
+#new-section-slide("Conclusion")
 
 #slide(title: "That's it!")[
     Hopefully you now have some kind of idea what you can do with this template.

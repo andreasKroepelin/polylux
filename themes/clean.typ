@@ -29,6 +29,9 @@
   show footnote.entry: set text(size: .6em)
   show heading.where(level: 2): set block(below: 1.5em)
   set outline(target: heading.where(level: 1), title: none, fill: none)
+  show outline.entry: it => it.body
+  show outline: it => block(inset: (x: 1em), it)
+
 
   clean-footer.update(footer)
   clean-color.update(color)
@@ -103,6 +106,8 @@
     let color = clean-color.at(loc)
     let logo = clean-logo.at(loc)
     let short-title = clean-short-title.at(loc)
+    let sections = query(heading.where(level: 1, outlined: true).before(loc), loc)
+    let section = if sections == () [] else { sections.last().body }
 
     block(
       stroke: ( bottom: 1mm + color ), width: 100%, inset: ( y: .3em ),
@@ -112,10 +117,10 @@
           align(right, grid(
             columns: 1, rows: 1em, gutter: .5em,
             short-title,
-            clean-section.display()
+            section
           ))
         } else {
-          align(horizon + right, clean-section.display())
+          align(horizon + right, section)
         }
       ))
     )
@@ -166,4 +171,19 @@
   set page(fill: bg, margin: 2em)
   set text(fill: fg, size: 1.5em)
   logic.polylux-slide(align(horizon, body))
+}
+
+#let new-section-slide(name) = {
+  set page(margin: 2em)
+  let content = locate( loc => {
+    let color = clean-color.at(loc)
+    align(
+      center + horizon,
+      block(
+        stroke: ( bottom: 1mm + color ), inset: 1em,
+        heading(level: 1, name)
+      )
+    )
+  })
+  logic.polylux-slide(content)
 }
