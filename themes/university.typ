@@ -1,4 +1,4 @@
-#import "../slides.typ": *
+#import "../logic.typ":
 
 // University theme
 //
@@ -6,7 +6,7 @@
 //
 // Please feel free to improve this theme
 // by submitting a PR in https://github.com/andreasKroepelin/typst-slides
-//
+
 #let university-theme(
     institution-name: "University",
     color-a: rgb("#0C6291"),
