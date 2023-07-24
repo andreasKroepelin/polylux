@@ -1,41 +1,45 @@
-#import "../slides.typ": *
+#import "../polylux.typ": *
 
-#show: slides.with(
-    authors: "Names of author(s)",
-    short-authors: "Shorter author for slide footer",
-    title: "Title of the presentation",
-    subtitle: "Subtitle of the presentation",
-    short-title: "Shorter title for slide footer",
-    date: "March 2023",
-)
+#import themes.simple: *
 
 #set text(font: "Inria Sans")
 
-#slide(theme-variant: "title slide")
+#show: simple-theme.with(
+  footer: [Simple slides],
+)
 
-#new-section("My section name")
+#title-slide[
+  = Keep it simple!
+  #v(2em)
 
-#slide(title: "A boring static slide")[
-  Some boring static text.
+  Alpha #footnote[Uni Augsburg] #h(1em)
+  Bravo #footnote[Uni Bayreuth] #h(1em)
+  Charlie #footnote[Uni Chemnitz] #h(1em)
+
+  July 23
+]
+
+#slide[
+  == First slide
 
   #lorem(20)
 ]
 
+#focus-slide[
+  _Focus!_
+
+  This is very important.
+]
+
+#centered-slide[
+  = Let's start a new section!
+]
+
 #slide[
-  A fancy dynamic slide without a title.
-  #uncover("2-")[This appears later!]
-]
+  == Dynamic slide
+  Did you know that...
 
-#slide(theme-variant: "wake up")[
-  Focus!
-]
-
-#new-section("Conclusion")
-
-#slide(title: "Take home message")[
-  Read the book!
-
-  Try it out!
-
-  Create themes!
+  #uncover(2)[
+    ...you can see the current section at the top of the slide?
+  ]
 ]

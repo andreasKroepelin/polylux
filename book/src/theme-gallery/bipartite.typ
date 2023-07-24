@@ -1,26 +1,26 @@
-#import "../../../slides.typ": *
-#import "../../../themes/bipartite.typ": *
+#import "../../../polylux.typ": *
+#import themes.bipartite: *
 
-#show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
-    theme: bipartite-theme(),
+#show: bipartite-theme
+
+#set text(size: 25pt)
+
+#title-slide(
+  author: [Author A, Author B],
+  title: "Title",
+  subtitle: "Subtitle",
+  date: "Date",
 )
 
-#slide(theme-variant: "title slide")
-
-#new-section("section name")
-
-#slide(title: "A longer slide title")[
+#west-slide(title: "A longer slide title")[
   #lorem(40)
 ]
 
-#slide(theme-variant: "east", title: "On the right!")[
+#east-slide(title: "On the right!")[
   #lorem(40)
 ]
 
-#slide(theme-variant: "center split")[
+#split-slide[
   #lorem(40)
 ][
   #lorem(40)

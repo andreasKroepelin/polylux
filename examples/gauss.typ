@@ -1,19 +1,20 @@
-#import "../slides.typ": *    
+#import "../polylux.typ": *    
 
+#import themes.clean: *
 
-#show: slides.with(
-    authors: "Carl Friedrich Gauß",
-    short-authors: "CF Gauß",
-    title: "On a revolutionary way to sum up natural numbers",
-		subtitle: "What they won't teach you in school",
-    short-title: "Sum of natural numbers",
-    date: "1784",
-)
-
-#set text(font: "GFS Neohellenic")
+#set text(font: "Source Sans 3")
 #show math.equation: set text(font: "GFS Neohellenic Math")
 
-#slide(theme-variant: "title slide")
+#show: clean-theme.with(
+	footer : [Sum of natural numbers, CF Gauß],
+)
+
+#title-slide(
+	authors: "Carl Friedrich Gauß",
+	title: [On a revolutionary way to \ sum up natural numbers],
+	subtitle: "What they won't teach you in school",
+	date: "1784",
+)
 
 #new-section("Introduction")
 
@@ -29,9 +30,9 @@
 	$ sum_(i=1)^n i = n(n+1)/2 $
 
 	Let's prove that!
+	#new-section("Proof")
 ]
 
-#new-section("Proof")
 
 #slide(title: "Method of proof")[
 	We will prove the theorem by induction, following these steps:
@@ -65,13 +66,13 @@
 	]
 ]
 
-#slide(theme-variant: "wake up")[
-	= Proof is over, wake up!
+#focus-slide[
+	Proof is over, wake up!
+	#new-section("Conclusion")
 ]
 
-#new-section("Conclusion")
 
 #slide(title: "That's it!")[
 
-	Now you know how to calculate those sums more quickly, nice!
+	Now you know how to calculate those sums more quickly. Nice!
 ]

@@ -1,4 +1,4 @@
-# Basics
+# Getting started
 
 This template allows you to produce presentation slides in
 [Typst](https://typst.app), just like you would use the _beamer_ package in LaTeX.
