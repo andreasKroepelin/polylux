@@ -131,8 +131,8 @@ there are no compatibility guarantees!**
 
 ## Acknowledgements
 Thank you to...
-- @drupol for the `university` theme
-- @Enivex for the `metropolis` theme
-- @MarkBlyth for the `bristol` theme
-- @fncnt for coming up with the name "polylux"
+- [@drupol](https://github.com/fncnt) for the `university` theme
+- [@Enivex](https://github.com/Enivex) for the `metropolis` theme
+- [@MarkBlyth](https://github.com/MarkBlyth) for the `bristol` theme
+- [@fncnt](https://github.com/fncnt) for coming up with the name "polylux"
 - the Typst authors and contributors for this refreshing piece of software
