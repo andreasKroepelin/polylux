@@ -128,3 +128,11 @@ where you can see the features of this template in action.
 **⚠ This package is in active development.
 While I try to make sure that the `main`-branch always is in a usable state,
 there are no compatibility guarantees!**
+
+## Acknowledgements
+Thank you to...
+- @drupol for the `university` theme
+- @Enivex for the `metropolis` theme
+- @MarkBlyth for the `bristol` theme
+- @fncnt for coming up with the name "polylux"
+- the Typst authors and contributors for this refreshing piece of software
