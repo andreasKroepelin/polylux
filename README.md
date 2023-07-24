@@ -7,47 +7,38 @@ This is a package for creating presentation slides in [Typst](https://typst.app/
 [![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 
 ## Quickstart
+For the bare-bones, do-it-yourself experience, all you need is:
 ```typ
-#import "polylux.typ": *
+// Get polylux from the official package repository
+#import "@preview/polylux:0.2.0": *
 
-#show: slides.with(
-    authors: "Names of author(s)",
-    short-authors: "Shorter author for slide footer",
-    title: "Title of the presentation",
-    subtitle: "Subtitle of the presentation",
-    short-title: "Shorter title for slide footer",
-    date: "March 2023",
-)
+// Make the paper dimensions fit for a presentation and the text larger
+#set page(paper: "presentation-16-9")
+#set text(size: 25pt)
 
-#set text(font: "Inria Sans", size: 25pt)
+// Use #polylux-slide to create a slide and style it using your favourite Typst functions
+#polylux-slide[
+  #align(horizon + center)[
+    = Very minimalist slides
 
-#slide(theme-variant: "title slide")
+    A lazy author
 
-#new-section("My section name")
-
-#slide(title: "A boring static slide")[
-  Some boring static text.
-
-  #lorem(20)
+    July 23, 2023
+  ]
 ]
 
-#slide[
-  A fancy dynamic slide without a title.
-  #uncover("2-")[This appears later!]
+#polylux-slide[
+  == First slide
+
+  Some static text on this slide.
 ]
 
-#slide(theme-variant: "wake up")[
-  Focus!
-]
+#polylux-slide[
+  == This slide changes!
 
-#new-section("Conclusion")
-
-#slide(title: "Take home message")[
-  Read the book!
-
-  Try it out!
-
-  Create themes!
+  You can always see this.
+  // Make use of features like #uncover, #only, and others to create dynamic content
+  #uncover(2)[But this appears later!]
 ]
 ```
 This code produces these PDF pages:

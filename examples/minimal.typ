@@ -12,6 +12,7 @@
     July 23, 2023
   ]
 ]
+
 #polylux-slide[
   == First slide
 
