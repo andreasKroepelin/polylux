@@ -42,15 +42,81 @@ For the bare-bones, do-it-yourself experience, all you need is:
 ]
 ```
 This code produces these PDF pages:
-![title slide](assets/simple.png)
+![minimalist example](assets/minimalist.png)
 
-As you can see, creating slides is as simple as using the `#slide` function.
-You can also use different
-[themes](https://andreaskroepelin.github.io/polylux/book/theme-gallery/index.html)
-(contributions welcome if you happen to
-[create your own](https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme)!)
+From there, you can either start creatively adapting the looks to your likings
+or you can use one of the provided themes.
+The simplest one of them is called `simple` (what a coincidence!).
+It is still very unintrusive but gives you some sensible defaults:
+```typ
+#import "@preview/polylux:0.2.0": *
 
-For dynamic content, the template also provides [a convenient API for complex
+#import themes.simple: *
+
+#show: simple-theme.with(
+  footer: [Simple slides],
+)
+
+#title-slide[
+  = Keep it simple!
+  #v(2em)
+
+  Alpha #footnote[Uni Augsburg] #h(1em)
+  Bravo #footnote[Uni Bayreuth] #h(1em)
+  Charlie #footnote[Uni Chemnitz] #h(1em)
+
+  July 23
+]
+
+#slide[
+  #outline()
+]
+
+#slide[
+  == First slide
+
+  #lorem(20)
+]
+
+#focus-slide[
+  _Focus!_
+
+  This is very important.
+]
+
+#centered-slide[
+  = Next part
+]
+
+#slide[
+  == Let's see some sources
+  Where have they gone?
+
+  #uncover(2)[
+    Ahh here they are:
+    @A @B @C @D @E @F @G @H
+  ]
+]
+
+#centered-slide[
+  = Appendix
+
+  ... what no one wants to see.
+]
+
+
+#slide[
+  == Bibliography
+  #bibliography(title: none, "literature.bib")
+]
+```
+As you can see, a theme can introduce its own types of slides (here: `title-slide`,
+`slide`, `focus-slide`, `centered-slide`) to let you quickly switch between
+different layouts.
+The book (**TODO**) has more infos on how to use (and create your own) themes.
+
+
+For dynamic content, polylux also provides [a convenient API for complex
 overlays](https://andreaskroepelin.github.io/polylux/book/dynamic.html).
 
 Visit the
@@ -59,6 +125,6 @@ for more details or take a look at the
 [demo PDF](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 where you can see the features of this template in action.
 
-**⚠ This template is in active development.
+**⚠ This package is in active development.
 While I try to make sure that the `main`-branch always is in a usable state,
 there are no compatibility guarantees!**
