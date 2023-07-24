@@ -1,3 +1,6 @@
+// This theme contains ideas from the former "bristol" theme, contributed by
+// https://github.com/MarkBlyth
+
 #import "../logic.typ"
 
 #let clean-footer = state("clean-footer", [])
