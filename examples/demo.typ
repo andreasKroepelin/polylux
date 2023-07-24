@@ -7,7 +7,9 @@
 #show raw: set text(font: "JuliaMono")
 
 #show: clean-theme.with(
-    footer: [Polylux demo, A. Kröpelin],
+    footer: [Polylux demo],
+    short-title: [Polylux demo],
+    logo: "../assets/logo.png",
 )
 
 #set text(size: 20pt)
