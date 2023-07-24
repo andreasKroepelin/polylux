@@ -43,7 +43,7 @@ For the bare-bones, do-it-yourself experience, all you need is:
 ]
 ```
 This code produces these PDF pages:
-![minimalist example](assets/minimalist.png)
+![minimal example](assets/minimal.png)
 
 From there, you can either start creatively adapting the looks to your likings
 or you can use one of the provided themes.
