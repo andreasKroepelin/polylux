@@ -12,17 +12,11 @@
   = A fascinating presentation
   #v(2em)
 
-  Anton #footnote[Uni Augsburg] <uaachen> #h(1em)
-  Berta #footnote[Uni Bayreuth] #h(1em)
-  Caesar #footnote[Uni Chemnitz] #h(1em)
-  Anette @uaachen
+  Alpha #footnote[Uni Augsburg] #h(1em)
+  Bravo #footnote[Uni Bayreuth] #h(1em)
+  Charlie #footnote[Uni Chemnitz] #h(1em)
 
   July 23
-]
-
-#slide[
-  #heading(outlined: false, level: 2)[Outline]
-  #outline()
 ]
 
 #slide[
@@ -38,40 +32,14 @@
 ]
 
 #centered-slide[
-  = Next part
+  = Let's start a new section!
 ]
 
 #slide[
-  == Let's see some sources
-  Where have they gone?
+  == Dynamic slide
+  Did you know that...
 
   #uncover(2)[
-    Ahh here they are:
-    @A @B @C @D @E @F @G @H
+    ...you can see the current section at the top of the slide?
   ]
 ]
-
-#slide[
-  == Two columns
-  #grid(columns: (1fr, 1fr),
-    [
-      Here we can see content that is
-    ],
-    [
-      split into two columns using `#grid`.
-    ]
-  )
-]
-
-#centered-slide[
-  = Appendix
-
-  ... what no one wants to see.
-]
-
-
-#slide[
-  == Bibliography
-  #bibliography(title: none, "literature.bib")
-]
-

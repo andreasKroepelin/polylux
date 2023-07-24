@@ -50,16 +50,18 @@ or you can use one of the provided themes.
 The simplest one of them is called `simple` (what a coincidence!).
 It is still very unintrusive but gives you some sensible defaults:
 ```typ
-#import "@preview/polylux:0.2.0": *
+#import "../polylux.typ": *
 
 #import themes.simple: *
+
+#set text(font: "Inria Sans")
 
 #show: simple-theme.with(
   footer: [Simple slides],
 )
 
 #title-slide[
-  = Keep it simple!
+  = A fascinating presentation
   #v(2em)
 
   Alpha #footnote[Uni Augsburg] #h(1em)
@@ -67,10 +69,6 @@ It is still very unintrusive but gives you some sensible defaults:
   Charlie #footnote[Uni Chemnitz] #h(1em)
 
   July 23
-]
-
-#slide[
-  #outline()
 ]
 
 #slide[
@@ -86,29 +84,16 @@ It is still very unintrusive but gives you some sensible defaults:
 ]
 
 #centered-slide[
-  = Next part
+  = Let's start a new section!
 ]
 
 #slide[
-  == Let's see some sources
-  Where have they gone?
+  == Dynamic slide
+  Did you know that...
 
   #uncover(2)[
-    Ahh here they are:
-    @A @B @C @D @E @F @G @H
+    ...you can see the current section at the top of the slide?
   ]
-]
-
-#centered-slide[
-  = Appendix
-
-  ... what no one wants to see.
-]
-
-
-#slide[
-  == Bibliography
-  #bibliography(title: none, "literature.bib")
 ]
 ```
 As you can see, a theme can introduce its own types of slides (here: `title-slide`,
