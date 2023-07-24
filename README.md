@@ -50,7 +50,7 @@ or you can use one of the provided themes.
 The simplest one of them is called `simple` (what a coincidence!).
 It is still very unintrusive but gives you some sensible defaults:
 ```typ
-#import "../polylux.typ": *
+#import "@preview/polylux:0.2.0": *
 
 #import themes.simple: *
 
@@ -61,7 +61,7 @@ It is still very unintrusive but gives you some sensible defaults:
 )
 
 #title-slide[
-  = A fascinating presentation
+  = Keep it simple!
   #v(2em)
 
   Alpha #footnote[Uni Augsburg] #h(1em)

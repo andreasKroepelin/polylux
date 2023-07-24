@@ -9,7 +9,7 @@
 )
 
 #title-slide[
-  = A fascinating presentation
+  = Keep it simple!
   #v(2em)
 
   Alpha #footnote[Uni Augsburg] #h(1em)
