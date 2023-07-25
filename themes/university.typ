@@ -130,8 +130,6 @@
   })
 
   let header-text = {
-    // let cell = rect.with( width: 100%, stroke: none, outset: 0mm )
-    let cell(it) = it
     if header != none {
       header
     } else if title != none {
@@ -142,8 +140,8 @@
         let colors = uni-colors.at(loc)
         block(fill: colors.c, inset: (x: .5em), grid(
           columns: (60%, 40%),
-          cell(align(top+left, heading(level: 2, text(fill: colors.a, title)))),
-          cell(align(right, text(fill: colors.a.lighten(65%), uni-section.display())))
+          align(top + left, heading(level: 2, text(fill: colors.a, title))),
+          align(top + right, text(fill: colors.a.lighten(65%), uni-section.display()))
         ))
       })
     } else { [] }
