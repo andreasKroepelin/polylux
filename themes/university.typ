@@ -1,4 +1,5 @@
 #import "../logic.typ"
+#import "../helpers.typ"
 
 // University theme
 //
@@ -12,9 +13,6 @@
 #let uni-short-author = state("uni-short-author", none)
 #let uni-short-date = state("uni-short-date", none)
 #let uni-progress-bar = state("uni-progress-bar", true)
-#let uni-section = state("uni-section", [])
-
-#let uni-last-slide-number = locate(loc => logic.logical-slide.final(loc).first())
 
 #let university-theme(
   aspect-ratio: "16-9",
@@ -35,10 +33,6 @@
   )
   set text(size: 25pt)
   show footnote.entry: set text(size: .6em)
-  set outline(target: heading.where(level: 1), title: none, fill: none)
-  show outline.entry: it => it.body
-  show outline: it => block(inset: (x: 1em), it)
-
 
   uni-progress-bar.update(progress-bar)
   uni-colors.update((a: color-a, b: color-b, c: color-c))
@@ -124,8 +118,13 @@
       let cell = block.with( width: 100%, height: 100%, above: 0pt, below: 0pt, breakable: false )
       let colors = uni-colors.at(loc)
 
-      let filled = logic.logical-slide.at(loc).first() / logic.logical-slide.final(loc).first() * 100%
-      grid(rows: 2pt, columns: (filled, 1fr), cell(fill: colors.a), cell(fill: colors.b))
+      helpers.polylux-progress( ratio => {
+        grid(
+          rows: 2pt, columns: (ratio * 100%, 1fr),
+          cell(fill: colors.a),
+          cell(fill: colors.b)
+        )
+      })
     } else { [] }
   })
 
@@ -134,14 +133,14 @@
       header
     } else if title != none {
       if new-section != none {
-        uni-section.update(new-section)
+        helpers.register-section(new-section)
       }
       locate( loc => {
         let colors = uni-colors.at(loc)
         block(fill: colors.c, inset: (x: .5em), grid(
           columns: (60%, 40%),
           align(top + left, heading(level: 2, text(fill: colors.a, title))),
-          align(top + right, text(fill: colors.a.lighten(65%), uni-section.display()))
+          align(top + right, text(fill: colors.a.lighten(65%), helpers.current-section))
         ))
       })
     } else { [] }
@@ -172,7 +171,7 @@
           cell(fill: colors.a, uni-short-author.display()),
           cell(uni-short-title.display()),
           cell(uni-short-date.display()),
-          cell(logic.logical-slide.display() + [~/~] + uni-last-slide-number)
+          cell(logic.logical-slide.display() + [~/~] + helpers.last-slide-number)
         )
       })
     }

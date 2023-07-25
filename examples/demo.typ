@@ -315,7 +315,7 @@
 
 #slide(title: "Outline")[
     Why not include an outline?
-    #outline()
+    #polylux-outline(padding: 1em, enum-args: (tight: false))
 ]
 
 #slide(title: "Bibliography")[

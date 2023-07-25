@@ -2,14 +2,13 @@
 // https://github.com/MarkBlyth
 
 #import "../logic.typ"
+#import "../helpers.typ"
 
 #let clean-footer = state("clean-footer", [])
 #let clean-short-title = state("clean-short-title", none)
 #let clean-color = state("clean-color", teal)
 #let clean-logo = state("clean-logo", none)
-#let clean-section = state("clean-section", [])
 
-#let new-section(it) = clean-section.update(it)
 
 #let clean-theme(
   aspect-ratio: "16-9",
@@ -28,10 +27,6 @@
   set text(size: 25pt)
   show footnote.entry: set text(size: .6em)
   show heading.where(level: 2): set block(below: 1.5em)
-  set outline(target: heading.where(level: 1), title: none, fill: none)
-  show outline.entry: it => it.body
-  show outline: it => block(inset: (x: 1em), it)
-
 
   clean-footer.update(footer)
   clean-color.update(color)
@@ -106,23 +101,22 @@
     let color = clean-color.at(loc)
     let logo = clean-logo.at(loc)
     let short-title = clean-short-title.at(loc)
-    let sections = query(heading.where(level: 1, outlined: true).before(loc), loc)
-    let section = if sections == () [] else { sections.last().body }
 
-    block(
-      stroke: ( bottom: 1mm + color ), width: 100%, inset: ( y: .3em ),
-      text(.5em, grid(columns: (1fr, 1fr),
-        if type(logo) == "string" { align(left, image(logo, height: 4em)) } else { [] },
-        if short-title != none {
-          align(right, grid(
-            columns: 1, rows: 1em, gutter: .5em,
-            short-title,
-            section
-          ))
-        } else {
-          align(horizon + right, section)
-        }
-      ))
+    show: block.with(stroke: (bottom: 1mm + color), width: 100%, inset: (y: .3em))
+    set text(size: .5em)
+
+    grid(
+      columns: (1fr, 1fr),
+      if type(logo) == "string" { align(left, image(logo, height: 4em)) } else { [] },
+      if short-title != none {
+        align(horizon + right, grid(
+          columns: 1, rows: 1em, gutter: .5em,
+          short-title,
+          helpers.current-section
+        ))
+      } else {
+        align(horizon + right, helpers.current-section)
+      }
     )
   })
 
@@ -177,13 +171,11 @@
   set page(margin: 2em)
   let content = locate( loc => {
     let color = clean-color.at(loc)
-    align(
-      center + horizon,
-      block(
-        stroke: ( bottom: 1mm + color ), inset: 1em,
-        heading(level: 1, name)
-      )
-    )
+    set align(center + horizon)
+    show: block.with(stroke: ( bottom: 1mm + color ), inset: 1em,)
+    set text(size: 1.5em)
+    strong(name)
+    helpers.register-section(name)
   })
   logic.polylux-slide(content)
 }

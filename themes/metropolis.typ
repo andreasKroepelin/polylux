@@ -8,13 +8,13 @@
 // #set par(justify: true)
 
 #import "../logic.typ"
+#import "../helpers.typ"
 
 #let m-dark-teal = rgb("#23373b")
 #let m-light-brown = rgb("#eb811b")
 #let m-lighter-brown = rgb("#d6c6b7")
 #let m-extra-light-gray = white.darken(2%)
 
-#let m-sections = state("m-sections", ())
 #let m-footer = state("m-footer", [])
 
 #let m-cell = block.with(
@@ -25,9 +25,12 @@
   breakable: false
 )
 
-#let m-progress-bar = locate(loc => {
-  let filled = logic.logical-slide.at(loc).first() / logic.logical-slide.final(loc).first() * 100%
-  grid(columns: (filled, 1fr), m-cell(fill: m-light-brown), m-cell(fill: m-lighter-brown))
+#let m-progress-bar = helpers.polylux-progress( ratio => {
+  grid(
+    columns: (ratio * 100%, 1fr),
+    m-cell(fill: m-light-brown),
+    m-cell(fill: m-lighter-brown)
+  )
 })
 
 #let metropolis-theme(
@@ -121,12 +124,7 @@
 
 #let new-section-slide(name) = {
   let content = {
-    locate( loc => {
-      m-sections.update(sections => {
-        sections.push((body: name, loc: loc))
-        sections
-      })
-    })
+    helpers.register-section(name)
     set align(horizon)
     show: pad.with(20%)
     set text(size: 1.5em)
@@ -144,10 +142,4 @@
 
 #let alert = text.with(fill: m-light-brown)
 
-#let metropolis-outline = locate( loc => {
-  let sections = m-sections.final(loc)
-  for section in sections [
-    + #link(section.loc, section.body)
-
-  ]
-})
+#let metropolis-outline = helpers.polylux-outline(enum-args: (tight: false,))
