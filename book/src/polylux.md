@@ -1,4 +1,4 @@
-# Polylux
+![logo](logo2.png)
 
 **Polylux** is a package for the typesetting system [*Typst*](https://typst.app)
 to create presentation slides, just like you would use the _beamer_ package in LaTeX.

@@ -1,32 +1,15 @@
 # Getting started
 
-This template allows you to produce presentation slides in
-[Typst](https://typst.app), just like you would use the _beamer_ package in LaTeX.
-(So far, it is much less advanced than beamer, obviously.)
-
-There are two main building blocks, the functions `slides` and `slide`.
-The first one, `slides` allows you to set up a document such that the PDF can
-be used as a presentation.
-As a rule of thumb, one slide becomes one PDF page, and most PDF viewers can
-display PDFs in the form of a slide show (usually by hitting the F5-key).
-The second function, `slide`, produces a single slide.
-This means that your code will be structured like this when using this template:
+You can find this package in the
+[official Typst package repository](https://github.com/typst/packages).
+To use it, start your document with
 ```typ
-#import "slides.typ": *
-
-#show: slides.with( /* configuration */ )
-
-#slide[
-  First slide
-]
-
-#slide[
-  Second slide
-]
-
-#slide[
-  Third slide
-]
-
-// ...
+#import "@preview/polylux:0.2.0": *
 ```
+You now have two options:
+1. use the features of polylux but define every visual aspect yourself,
+2. use one of the provided themes.
+
+We will first explore how you can get started without the support of themes.
+Later, we will see how you can employ them to get beautiful slides without having
+to do the design work yourself.
