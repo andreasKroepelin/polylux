@@ -114,7 +114,7 @@ for more details or take a look at the
 [demo PDF](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 where you can see the features of this template in action.
 
-**⚠ This package is in active development.
+**⚠ This package is under active development.
 While I try to make sure that the `main`-branch always is in a usable state,
 there are no compatibility guarantees!**
 
