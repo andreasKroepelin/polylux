@@ -117,7 +117,7 @@
     panic("number of columns must match number of content arguments")
   }
 
-  let body = pad(1em, grid(columns: columns, gutter: gutter, ..bodies))
+  let body = pad(x: 2em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
   
   let progress-barline = locate( loc => {
     if uni-progress-bar.at(loc) {
@@ -147,14 +147,17 @@
     } else { [] }
   }
 
-  let header = stack(dir: ttb, spacing: 3mm, progress-barline, header-text)
+  let header = {
+    set align(top)
+    grid(rows: (auto, auto), row-gutter: 3mm, progress-barline, header-text)
+  }
 
   let footer = {
     set text(size: 10pt)
-    set align(center + horizon)
+    set align(center + bottom)
     let cell(fill: none, it) = rect(
       width: 100%, height: 100%, inset: 1mm, outset: 0mm, fill: fill, stroke: none,
-      text(fill: white, it)
+      align(horizon, text(fill: white, it))
     )
     if footer != none {
       footer
