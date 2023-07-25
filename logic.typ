@@ -3,6 +3,7 @@
 #let repetitions = counter("repetitions")
 #let handout-mode = state("handout-mode", false)
 
+#let enable-handout-mode(flag) = handout-mode.update(flag)
 
 #let _slides-cover(mode, body) = {
   if mode == "invisible" {
