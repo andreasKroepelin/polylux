@@ -1,134 +1,48 @@
-#import "../../../slides.typ": *
-#import "../../../themes/university.typ": *
+#import "../../../polylux.typ": *
+#import themes.university: *
 
-#show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
-    theme: university-theme(
-        institution-name: "UniversityName",
-        logo: image("300x200.svg", width: 60mm)
-    )
+#show: university-theme.with(
+  short-author: "Short author",
+  short-title: "Short title",
+  short-date: "Short date",
 )
 
-#slide(theme-variant: "title slide")
+#title-slide(
+  authors: ("Author A", "Author B"),
+  title: "Title",
+  subtitle: "Subtitle",
+  date: "Date",
+  institution-name: "University Name",
+  logo: image("300x200.svg", width: 60mm)
+)
 
-#new-section("section name")
-
-#slide(title: "A longer slide title")[
-  #box(
-    inset: 1em
-  )[
-    #lorem(40)
-  ]
+#slide(title: [Slide title], new-section: [The section])[
+  #lorem(40)
 ]
+
 
 #slide(title: "A longer slide title with 2 columns")[
-  #block(
-    inset: 1em,
-    outset: 0pt,
-    fill: rgb("#eeeeee"),
-    width: 100%,
-    height: 100%,
-    lorem(30)
-  )
+  #lorem(30)
 ][
-  #block(
-    inset: 1em,
-    outset: 0pt,
-    fill: rgb("#555555"),
-    width: 100%,
-    height: 100%,
-    text(fill:white)[#lorem(30)]
-  )
+  #lorem(30)
 ]
 
-#slide(theme-variant: "wake up", background: "../book/src/theme-gallery/background.svg")[
+#focus-slide(background-img: "../book/src/theme-gallery/background.svg")[
   *Another variant with an image in background...*
 ]
 
-#slide(theme-variant: "split v", columns: 2, fill: rgb("#ff0000"))[
-  #box(
-    height: 100%,
-  )[
-    #image("1080x1920.svg", fit: "stretch")
-  ]
+#matrix-slide[
+  left
 ][
-  #set align(center + horizon)
-  #set text(fill: white);
-  #box(
-    inset: 1em,
-  )[
-    Or a split slide with an image on the left and some text on the right...
-  ]
+  middle
+][
+  right
 ]
 
-#slide(theme-variant: "split v")[
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-    height: 100%,
-    fill: rgb("#dddddd")
-  )[
-    left
-  ]
+#matrix-slide(columns: 1)[
+  top
 ][
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-  )[
-    right
-  ]
+  bottom
 ]
 
-#slide(theme-variant: "split h")[
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-    height: 100%,
-    fill: rgb("#dddddd")
-  )[
-    top
-  ]
-][
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-  )[
-    bottom
-  ]
-]
-
-#slide(theme-variant: "split matrix")[
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-    height: 100%,
-    fill: rgb("#dddddd")
-  )[
-    top left
-  ]
-][
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-  )[
-    top right
-  ]
-][
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-  )[
-    bottom left
-  ]
-][
-  #set align(center+horizon)
-  #box(
-    width: 100%,
-    height: 100%,
-    fill: rgb("#dddddd")
-  )[
-    bottom right
-  ]
-]
+#matrix-slide(columns: (1fr, 2fr, 1fr), ..(lorem(8),) * 9)
