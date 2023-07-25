@@ -1,27 +1,42 @@
-#import "../../../slides.typ": *
-#import "../../../themes/metropolis.typ": *
+#import "../../../polylux.typ": *
+#import themes.metropolis: *
 
-#show: slides.with(
-    authors: ("Author A", "Author B"), short-authors: "Short author",
-    title: "Title", short-title: "Short title", subtitle: "Subtitle",
-    date: "Date",
-    theme: metropolis-theme(extra: "Extra"),
+#show: metropolis-theme.with(
+  footer: [Custom footer]
 )
-#set text(font: "Fira Sans", weight: "light", size:20pt)
+
+#set text(font: "Fira Sans", weight: "light", size: 20pt)
 #show math.equation: set text(font: "Fira Math")
 #set strong(delta: 100)
-#set par(justify:true)
+#set par(justify: true)
 
-#slide(theme-variant: "title slide")
+#title-slide(
+  author: [Authors],
+  title: "Title",
+  subtitle: "Subtitle",
+  date: "Date",
+  extra: "Extra"
+)
+
+#slide(title: "Table of contents")[
+  #metropolis-outline
+]
 
 #slide(title: "Slide title")[
-  A slide
+  A slide with some maths:
+  $ x_(n+1) = (x_n + a/x_n) / 2 $
+
+  #lorem(200)
 ]
 
-#slide()[
-  A slide without a title
+#new-section-slide("First section")
+
+#slide[
+  A slide without a title but with #alert[important] infos
 ]
 
-#slide(theme-variant: "wake up")[
+#new-section-slide([Second section])
+
+#focus-slide[
   Wake up!
 ]
