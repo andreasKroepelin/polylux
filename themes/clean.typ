@@ -140,7 +140,7 @@
   })
 
   set page(
-    margin: ( top: 4em, bottom: 2em, x: 2em ),
+    margin: ( top: 4em, bottom: 2em, x: 1em ),
     header: header,
     footer: footer,
     footer-descent: 1em,
@@ -154,7 +154,7 @@
     panic("number of columns must match number of content arguments")
   }
 
-  let body = grid(columns: columns, gutter: gutter, ..bodies)
+  let body = pad(x: 1em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
   
 
   let content = {
