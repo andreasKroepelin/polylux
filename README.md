@@ -5,7 +5,7 @@ This is a package for creating presentation slides in [Typst](https://typst.app/
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
 [![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
-![Themes badge](https://img.shields.io/badge/themes-4-aqua)
+![Themes badge](https://img.shields.io/badge/themes-5-aqua)
 
 ## Quickstart
 For the bare-bones, do-it-yourself experience, all you need is:
