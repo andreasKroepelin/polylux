@@ -10,7 +10,7 @@ Use it via
 #import "@preview/polylux:0.2.0": *
 #import themes.clean: *
 
-#show clean-theme.with(...)
+#show: clean-theme.with(...)
 ```
 
 `clean` uses polylux' section handling, the regular `#outline()` will not work

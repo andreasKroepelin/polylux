@@ -11,7 +11,7 @@ Use it via
 #import "@preview/polylux:0.2.0": *
 #import themes.metropolis: *
 
-#show metropolis-theme.with(...)
+#show: metropolis-theme.with(...)
 ```
 
 `metropolis` uses polylux' section handling, the regular `#outline()` will not work

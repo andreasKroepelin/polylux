@@ -13,7 +13,7 @@ Use it via
 #import "@preview/polylux:0.2.0": *
 #import themes.bipartite: *
 
-#show bipartite-theme.with(...)
+#show: bipartite-theme.with(...)
 ```
 
 The `bipartite` theme cannot display content that exceeds one page, in general.

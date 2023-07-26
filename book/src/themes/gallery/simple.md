@@ -11,7 +11,7 @@ Use it via
 #import "@preview/polylux:0.2.0": *
 #import themes.simple: *
 
-#show simple-theme.with(...)
+#show: simple-theme.with(...)
 ```
 
 `simple` uses regular headings for sections.
