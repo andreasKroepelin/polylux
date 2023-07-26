@@ -20,5 +20,6 @@
     - [Clean](./themes/gallery/clean.md)
     - [Metropolis](./themes/gallery/metropolis.md)
     - [University](./themes/gallery/university.md)
+    - [Bipartite](./themes/gallery/bipartite.md)
   - [Build your own](./themes/your-own.md)
   - [Helpers for theme authors](./themes/helpers.md)

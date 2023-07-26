@@ -136,6 +136,7 @@ generate_previews([
 	typ2png(path = gallery, file = "clean"),
 	typ2png(path = gallery, file = "metropolis"),
 	typ2png(path = gallery, file = "university"),
+	typ2png(path = gallery, file = "bipartite"),
 ])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
