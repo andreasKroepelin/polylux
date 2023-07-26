@@ -113,7 +113,7 @@ gallery = joinpath(themes, "gallery")
 
 # ╔═╡ aa8102d8-029f-4a94-bce4-a7f362b64e4c
 generate_previews([
-	(input = "examples/minimal.typ", output = "assets/minimal.png", label = :none),
+	(input = "examples/minimal.typ", output = "book/src/minimal.png", label = :none),
 	typ2png(path = diy, file = "hello-world"),
 	typ2png(path = diy, file = "title-slide"),
 	typ2png(path = diy, file = "slide-title"),

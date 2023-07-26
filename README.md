@@ -1,4 +1,4 @@
-# Polylux <img src="assets/logo.png" style="width: 3em;"></img>
+# Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
 This is a package for creating presentation slides in [Typst](https://typst.app/).
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
@@ -43,7 +43,7 @@ For the bare-bones, do-it-yourself experience, all you need is:
 ]
 ```
 This code produces these PDF pages:
-![minimal example](assets/minimal.png)
+![minimal example](https://andreaskroepelin.github.io/polylux/book/minimal.png)
 
 From there, you can either start creatively adapting the looks to your likings
 or you can use one of the provided themes.
@@ -97,16 +97,18 @@ It is still very unintrusive but gives you some sensible defaults:
 ]
 ```
 This time, we obtain these PDF pages:
-![simple example](assets/simple.png)
+![simple example](https://andreaskroepelin.github.io/polylux/book/themes/gallery/simple.png)
 
 As you can see, a theme can introduce its own types of slides (here: `title-slide`,
 `slide`, `focus-slide`, `centered-slide`) to let you quickly switch between
 different layouts.
-The book (**TODO**) has more infos on how to use (and create your own) themes.
+The book
+[has more infos](https://andreaskroepelin.github.io/polylux/book/themes/themes.html)
+on how to use (and create your own) themes.
 
 
 For dynamic content, polylux also provides [a convenient API for complex
-overlays](https://andreaskroepelin.github.io/polylux/book/dynamic.html).
+overlays](https://andreaskroepelin.github.io/polylux/book/dynamic/dynamic.html).
 
 Visit the
 [book](https://andreaskroepelin.github.io/polylux/book)
