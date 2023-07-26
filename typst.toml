@@ -1,0 +1,9 @@
+[package]
+name = "polylux"
+version = "0.2.0"
+entrypoint = "polylux.typ"
+authors = ["Andreas Kröpelin", "contributors"]
+license = "MIT"
+description = "Presentation slides creation with Typst"
+repository = "https://github.com/andreasKroepelin/polylux"
+exclude = ["README.md", "LICENSE"]
