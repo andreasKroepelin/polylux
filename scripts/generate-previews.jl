@@ -44,7 +44,7 @@ function montage(imgs, annotation)
 	b, a = minmax(a, b)
 	@assert a * b >= n
 	idcs = CartesianIndices((1:a, 1:b))
-	dims = size(first(imgs)) .* (b, a) .* 1 |> reverse
+	dims = size(first(imgs)) .* (b, a) .* .6 |> reverse
 	
 	plt = plot(
 		size = dims,
