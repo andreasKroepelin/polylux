@@ -26,7 +26,6 @@
   )
   set text(size: 25pt)
   show footnote.entry: set text(size: .6em)
-  show heading.where(level: 2): set block(below: 1.5em)
 
   clean-footer.update(footer)
   clean-color.update(color)
@@ -54,15 +53,24 @@
       authors
     }
 
-    if type(watermark) == "string" {
-      place(image(watermark, width:100%))
+    if watermark != none {
+      set image(width: 100%)
+      place(watermark)
     }
 
     v(5%)
     grid(columns: (5%, 1fr, 1fr, 5%),
       [],
-      if type(logo) == "string" { align(bottom + left, image(logo, height: 3em)) } else { [] },
-      if type(secondlogo) == "string" { align(bottom + right, image(secondlogo, height: 3em)) } else { [] },
+      if logo != none {
+        set align(bottom + left)
+        set image(height: 3em)
+        logo
+      } else { [] },
+      if secondlogo != none {
+        set align(bottom + right)
+        set image(height: 3em)
+        secondlogo
+      } else { [] },
       []
     )
 
@@ -107,7 +115,11 @@
 
     grid(
       columns: (1fr, 1fr),
-      if type(logo) == "string" { align(left, image(logo, height: 4em)) } else { [] },
+      if logo != none {
+        set align(left)
+        set image(height: 4em)
+        logo
+      } else { [] },
       if short-title != none {
         align(horizon + right, grid(
           columns: 1, rows: 1em, gutter: .5em,
@@ -148,7 +160,7 @@
     panic("number of columns must match number of content arguments")
   }
 
-  let body = pad(x: 1em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
+  let body = pad(x: .0em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
   
 
   let content = {

@@ -15,7 +15,7 @@
     []
   }
 })
-#let polylux-outline(enum-args: (:), padding: none) = locate( loc => {
+#let polylux-outline(enum-args: (:), padding: 0pt) = locate( loc => {
   let sections = sections-state.final(loc)
   pad(padding, enum(
     ..enum-args,

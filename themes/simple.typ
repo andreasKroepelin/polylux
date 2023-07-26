@@ -37,9 +37,9 @@
   centered-slide(body)
 }
 
-#let focus-slide(bg: aqua.darken(50%), fg: white, body) = {
-  set page(fill: bg)
-  set text(fill: fg, size: 1.5em)
+#let focus-slide(background: aqua.darken(50%), foreground: white, body) = {
+  set page(fill: background)
+  set text(fill: foreground, size: 1.5em)
   logic.polylux-slide(align(center + horizon, body))
 }
 

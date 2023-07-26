@@ -190,9 +190,18 @@
 }
 
 #let focus-slide(background-color: none, background-img: none, body) = {
+  let background-color = if background-img == none and background-colour ==  none {
+    rgb("#0C6291")
+  } else {
+    background-color
+  }
+
   set page(fill: background-color, margin: 1em) if background-color != none
   set page(
-    background: image(background-img, fit: "stretch", width: 100%, height: 100%),
+    background: {
+      set image(fit: "stretch", width: 100%, height: 100%)
+      background-img
+    },
     margin: 1em,
   ) if background-img != none
 
@@ -216,14 +225,16 @@
   let rows = if type(rows) == "integer" {
     (1fr,) * rows
   } else if rows == none {
-    (1fr,) * calc.quo(bodies.len(), num-cols)
+    let quotient = calc.quo(bodies.len(), num-cols)
+    let correction = if calc.rem(bodies.len(), num-cols) == 0 { 0 } else { 1 }
+    (1fr,) * (quotient + correction)
   } else {
     rows
   }
   let num-rows = rows.len()
 
-  if num-rows * num-cols != bodies.len() {
-    panic("number of rows * number of columns must equal number of content arguments")
+  if num-rows * num-cols < bodies.len() {
+    panic("number of rows (" + str(num-rows) + ") * number of columns (" + str(num-cols) + ") must at least be number of content arguments (" + str(bodies.len()) + ")")
   }
 
   let cart-idx(i) = (calc.quo(i, num-cols), calc.rem(i, num-cols))
