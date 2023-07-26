@@ -16,6 +16,9 @@ Polylux gives you:
   to call it).
 - Decently looking themes.
 
+If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/packages)!
+
+
 ## Why the name?
 A [*polylux*](https://en.wikipedia.org/wiki/Polylux_(overhead_projector)) is
 a brand of overhead projectors very common in Eastern German schools (where the

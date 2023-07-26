@@ -1,11 +1,15 @@
 # Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
 This is a package for creating presentation slides in [Typst](https://typst.app/).
 
+If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/packages)!
+
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
+![GitHub Repo stars](https://img.shields.io/github/stars/andreasKroepelin/polylux)
 [![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 ![Themes badge](https://img.shields.io/badge/themes-5-aqua)
+
 
 ## Quickstart
 For the bare-bones, do-it-yourself experience, all you need is:
