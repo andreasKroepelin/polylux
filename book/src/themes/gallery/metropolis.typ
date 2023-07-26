@@ -1,4 +1,5 @@
-#import "../../../polylux.typ": *
+#import "../../../../polylux.typ": *
+
 #import themes.metropolis: *
 
 #show: metropolis-theme.with(

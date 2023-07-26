@@ -1,4 +1,5 @@
-#import "../../../polylux.typ": *
+#import "../../../../polylux.typ": *
+
 #import themes.university: *
 
 #show: university-theme.with(
@@ -13,7 +14,7 @@
   subtitle: "Subtitle",
   date: "Date",
   institution-name: "University Name",
-  logo: image("300x200.svg", width: 60mm)
+  logo: image("dummy-logo.png", width: 60mm)
 )
 
 #slide(title: [Slide title], new-section: [The section])[
@@ -27,7 +28,7 @@
   #lorem(30)
 ]
 
-#focus-slide(background-img: "../book/src/theme-gallery/background.svg")[
+#focus-slide(background-img: image("background.svg"))[
   *Another variant with an image in background...*
 ]
 

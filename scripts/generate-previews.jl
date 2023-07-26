@@ -105,9 +105,14 @@ diy = "book/src/diy"
 # ╔═╡ 09396295-f40a-4bb1-b261-81f784d93bc2
 dynamic = "book/src/dynamic"
 
+# ╔═╡ b7923561-c79b-4443-99c2-4306589313d6
+themes = "book/src/themes"
+
+# ╔═╡ c3934766-e918-456d-81ea-de1e4726d3b6
+gallery = joinpath(themes, "gallery")
+
 # ╔═╡ aa8102d8-029f-4a94-bce4-a7f362b64e4c
 generate_previews([
-	(input = "examples/simple.typ", output = "assets/simple.png", label = :none),
 	(input = "examples/minimal.typ", output = "assets/minimal.png", label = :none),
 	typ2png(path = diy, file = "hello-world"),
 	typ2png(path = diy, file = "title-slide"),
@@ -126,6 +131,11 @@ generate_previews([
 	typ2png(path = dynamic, file = "alternatives-position", label = "subslide "),
 	typ2png(path = dynamic, file = "cover", label = "subslide "),
 	typ2png(path = dynamic, file = "handout", label = "subslide "),
+	typ2png(path = themes, file = "science-slam"),
+	typ2png(path = gallery, file = "simple"),
+	typ2png(path = gallery, file = "clean"),
+	typ2png(path = gallery, file = "metropolis"),
+	typ2png(path = gallery, file = "university"),
 ])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1652,6 +1662,8 @@ version = "1.4.1+0"
 # ╠═95a869c8-8596-4834-a9a1-74d29da2432c
 # ╠═59a40cbd-5ad7-4c22-b676-e85bbf9ee918
 # ╠═09396295-f40a-4bb1-b261-81f784d93bc2
+# ╠═b7923561-c79b-4443-99c2-4306589313d6
+# ╠═c3934766-e918-456d-81ea-de1e4726d3b6
 # ╠═aa8102d8-029f-4a94-bce4-a7f362b64e4c
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
