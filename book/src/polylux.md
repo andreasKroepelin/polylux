@@ -16,7 +16,7 @@ Polylux gives you:
   to call it).
 - Decently looking themes.
 
-If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/packages)!
+If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/polylux)!
 
 
 ## Why the name?

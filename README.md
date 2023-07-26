@@ -1,7 +1,7 @@
 # Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
 This is a package for creating presentation slides in [Typst](https://typst.app/).
 
-If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/packages)!
+If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/polylux)!
 
 [![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)
