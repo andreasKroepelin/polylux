@@ -6,4 +6,4 @@ authors = ["Andreas Kröpelin", "contributors"]
 license = "MIT"
 description = "Presentation slides creation with Typst"
 repository = "https://github.com/andreasKroepelin/polylux"
-exclude = ["README.md", "LICENSE"]
+exclude = ["README.md"]
