@@ -6,7 +6,7 @@
 #show math.equation: set text(font: "GFS Neohellenic Math")
 
 #show: clean-theme.with(
-	footer : [Sum of natural numbers, CF Gauß],
+	footer: [Sum of natural numbers, CF Gauß],
 )
 
 #title-slide(
@@ -16,7 +16,7 @@
 	date: "1784",
 )
 
-#new-section("Introduction")
+#new-section-slide("Introduction")
 
 #slide(title: "Problem statement")[
 	Let $n in NN$.
@@ -30,9 +30,9 @@
 	$ sum_(i=1)^n i = n(n+1)/2 $
 
 	Let's prove that!
-	#new-section("Proof")
 ]
 
+#new-section-slide("Proof")
 
 #slide(title: "Method of proof")[
 	We will prove the theorem by induction, following these steps:
@@ -68,9 +68,9 @@
 
 #focus-slide[
 	Proof is over, wake up!
-	#new-section("Conclusion")
 ]
 
+#new-section-slide("Conclusion")
 
 #slide(title: "That's it!")[
 

@@ -105,7 +105,7 @@
 }
 
 #let slide(title: none, columns: none, gutter: none, ..bodies) = {
-  let header = locate( loc => {
+  let header = align(top, locate( loc => {
     let color = clean-color.at(loc)
     let logo = clean-logo.at(loc)
     let short-title = clean-short-title.at(loc)
@@ -130,7 +130,7 @@
         align(horizon + right, helpers.current-section)
       }
     )
-  })
+  }))
 
   let footer = locate( loc => {
     let color = clean-color.at(loc)

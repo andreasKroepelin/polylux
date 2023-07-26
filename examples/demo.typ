@@ -9,7 +9,7 @@
 #show: clean-theme.with(
     footer: [Andreas Kröpelin, July 2023],
     short-title: [Polylux demo],
-    logo: "../assets/logo.png",
+    logo: image("../assets/logo.png"),
 )
 
 #set text(size: 20pt)
