@@ -27,10 +27,10 @@ all comes together.
 (The original author of the aforementioned LaTeX package is German as well.)
 
 ## Contributing
-This package is free open source.
+This package is free and open source.
 You can find the code on [GitHub](https://github.com/andreasKroepelin/polylux)
 where you can also create issues or pull requests.
 
 ## License
 Polylux is released under the
-[MPI license](https://github.com/andreasKroepelin/polylux/blob/main/LICENSE).
+[MIT license](https://github.com/andreasKroepelin/polylux/blob/main/LICENSE).
