@@ -12,7 +12,7 @@ Use it via
 #import "@preview/polylux:0.2.0": *
 #import themes.university: *
 
-#show university-theme.with(...)
+#show: university-theme.with(...)
 ```
 
 `university` uses polylux' section handling, the regular `#outline()` will not work
