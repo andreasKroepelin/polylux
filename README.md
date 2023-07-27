@@ -124,6 +124,17 @@ where you can see the features of this template in action.
 While I try to make sure that the `main`-branch always is in a usable state,
 there are no compatibility guarantees!**
 
+## Testing
+
+This package comes with some unit tests under the `tests` directory.
+To run all tests you can run the `just test` target.
+
+You need to have ImageMagick installed on your system, which is needed for image comparison.
+
+### Windows
+If you are using the [Chocolatey](https://chocolatey.org/) package manager, you can install imagemagick using `choco install imagemagick`.
+Otherwise download and install a matching package from the [ImageMagick](https://imagemagick.org/script/download.php) website.
+
 ## Acknowledgements
 Thank you to...
 - [@drupol](https://github.com/drupol) for the `university` theme
