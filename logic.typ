@@ -159,6 +159,10 @@
   }
 }
 
+#let pause(beginning, mode: "invisible") = body => {
+  uncover((beginning: beginning), mode: mode, body)
+}
+
 #let fill-remaining-height(
   margin: 0%,
   before-label: "before-fill",
@@ -177,19 +181,26 @@
       panic(
         "Label `" + before-label + "` must appear on the same page as the content passed"
         + " to this function (page " + str(loc-page) + "), but the last found label"
-        + " was on page " + str(prev-pos.page)
+        + " was on page " + str(prev-pos.page) + ". Perhaps there was too much content"
+        + " before the label? I.e., the content before the label may be overflowing the"
+        + " page, pushing it onto the next page."
       )
     }
-    layout(page-size => {
+    if type(margin) != "ratio" {
+        panic(
+            "margin must be of type `ratio` (e.g., `10%`), got: " + repr(margin)
+             + " (type `" + type(margin) + "`) instead"
+        )
+    }
+    layout(container-size => {
       let kwargs = box-kwargs.named()
-      let initial-width = kwargs.at("width", default: page-size.width)
+      let initial-width = kwargs.at("width", default: container-size.width)
       if type(initial-width) == "ratio" {
-        initial-width = initial-width * page-size.width
+        initial-width = initial-width * container-size.width
       }
       kwargs.insert("width", initial-width)
-      // let width = calc.max(page-size.width, kwargs.at("width", default: 0pt))
-      let remaining-height = (page-size.height - prev-pos.y) * (100% - margin)
-      let remaining-width = page-size.width
+      let remaining-height = (container-size.height - prev-pos.y) * (100% - margin)
+      let remaining-width = container-size.width
       let boxed = box(..kwargs, content)
       style(styles => {
         let boxed-size = measure(boxed, styles)
@@ -202,11 +213,6 @@
     })
   })
 }
-
-#let pause(beginning, mode: "invisible") = body => {
-  uncover((beginning: beginning), mode: mode, body)
-}
-
 
 #let polylux-slide(max-repetitions: 10, body) = {
   locate( loc => {
