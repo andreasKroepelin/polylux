@@ -22,5 +22,5 @@
 
   What is the capital of the Republic of Benin?
 
-  #uncover(2)[Cotonou]
+  #uncover(2)[Porto Novo]
 ]
