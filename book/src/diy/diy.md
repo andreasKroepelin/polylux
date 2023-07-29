@@ -83,7 +83,7 @@ As a quick example, let's add a little quiz to our slides:
 
   What is the capital of the Republic of Benin?
 
-  #uncover(2)[Cotonou]
+  #uncover(2)[Porto-Novo]
 ]
 ```
 ![quiz](quiz.png)
@@ -118,7 +118,7 @@ section:
 
   What is the capital of the Republic of Benin?
 
-  #uncover(2)[Cotonou]
+  #uncover(2)[Porto-Novo]
 ]
 ```
 
