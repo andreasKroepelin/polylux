@@ -165,49 +165,67 @@
 
 #let fill-remaining-height(
   margin: 0%,
-  before-label: "before-fill",
   ..box-kwargs,
   h-align: left,
   content,
 ) = {
+  // Place a label that can be queried below to know exactly where to start placing this
+  // content, and how much remaining space is available. The label must be attached to 
+  // content, so we use a show rule that doesn't display anything as the anchor.
+  let before-label = label("fit-remaining-marker")
+  let fit-marker = [
+    #show before-label: []
+    this-will-be-hidden #before-label
+  ]
+  fit-marker
+
   locate(loc => {
-    let prev = query(selector(label("before-fill")).before(loc), loc)
-    if prev.len() == 0 {
-      panic("You must use the label `" + before-label + "` before calling this function")
-    }
+    let prev = query(selector(before-label).before(loc), loc)
     let prev-pos = prev.last().location().position()
-    let loc-page = loc.position().page
-    if prev-pos.page != loc-page {
-      panic(
-        "Label `" + before-label + "` must appear on the same page as the content passed"
-        + " to this function (page " + str(loc-page) + "), but the last found label"
-        + " was on page " + str(prev-pos.page) + ". Perhaps there was too much content"
-        + " before the label? I.e., the content before the label may be overflowing the"
-        + " page, pushing it onto the next page."
-      )
-    }
-    if type(margin) != "ratio" {
-        panic(
-            "margin must be of type `ratio` (e.g., `10%`), got: " + repr(margin)
-             + " (type `" + type(margin) + "`) instead"
-        )
-    }
     layout(container-size => {
       let kwargs = box-kwargs.named()
       let initial-width = kwargs.at("width", default: container-size.width)
       if type(initial-width) == "ratio" {
+        // Typst doesn't use the correct container size when computing the ratio,
+        // so explicitly compute in terms of container size
         initial-width = initial-width * container-size.width
       }
       kwargs.insert("width", initial-width)
-      let remaining-height = (container-size.height - prev-pos.y) * (100% - margin)
-      let remaining-width = container-size.width
-      let boxed = box(..kwargs, content)
+
       style(styles => {
+        let boxed = box(..kwargs, content)
         let boxed-size = measure(boxed, styles)
-        let h-ratio = remaining-height / boxed-size.height
-        let w-ratio = remaining-width / boxed-size.width
+
+        let mutable-margin = margin
+        if type(mutable-margin) == "ratio" {
+          // See earlier comment on ratio check
+          mutable-margin = margin * container-size.width
+        }
+        mutable-margin = measure(v(mutable-margin), styles).height
+
+        let available-height = container-size.height - prev-pos.y
+        if available-height < mutable-margin {
+          panic(
+            "Margin cannot be greater than remaining space. Got margin: "
+            + repr(mutable-margin) + ", remaining space: " + repr(available-height)
+            + " on slide " + repr(logical-slide.at(loc).first())
+            + " subslide " + repr(subslide.at(loc).first())
+          )
+        }
+        available-height -= mutable-margin
+
+        let available-width = container-size.width
+
+        let h-ratio = available-height / boxed-size.height
+        let w-ratio = available-width / boxed-size.width
         let ratio = calc.min(h-ratio, w-ratio)
+
         let scaled = scale(boxed, origin: top + h-align, x: ratio * 100%, y: ratio * 100%)
+        // If not boxed, the content can overflow to the next page even though it will fit.
+        // This is because scale doesn't update the layout information.
+
+        // Boxing in a 0pt container without clipping will inform typst that content
+        // will indeed fit in the remaining space
         box(scaled, height: 0pt)
       })
     })
