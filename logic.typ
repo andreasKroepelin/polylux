@@ -159,6 +159,50 @@
   }
 }
 
+#let fill-remaining-height(
+  margin: 0%,
+  before-label: "before-fill",
+  ..box-kwargs,
+  h-align: left,
+  content,
+) = {
+  locate(loc => {
+    let prev = query(selector(label("before-fill")).before(loc), loc)
+    if prev.len() == 0 {
+      panic("You must use the label `" + before-label + "` before calling this function")
+    }
+    let prev-pos = prev.last().location().position()
+    let loc-page = loc.position().page
+    if prev-pos.page != loc-page {
+      panic(
+        "Label `" + before-label + "` must appear on the same page as the content passed"
+        + " to this function (page " + str(loc-page) + "), but the last found label"
+        + " was on page " + str(prev-pos.page)
+      )
+    }
+    layout(page-size => {
+      let kwargs = box-kwargs.named()
+      let initial-width = kwargs.at("width", default: page-size.width)
+      if type(initial-width) == "ratio" {
+        initial-width = initial-width * page-size.width
+      }
+      kwargs.insert("width", initial-width)
+      // let width = calc.max(page-size.width, kwargs.at("width", default: 0pt))
+      let remaining-height = (page-size.height - prev-pos.y) * (100% - margin)
+      let remaining-width = page-size.width
+      let boxed = box(..kwargs, content)
+      style(styles => {
+        let boxed-size = measure(boxed, styles)
+        let h-ratio = remaining-height / boxed-size.height
+        let w-ratio = remaining-width / boxed-size.width
+        let ratio = calc.min(h-ratio, w-ratio)
+        let scaled = scale(boxed, origin: top + h-align, x: ratio * 100%, y: ratio * 100%)
+        box(scaled, height: 0pt)
+      })
+    })
+  })
+}
+
 #let pause(beginning, mode: "invisible") = body => {
   uncover((beginning: beginning), mode: mode, body)
 }
