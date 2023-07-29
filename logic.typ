@@ -175,10 +175,9 @@
   let before-label = label("fit-remaining-marker")
   let fit-marker = [
     #show before-label: []
-    this-will-be-hidden #before-label
+    this-will-be-hidden#before-label
   ]
   fit-marker
-
   locate(loc => {
     let prev = query(selector(before-label).before(loc), loc)
     let prev-pos = prev.last().location().position()
@@ -202,8 +201,10 @@
           mutable-margin = margin * container-size.width
         }
         mutable-margin = measure(v(mutable-margin), styles).height
-
-        let available-height = container-size.height - prev-pos.y
+        // The programmatically placed and hidden label still takes up one line even when
+        // hidden, so add in its 1em of height to the available space
+        let hidden-label-height = measure(v(1em), styles).height
+        let available-height = container-size.height - prev-pos.y + hidden-label-height
         if available-height < mutable-margin {
           panic(
             "Margin cannot be greater than remaining space. Got margin: "
