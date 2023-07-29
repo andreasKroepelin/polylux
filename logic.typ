@@ -225,9 +225,9 @@
         // If not boxed, the content can overflow to the next page even though it will fit.
         // This is because scale doesn't update the layout information.
 
-        // Boxing in a 0pt container without clipping will inform typst that content
+        // Boxing in a container without clipping will inform typst that content
         // will indeed fit in the remaining space
-        box(scaled, height: 0pt)
+        box(scaled, height: available-height)
       })
     })
   })
