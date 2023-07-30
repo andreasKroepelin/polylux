@@ -163,6 +163,7 @@
   uncover((beginning: beginning), mode: mode, body)
 }
 
+
 #let fill-remaining-height(
   margin: 0%,
   ..box-kwargs,
@@ -173,25 +174,29 @@
   // content, and how much remaining space is available. The label must be attached to 
   // content, so we use a show rule that doesn't display anything as the anchor.
   let before-label = label("fit-remaining-marker")
-  let fit-marker = [
+  [
     #show before-label: []
     this-will-be-hidden#before-label
   ]
-  fit-marker
   locate(loc => {
     let prev = query(selector(before-label).before(loc), loc)
     let prev-pos = prev.last().location().position()
     layout(container-size => {
-      let kwargs = box-kwargs.named()
-      let initial-width = kwargs.at("width", default: container-size.width)
-      if type(initial-width) == "ratio" {
-        // Typst doesn't use the correct container size when computing the ratio,
-        // so explicitly compute in terms of container size
-        initial-width = initial-width * container-size.width
-      }
-      kwargs.insert("width", initial-width)
-
       style(styles => {
+        let kwargs = box-kwargs.named()
+
+        let default-width = calc.min(
+            container-size.width, measure(content, styles).width
+        )
+        let user-gave-width = "width" in kwargs
+        let initial-width = kwargs.at("width", default: default-width)
+        if type(initial-width) == "ratio" {
+            // Typst doesn't use the correct container size when computing the ratio,
+            // so explicitly compute in terms of container size
+            initial-width = initial-width * container-size.width
+        }
+        kwargs.insert("width", initial-width)
+
         let boxed = box(..kwargs, content)
         let boxed-size = measure(boxed, styles)
 
@@ -201,6 +206,7 @@
           mutable-margin = margin * container-size.width
         }
         mutable-margin = measure(v(mutable-margin), styles).height
+
         let available-height = container-size.height - prev-pos.y
         if available-height < mutable-margin {
           panic(
@@ -212,12 +218,15 @@
         }
         available-height -= mutable-margin
 
-        let available-width = container-size.width
-
         let h-ratio = available-height / boxed-size.height
-        let w-ratio = available-width / boxed-size.width
-        let ratio = calc.min(h-ratio, w-ratio)
+        let w-ratio = container-size.width / boxed-size.width
+        if (h-ratio < w-ratio) and h-ratio < 1 and not user-gave-width {
+            // The text box can be made a bit wider without overflowing
+            kwargs.insert("width", boxed-size.width / h-ratio)
+            boxed = box(..kwargs, content)
+        }
 
+        let ratio = calc.min(h-ratio, w-ratio)
         let scaled = scale(boxed, origin: top + h-align, x: ratio * 100%, y: ratio * 100%)
         // If not boxed, the content can overflow to the next page even though it will fit.
         // This is because scale doesn't update the layout information.
