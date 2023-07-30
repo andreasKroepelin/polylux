@@ -201,10 +201,7 @@
           mutable-margin = margin * container-size.width
         }
         mutable-margin = measure(v(mutable-margin), styles).height
-        // The programmatically placed and hidden label still takes up one line even when
-        // hidden, so add in its 1em of height to the available space
-        let hidden-label-height = measure(v(1em), styles).height
-        let available-height = container-size.height - prev-pos.y + hidden-label-height
+        let available-height = container-size.height - prev-pos.y
         if available-height < mutable-margin {
           panic(
             "Margin cannot be greater than remaining space. Got margin: "
