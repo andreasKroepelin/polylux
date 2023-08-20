@@ -68,6 +68,34 @@
     You can also see the slide number there.
 ]
 
+#new-section-slide("Utilities")
+
+#slide(title: [Adaptive size])[
+    This rectangle fills the remaining space on this slide:
+
+    // #helpers.fill-remaining-height(rect(stroke: 1pt + aqua, width: 1em, height: 1em))
+
+    #lorem(50)
+]
+
+#slide[
+    #set par(justify: true)
+    // #show: it => align(center + horizon, it)
+    // #fill-remaining-height(prescale-width: 200%, lorem(500))
+
+    // abc
+]
+
+#focus-slide[
+    // #fill-remaining-height[wow]
+
+    abc
+    #v(1fr)
+    def
+]
+
+#slide(rect(width: 100%, height: 100%, fill: aqua))
+
 #new-section-slide("Dynamic content")
 
 

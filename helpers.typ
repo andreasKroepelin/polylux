@@ -109,22 +109,36 @@
   // Place a label that can be queried below to know exactly where to start placing this
   // content, and how much remaining space is available. The label must be attached to 
   // content, so we use a show rule that doesn't display anything as the anchor.
-  let before-label = label("fit-remaining-marker")
+  let before-label = label("polylux-fill-remaining-height-before")
+  let end-label = label("polylux-fill-remaining-height-end")
   [
-    #show before-label: []
-    this-will-be-hidden#before-label
+    #show before-label: none
+    #show end-label: none
+    #v(1em)
+    hidden#before-label
+    #v(1fr)
+    hidden#end-label
   ]
   locate(loc => {
     let prev = query(selector(before-label).before(loc), loc)
     let prev-pos = prev.last().location().position()
+    let after = query(selector(end-label).before(loc), loc)
+    let after-pos = after.last().location().position()
     layout(container-size => {
       style(styles => {
         let mutable-margin = _size-to-pt(margin, styles, container-size.height)
-        let available-height = container-size.height - prev-pos.y - mutable-margin
+        let available-height = after-pos.y - prev-pos.y - mutable-margin
 
-        fit-to-height(available-height, ..fit-kwargs, content)
+        place(
+          dy: -available-height,
+          fit-to-height(available-height, ..fit-kwargs, content)
+        )
+
+        // panic(repr(prev-pos) + repr(after-pos))
+
+        place(horizon + center, dy: -50%, box(fill: white, stroke: 1pt + aqua, inset: 1pt)[#available-height])
+
       })
     })
   })
 }
-
