@@ -163,7 +163,6 @@
   uncover((beginning: beginning), mode: mode, body)
 }
 
-
 #let polylux-slide(max-repetitions: 10, body) = {
   locate( loc => {
     if counter(page).at(loc).first() > 1 {
