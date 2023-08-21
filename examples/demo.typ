@@ -278,21 +278,23 @@
 
 /*
 #slide(title: "Different ways of covering content")[
-    When content is covered, it is completely invisible by default.
+    #one-by-one(mode: "transparent")[
+        When content is covered, it is completely invisible by default.
 
-    However, you can also just display it in light gray by using the
-    `mode` argument with the value `"transparent"`:
-    #let pc = 1
-    #{ pc += 1 } #show: pause(pc, mode: "transparent")
+        However, you can also just display it in light gray by using the
+        `mode` argument with the value `"transparent"`:
+    ][
+        
+        Covered content is then displayed differently.
+    ][
 
-    Covered content is then displayed differently.
-    #{ pc += 1 } #show: pause(pc, mode: "transparent")
+        Every `uncover`-based function has an optional `mode` argument:
+        - `#show: pause(...)`
+        - `#uncover(...)[...]`
+        - `#one-by-one(...)[...][...]`
+        - `#line-by-line(...)[...][...]`
+    ]
 
-    Every `uncover`-based function has an optional `mode` argument:
-    - `#show: pause(...)`
-    - `#uncover(...)[...]`
-    - `#one-by-one(...)[...][...]`
-    - `#line-by-line(...)[...][...]`
 ]
 */
 

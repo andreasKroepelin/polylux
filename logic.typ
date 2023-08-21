@@ -10,7 +10,20 @@
   if mode == "invisible" {
     hide(body)
   } else if mode == "transparent" {
-    text(gray.lighten(50%), body)
+    style( styles => {
+      let cover-color = rgb(255, 255, 255, 200)
+      let height-adjust = 8pt
+      let size = measure(body, styles)
+      size.height += height-adjust
+      body
+      place(
+        start,
+        // dy: -height-adjust / 2,
+        dy: height-adjust / 2 - size.height,
+        rect(fill: cover-color, stroke: 1pt + black, width: size.width, height: size.height)
+      )
+    })
+    // text(gray.lighten(50%), body)
   } else {
     panic("Illegal cover mode: " + mode)
   }
