@@ -59,86 +59,73 @@
 }
 
 #let fit-to-height(height, width: none, prescale-width: none, body) = {
-  style(styles => {
-    layout(container-size => {
-      // Helper function to more easily grab absolute units
-      let get-pts(body, w-or-h) = {
-        let dim = if w-or-h == "w" {container-size.width} else {container-size.height}
-        _size-to-pt(body, styles, dim)
-      }
-
-      // Provide a sensible initial width, which will define initial scale parameters.
-      // Note this is different from the post-scale width, which is a limiting factor
-      // on the allowable scaling ratio
-      let boxed-content = _limit-content-width(
-        width: prescale-width, body, container-size, styles
-      )
-
-      // post-scaling width
-      let mutable-width = width
-      if width == none {
-        mutable-width = container-size.width
-      }
-      mutable-width = get-pts(mutable-width, "w")
-
-      let mutable-height = get-pts(height, "h")
-      let size = measure(boxed-content, styles)
-      let h-ratio = mutable-height / size.height
-      let w-ratio = mutable-width / size.width
-      let ratio = calc.min(h-ratio, w-ratio) * 100%
-
-      // If not boxed, the content can overflow to the next page even though it will fit.
-      // This is because scale doesn't update the layout information.
-      // Boxing in a container without clipping will inform typst that content
-      // will indeed fit in the remaining space
-      let new-width = size.width * ratio
-      box(
-        width: new-width,
-        height: mutable-height,
-        scale(x: ratio, y: ratio, origin: top + left, boxed-content)
-      )
-    })
-  })
-}
-
-#let fill-remaining-height(
-  margin: 0%,
-  content,
-  ..fit-kwargs
-) = {
-  // Place a label that can be queried below to know exactly where to start placing this
-  // content, and how much remaining space is available. The label must be attached to 
-  // content, so we use a show rule that doesn't display anything as the anchor.
-  let before-label = label("polylux-fill-remaining-height-before")
-  let end-label = label("polylux-fill-remaining-height-end")
+  // Place two labels with the requested vertical separation to be able to
+  // measure their vertical distance in pt.
+  // Using this approach instead of using `measure` allows us to accept fractions
+  // like `1fr` as well.
+  // The label must be attached to content, so we use a show rule that doesn't
+  // display anything as the anchor.
+  let before-label = label("polylux-fit-height-before")
+  let after-label = label("polylux-fit-height-after")
   [
     #show before-label: none
-    #show end-label: none
+    #show after-label: none
     #v(1em)
     hidden#before-label
-    #v(1fr)
-    hidden#end-label
+    #v(height)
+    hidden#after-label
   ]
-  locate(loc => {
-    let prev = query(selector(before-label).before(loc), loc)
-    let prev-pos = prev.last().location().position()
-    let after = query(selector(end-label).before(loc), loc)
-    let after-pos = after.last().location().position()
-    layout(container-size => {
-      style(styles => {
-        let mutable-margin = _size-to-pt(margin, styles, container-size.height)
-        let available-height = after-pos.y - prev-pos.y - mutable-margin
 
-        place(
-          dy: -available-height,
-          fit-to-height(available-height, ..fit-kwargs, content)
+  locate(loc => {
+    let before = query(selector(before-label).before(loc), loc)
+    let before-pos = before.last().location().position()
+    let after = query(selector(after-label).before(loc), loc)
+    let after-pos = after.last().location().position()
+
+    let available-height = after-pos.y - before-pos.y
+
+    style(styles => {
+      layout(container-size => {
+        // Helper function to more easily grab absolute units
+        let get-pts(body, w-or-h) = {
+          let dim = if w-or-h == "w" {container-size.width} else {container-size.height}
+          _size-to-pt(body, styles, dim)
+        }
+
+        // Provide a sensible initial width, which will define initial scale parameters.
+        // Note this is different from the post-scale width, which is a limiting factor
+        // on the allowable scaling ratio
+        let boxed-content = _limit-content-width(
+          width: prescale-width, body, container-size, styles
         )
 
-        // panic(repr(prev-pos) + repr(after-pos))
+        // post-scaling width
+        let mutable-width = width
+        if width == none {
+          mutable-width = container-size.width
+        }
+        mutable-width = get-pts(mutable-width, "w")
 
-        place(horizon + center, dy: -50%, box(fill: white, stroke: 1pt + aqua, inset: 1pt)[#available-height])
+        let size = measure(boxed-content, styles)
+        let h-ratio = available-height / size.height
+        let w-ratio = mutable-width / size.width
+        let ratio = calc.min(h-ratio, w-ratio) * 100%
 
+        // If not boxed, the content can overflow to the next page even though it will fit.
+        // This is because scale doesn't update the layout information.
+        // Boxing in a container without clipping will inform typst that content
+        // will indeed fit in the remaining space
+        let new-width = size.width * ratio
+        place(
+          dy: -available-height,
+          box(
+            width: new-width,
+            height: available-height,
+            scale(x: ratio, y: ratio, origin: top + left, boxed-content)
+          )
+        )
       })
     })
   })
 }
+

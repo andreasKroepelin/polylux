@@ -176,7 +176,7 @@
 #let focus-slide(background: teal, foreground: white, body) = {
   set page(fill: background, margin: 2em)
   set text(fill: foreground, size: 1.5em)
-  let content = { v(1fr); body; v(1fr) }
+  let content = { v(.1fr); body; v(.1fr) }
   // logic.polylux-slide(align(horizon, body))
   logic.polylux-slide(content)
 }

@@ -68,33 +68,6 @@
     You can also see the slide number there.
 ]
 
-#new-section-slide("Utilities")
-
-#slide(title: [Adaptive size])[
-    This rectangle fills the remaining space on this slide:
-
-    // #helpers.fill-remaining-height(rect(stroke: 1pt + aqua, width: 1em, height: 1em))
-
-    #lorem(50)
-]
-
-#slide[
-    #set par(justify: true)
-    // #show: it => align(center + horizon, it)
-    // #fill-remaining-height(prescale-width: 200%, lorem(500))
-
-    // abc
-]
-
-#focus-slide[
-    // #fill-remaining-height[wow]
-
-    abc
-    #v(1fr)
-    def
-]
-
-#slide(rect(width: 100%, height: 100%, fill: aqua))
 
 #new-section-slide("Dynamic content")
 
@@ -334,16 +307,37 @@
     explains how to do so.
 ]
 
-#new-section-slide("Typst features")
+#new-section-slide("Utilities")
 
-#slide(title: "Use Typst!")[
-    Typst gives us so many cool things #footnote[For example footnotes!].
-    Use them!
+#slide(title: [The `helpers` module])[
+    Polylux ships a `helpers` module with solutions for common tasks in slide
+    building.
+]
+
+#slide(title: [Fit to height])[
+    You can scale content such that it has a certain height using
+    `#fit-to-height(height, content)`:
+
+    #helpers.fit-to-height(2.5cm)[Height is `2.5cm`]
+]
+
+#slide(title: "Fill remaining space")[
+    This function also allows you to fill the remaining space by using fractions
+    as heights, i.e. `fit-to-height(1fr)[...]`:
+
+    #fit-to-height(1fr)[Wow!]
 ]
 
 #slide(title: "Outline")[
     Why not include an outline?
     #polylux-outline(padding: 1em, enum-args: (tight: false))
+]
+
+#new-section-slide("Typst features")
+
+#slide(title: "Use Typst!")[
+    Typst gives us so many cool things #footnote[For example footnotes!].
+    Use them!
 ]
 
 #slide(title: "Bibliography")[
