@@ -190,7 +190,7 @@
 }
 
 #let focus-slide(background-color: none, background-img: none, body) = {
-  let background-color = if background-img == none and background-colour ==  none {
+  let background-color = if background-img == none and background-color ==  none {
     rgb("#0C6291")
   } else {
     background-color

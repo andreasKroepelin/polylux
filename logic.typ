@@ -126,13 +126,25 @@
   }
 }
 
-#let alternatives(start: 1, position: bottom + left, ..children) = {
+#let alternatives(
+  start: 1,
+  position: bottom + left,
+  repeat-last: false,
+  ..children
+) = {
   style(styles => {
     let sizes = children.pos().map(c => measure(c, styles))
     let max-width = calc.max(..sizes.map(sz => sz.width))
     let max-height = calc.max(..sizes.map(sz => sz.height))
     for (idx, child) in children.pos().enumerate() {
-      only(start + idx, box(
+      let last = idx == children.pos().len() - 1
+      let visible-subslides = if last and repeat-last {
+        (beginning: start + idx)
+      } else {
+        start + idx
+      }
+
+      only(visible-subslides, box(
         width: max-width,
         height: max-height,
         align(position, child)
