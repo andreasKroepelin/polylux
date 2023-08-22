@@ -102,6 +102,7 @@
   header: none,
   footer: none,
   new-section: none,
+  bookmarked: false,
   ..bodies
 ) = {
   let bodies = bodies.pos()
@@ -128,6 +129,7 @@
     } else { [] }
   })
 
+  let should-bookmark = bookmarked or new-section != none
   let header-text = {
     if header != none {
       header
@@ -139,7 +141,7 @@
         let colors = uni-colors.at(loc)
         block(fill: colors.c, inset: (x: .5em), grid(
           columns: (60%, 40%),
-          align(top + left, heading(level: 2, text(fill: colors.a, title))),
+          align(top + left, heading(level: 2, bookmarked: should-bookmark, text(fill: colors.a, title))),
           align(top + right, text(fill: colors.a.lighten(65%), helpers.current-section))
         ))
       })

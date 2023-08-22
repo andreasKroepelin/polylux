@@ -104,7 +104,7 @@
   logic.polylux-slide(content)
 }
 
-#let slide(title: none, columns: none, gutter: none, ..bodies) = {
+#let slide(title: none, columns: none, gutter: none, bookmarked: false, ..bodies) = {
   let header = align(top, locate( loc => {
     let color = clean-color.at(loc)
     let logo = clean-logo.at(loc)
@@ -162,10 +162,9 @@
 
   let body = pad(x: .0em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
   
-
   let content = {
     if title != none {
-      heading(level: 2, title)
+      heading(level: 2, bookmarked: bookmarked, title)
     }
     body
   }
@@ -188,7 +187,7 @@
     set align(center + horizon)
     show: block.with(stroke: ( bottom: 1mm + color ), inset: 1em,)
     set text(size: 1.5em)
-    strong(name)
+    heading(level: 2, name)
     helpers.register-section(name)
   })
   logic.polylux-slide(content)
