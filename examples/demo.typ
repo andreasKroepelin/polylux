@@ -273,6 +273,20 @@
     - `#line-by-line(...)[...][...]`
 ]
 
+#slide(title: [`#alert`: Highlighting text])[
+    With `#alert`, text can be highlighted with a different color for some "subslides".
+
+    For example, #alert(2)[these words] are only highlighted on the second "subslide".
+    Like with `#uncover` you can specify _when_ to highlight the content in `()` and give the content in `[]`:
+
+    #example[
+        ```typ
+        #alert("-3, 5")[Highlighted on subslides 1, 2, 3, and 5]
+        ```
+        #alert("-3, 5")[Highlighted on subslides 1, 2, 3, and 5]
+    ]
+]
+
 #new-section-slide("Themes")
 
 

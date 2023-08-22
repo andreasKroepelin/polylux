@@ -163,6 +163,18 @@
   uncover((beginning: beginning), mode: mode, body)
 }
 
+#let alert(highlighted-subslides, color: red, body) = {
+  locate( loc => {
+    repetitions.update(rep => calc.max(rep, _last-required-subslide(highlighted-subslides)))
+    if _check-visible(subslide.at(loc).first(), highlighted-subslides) {
+      set text(fill: color)
+      body
+    } else {
+      body
+    }
+  })
+}
+
 
 #let polylux-slide(max-repetitions: 10, body) = {
   locate( loc => {
