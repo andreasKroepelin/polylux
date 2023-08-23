@@ -1,85 +1,85 @@
 {
+  "pdfpcFormat": 2,
   "pages": [
     {
       "idx": 0,
-      "label": "1",
-      "overlay": 0
+      "overlay": 0,
+      "label": "1"
     },
     {
-      "overlay": 0,
       "label": "2",
-      "idx": 1
+      "idx": 1,
+      "overlay": 0
     },
     {
       "label": "3",
-      "idx": 2,
+      "overlay": 0,
       "note": "Remember to explain Sigma notation!",
-      "overlay": 0
+      "idx": 2
     },
     {
-      "idx": 3,
+      "label": "4",
       "overlay": 0,
-      "label": "4"
-    },
-    {
-      "overlay": 0,
-      "idx": 4,
-      "label": "5"
+      "idx": 3
     },
     {
       "overlay": 0,
-      "label": "6",
-      "idx": 5
+      "label": "5",
+      "idx": 4
+    },
+    {
+      "idx": 5,
+      "overlay": 0,
+      "label": "6"
     },
     {
       "overlay": 0,
+      "idx": 6,
       "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
-      "label": "7",
-      "idx": 6
+      "label": "7"
     },
     {
-      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
-      "idx": 7,
       "overlay": 1,
+      "label": "7",
+      "idx": 7,
+      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
+      "forcedOverlay": true
+    },
+    {
+      "label": "7",
+      "idx": 8,
+      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
+      "forcedOverlay": true,
+      "overlay": 2
+    },
+    {
+      "overlay": 3,
+      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
+      "forcedOverlay": true,
+      "idx": 9,
+      "label": "7"
+    },
+    {
+      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
+      "idx": 10,
+      "overlay": 4,
       "label": "7",
       "forcedOverlay": true
     },
     {
-      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
-      "label": "7",
-      "forcedOverlay": true,
-      "overlay": 2,
-      "idx": 8
-    },
-    {
-      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
-      "forcedOverlay": true,
-      "idx": 9,
-      "label": "7",
-      "overlay": 3
-    },
-    {
-      "note": "# How the last steps work\nWe use _basic algebra_ rules for the last steps.",
-      "forcedOverlay": true,
-      "idx": 10,
-      "overlay": 4,
-      "label": "7"
-    },
-    {
-      "label": "8",
       "idx": 11,
+      "label": "8",
       "overlay": 0
     },
     {
-      "label": "9",
       "idx": 12,
+      "label": "9",
       "overlay": 0
     },
     {
+      "idx": 13,
       "overlay": 0,
-      "label": "10",
-      "idx": 13
+      "label": "10"
     }
-  ],
-  "pdfpcFormat": 2
+  ]
 }

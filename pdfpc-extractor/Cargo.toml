@@ -1,5 +1,7 @@
 [package]
-name = "pdfpc-extractor"
+name = "polylux2pdfpc"
+license = "MIT"
+description = "A tool to make pdfpc interpret slides created by polylux correctly"
 version = "0.1.0"
 edition = "2021"
 

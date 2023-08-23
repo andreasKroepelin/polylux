@@ -22,7 +22,7 @@
 	Let $n in NN$.
 	We are interested in sums of the form
 	$ 1 + ... + n = sum_(i=1)^n i $
-	#helpers.note("Remember to explain Sigma notation!")
+	#pdfpc.speaker-note("Remember to explain Sigma notation!")
 ]
 
 #slide(title: "The theorem")[
@@ -66,7 +66,7 @@
 		#h(1em) checkmark$
 	]
 
-	#helpers.note(```md
+	#pdfpc.speaker-note(```md
 # How the last steps work
 We use _basic algebra_ rules for the last steps.
 	```)
