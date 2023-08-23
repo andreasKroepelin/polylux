@@ -192,7 +192,16 @@
         if curr-subslide > 1 { pagebreak(weak: true) }
         set heading(outlined: false) if curr-subslide > 1
 
+        [
+          #metadata("slide start") <pdfpc-marker>
+          #metadata(str(counter(page).at(loc).first() - 1)) <pdfpc-idx>
+          #metadata(str(curr-subslide - 1)) <pdfpc-overlay>
+          #metadata(str(logical-slide.at(loc).first())) <pdfpc-label>
+        ]
+
         body
+
+        [ #metadata("slide end") <pdfpc-marker> ]
       }
     })
     subslide.step()
