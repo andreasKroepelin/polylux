@@ -9,10 +9,12 @@
 	footer: [Sum of natural numbers, CF Gauß],
 )
 
-#pdfpc.duration-minutes(15)
-#pdfpc.start-time(datetime(hour: 8, minute: 15, second: 0))
-#pdfpc.note-font-size(5)
-#pdfpc.default-transition("push:0.3")
+#pdfpc.config(
+	duration-minutes: 15,
+	start-time: datetime(hour: 8, minute: 15, second: 0),
+	note-font-size: 5,
+	default-transition: (type: "push", duration-seconds: 0.3),
+)
 
 #title-slide(
 	authors: "Carl Friedrich Gauß",
