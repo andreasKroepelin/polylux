@@ -74,17 +74,12 @@
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
-    #let pc = 1
-    #{ pc += 1 } #show: pause(pc)
+    #pause
 
-    That's what the `pause` function is there for!
-    Use it as
-    ```typ
-    #show: pause(n)
-    ```
-    #{ pc += 1 } #show: pause(pc)
+    That's what the `#pause` function is there for!
+    #pause
 
-    It makes everything after it appear at the `n`-th subslide.
+    It makes everything after it appear at the next subslide.
 
     #text(.6em)[(Also note that the slide number does not change while we are here.)]
 ]
@@ -256,6 +251,7 @@
     `start` is again optional and defaults to `1`.
 ]
 
+/*
 #slide(title: "Different ways of covering content")[
     When content is covered, it is completely invisible by default.
 
@@ -273,6 +269,7 @@
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
 ]
+*/
 
 #new-section-slide("Themes")
 

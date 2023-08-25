@@ -1,4 +1,5 @@
 #let subslide = counter("subslide")
+#let pause-counter = counter("pause-counter")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let handout-mode = state("handout-mode", false)
@@ -171,9 +172,23 @@
   }
 }
 
-#let pause(beginning, mode: "invisible") = body => {
-  uncover((beginning: beginning), mode: mode, body)
+#let pause = {
+  pause-counter.step()
+  locate( loc => {
+    repetitions.update(rep => calc.max(rep, pause-counter.at(loc).first() + 1))
+  })
 }
+
+#let paused-content(body) = locate( loc => {
+  let current-subslide = subslide.at(loc).first()
+  let current-pause-counter = pause-counter.at(loc).first()
+
+  if current-subslide > current-pause-counter {
+    body
+  } else {
+    hide(body)
+  }
+})
 
 #let polylux-slide(max-repetitions: 10, body) = {
   locate( loc => {
@@ -185,7 +200,21 @@
   subslide.update(1)
   repetitions.update(1)
 
+  show text: paused-content
+  show smartquote: paused-content
+  show box: paused-content
+  show block: paused-content
+  show path: paused-content
+  show rect: paused-content
+  show square: paused-content
+  show circle: paused-content
+  show ellipse: paused-content
+  show line: paused-content
+  show polygon: paused-content
+  show image: paused-content
+
   for _ in range(max-repetitions) {
+    pause-counter.update(0)
     locate( loc => {
       let curr-subslide = subslide.at(loc).first()
       if curr-subslide <= repetitions.at(loc).first() {
