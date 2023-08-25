@@ -221,6 +221,13 @@
         if curr-subslide > 1 { pagebreak(weak: true) }
         set heading(outlined: false) if curr-subslide > 1
 
+        [
+          #metadata((t: "NewSlide")) <pdfpc>
+          #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
+          #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
+          #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
+        ]
+
         body
       }
     })
