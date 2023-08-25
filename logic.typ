@@ -193,15 +193,13 @@
         set heading(outlined: false) if curr-subslide > 1
 
         [
-          #metadata("slide start") <pdfpc-marker>
-          #metadata(str(counter(page).at(loc).first() - 1)) <pdfpc-idx>
-          #metadata(str(curr-subslide - 1)) <pdfpc-overlay>
-          #metadata(str(logical-slide.at(loc).first())) <pdfpc-label>
+          #metadata((t: "NewSlide")) <pdfpc>
+          #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
+          #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
+          #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
         ]
 
         body
-
-        [ #metadata("slide end") <pdfpc-marker> ]
       }
     })
     subslide.step()

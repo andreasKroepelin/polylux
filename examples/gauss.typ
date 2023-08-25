@@ -9,6 +9,11 @@
 	footer: [Sum of natural numbers, CF Gauß],
 )
 
+#pdfpc.duration-minutes(15)
+#pdfpc.start-time(datetime(hour: 8, minute: 15, second: 0))
+#pdfpc.note-font-size(5)
+#pdfpc.default-transition("push:0.3")
+
 #title-slide(
 	authors: "Carl Friedrich Gauß",
 	title: [On a revolutionary way to \ sum up natural numbers],
@@ -31,6 +36,7 @@
 	$ sum_(i=1)^n i = n(n+1)/2 $
 
 	Let's prove that!
+	#pdfpc.save-slide
 ]
 
 #new-section-slide("Proof")
@@ -41,6 +47,8 @@
 	+ base case
 	+ induction hypothesis
 	+ induction step
+
+	#pdfpc.hidden-slide
 ]
 
 #slide(title: "Proof")[
@@ -81,4 +89,11 @@ We use _basic algebra_ rules for the last steps.
 #slide(title: "That's it!")[
 
 	Now you know how to calculate those sums more quickly. Nice!
+
+	#pdfpc.end-slide
+]
+
+#slide(title: [Further references])[
+	If you want to learn more about this cool kind of math, you can start your
+	investigation here: https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss
 ]
