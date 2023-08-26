@@ -21,13 +21,6 @@
   #lorem(40)
 ]
 
-
-#slide(title: "A longer slide title with 2 columns")[
-  #lorem(30)
-][
-  #lorem(30)
-]
-
 #focus-slide(background-img: image("background.svg"))[
   *Another variant with an image in background...*
 ]

@@ -8,7 +8,7 @@
 // #set par(justify: true)
 
 #import "../logic.typ"
-#import "../helpers.typ"
+#import "../utils/utils.typ"
 
 #let m-dark-teal = rgb("#23373b")
 #let m-light-brown = rgb("#eb811b")
@@ -25,7 +25,7 @@
   breakable: false
 )
 
-#let m-progress-bar = helpers.polylux-progress( ratio => {
+#let m-progress-bar = utils.polylux-progress( ratio => {
   grid(
     columns: (ratio * 100%, 1fr),
     m-cell(fill: m-light-brown),
@@ -124,7 +124,7 @@
 
 #let new-section-slide(name) = {
   let content = {
-    helpers.register-section(name)
+    utils.register-section(name)
     set align(horizon)
     show: pad.with(20%)
     set text(size: 1.5em)
@@ -142,4 +142,4 @@
 
 #let alert = text.with(fill: m-light-brown)
 
-#let metropolis-outline = helpers.polylux-outline(enum-args: (tight: false,))
+#let metropolis-outline = utils.polylux-outline(enum-args: (tight: false,))

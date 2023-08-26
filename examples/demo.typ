@@ -316,11 +316,6 @@
     It's very minimalist and helps the audience focus on an important point.
 ]
 
-#slide(
-    title: [The `clean` theme also makes multiple colums very easy!],
-    lorem(20), lorem(30), lorem(25)
-)
-
 #slide(title: "Your own theme?")[
     If you want to create your own design for slides, you can define custom
     themes!
@@ -331,8 +326,8 @@
 
 #new-section-slide("Utilities")
 
-#slide(title: [The `helpers` module])[
-    Polylux ships a `helpers` module with solutions for common tasks in slide
+#slide(title: [The `utils` module])[
+    Polylux ships a `utils` module with solutions for common tasks in slide
     building.
 ]
 
@@ -340,7 +335,7 @@
     You can scale content such that it has a certain height using
     `#fit-to-height(height, content)`:
 
-    #helpers.fit-to-height(2.5cm)[Height is `2.5cm`]
+    #fit-to-height(2.5cm)[Height is `2.5cm`]
 ]
 
 #slide(title: "Fill remaining space")[
@@ -348,6 +343,13 @@
     as heights, i.e. `fit-to-height(1fr)[...]`:
 
     #fit-to-height(1fr)[Wow!]
+]
+
+#slide(title: "Side by side content")[
+    Often you want to put different content next to each other.
+    We have the function `#side-by-side` for that:
+
+    #side-by-side(lorem(10), lorem(20), lorem(15))
 ]
 
 #slide(title: "Outline")[
