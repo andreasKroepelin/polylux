@@ -8,7 +8,7 @@ created by Matthias Vogelgesang.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.metropolis: *
 
 #show: metropolis-theme.with(...)
@@ -93,6 +93,6 @@ displays a table of contents with all sections.
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include metropolis.typ:3:}}
 ```

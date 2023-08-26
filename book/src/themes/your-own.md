@@ -17,7 +17,7 @@ Depending on whether this is a theme for yourself or supposed to be part of
 polylux, you do one of two things:
 For yourself, you simply import polylux as always:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../IMPORT.typ}}
 ```
 
 A theme that is shipped with polylux doesn't have to do that, and it shouldn't!

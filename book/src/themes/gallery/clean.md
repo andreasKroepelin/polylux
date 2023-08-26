@@ -7,7 +7,7 @@ to be an off-the-shelf solution that fits many use cases.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.clean: *
 
 #show: clean-theme.with(...)
@@ -104,6 +104,6 @@ Use `#polylux-outline()` to display all sections, similarly to how you would use
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include clean.typ:3:}}
 ```

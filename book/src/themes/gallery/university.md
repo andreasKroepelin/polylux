@@ -9,7 +9,7 @@ displays the current status of the presentation.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.university: *
 
 #show: university-theme.with(...)
@@ -137,6 +137,6 @@ Not suitable for content that exceeds one page.
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include university.typ:3:}}
 ```
