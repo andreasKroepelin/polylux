@@ -88,7 +88,7 @@
     When `#pause` does not suffice, you can use more advanced commands to show
     or hide content.
 
-    These are your options:
+    These are some of your options:
     - `#uncover`
     - `#only`
     - `#alternatives`
@@ -250,6 +250,31 @@
 
     `start` is again optional and defaults to `1`.
 ]
+
+#slide(title: [`#list-one-by-one` and Co: when `#line-by-line` doesn't suffice])[
+    While `#line-by-line` is very convenient syntax-wise, it fails to produce
+    more sophisticated bullet lists, enumerations or term lists.
+    For example, non-tight lists are out of reach.
+
+    For that reason, there are `#list-one-by-one`, `#enum-one-by-one`, and 
+    `#terms-one-by-one`, respectively.
+    #example[
+        #grid(
+            columns: (1fr, 1fr),
+            gutter: 1em,
+            ```typ
+            #enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
+            ```,
+            enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
+        )
+    ]
+
+    Note that, for technical reasons, the bullet points, numbers, or terms are
+    never covered.
+
+    `start` is again optional and defaults to `1`.
+]
+
 
 /*
 #slide(title: "Different ways of covering content")[
