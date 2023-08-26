@@ -7,8 +7,9 @@ function extract-package
     cp typst.toml $target
     cp polylux.typ $target
     cp logic.typ $target
-    cp helpers.typ $target
     mkdir -p $target/themes
     cp themes/* $target/themes
+    mkdir -p $target/utils
+    cp utils/* $target/utils
     echo "Done"
 end
