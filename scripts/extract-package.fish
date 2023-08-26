@@ -1,4 +1,9 @@
 function extract-package
+    if test (git branch --show-current) != "release"
+        echo "You are not on the release branch!"
+        return 1
+    end
+
     set target $argv[1]
     pwd
     mkdir -p $target
