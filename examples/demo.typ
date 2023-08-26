@@ -275,15 +275,6 @@
     `start` is again optional and defaults to `1`.
 ]
 
-#slide[
-    #let tl = enum([abc], [def])
-
-    #tl
-
-    #raw(repr(tl))
-]
-
-
 
 /*
 #slide(title: "Different ways of covering content")[
