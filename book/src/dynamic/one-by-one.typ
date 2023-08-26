@@ -3,5 +3,5 @@
 #set text(size: 50pt)
 
 #polylux-slide[
-#one-by-one[first ][second ][third]
+#one-by-one[Do you know ][$pi$ ][to a thousand decimal places?]
 ]

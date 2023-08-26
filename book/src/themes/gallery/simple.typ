@@ -39,7 +39,6 @@
   == Dynamic slide
   Did you know that...
 
-  #uncover(2)[
-    ...you can see the current section at the top of the slide?
-  ]
+  #pause
+  ...you can see the current section at the top of the slide?
 ]

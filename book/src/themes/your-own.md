@@ -1,6 +1,6 @@
 # Build your own theme
 
-Again, there is no right or wrong when it comes to how a polylux theme works.
+Again, there is no right or wrong when it comes to how a Polylux theme works.
 If you consider building a theme that you would like to contribute to the
 package ([which you are cordially invited to do!](https://github.com/andreasKroepelin/polylux/pulls)),
 we kindly ask you to follow the convention presented before.
@@ -22,12 +22,12 @@ For yourself, you simply import polylux as always:
 
 A theme that is shipped with polylux doesn't have to do that, and it shouldn't!
 Otherwise circular imports can occur.
-Instead, you depend on the two files `logic.typ` and `helpers.typ`.
+Instead, you depend on the two files `logic.typ` and `utils/utils.typ`.
 As your theme file `science-slam.typ` will be inside the `themes` directory, the
 imports will be:
 ```typ
 #import "../logic.typ"
-#import "../helpers.typ"
+#import "../utils/utils.typ"
 ```
 Additionally, you have to make polylux know about your theme which you do by
 adding

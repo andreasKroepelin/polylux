@@ -79,7 +79,7 @@ function generate_previews(items)
 			mktempdir() do tmp
 				typst_output = joinpath(tmp, "img-{n}.png")
 				typst_input = item.input
-				`typst --root . compile $typst_input $typst_output` |> run
+				`typst compile --root . $typst_input $typst_output` |> run
 				imgs = readdir(tmp, join = true) .|> load
 				plt = montage(imgs, item.label)
 				savefig(plt, item.output)
@@ -125,10 +125,17 @@ generate_previews([
 	typ2png(path = dynamic, file = "one-by-one", label = "subslide "),
 	typ2png(path = dynamic, file = "one-by-one-start", label = "subslide "),
 	typ2png(path = dynamic, file = "line-by-line", label = "subslide "),
+	typ2png(path = dynamic, file = "list-one-by-one", label = "subslide "),
+	typ2png(path = dynamic, file = "enum-one-by-one", label = "subslide "),
+	typ2png(path = dynamic, file = "terms-one-by-one", label = "subslide "),
 	typ2png(path = dynamic, file = "pause", label = "subslide "),
 	typ2png(path = dynamic, file = "poor-alternatives", label = "subslide "),
 	typ2png(path = dynamic, file = "alternatives", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-repeat-last", label = "subslide "),
 	typ2png(path = dynamic, file = "alternatives-position", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-match", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-cases", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-fn", label = "subslide "),
 	typ2png(path = dynamic, file = "cover", label = "subslide "),
 	typ2png(path = dynamic, file = "handout", label = "subslide "),
 	typ2png(path = themes, file = "science-slam"),

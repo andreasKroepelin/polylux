@@ -1,6 +1,6 @@
 # Cover mode
-Covered content (using `#uncover`, `#one-by-one`, `#line-by-line`, or `pause`)
-is completely invisible, by default.
+Covered content (using `#uncover`, `#one-by-one`, `#line-by-line`, or
+`#{list|enum|terms}-one-by-one`) is completely invisible, by default.
 You can decide to make it visible but less prominent using the optional `mode`
 argument to each of those functions.
 The `mode` argument takes two different values: `"invisible"` (the default) and
@@ -10,7 +10,7 @@ With `mode: "transparent"`, text is printed in a light gray.
 
 Use it as follows:
 ```typ
-{{#include cover.typ:6:16}}
+{{#include cover.typ:6:15}}
 ```
 resulting in
 
