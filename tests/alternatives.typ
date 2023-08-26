@@ -15,7 +15,7 @@
 #polylux-slide[
   == Test that `alternatives-match` works
 
-  #alternatives-match((
+  #alternatives-match(position: center, (
     "-2": [beginning],
     "3, 5": [main part],
     "4": [short break],
