@@ -1,5 +1,5 @@
 #import "../logic.typ"
-#import "../helpers.typ"
+#import "../utils/utils.typ"
 
 // University theme
 //
@@ -97,28 +97,20 @@
 
 #let slide(
   title: none,
-  columns: none,
-  gutter: none,
   header: none,
   footer: none,
   new-section: none,
-  ..bodies
+  body
 ) = {
-  let bodies = bodies.pos()
-  let gutter = if gutter == none { 1em } else { gutter }
-  let columns = if columns ==  none { (1fr,) * bodies.len() } else { columns }
-  if columns.len() != bodies.len() {
-    panic("number of columns must match number of content arguments")
-  }
 
-  let body = pad(x: 2em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
+  let body = pad(x: 2em, y: .5em, body)
   
   let progress-barline = locate( loc => {
     if uni-progress-bar.at(loc) {
       let cell = block.with( width: 100%, height: 100%, above: 0pt, below: 0pt, breakable: false )
       let colors = uni-colors.at(loc)
 
-      helpers.polylux-progress( ratio => {
+      utils.polylux-progress( ratio => {
         grid(
           rows: 2pt, columns: (ratio * 100%, 1fr),
           cell(fill: colors.a),
@@ -133,14 +125,14 @@
       header
     } else if title != none {
       if new-section != none {
-        helpers.register-section(new-section)
+        utils.register-section(new-section)
       }
       locate( loc => {
         let colors = uni-colors.at(loc)
         block(fill: colors.c, inset: (x: .5em), grid(
           columns: (60%, 40%),
           align(top + left, heading(level: 2, text(fill: colors.a, title))),
-          align(top + right, text(fill: colors.a.lighten(65%), helpers.current-section))
+          align(top + right, text(fill: colors.a.lighten(65%), utils.current-section))
         ))
       })
     } else { [] }
@@ -171,7 +163,7 @@
           cell(fill: colors.a, uni-short-author.display()),
           cell(uni-short-title.display()),
           cell(uni-short-date.display()),
-          cell(logic.logical-slide.display() + [~/~] + helpers.last-slide-number)
+          cell(logic.logical-slide.display() + [~/~] + utils.last-slide-number)
         )
       })
     }
