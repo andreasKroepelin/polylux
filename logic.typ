@@ -210,6 +210,42 @@
   }
 }
 
+
+#let _items-one-by-one(fn, start: 1, mode: "invisible", ..args) = {
+  let kwargs = args.named()
+  let items = args.pos()
+  let covered-items = items.enumerate().map(
+    ((idx, item)) => uncover((beginning: idx + start), mode: mode, item)
+  )
+  fn(
+    ..kwargs,
+    ..covered-items
+  )
+}
+
+#let list-one-by-one(start: 1, mode: "invisible", ..args) = {
+  _items-one-by-one(list, start: start, mode: mode, ..args)
+}
+
+#let enum-one-by-one(start: 1, mode: "invisible", ..args) = {
+  _items-one-by-one(enum, start: start, mode: mode, ..args)
+}
+
+#let terms-one-by-one(start: 1, mode: "invisible", ..args) = {
+  let kwargs = args.named()
+  let items = args.pos()
+  let covered-items = items.enumerate().map(
+    ((idx, item)) => terms.item(
+      item.term,
+      uncover((beginning: idx + start), mode: mode, item.description)
+    )
+  )
+  terms(
+    ..kwargs,
+    ..covered-items
+  )
+}
+
 #let pause = {
   pause-counter.step()
   locate( loc => {
