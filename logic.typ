@@ -127,31 +127,69 @@
   }
 }
 
-#let alternatives(
-  start: 1,
-  position: bottom + left,
-  repeat-last: false,
-  ..children
-) = {
+#let alternatives-match(subslides-contents, position: bottom + left) = {
+  let subslides-contents = if type(subslides-contents) == "dictionary" {
+    subslides-contents.pairs()
+  } else {
+    subslides-contents
+  }
+
+  let subslides = subslides-contents.map(it => it.first())
+  let contents = subslides-contents.map(it => it.last())
   style(styles => {
-    let sizes = children.pos().map(c => measure(c, styles))
+    let sizes = contents.map(c => measure(c, styles))
     let max-width = calc.max(..sizes.map(sz => sz.width))
     let max-height = calc.max(..sizes.map(sz => sz.height))
-    for (idx, child) in children.pos().enumerate() {
-      let last = idx == children.pos().len() - 1
-      let visible-subslides = if last and repeat-last {
-        (beginning: start + idx)
-      } else {
-        start + idx
-      }
-
-      only(visible-subslides, box(
+    for (subslides, content) in subslides-contents {
+      only(subslides, box(
         width: max-width,
         height: max-height,
-        align(position, child)
+        align(position, content)
       ))
     }
   })
+}
+
+#let alternatives(
+  start: 1,
+  repeat-last: false,
+  ..args
+) = {
+  let contents = args.pos()
+  let kwargs = args.named()
+  let subslides = range(start, start + contents.len())
+  if repeat-last {
+    subslides.last() = (beginning: subslides.last())
+  }
+  alternatives-match(subslides.zip(contents), ..kwargs)
+}
+
+#let alternatives-fn(
+  start: 1,
+  end: none,
+  count: none,
+  ..kwargs,
+  fn
+) = {
+  let end = if end == none {
+    if count == none {
+      panic("You must specify either end or count.")
+    } else {
+      start + count
+    }
+  } else {
+    end
+  }
+
+  let subslides = range(start, end)
+  let contents = subslides.map(fn)
+  alternatives-match(subslides.zip(contents), ..kwargs.named())
+}
+
+#let alternatives-cases(cases, fn, ..kwargs) = {
+  let idcs = range(cases.len())
+  let contents = idcs.map(fn)
+  alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
 #let line-by-line(start: 1, mode: "invisible", body) = {
