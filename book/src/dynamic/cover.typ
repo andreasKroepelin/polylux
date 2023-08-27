@@ -3,7 +3,7 @@
 #set text(size: 30pt)
 
 #polylux-slide[
-#uncover("3-4", mode: "transparent")[abc]
+#uncover(3, mode: "transparent")[abc]
 
 #one-by-one(start: 2, mode: "transparent")[def ][ghi]
 
@@ -12,6 +12,5 @@
   - mno
 ]
 
-#show: pause(4, mode: "transparent")
-pqr
+#enum-one-by-one(mode: "transparent", tight: false)[pqr][stu][vwx]
 ]

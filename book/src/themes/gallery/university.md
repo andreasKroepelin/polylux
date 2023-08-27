@@ -5,11 +5,10 @@
 This theme offers a simple yet versatile design, allowing for easy customization
 and flexibility. Additionally, it incorporates a progress bar at the top, which
 displays the current status of the presentation.
-`university` also makes working with mulit-column content very easy.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.university: *
 
 #show: university-theme.with(...)
@@ -39,7 +38,7 @@ Text is configured to have a base font size of 25 pt.
   regular sides, default: `true`
 
 ## Slide functions
-`metropolis` provides the following custom slide functions:
+`university` provides the following custom slide functions:
 
 ```typ
 #title-slide(...)
@@ -63,8 +62,6 @@ Does not accept additional content.
 ```typ
 #slide(...)[
   ...
-][
-  ...
 ]
 ```
 Decorates the provided content with a header containing a progress bar (optionally),
@@ -72,17 +69,10 @@ the slide title, and the current section (if any); and a footer containing short
 forms of authors, title, and date, and the slide number.
 Header and footer can also be overwritten by respective keyword arguments.
 
-Accepts an arbitrary amount of content blocks, they are placed next to each other
-as columns.
-Configure using the `columns` and `gutter` keyword arguments. 
-
 Pass the slide title as a keyword argument `title`.
 
 Accepts the following keyword arguments:
 - `title`: title of the slide, default: `none`,
-- `columns`: propagated to `grid` for placing the body columns, default: array
-  filled with as many `1fr` as there are content blocks
-- `gutter`: propagated to `grid` for placing the body columns, default: `1em`
 - `header`: custom content to overwrite default header
 - `footer`: custom content to overwrite default footer
 - `new-section`: name of the new section that starts here if not `none`, default:
@@ -137,6 +127,6 @@ Not suitable for content that exceeds one page.
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include university.typ:3:}}
 ```

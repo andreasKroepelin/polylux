@@ -29,6 +29,13 @@ The German term for projector is *beamer*, and now you might understand how it
 all comes together.
 (The original author of the aforementioned LaTeX package is German as well.)
 
+## About this book
+This book documents all features currently implemented in Polylux.
+Specifically, it describes the state of the package as it is pulished to the
+Typst package registry.
+The `main` branch of the Polylux repository may contain features not documented
+here.
+
 ## Contributing
 This package is free and open source.
 You can find the code on [GitHub](https://github.com/andreasKroepelin/polylux)

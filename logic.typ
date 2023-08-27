@@ -1,4 +1,5 @@
 #let subslide = counter("subslide")
+#let pause-counter = counter("pause-counter")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let handout-mode = state("handout-mode", false)
@@ -126,19 +127,69 @@
   }
 }
 
-#let alternatives(start: 1, position: bottom + left, ..children) = {
+#let alternatives-match(subslides-contents, position: bottom + left) = {
+  let subslides-contents = if type(subslides-contents) == "dictionary" {
+    subslides-contents.pairs()
+  } else {
+    subslides-contents
+  }
+
+  let subslides = subslides-contents.map(it => it.first())
+  let contents = subslides-contents.map(it => it.last())
   style(styles => {
-    let sizes = children.pos().map(c => measure(c, styles))
+    let sizes = contents.map(c => measure(c, styles))
     let max-width = calc.max(..sizes.map(sz => sz.width))
     let max-height = calc.max(..sizes.map(sz => sz.height))
-    for (idx, child) in children.pos().enumerate() {
-      only(start + idx, box(
+    for (subslides, content) in subslides-contents {
+      only(subslides, box(
         width: max-width,
         height: max-height,
-        align(position, child)
+        align(position, content)
       ))
     }
   })
+}
+
+#let alternatives(
+  start: 1,
+  repeat-last: false,
+  ..args
+) = {
+  let contents = args.pos()
+  let kwargs = args.named()
+  let subslides = range(start, start + contents.len())
+  if repeat-last {
+    subslides.last() = (beginning: subslides.last())
+  }
+  alternatives-match(subslides.zip(contents), ..kwargs)
+}
+
+#let alternatives-fn(
+  start: 1,
+  end: none,
+  count: none,
+  ..kwargs,
+  fn
+) = {
+  let end = if end == none {
+    if count == none {
+      panic("You must specify either end or count.")
+    } else {
+      start + count
+    }
+  } else {
+    end
+  }
+
+  let subslides = range(start, end)
+  let contents = subslides.map(fn)
+  alternatives-match(subslides.zip(contents), ..kwargs.named())
+}
+
+#let alternatives-cases(cases, fn, ..kwargs) = {
+  let idcs = range(cases.len())
+  let contents = idcs.map(fn)
+  alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
 #let line-by-line(start: 1, mode: "invisible", body) = {
@@ -159,10 +210,59 @@
   }
 }
 
-#let pause(beginning, mode: "invisible") = body => {
-  uncover((beginning: beginning), mode: mode, body)
+
+#let _items-one-by-one(fn, start: 1, mode: "invisible", ..args) = {
+  let kwargs = args.named()
+  let items = args.pos()
+  let covered-items = items.enumerate().map(
+    ((idx, item)) => uncover((beginning: idx + start), mode: mode, item)
+  )
+  fn(
+    ..kwargs,
+    ..covered-items
+  )
 }
 
+#let list-one-by-one(start: 1, mode: "invisible", ..args) = {
+  _items-one-by-one(list, start: start, mode: mode, ..args)
+}
+
+#let enum-one-by-one(start: 1, mode: "invisible", ..args) = {
+  _items-one-by-one(enum, start: start, mode: mode, ..args)
+}
+
+#let terms-one-by-one(start: 1, mode: "invisible", ..args) = {
+  let kwargs = args.named()
+  let items = args.pos()
+  let covered-items = items.enumerate().map(
+    ((idx, item)) => terms.item(
+      item.term,
+      uncover((beginning: idx + start), mode: mode, item.description)
+    )
+  )
+  terms(
+    ..kwargs,
+    ..covered-items
+  )
+}
+
+#let pause = {
+  pause-counter.step()
+  locate( loc => {
+    repetitions.update(rep => calc.max(rep, pause-counter.at(loc).first() + 1))
+  })
+}
+
+#let paused-content(body) = locate( loc => {
+  let current-subslide = subslide.at(loc).first()
+  let current-pause-counter = pause-counter.at(loc).first()
+
+  if current-subslide > current-pause-counter {
+    body
+  } else {
+    hide(body)
+  }
+})
 
 #let polylux-slide(max-repetitions: 10, body) = {
   locate( loc => {
@@ -174,12 +274,33 @@
   subslide.update(1)
   repetitions.update(1)
 
+  show text: paused-content
+  show smartquote: paused-content
+  show box: paused-content
+  show block: paused-content
+  show path: paused-content
+  show rect: paused-content
+  show square: paused-content
+  show circle: paused-content
+  show ellipse: paused-content
+  show line: paused-content
+  show polygon: paused-content
+  show image: paused-content
+
   for _ in range(max-repetitions) {
+    pause-counter.update(0)
     locate( loc => {
       let curr-subslide = subslide.at(loc).first()
       if curr-subslide <= repetitions.at(loc).first() {
         if curr-subslide > 1 { pagebreak(weak: true) }
         set heading(outlined: false) if curr-subslide > 1
+
+        [
+          #metadata((t: "NewSlide")) <pdfpc>
+          #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
+          #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
+          #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
+        ]
 
         body
       }

@@ -2,7 +2,7 @@
 // https://github.com/MarkBlyth
 
 #import "../logic.typ"
-#import "../helpers.typ"
+#import "../utils/utils.typ"
 
 #let clean-footer = state("clean-footer", [])
 #let clean-short-title = state("clean-short-title", none)
@@ -104,7 +104,7 @@
   logic.polylux-slide(content)
 }
 
-#let slide(title: none, columns: none, gutter: none, ..bodies) = {
+#let slide(title: none, body) = {
   let header = align(top, locate( loc => {
     let color = clean-color.at(loc)
     let logo = clean-logo.at(loc)
@@ -124,10 +124,10 @@
         align(horizon + right, grid(
           columns: 1, rows: 1em, gutter: .5em,
           short-title,
-          helpers.current-section
+          utils.current-section
         ))
       } else {
-        align(horizon + right, helpers.current-section)
+        align(horizon + right, utils.current-section)
       }
     )
   }))
@@ -153,14 +153,7 @@
     header-ascent: 1.5em,
   )
 
-  let bodies = bodies.pos()
-  let gutter = if gutter == none { 1em } else { gutter }
-  let columns = if columns ==  none { (1fr,) * bodies.len() } else { columns }
-  if columns.len() != bodies.len() {
-    panic("number of columns must match number of content arguments")
-  }
-
-  let body = pad(x: .0em, y: .5em, grid(columns: columns, gutter: gutter, ..bodies))
+  let body = pad(x: .0em, y: .5em, body)
   
 
   let content = {
@@ -176,7 +169,9 @@
 #let focus-slide(background: teal, foreground: white, body) = {
   set page(fill: background, margin: 2em)
   set text(fill: foreground, size: 1.5em)
-  logic.polylux-slide(align(horizon, body))
+  let content = { v(.1fr); body; v(.1fr) }
+  // logic.polylux-slide(align(horizon, body))
+  logic.polylux-slide(content)
 }
 
 #let new-section-slide(name) = {
@@ -187,7 +182,7 @@
     show: block.with(stroke: ( bottom: 1mm + color ), inset: 1em,)
     set text(size: 1.5em)
     strong(name)
-    helpers.register-section(name)
+    utils.register-section(name)
   })
   logic.polylux-slide(content)
 }

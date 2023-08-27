@@ -24,12 +24,12 @@
 
 #new-section-slide("The new section")
 
-#slide(title: [Slide with multiple columns])[
-  #lorem(20)
-][
-  #lorem(10)
-][
-  #lorem(30)
+#slide(title: "Another slide")[
+  Note that you can see the section title at the top.
+
+  The rest of this slide will fill more than one page!
+
+  #lorem(100)
 ]
 
 #focus-slide[

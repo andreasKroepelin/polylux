@@ -68,22 +68,18 @@
     You can also see the slide number there.
 ]
 
+
 #new-section-slide("Dynamic content")
 
 
 #slide(title: [A dynamic slide with `pause`s])[
     Sometimes we don't want to display everything at once.
-    #let pc = 1
-    #{ pc += 1 } #show: pause(pc)
+    #pause
 
-    That's what the `pause` function is there for!
-    Use it as
-    ```typ
-    #show: pause(n)
-    ```
-    #{ pc += 1 } #show: pause(pc)
+    That's what the `#pause` function is there for!
+    #pause
 
-    It makes everything after it appear at the `n`-th subslide.
+    It makes everything after it appear at the next subslide.
 
     #text(.6em)[(Also note that the slide number does not change while we are here.)]
 ]
@@ -92,7 +88,7 @@
     When `#pause` does not suffice, you can use more advanced commands to show
     or hide content.
 
-    These are your options:
+    These are some of your options:
     - `#uncover`
     - `#only`
     - `#alternatives`
@@ -255,6 +251,32 @@
     `start` is again optional and defaults to `1`.
 ]
 
+#slide(title: [`#list-one-by-one` and Co: when `#line-by-line` doesn't suffice])[
+    While `#line-by-line` is very convenient syntax-wise, it fails to produce
+    more sophisticated bullet lists, enumerations or term lists.
+    For example, non-tight lists are out of reach.
+
+    For that reason, there are `#list-one-by-one`, `#enum-one-by-one`, and 
+    `#terms-one-by-one`, respectively.
+    #example[
+        #grid(
+            columns: (1fr, 1fr),
+            gutter: 1em,
+            ```typ
+            #enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
+            ```,
+            enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
+        )
+    ]
+
+    Note that, for technical reasons, the bullet points, numbers, or terms are
+    never covered.
+
+    `start` is again optional and defaults to `1`.
+]
+
+
+/*
 #slide(title: "Different ways of covering content")[
     When content is covered, it is completely invisible by default.
 
@@ -272,6 +294,7 @@
     - `#one-by-one(...)[...][...]`
     - `#line-by-line(...)[...][...]`
 ]
+*/
 
 #new-section-slide("Themes")
 
@@ -293,11 +316,6 @@
     It's very minimalist and helps the audience focus on an important point.
 ]
 
-#slide(
-    title: [The `clean` theme also makes multiple colums very easy!],
-    lorem(20), lorem(30), lorem(25)
-)
-
 #slide(title: "Your own theme?")[
     If you want to create your own design for slides, you can define custom
     themes!
@@ -306,16 +324,44 @@
     explains how to do so.
 ]
 
-#new-section-slide("Typst features")
+#new-section-slide("Utilities")
 
-#slide(title: "Use Typst!")[
-    Typst gives us so many cool things #footnote[For example footnotes!].
-    Use them!
+#slide(title: [The `utils` module])[
+    Polylux ships a `utils` module with solutions for common tasks in slide
+    building.
+]
+
+#slide(title: [Fit to height])[
+    You can scale content such that it has a certain height using
+    `#fit-to-height(height, content)`:
+
+    #fit-to-height(2.5cm)[Height is `2.5cm`]
+]
+
+#slide(title: "Fill remaining space")[
+    This function also allows you to fill the remaining space by using fractions
+    as heights, i.e. `fit-to-height(1fr)[...]`:
+
+    #fit-to-height(1fr)[Wow!]
+]
+
+#slide(title: "Side by side content")[
+    Often you want to put different content next to each other.
+    We have the function `#side-by-side` for that:
+
+    #side-by-side(lorem(10), lorem(20), lorem(15))
 ]
 
 #slide(title: "Outline")[
     Why not include an outline?
     #polylux-outline(padding: 1em, enum-args: (tight: false))
+]
+
+#new-section-slide("Typst features")
+
+#slide(title: "Use Typst!")[
+    Typst gives us so many cool things #footnote[For example footnotes!].
+    Use them!
 ]
 
 #slide(title: "Bibliography")[

@@ -4,7 +4,7 @@ You can find this package in the
 [official Typst package repository](https://github.com/typst/packages).
 To use it, start your document with
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include IMPORT.typ}}
 ```
 You now have two options:
 1. use the features of polylux but define every visual aspect yourself,
