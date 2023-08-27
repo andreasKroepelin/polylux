@@ -149,6 +149,8 @@ generate_previews([
 	typ2png(path = gallery, file = "bipartite"),
 	typ2png(path = utils, file = "side-by-side"),
 	typ2png(path = utils, file = "side-by-side-kwargs"),
+	typ2png(path = utils, file = "fill-remaining"),
+	typ2png(path = utils, file = "fit-to-height-width"),
 ])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
