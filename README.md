@@ -1,5 +1,8 @@
 # Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
 This is a package for creating presentation slides in [Typst](https://typst.app/).
+Read the [book](https://andreaskroepelin.github.io/polylux/book) to learn all
+about it and click [here](https://andreaskroepelin.github.io/polylux/book/changelog.html)
+to see what's new!
 
 If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/polylux)!
 
@@ -14,8 +17,8 @@ If you like it, consider [giving a star on GitHub](https://github.com/andreasKro
 ## Quickstart
 For the bare-bones, do-it-yourself experience, all you need is:
 ```typ
-// Get polylux from the official package repository
-#import "@preview/polylux:0.2.0": *
+// Get Polylux from the official package repository
+#import "@preview/polylux:0.3.0": *
 
 // Make the paper dimensions fit for a presentation and the text larger
 #set page(paper: "presentation-16-9")
@@ -54,7 +57,7 @@ or you can use one of the provided themes.
 The simplest one of them is called `simple` (what a coincidence!).
 It is still very unintrusive but gives you some sensible defaults:
 ```typ
-#import "@preview/polylux:0.2.0": *
+#import "@preview/polylux:0.3.0": *
 
 #import themes.simple: *
 
@@ -95,9 +98,8 @@ It is still very unintrusive but gives you some sensible defaults:
   == Dynamic slide
   Did you know that...
 
-  #uncover(2)[
-    ...you can see the current section at the top of the slide?
-  ]
+  #pause
+  ...you can see the current section at the top of the slide?
 ]
 ```
 This time, we obtain these PDF pages:
@@ -111,8 +113,12 @@ The book
 on how to use (and create your own) themes.
 
 
-For dynamic content, polylux also provides [a convenient API for complex
+For dynamic content, Polylux also provides [a convenient API for complex
 overlays](https://andreaskroepelin.github.io/polylux/book/dynamic/dynamic.html).
+
+If you use [pdfpc](https://pdfpc.github.io/) to display your slides, you can rely
+on [Polylux' support for it](https://andreaskroepelin.github.io/polylux/book/external/pdfpc.html)
+and create speaker notes, hide slides, configure the timer and more!
 
 Visit the
 [book](https://andreaskroepelin.github.io/polylux/book)
@@ -120,14 +126,17 @@ for more details or take a look at the
 [demo PDF](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 where you can see the features of this template in action.
 
-**⚠ This package is under active development.
-While I try to make sure that the `main`-branch always is in a usable state,
-there are no compatibility guarantees!**
+**⚠ This package is under active development and there are no backwards
+compatibility guarantees!**
 
 ## Acknowledgements
 Thank you to...
 - [@drupol](https://github.com/drupol) for the `university` theme
 - [@Enivex](https://github.com/Enivex) for the `metropolis` theme
 - [@MarkBlyth](https://github.com/MarkBlyth) for contributing to the `clean` theme
-- [@fncnt](https://github.com/fncnt) for coming up with the name "polylux"
+- [@ntjess](https://github.com/ntjess) for contributing to the height fitting
+  feature
+- [@JuliusFreudenberger](https://github.com/JuliusFreudenberger) for maintaining
+  the `polylux2pdfpc` AUR package
+- [@fncnt](https://github.com/fncnt) for coming up with the name "Polylux"
 - the Typst authors and contributors for this refreshing piece of software
