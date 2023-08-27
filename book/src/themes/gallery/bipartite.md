@@ -10,7 +10,7 @@ rather on the "artsy" than functional side.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.bipartite: *
 
 #show: bipartite-theme.with(...)
@@ -84,6 +84,6 @@ Does not display a slide title.
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include bipartite.typ:3:}}
 ```

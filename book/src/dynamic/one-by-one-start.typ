@@ -3,5 +3,5 @@
 #set text(size: 50pt)
 
 #polylux-slide[
-#one-by-one(start: 3)[first ][second ][third]
+#one-by-one(start: 3)[This ][came ][pretty late.]
 ]

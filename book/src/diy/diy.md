@@ -94,7 +94,7 @@ The next sections will explain dynamic content in polylux in all its details.
 For reference, here is the full source code for the slides we developed in this
 section:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../IMPORT.typ}}
 
 #set page(paper: "presentation-16-9", fill: teal.lighten(90%))
 #set text(size: 25pt, font: "Blogger Sans")

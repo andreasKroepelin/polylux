@@ -7,7 +7,7 @@ to be an off-the-shelf solution that fits many use cases.
 
 Use it via
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 #import themes.clean: *
 
 #show: clean-theme.with(...)
@@ -56,25 +56,16 @@ Does not accept additional content.
 ```typ
 #slide(...)[
   ...
-][
-  ...
 ]
 ```
 Decorates the provided content with a header containing the current section (if
 any), the short title of the presentation, and the logo; and a footer containing
 some custom text and the slide number.
 
-Accepts an arbitrary amount of content blocks, they are placed next to each other
-as columns.
-Configure using the `columns` and `gutter` keyword arguments. 
-
 Pass the slide title as a keyword argument `title`.
 
 Accepts the following keyword arguments:
 - `title`: title of the slide, default: `none`,
-- `columns`: propagated to `grid` for placing the body columns, default: array
-  filled with as many `1fr` as there are content blocks
-- `gutter`: propagated to `grid` for placing the body columns, default: `1em`
 
 ---
 
@@ -104,6 +95,6 @@ Use `#polylux-outline()` to display all sections, similarly to how you would use
 ## Example code
 The image at the top is created by the following code:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../../IMPORT.typ}}
 {{#include clean.typ:3:}}
 ```

@@ -20,7 +20,7 @@ First of all, all themes reside in the `themes` module inside polylux.
 That means, if you want to employ, say, the `simple` theme, you add the following
 to your regular `#import` line at the top:
 ```typ
-#import "@preview/polylux:0.2.0": *
+{{#include ../IMPORT.typ}}
 #import themes.simple: *
 ```
 

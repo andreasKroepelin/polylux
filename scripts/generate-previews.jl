@@ -79,7 +79,7 @@ function generate_previews(items)
 			mktempdir() do tmp
 				typst_output = joinpath(tmp, "img-{n}.png")
 				typst_input = item.input
-				`typst --root . compile $typst_input $typst_output` |> run
+				`typst compile --root . $typst_input $typst_output` |> run
 				imgs = readdir(tmp, join = true) .|> load
 				plt = montage(imgs, item.label)
 				savefig(plt, item.output)
@@ -108,6 +108,9 @@ dynamic = "book/src/dynamic"
 # ╔═╡ b7923561-c79b-4443-99c2-4306589313d6
 themes = "book/src/themes"
 
+# ╔═╡ 98d47b63-9744-4f68-aff9-6b80a1bd2212
+utils = "book/src/utils"
+
 # ╔═╡ c3934766-e918-456d-81ea-de1e4726d3b6
 gallery = joinpath(themes, "gallery")
 
@@ -125,10 +128,17 @@ generate_previews([
 	typ2png(path = dynamic, file = "one-by-one", label = "subslide "),
 	typ2png(path = dynamic, file = "one-by-one-start", label = "subslide "),
 	typ2png(path = dynamic, file = "line-by-line", label = "subslide "),
+	typ2png(path = dynamic, file = "list-one-by-one", label = "subslide "),
+	typ2png(path = dynamic, file = "enum-one-by-one", label = "subslide "),
+	typ2png(path = dynamic, file = "terms-one-by-one", label = "subslide "),
 	typ2png(path = dynamic, file = "pause", label = "subslide "),
 	typ2png(path = dynamic, file = "poor-alternatives", label = "subslide "),
 	typ2png(path = dynamic, file = "alternatives", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-repeat-last", label = "subslide "),
 	typ2png(path = dynamic, file = "alternatives-position", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-match", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-cases", label = "subslide "),
+	typ2png(path = dynamic, file = "alternatives-fn", label = "subslide "),
 	typ2png(path = dynamic, file = "cover", label = "subslide "),
 	typ2png(path = dynamic, file = "handout", label = "subslide "),
 	typ2png(path = themes, file = "science-slam"),
@@ -137,6 +147,10 @@ generate_previews([
 	typ2png(path = gallery, file = "metropolis"),
 	typ2png(path = gallery, file = "university"),
 	typ2png(path = gallery, file = "bipartite"),
+	typ2png(path = utils, file = "side-by-side"),
+	typ2png(path = utils, file = "side-by-side-kwargs"),
+	typ2png(path = utils, file = "fill-remaining"),
+	typ2png(path = utils, file = "fit-to-height-width"),
 ])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1664,6 +1678,7 @@ version = "1.4.1+0"
 # ╠═59a40cbd-5ad7-4c22-b676-e85bbf9ee918
 # ╠═09396295-f40a-4bb1-b261-81f784d93bc2
 # ╠═b7923561-c79b-4443-99c2-4306589313d6
+# ╠═98d47b63-9744-4f68-aff9-6b80a1bd2212
 # ╠═c3934766-e918-456d-81ea-de1e4726d3b6
 # ╠═aa8102d8-029f-4a94-bce4-a7f362b64e4c
 # ╟─00000000-0000-0000-0000-000000000001
