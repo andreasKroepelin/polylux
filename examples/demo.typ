@@ -276,7 +276,6 @@
 ]
 
 
-/*
 #slide(title: "Different ways of covering content")[
     #one-by-one(mode: "transparent")[
         When content is covered, it is completely invisible by default.
@@ -284,7 +283,6 @@
         However, you can also just display it in light gray by using the
         `mode` argument with the value `"transparent"`:
     ][
-        
         Covered content is then displayed differently.
     ][
 
@@ -294,9 +292,7 @@
         - `#one-by-one(...)[...][...]`
         - `#line-by-line(...)[...][...]`
     ]
-
 ]
-*/
 
 #new-section-slide("Themes")
 
