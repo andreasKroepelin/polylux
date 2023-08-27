@@ -113,18 +113,16 @@
         let w-ratio = mutable-width / size.width
         let ratio = calc.min(h-ratio, w-ratio) * 100%
 
+        let new-width = size.width * ratio
+        v(-available-height)
         // If not boxed, the content can overflow to the next page even though it will fit.
         // This is because scale doesn't update the layout information.
         // Boxing in a container without clipping will inform typst that content
         // will indeed fit in the remaining space
-        let new-width = size.width * ratio
-        place(
-          dy: -available-height,
-          box(
-            width: new-width,
-            height: available-height,
-            scale(x: ratio, y: ratio, origin: top + left, boxed-content)
-          )
+        box(
+          width: new-width,
+          height: available-height,
+          scale(x: ratio, y: ratio, origin: top + left, boxed-content)
         )
       })
     })
