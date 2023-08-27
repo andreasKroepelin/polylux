@@ -22,4 +22,7 @@
     - [University](./themes/gallery/university.md)
     - [Bipartite](./themes/gallery/bipartite.md)
   - [Build your own](./themes/your-own.md)
-  - [Helpers for theme authors](./themes/helpers.md)
+- [Utilities](./utils/utils.md)
+  - [Side by side](./utils/side-by-side.md)
+  - [Progress](./utils/progress.md)
+  - [Sections](./utils/sections.md)

@@ -108,6 +108,9 @@ dynamic = "book/src/dynamic"
 # ╔═╡ b7923561-c79b-4443-99c2-4306589313d6
 themes = "book/src/themes"
 
+# ╔═╡ 98d47b63-9744-4f68-aff9-6b80a1bd2212
+utils = "book/src/utils"
+
 # ╔═╡ c3934766-e918-456d-81ea-de1e4726d3b6
 gallery = joinpath(themes, "gallery")
 
@@ -144,6 +147,8 @@ generate_previews([
 	typ2png(path = gallery, file = "metropolis"),
 	typ2png(path = gallery, file = "university"),
 	typ2png(path = gallery, file = "bipartite"),
+	typ2png(path = utils, file = "side-by-side"),
+	typ2png(path = utils, file = "side-by-side-kwargs"),
 ])
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1671,6 +1676,7 @@ version = "1.4.1+0"
 # ╠═59a40cbd-5ad7-4c22-b676-e85bbf9ee918
 # ╠═09396295-f40a-4bb1-b261-81f784d93bc2
 # ╠═b7923561-c79b-4443-99c2-4306589313d6
+# ╠═98d47b63-9744-4f68-aff9-6b80a1bd2212
 # ╠═c3934766-e918-456d-81ea-de1e4726d3b6
 # ╠═aa8102d8-029f-4a94-bce4-a7f362b64e4c
 # ╟─00000000-0000-0000-0000-000000000001
