@@ -3,5 +3,9 @@
 #set text(size: 50pt)
 
 #polylux-slide[
-first #pause second #pause third
+first #pause
+
+second #pause
+
+third
 ]

@@ -1,1 +1,1 @@
-#import "@preview/polylux:0.3.0": *
+#import "@preview/polylux:0.3.1": *

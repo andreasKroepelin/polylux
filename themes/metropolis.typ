@@ -40,6 +40,7 @@
 ) = {
   set page(
     paper: "presentation-" + aspect-ratio,
+    fill: m-extra-light-gray,
     margin: 0em,
     header: none,
     footer: none,

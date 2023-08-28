@@ -274,8 +274,8 @@
   subslide.update(1)
   repetitions.update(1)
 
-  show text: paused-content
-  show smartquote: paused-content
+  show par: paused-content
+  show math.equation: paused-content
   show box: paused-content
   show block: paused-content
   show path: paused-content
