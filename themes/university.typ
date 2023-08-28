@@ -1,5 +1,6 @@
 #import "../logic.typ"
 #import "../utils/utils.typ"
+#import "../utils/pdfpc.typ": meta_out;
 
 // University theme
 //
@@ -41,6 +42,7 @@
   uni-short-date.update(short-date)
 
   body
+  meta_out();
 }
 
 #let title-slide(
