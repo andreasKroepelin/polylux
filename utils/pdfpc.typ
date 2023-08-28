@@ -41,24 +41,23 @@
     panic("A note must either be a string or a raw block")
   }
   pdfpc_metadata.update(m=>{
-    let page = m.pages.at(-1);
-    page.insert("note", page.at("note", default: "")+text);
+    m.pages.last().insert("note", m.pages.last().at("note", default: "")+text);
     m
   })
 }
 
 #let end-slide = {
-  pdfpc_metadata.display(m=>set_or_fail("endSlide", m.pages.at(-1).label))
+  pdfpc_metadata.display(m=>set_or_fail("endSlide", int(m.pages.last().label)-1))
   
 }
 
 #let save-slide = {
-  pdfpc_metadata.display(m=>set_or_fail("saveSlide", m.pages.at(-1).label))
+  pdfpc_metadata.display(m=>set_or_fail("savedSlide", int(m.pages.last().label)-1))
 }
 
 #let hidden-slide = {
   pdfpc_metadata.update(m=>{
-    m.pages.at(-1).hidden=true;
+    m.pages.last().hidden=true;
     m
   })
 }
