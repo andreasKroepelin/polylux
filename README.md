@@ -18,7 +18,7 @@ If you like it, consider [giving a star on GitHub](https://github.com/andreasKro
 For the bare-bones, do-it-yourself experience, all you need is:
 ```typ
 // Get Polylux from the official package repository
-#import "@preview/polylux:0.3.0": *
+#import "@preview/polylux:0.3.1": *
 
 // Make the paper dimensions fit for a presentation and the text larger
 #set page(paper: "presentation-16-9")
@@ -57,7 +57,7 @@ or you can use one of the provided themes.
 The simplest one of them is called `simple` (what a coincidence!).
 It is still very unintrusive but gives you some sensible defaults:
 ```typ
-#import "@preview/polylux:0.3.0": *
+#import "@preview/polylux:0.3.1": *
 
 #import themes.simple: *
 
