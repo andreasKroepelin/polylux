@@ -3,6 +3,7 @@
 
 #import "../logic.typ"
 #import "../utils/utils.typ"
+#import "../utils/pdfpc.typ": meta_out;
 
 #let clean-footer = state("clean-footer", [])
 #let clean-short-title = state("clean-short-title", none)
@@ -33,6 +34,7 @@
   clean-logo.update(logo)
 
   body
+  meta_out();
 }
 
 

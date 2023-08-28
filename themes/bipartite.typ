@@ -1,6 +1,7 @@
 // This theme is inspired by https://slidesgo.com/theme/modern-annual-report
 
 #import "../logic.typ"
+#import "../utils/pdfpc.typ": meta_out;
 
 
 #let bipartite-dark = rgb("#192e41")
@@ -17,6 +18,7 @@
   )
 
   body
+  meta_out();
 }
 
 #let title-slide(title: [], subtitle: none, author: [], date: none) = {

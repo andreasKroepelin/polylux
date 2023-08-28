@@ -1,4 +1,5 @@
 #import "../logic.typ"
+#import "../utils/pdfpc.typ": meta_out;
 
 #let simple-footer = state("simple-footer", [])
 
@@ -26,6 +27,7 @@
   simple-footer.update(footer)
 
   body
+  meta_out();
 }
 
 #let centered-slide(body) = {

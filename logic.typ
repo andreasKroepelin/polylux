@@ -1,3 +1,5 @@
+#import "utils/pdfpc.typ": register_page;
+
 #let subslide = counter("subslide")
 #let pause-counter = counter("pause-counter")
 #let logical-slide = counter("logical-slide")
@@ -294,14 +296,7 @@
       if curr-subslide <= repetitions.at(loc).first() {
         if curr-subslide > 1 { pagebreak(weak: true) }
         set heading(outlined: false) if curr-subslide > 1
-
-        [
-          #metadata((t: "NewSlide")) <pdfpc>
-          #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
-          #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
-          #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
-        ]
-
+        register_page(counter(page).at(loc).first() - 1, logical-slide.at(loc).first(), curr-subslide - 1);
         body
       }
     })

@@ -9,6 +9,7 @@
 
 #import "../logic.typ"
 #import "../utils/utils.typ"
+#import "../utils/pdfpc.typ": meta_out;
 
 #let m-dark-teal = rgb("#23373b")
 #let m-light-brown = rgb("#eb811b")
@@ -49,6 +50,7 @@
   m-footer.update(footer)
 
   body
+  meta_out();
 }
 
 #let title-slide(
