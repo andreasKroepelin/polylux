@@ -13,11 +13,17 @@
 
 #let register_page(idx, logicalSlide, overlay) = {
   pdfpc_metadata.update(m=>{
-    m.pages.push((
+    let entry = (
       idx: idx,
-      label: logicalSlide,
+      label: str(logicalSlide),
       overlay: overlay
-    ));
+    );
+
+    if(overlay>0) {
+      entry.forcedOverlay = true;
+    }
+
+    m.pages.push(entry);
     m
   })
 }
