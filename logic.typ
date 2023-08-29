@@ -6,7 +6,7 @@
 
 #let enable-handout-mode(flag) = handout-mode.update(flag)
 
-#let cover-with-rect(outset: 0em, fill: auto, body) = {
+#let cover-with-rect(..cover-args, fill: auto, body) = {
   if fill == auto {
     panic(
       "`auto` fill value is not supported until typst provides utilities to"
@@ -23,15 +23,17 @@
       let body-size = measure(body, styles)
       let bounding-width = calc.min(body-size.width, layout-size.width)
       let wrapped-body-size = measure(box(body, width: bounding-width), styles)
+      let named = cover-args.named()
+      if "width" not in named {
+        named.insert("width", wrapped-body-size.width)
+      }
+      if "height" not in named {
+        named.insert("height", wrapped-body-size.height)
+      }
       stack(
         spacing: -wrapped-body-size.height,
         box(body),
-        rect(
-          fill: fill,
-          width: wrapped-body-size.width,
-          height: wrapped-body-size.height,
-          outset: outset,
-        )
+        rect(fill: fill, ..named, ..cover-args.pos())
       )
     })
   })
