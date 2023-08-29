@@ -53,7 +53,7 @@
     // considering prior "transparent" behavior is broken in those cases anyway
     "transparent": cover-with-white-rect,
     "transparent-black": cover-with-black-rect,
-    "default": hide
+    "default": hide,
   )
 )
 
@@ -68,6 +68,10 @@
   let mode-key = mode
   if mode == auto {
     mode-key = "default"
+  }
+  if type(mode) == "function" {
+    // skip mode lookup, user directly provided hider function
+    return mode(body)
   }
   locate(loc => {
     let hider-options = content-hider-modes.at(loc)
