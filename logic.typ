@@ -6,14 +6,76 @@
 
 #let enable-handout-mode(flag) = handout-mode.update(flag)
 
-#let _slides-cover(mode, body) = {
-  if mode == "invisible" {
-    hide(body)
-  } else if mode == "transparent" {
-    text(gray.lighten(50%), body)
-  } else {
-    panic("Illegal cover mode: " + mode)
+#let cover-with-rect(outset: 0em, fill: auto, body) = {
+  if fill == auto {
+    panic(
+      "`auto` fill value is not supported until typst provides utilities to"
+      + " retrieve the current page background"
+    )
   }
+  if type(fill) == "string" {
+    fill = rgb(fill)
+  }
+
+  layout(layout-size => {
+    set text(top-edge: "bounds", bottom-edge: "bounds")
+    style(styles => {
+      let body-size = measure(body, styles)
+      let bounding-width = calc.min(body-size.width, layout-size.width)
+      let wrapped-body-size = measure(box(body, width: bounding-width), styles)
+      stack(
+        spacing: -wrapped-body-size.height,
+        box(body),
+        rect(
+          fill: fill,
+          width: wrapped-body-size.width,
+          height: wrapped-body-size.height,
+          outset: outset,
+        )
+      )
+    })
+  })
+}
+
+// 50% alpha
+#let cover-with-white-rect = cover-with-rect.with(fill: "fff8")
+#let cover-with-black-rect = cover-with-rect.with(fill: "0008")
+
+// States are normally defined at the top of the file by convention, but functions aren't
+// hoisted. So wait to populate the state until here, when functions are accessible
+#let content-hider-modes = state("content-hider-modes",
+  (
+    "invisible": hide,
+    // Backwards compatible. When `get` rules are established, the default "transparent"
+    // behavior could change to use the page background for a more robust alternative,
+    // considering prior "transparent" behavior is broken in those cases anyway
+    "transparent": cover-with-white-rect,
+    "transparent-black": cover-with-black-rect,
+    "default": hide
+  )
+)
+
+#let add-hider-mode(name, function) = {
+  content-hider-modes.update(old => {
+    old.insert(name, function)
+    old
+  })
+}
+
+#let _slides-cover(mode: auto, body) = {
+  let mode-key = mode
+  if mode == auto {
+    mode-key = "default"
+  }
+  locate(loc => {
+    let hider-options = content-hider-modes.at(loc)
+    if mode-key not in hider-options {
+      panic(
+        "Illegal cover mode: `" + mode + "`. Must be one of: " + hider-options.keys().join(", ")
+      )
+    }
+    hider-options.at(mode-key)(body)
+  })
 }
 
 #let _parse-subslide-indices(s) = {
@@ -108,12 +170,12 @@
     if _check-visible(subslide.at(loc).first(), vs) {
       body
     } else if reserve-space {
-      _slides-cover(mode, body)
+      _slides-cover(mode: mode, body)
     }
   })
 }
 
-#let uncover(visible-subslides, mode: "invisible", body) = {
+#let uncover(visible-subslides, mode: auto, body) = {
   _conditional-display(visible-subslides, true, mode, body)
 }
 
@@ -121,7 +183,7 @@
   _conditional-display(visible-subslides, false, "doesn't even matter", body)
 }
 
-#let one-by-one(start: 1, mode: "invisible", ..children) = {
+#let one-by-one(start: 1, mode: auto, ..children) = {
   for (idx, child) in children.pos().enumerate() {
     uncover((beginning: start + idx), mode: mode, child)
   }
@@ -192,7 +254,7 @@
   alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
-#let line-by-line(start: 1, mode: "invisible", body) = {
+#let line-by-line(start: 1, mode: auto, body) = {
   let items = if repr(body.func()) == "sequence" {
     body.children
   } else {
@@ -211,7 +273,7 @@
 }
 
 
-#let _items-one-by-one(fn, start: 1, mode: "invisible", ..args) = {
+#let _items-one-by-one(fn, start: 1, mode: auto, ..args) = {
   let kwargs = args.named()
   let items = args.pos()
   let covered-items = items.enumerate().map(
@@ -223,15 +285,15 @@
   )
 }
 
-#let list-one-by-one(start: 1, mode: "invisible", ..args) = {
+#let list-one-by-one(start: 1, mode: auto, ..args) = {
   _items-one-by-one(list, start: start, mode: mode, ..args)
 }
 
-#let enum-one-by-one(start: 1, mode: "invisible", ..args) = {
+#let enum-one-by-one(start: 1, mode: auto, ..args) = {
   _items-one-by-one(enum, start: start, mode: mode, ..args)
 }
 
-#let terms-one-by-one(start: 1, mode: "invisible", ..args) = {
+#let terms-one-by-one(start: 1, mode: auto, ..args) = {
   let kwargs = args.named()
   let items = args.pos()
   let covered-items = items.enumerate().map(
