@@ -39,9 +39,9 @@
   })
 }
 
-// 50% alpha
-#let cover-with-white-rect = cover-with-rect.with(fill: "fff8")
-#let cover-with-black-rect = cover-with-rect.with(fill: "0008")
+// matches equivalent transparency of "gray.lighten(50%)"
+#let cover-with-white-rect = cover-with-rect.with(fill: rgb(255, 255, 255, 213))
+#let cover-with-black-rect = cover-with-rect.with(fill: rgb(0, 0, 0, 213))
 
 // States are normally defined at the top of the file by convention, but functions aren't
 // hoisted. So wait to populate the state until here, when functions are accessible
