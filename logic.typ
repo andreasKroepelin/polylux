@@ -17,7 +17,8 @@
     fill = rgb(fill)
   }
 
-  layout(layout-size => {
+  // The extra `box` allows inline content to remain inline after being covered
+  box(layout(layout-size => {
     set text(top-edge: "bounds", bottom-edge: "bounds")
     style(styles => {
       let body-size = measure(body, styles)
@@ -32,11 +33,11 @@
       }
       stack(
         spacing: -wrapped-body-size.height,
-        box(body),
+        body,
         rect(fill: fill, ..named, ..cover-args.pos())
       )
     })
-  })
+  }))
 }
 
 // matches equivalent transparency of "gray.lighten(50%)"
