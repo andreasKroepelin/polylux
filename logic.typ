@@ -290,7 +290,7 @@
 
   // Having this here is a bit unfortunate concerning separation of concerns
   // but I'm not comfortable with logic depending on pdfpc...
-  let pgfpc-slide-markers(curr-subslide) = locate( loc => [
+  let pdfpc-slide-markers(curr-subslide) = locate( loc => [
     #metadata((t: "NewSlide")) <pdfpc>
     #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
     #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
