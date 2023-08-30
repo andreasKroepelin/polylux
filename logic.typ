@@ -264,7 +264,7 @@
   }
 })
 
-#let polylux-slide(max-repetitions: 10, body) = {
+#let polylux-slide(body) = {
   locate( loc => {
     if counter(page).at(loc).first() > 1 {
       pagebreak(weak: true)
@@ -273,6 +273,7 @@
   logical-slide.step()
   subslide.update(1)
   repetitions.update(1)
+  pause-counter.update(0)
 
   show par: paused-content
   show math.equation: paused-content
@@ -287,24 +288,32 @@
   show polygon: paused-content
   show image: paused-content
 
-  for _ in range(max-repetitions) {
-    pause-counter.update(0)
-    locate( loc => {
-      let curr-subslide = subslide.at(loc).first()
-      if curr-subslide <= repetitions.at(loc).first() {
-        if curr-subslide > 1 { pagebreak(weak: true) }
-        set heading(outlined: false) if curr-subslide > 1
+  // Having this here is a bit unfortunate concerning separation of concerns
+  // but I'm not comfortable with logic depending on pdfpc...
+  let pgfpc-slide-markers(curr-subslide) = locate( loc => [
+    #metadata((t: "NewSlide")) <pdfpc>
+    #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
+    #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
+    #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
+  ])
 
-        [
-          #metadata((t: "NewSlide")) <pdfpc>
-          #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
-          #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
-          #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
-        ]
+  pdfpc-slide-markers(1)
 
-        body
-      }
-    })
-    subslide.step()
-  }
+  body
+
+  subslide.step()
+  set heading(outlined: false)
+
+  locate( loc => {
+    let reps = repetitions.at(loc).first()
+    for curr-subslide in range(2, reps + 1) {
+      pause-counter.update(0)
+      pagebreak(weak: true)
+
+      pdfpc-slide-markers(curr-subslide)
+
+      body
+      subslide.step()
+    }
+  })
 }
