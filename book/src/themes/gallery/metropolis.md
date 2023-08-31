@@ -35,7 +35,7 @@ information by a bright line.
 Accepts the following keyword arguments:
 - `title`: title of the presentation, default: `[]`
 - `subtitle`: subtitle of the presentation, default: `none`
-- `author`: author of presentation, can be arbitrary contet, default: `none`
+- `author`: author of presentation, can be arbitrary content, default: `none`
 - `date`: date of the presentation, default: `none`
 - `extra`: some extra information, can be used for affiliation, instiution,
   logos, etc., default: `none`

@@ -4,7 +4,7 @@
 
 - The previously existing module `helpers` was transformed to `utils` and now
   contains many more useful features.
-- The modules `logic` and `utils` are now directly accesible when importing
+- The modules `logic` and `utils` are now directly accessible when importing
   Polylux (it was a bug that it did not work previously).
 - We finally have an ergonomic `#pause` function that does not expect the user
   to keep track of some counter themselves.

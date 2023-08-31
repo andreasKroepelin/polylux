@@ -45,7 +45,7 @@ this leads to severe lagging that somewhat defeats the purpose of Typst's speed.
 It appears reasonable that occasions are rare where one needs more than ten
 subslides for one slide.
 Therefore, ten is the default value for how often we try to create a new subslide.
-This should not produce noticable lag.
+This should not produce noticeable lag.
 (If it does for you, consider
 [creating an issue](https://github.com/andreasKroepelin/polylux/issues)
 so we can discuss this.)

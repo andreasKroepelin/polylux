@@ -21,8 +21,8 @@ the maximum is take again and that defines the number of PDF pages produced for
 one logical slide.**
 For example, suppose we have a slide with the following commands:
 - show something on subslides 1 and 3
-- show someting from subslide 2 to subslide 4
-- show someting until subslide 6
+- show something from subslide 2 to subslide 4
+- show something until subslide 6
 
 This results in 6 PDF pages for this logical slide.
 

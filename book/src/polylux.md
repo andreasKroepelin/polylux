@@ -10,7 +10,7 @@ display PDFs in the form of a slide show (usually by hitting the F5-key).
 
 
 Polylux gives you:
-- Elegant yet powerfull typesetting by the ever-improving Typst.
+- Elegant yet powerful typesetting by the ever-improving Typst.
 - Fully customisable slides.
 - Dynamic slides (or *overlays* or (dis-)appearing content, or however you want
   to call it).

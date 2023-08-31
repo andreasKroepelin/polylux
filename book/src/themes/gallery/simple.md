@@ -2,7 +2,7 @@
 
 ![simple](simple.png)
 
-This theme is rather unobstrusive and might still be considered bare-bones.
+This theme is rather unobtrusive and might still be considered bare-bones.
 It uses a minimal amount of colour and lets you define your slides' content very
 freely.
 

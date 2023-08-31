@@ -11,7 +11,7 @@ using
 ```typ
 {{#include ../IMPORT.typ}}
 ```
-you can direcly invoke them using `utils` and `logic`.
+you can directly invoke them using `utils` and `logic`.
 As a theme author, you have access to them due to the imports
 ```typ
 #import "../logic.typ"
