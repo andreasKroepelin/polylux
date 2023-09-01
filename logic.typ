@@ -51,7 +51,11 @@
 
 // matches equivalent transparency of "gray.lighten(50%)"
 #let cover-with-white-rect = cover-with-rect.with(fill: rgb(255, 255, 255, 213))
-#let cover-with-black-rect = cover-with-rect.with(fill: rgb(0, 0, 0, 213))
+// White cover was determined using a color picker over `gray.lighten(50%)`. Black cover
+// could theoretically be the *inverse* of this value (i.e., if white uses 213,
+// black can use 255 - 213 = 42), but in practice this leaves text too visible.
+// Using 127 more closely matches the visual contrast from the `white` variant.
+#let cover-with-black-rect = cover-with-rect.with(fill: rgb(0, 0, 0, 127))
 
 // States are normally defined at the top of the file by convention, but functions aren't
 // hoisted. So wait to populate the state until here, when functions are accessible
