@@ -6,7 +6,7 @@
 
 #let enable-handout-mode(flag) = handout-mode.update(flag)
 
-#let cover-with-rect(..cover-args, fill: auto, body) = {
+#let cover-with-rect(..cover-args, fill: auto, inline: true, body) = {
   if fill == auto {
     panic(
       "`auto` fill value is not supported until typst provides utilities to"
@@ -17,8 +17,7 @@
     fill = rgb(fill)
   }
 
-  // The extra `box` allows inline content to remain inline after being covered
-  box(layout(layout-size => {
+  let to-display = layout(layout-size => {
     style(styles => {
       let body-size = measure(body, styles)
       let bounding-width = calc.min(body-size.width, layout-size.width)
@@ -46,7 +45,12 @@
         rect(fill: fill, ..named, ..cover-args.pos())
       )
     })
-  }))
+  })
+  if inline {
+    box(to-display)
+  } else {
+    to-display
+  }
 }
 
 // matches equivalent transparency of "gray.lighten(50%)"
