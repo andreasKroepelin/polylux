@@ -1,6 +1,6 @@
 # How much longer? 🥱
 
-There are a handfull of features that let you display the progress of the
+There are a handful of features that let you display the progress of the
 presentation.
 
 The most simple one is directly displaying the current slide number.

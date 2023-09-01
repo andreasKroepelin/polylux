@@ -110,7 +110,7 @@ provided another number of content blocks than you expected.
 
 To make use of some of the functionality this template offers, you can access
 - the counter `logical-slide`, telling you the "page number" of a slide, but
-  without counting up on dynamical slides that produce mulitple PDF pages;
+  without counting up on dynamical slides that produce multiple PDF pages;
 - the state `section`, telling you what the user has currently set as the
   section name.
 

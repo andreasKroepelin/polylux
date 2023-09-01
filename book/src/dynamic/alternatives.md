@@ -20,7 +20,7 @@ than `Christopher` when using `#only` for that job.
 This somewhat disturbs the perception of the constant structure of the sentence
 and that only the names and kinds of ice cream change.
 
-To avoid such movement and only subsitute certain parts of content, you can use
+To avoid such movement and only substitute certain parts of content, you can use
 the `#alternatives` function.
 With it, our example becomes:
 ```typ
