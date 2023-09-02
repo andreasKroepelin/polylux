@@ -40,7 +40,7 @@
 #let last-slide-number = locate(loc => logic.logical-slide.final(loc).first())
 
 
-// HEIGHT FITTING
+// HEIGHT/WIDTH FITTING
 
 #let _size-to-pt(size, styles, container-dimension) = {
   let to-convert = size
@@ -126,6 +126,25 @@
         )
       })
     })
+  })
+}
+
+#let fit-to-width(width: 100%, content) = {
+  style(styles => {
+    let content-size = measure(content, styles)
+    let content-width = content-size.width
+    if width < content-width {
+      let ratio = width / content-width * 100%
+      // The first box keeps content from prematurely wrapping
+      let scaled = scale(
+        box(content, width: content-width), origin: top + left, x: ratio, y: ratio
+      )
+      // The second box lets typst know the post-scaled dimensions, since `scale`
+      // doesn't update layout information
+      box(scaled, width: width, height: content-size.height * ratio)
+    } else {
+      content
+    }
   })
 }
 
