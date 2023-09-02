@@ -60,7 +60,9 @@
   box(width: mutable-width, body)
 }
 
-#let fit-to-height(height, width: none, prescale-width: none, body) = {
+#let fit-to-height(
+  width: none, prescale-width: none, grow: true, shrink: true, height, body
+) = {
   // Place two labels with the requested vertical separation to be able to
   // measure their vertical distance in pt.
   // Using this approach instead of using `measure` allows us to accept fractions
@@ -113,29 +115,39 @@
         let w-ratio = mutable-width / size.width
         let ratio = calc.min(h-ratio, w-ratio) * 100%
 
-        let new-width = size.width * ratio
-        v(-available-height)
-        // If not boxed, the content can overflow to the next page even though it will fit.
-        // This is because scale doesn't update the layout information.
-        // Boxing in a container without clipping will inform typst that content
-        // will indeed fit in the remaining space
-        box(
-          width: new-width,
-          height: available-height,
-          scale(x: ratio, y: ratio, origin: top + left, boxed-content)
-        )
+        if (
+          (shrink and (ratio < 100%))
+          or (grow and (ratio > 100%))
+        ) {
+          let new-width = size.width * ratio
+          v(-available-height)
+          // If not boxed, the content can overflow to the next page even though it will
+          // fit. This is because scale doesn't update the layout information.
+          // Boxing in a container without clipping will inform typst that content
+          // will indeed fit in the remaining space
+          box(
+            width: new-width,
+            height: available-height,
+            scale(x: ratio, y: ratio, origin: top + left, boxed-content)
+          )
+        } else {
+          body
+        }
       })
     })
   })
 }
 
-#let fit-to-width(width, content) = {
+#let fit-to-width(grow: true, shrink: true, width, content) = {
   style(styles => {
     layout(layout-size => {
       let content-size = measure(content, styles)
       let content-width = content-size.width
       let width = _size-to-pt(width, styles, layout-size.width)
-      if width < content-width {
+      if (
+        (shrink and (width < content-width))
+        or (grow and (width > content-width))
+      ) {
         let ratio = width / content-width * 100%
         // The first box keeps content from prematurely wrapping
         let scaled = scale(
