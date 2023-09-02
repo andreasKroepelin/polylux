@@ -129,22 +129,25 @@
   })
 }
 
-#let fit-to-width(width: 100%, content) = {
+#let fit-to-width(width, content) = {
   style(styles => {
-    let content-size = measure(content, styles)
-    let content-width = content-size.width
-    if width < content-width {
-      let ratio = width / content-width * 100%
-      // The first box keeps content from prematurely wrapping
-      let scaled = scale(
-        box(content, width: content-width), origin: top + left, x: ratio, y: ratio
-      )
-      // The second box lets typst know the post-scaled dimensions, since `scale`
-      // doesn't update layout information
-      box(scaled, width: width, height: content-size.height * ratio)
-    } else {
-      content
-    }
+    layout(layout-size => {
+      let content-size = measure(content, styles)
+      let content-width = content-size.width
+      let width = _size-to-pt(width, styles, layout-size.width)
+      if width < content-width {
+        let ratio = width / content-width * 100%
+        // The first box keeps content from prematurely wrapping
+        let scaled = scale(
+          box(content, width: content-width), origin: top + left, x: ratio, y: ratio
+        )
+        // The second box lets typst know the post-scaled dimensions, since `scale`
+        // doesn't update layout information
+        box(scaled, width: width, height: content-size.height * ratio)
+      } else {
+        content
+      }
+    })
   })
 }
 
