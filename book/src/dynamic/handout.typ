@@ -8,4 +8,7 @@
   Some text.
   #uncover("3-")[You cannot always see this.]
   ...Or can you?
+  #pause
+
+  And what about this?
 ]

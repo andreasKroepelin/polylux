@@ -247,7 +247,13 @@
 }
 
 #let pause = {
-  pause-counter.step()
+  // We need to separate `locate`s because `repetitions` needs to be updated
+  // using the new value of `pause-counter`.
+  locate( loc => {
+    if not handout-mode.at(loc) {
+      pause-counter.step()
+    }
+  })
   locate( loc => {
     repetitions.update(rep => calc.max(rep, pause-counter.at(loc).first() + 1))
   })
