@@ -15,12 +15,20 @@
 #let rpd-iris = rgb(144, 122, 169)
 #let rpd-foam = rgb(86, 148, 159)
 
-#let rose-pine-dawn-theme(aspect-ratio: "16-9", body) = {
+#let _rpd-footer = state("_rpd-footer", none)
+
+#let rose-pine-dawn-theme(
+  aspect-ratio: "16-9",
+  footer: none,
+  body
+) = {
   set page(
     paper: "presentation-" + aspect-ratio,
     fill: rpd-base,
     margin: 1cm,
   )
+
+  _rpd-footer.update(footer)
   
   body
 }
@@ -63,7 +71,7 @@
     v(1fr)
   }
 
-  polylux-slide(body)
+  logic.polylux-slide(body)
 }
 
 #let slide(title: none, body) = {
@@ -76,8 +84,10 @@
       utils.polylux-progress(ratio => {
         place(bottom + right, dy: 1cm + (1 - ratio) * sun-radius, circle(radius: sun-radius, stroke: none, fill: sun-color))
       })
-      h(1fr)
+
       set text(size: 15pt, fill: rpd-muted)
+      _rpd-footer.display()
+      h(1fr)
       // sym.brace.l
       logic.logical-slide.display()
       // sym.space
@@ -100,7 +110,7 @@
     body
     v(.2fr)
   }
-  polylux-slide(body)
+  logic.polylux-slide(body)
 }
 
 #let focus-slide(body) = {
@@ -115,7 +125,7 @@
     body
     v(.1fr)
   }
-  polylux-slide(body)
+  logic.polylux-slide(body)
 }
 
 #let alert-love = text.with(fill: rpd-love)
