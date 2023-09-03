@@ -266,7 +266,7 @@
 
 #let polylux-slide(body) = {
   locate( loc => {
-    if counter(page).at(loc).first() > 1 {
+    if logical-slide.at(loc).first() > 0 {
       pagebreak(weak: true)
     }
   })
