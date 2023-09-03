@@ -10,7 +10,7 @@ It has the effect that all dynamic visibility of elements _that reserve space_
 is switched off.
 For example,
 ```typ
-{{#include handout.typ:5:11}}
+{{#include handout.typ:5:14}}
 ```
 becomes:
 
