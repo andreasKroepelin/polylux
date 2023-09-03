@@ -247,7 +247,7 @@
 }
 
 #let pause = {
-  // We need to separate `locate`s because `repetitions` needs to be updated
+  // We need two separate `locate`s because `repetitions` needs to be updated
   // using the new value of `pause-counter`.
   locate( loc => {
     if not handout-mode.at(loc) {
