@@ -1,7 +1,9 @@
 function extract-package
     if test (git branch --show-current) != "release"
-        echo "You are not on the release branch!"
-        return 1
+        if not contains unreleased $argv
+            echo "You are not on the release branch!"
+            return 1
+        end
     end
 
     set target $argv[1]
