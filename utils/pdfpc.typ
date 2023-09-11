@@ -55,7 +55,7 @@
   }
 
   if last-minutes != none {
-    [ #metadata((t: "LastMinutes", v: last_minutes)) <pdfpc> ]
+    [ #metadata((t: "LastMinutes", v: last-minutes)) <pdfpc> ]
   }
 
   if note-font-size != none {
