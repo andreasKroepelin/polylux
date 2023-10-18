@@ -137,15 +137,8 @@
   let subslides = subslides-contents.map(it => it.first())
   let contents = subslides-contents.map(it => it.last())
   style(styles => {
-    let sizes = contents.map(c => measure(c, styles))
-    let max-width = calc.max(..sizes.map(sz => sz.width))
-    let max-height = calc.max(..sizes.map(sz => sz.height))
     for (subslides, content) in subslides-contents {
-      only(subslides, box(
-        width: max-width,
-        height: max-height,
-        align(position, content)
-      ))
+      only(subslides, content)
     }
   })
 }
