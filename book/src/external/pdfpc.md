@@ -105,14 +105,27 @@ assemble the correct `.pdfpc` file yourself.
 However, this tedious task is better solved by the `polylux2pdfpc` tool.
 
 ### Installation
+#### From Source
 If you have [Rust](https://www.rust-lang.org/tools/install) installed, you can
 simply run
 ```sh
 cargo install --git https://github.com/andreasKroepelin/polylux/ --branch release
 ```
+
+#### Arch Linux
 If you use Arch Linux btw, you can also install `polylux2pdfpc` from the AUR
 package [polylux2pdfpc-git](https://aur.archlinux.org/packages/polylux2pdfpc-git)
 (thank you to Julius Freudenberger!)
+
+
+#### NixOS
+1. Add the flake to your own `flake.nix` as input:
+`polylux.url = "github:andreasKroepelin/polylux";`
+2. Use the package `inputs.polylux.defaultPackage.${pkgs.system}`, which will build `pdfpc-extractor`
+
+For development purposes, run
+- `nix build` to build the package into the `result` directory
+- `nix develop` to enter a development shell to run `cargo` commands
 
 ### Usage
 You invoke `polylux2pdfpc` with the same arguments you would also give to `typst
