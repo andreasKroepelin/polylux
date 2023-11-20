@@ -1,12 +1,12 @@
 # Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
 This is a package for creating presentation slides in [Typst](https://typst.app/).
-Read the [book](https://andreaskroepelin.github.io/polylux/book) to learn all
-about it and click [here](https://andreaskroepelin.github.io/polylux/book/changelog.html)
+Read the [book](https://polylux.dev/book) to learn all
+about it and click [here](https://polylux.dev/book/changelog.html)
 to see what's new!
 
 If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/polylux)!
 
-[![Book badge](https://img.shields.io/badge/docs-book-green)](https://andreaskroepelin.github.io/polylux/book)
+[![Book badge](https://img.shields.io/badge/docs-book-green)](https://polylux.dev/book)
 ![GitHub](https://img.shields.io/github/license/andreasKroepelin/polylux)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
 ![GitHub Repo stars](https://img.shields.io/github/stars/andreasKroepelin/polylux)
@@ -50,7 +50,7 @@ For the bare-bones, do-it-yourself experience, all you need is:
 ]
 ```
 This code produces these PDF pages:
-![minimal example](https://andreaskroepelin.github.io/polylux/book/minimal.png)
+![minimal example](https://polylux.dev/book/minimal.png)
 
 From there, you can either start creatively adapting the looks to your likings
 or you can use one of the provided themes.
@@ -103,25 +103,25 @@ It is still very unintrusive but gives you some sensible defaults:
 ]
 ```
 This time, we obtain these PDF pages:
-![simple example](https://andreaskroepelin.github.io/polylux/book/themes/gallery/simple.png)
+![simple example](https://polylux.dev/book/themes/gallery/simple.png)
 
 As you can see, a theme can introduce its own types of slides (here: `title-slide`,
 `slide`, `focus-slide`, `centered-slide`) to let you quickly switch between
 different layouts.
 The book
-[has more infos](https://andreaskroepelin.github.io/polylux/book/themes/themes.html)
+[has more infos](https://polylux.dev/book/themes/themes.html)
 on how to use (and create your own) themes.
 
 
 For dynamic content, Polylux also provides [a convenient API for complex
-overlays](https://andreaskroepelin.github.io/polylux/book/dynamic/dynamic.html).
+overlays](https://polylux.dev/book/dynamic/dynamic.html).
 
 If you use [pdfpc](https://pdfpc.github.io/) to display your slides, you can rely
-on [Polylux' support for it](https://andreaskroepelin.github.io/polylux/book/external/pdfpc.html)
+on [Polylux' support for it](https://polylux.dev/book/external/pdfpc.html)
 and create speaker notes, hide slides, configure the timer and more!
 
 Visit the
-[book](https://andreaskroepelin.github.io/polylux/book)
+[book](https://polylux.dev/book)
 for more details or take a look at the
 [demo PDF](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
 where you can see the features of this template in action.
