@@ -10,7 +10,6 @@
       pdfpc.insert(lower(item.t.at(0)) + item.t.slice(1), item.v)
     }
     let pages = ()
-    let current-label = 0
     for slide in slides {
       let page = (
         idx: 0,
