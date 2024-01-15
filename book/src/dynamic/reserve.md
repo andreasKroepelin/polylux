@@ -1,5 +1,5 @@
 # Reserve space or not?
-When you want to specify that a certain piece of content should be displayed one
+When you want to specify that a certain piece of content should be displayed on
 some subslides but not on others, the first question should be what should happen
 on the subslides it is _not_ displayed on.
 You could either want
