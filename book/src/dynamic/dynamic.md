@@ -1,7 +1,7 @@
 # Dynamic slides
 
 The PDF format does not (trivially) allow to include animations, as one would be
-used to from, say, Powerpoint.
+used to from, say, PowerPoint.
 The solution PDF-based presentation slides use is to create multiple PDF pages
 for one slide, each with slightly different content.
 This enables us to have some basic dynamic elements on our slides.
