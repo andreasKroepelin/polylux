@@ -38,6 +38,8 @@
           }
         } else if item.t == "Note" {
           page.note = item.v
+        } else {
+          pdfpc.insert(lower(item.t.at(0)) + item.t.slice(1), item.v)
         }
       }
       pages.push(page)
