@@ -28,7 +28,7 @@
     package.
 
     For a full documentation, read the
-    #link("https://andreaskroepelin.github.io/polylux/book/")[online book].
+    #link("https://polylux.dev/book/")[online book].
 ]
 
 #slide(title: "A title")[
@@ -320,7 +320,7 @@
     If you want to create your own design for slides, you can define custom
     themes!
 
-    #link("https://andreaskroepelin.github.io/polylux/book/themes.html#create-your-own-theme")[The book]
+    #link("https://polylux.dev/book/themes/your-own.html")[The book]
     explains how to do so.
 ]
 
