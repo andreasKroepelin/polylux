@@ -1,0 +1,31 @@
+name: Automatic tests
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: imagemagick cargo
+          version: 1.0
+      - name: Install just from crates.io
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: just
+      - uses: yusancky/setup-typst@v2
+        id: setup-typst
+        with:
+          version: 'v0.6.0'
+      - run: |
+          just test
