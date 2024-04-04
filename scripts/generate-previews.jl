@@ -38,14 +38,14 @@ function montage(imgs, annotation)
 		annotation
 	end
 
-	
+
 	a = min(max(ceil(Int, sqrt(n)), 3), n)
 	b = ceil(Int, n / a)
 	b, a = minmax(a, b)
 	@assert a * b >= n
 	idcs = CartesianIndices((1:a, 1:b))
 	dims = size(first(imgs)) .* (b, a) .* .6 |> reverse
-	
+
 	plt = plot(
 		size = dims,
 		background = :lightgray,
@@ -147,6 +147,7 @@ generate_previews([
 	typ2png(path = gallery, file = "metropolis"),
 	typ2png(path = gallery, file = "university"),
 	typ2png(path = gallery, file = "bipartite"),
+	typ2png(path = gallery, file = "ratio"),
 	typ2png(path = utils, file = "side-by-side"),
 	typ2png(path = utils, file = "side-by-side-kwargs"),
 	typ2png(path = utils, file = "fill-remaining"),
