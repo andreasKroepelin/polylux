@@ -29,14 +29,16 @@ properly, use `#polylux-outline` instead.
 
 The theme is highly customizable! If there's something you don't like or want to tweak, you probably can.
 
-### The basics
+### The essentials
 
+- `aspect-ratio`: The aspect ratio (16-9 by default).
+- `cover`: Wether to include the cover page.
 - `title`: Presentation title content
 - `abstract`: An abstract or subtitle for your work. Can be none to disable.
 - `authors`: An array of objects made with the custom `author(name:, affiliation:, email: )` method.
 - `date`: A datetime object, defaults to today.
-- `keywords`: Output document keywords to set.
 - `version`: A document version to display. Something like "Draft" or "1.0".
+- `keywords`: Output document keywords to set.
 
 ### The tweaks
 
@@ -63,6 +65,25 @@ The theme is highly customizable! If there's something you don't like or want to
 - `progress-overlay-color`: Progress bar overlay color.
 - `progress-text-color`: Progress bar text color.
 
+## Slide functions
+
+`ratio` provides the following custom slide functions:
+
+- `title-slide(title, authors, abstract, date, version, content, register-section)` with all keyword arguments:
+
+  - `title`: Presentation title content. Default to none.
+  - `abstract`: An abstract or subtitle for your work. Defaults to none.
+  - `authors`: An array of objects made with the custom `author(name:, affiliation:, email: )` method. Defaults to none.
+  - `date`: A datetime object, defaults to none.
+  - `version`: A document version to display. Something like "Draft" or "1.0". Defaults to none.
+  - `content`: Raw content to include on the page. Useful if you don't like the default text layout.
+  - `register-section`: Whether the given title should be registered as a section in the outline and navigation.
+
+- `slide(title)[body]` with a title keyword argument and body positional.
+
+  - `title`: Section title will be added as a heading, too. Mostly for compatibility purposes with other themes.
+  - `body`: Your content such that you can type `#slide[my foo is my bar]`
+
 ## Additional features
 
 We all know that themes and styles work all of the time 99% of the time.
@@ -73,6 +94,9 @@ Ergo, if you would like to (temporarily) turn off the "link anchor" that `ratio`
 ```
 
 Any of the initialization options works this way!
+
+For your convenience, there's also a `palette` dictionary with a bunch of matching colors to choose
+from.
 
 ## Example code
 

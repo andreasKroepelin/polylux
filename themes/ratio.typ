@@ -323,12 +323,12 @@
 
 // Ratio style slide.
 #let slide(title: none, body) = {
-  let content = {
-    if title != none {
+  let content = pad(left: 1em, right: 2em)[
+    #if title != none {
       heading(level: 1, title)
     }
-    pad(left: 1em, right: 2em, body)
-  }
+    #body
+  ]
   let header = ratio-header()
   let footer = ratio-footer()
   logic.polylux-slide(grid(
