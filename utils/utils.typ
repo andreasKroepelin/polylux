@@ -5,14 +5,30 @@
 // SECTIONS
 
 #let sections-state = state("polylux-sections", ())
-#let register-section(name) = locate( loc => {
-  sections-state.update(sections => {
-    sections.push((body: name, loc: loc))
-    sections
+#let subsections-state = state("polylux-subsections", ())
+
+#let register-section(name) = locate(loc => {
+  sections-state.update(s => {
+    s.push((body: name, loc: loc))
+    s
+  })
+  subsections-state.update(s => {
+    s.push(())
+    s
   })
 })
 
-#let current-section = locate( loc => {
+#let register-subsection(name) = locate(loc => {
+  subsections-state.update(s => {
+    if s.len() == 0 {
+      s.push(())
+    }
+    s.last().push((body: name, loc: loc))
+    s
+  })
+})
+
+#let current-section = locate(loc => {
   let sections = sections-state.at(loc)
   if sections.len() > 0 {
     sections.last().body
@@ -21,24 +37,38 @@
   }
 })
 
-#let polylux-outline(enum-args: (:), padding: 0pt) = locate( loc => {
+#let current-subsection = locate(loc => {
+  let subsections = subsections-state.at(loc)
+  if subsections.len() > 0 {
+    let arr = subsections.last()
+    if arr.len() > 0 {
+      arr.last().body
+    } else {
+      []
+    }
+  } else {
+    []
+  }
+})
+
+#let polylux-outline(enum-args: (:), padding: 0pt) = locate(loc => {
   let sections = sections-state.final(loc)
   pad(padding, enum(
     ..enum-args,
-    ..sections.map(section => link(section.loc, section.body))
+    ..sections.map(section => link(section.loc, section.body)),
   ))
 })
 
-
 // PROGRESS
 
-#let polylux-progress(ratio-to-content) = locate( loc => {
-  let ratio = logic.logical-slide.at(loc).first() / logic.logical-slide.final(loc).first()
-  ratio-to-content(ratio)
-})
+#let polylux-progress(ratio-to-content) = locate(
+  loc => {
+    let ratio = logic.logical-slide.at(loc).first() / logic.logical-slide.final(loc).first()
+    ratio-to-content(ratio)
+  },
+)
 
 #let last-slide-number = locate(loc => logic.logical-slide.final(loc).first())
-
 
 // HEIGHT FITTING
 
@@ -78,65 +108,81 @@
     hidden#after-label
   ]
 
-  locate(loc => {
-    let before = query(selector(before-label).before(loc), loc)
-    let before-pos = before.last().location().position()
-    let after = query(selector(after-label).before(loc), loc)
-    let after-pos = after.last().location().position()
+  locate(
+    loc => {
+      let before = query(selector(before-label).before(loc), loc)
+      let before-pos = before.last().location().position()
+      let after = query(selector(after-label).before(loc), loc)
+      let after-pos = after.last().location().position()
 
-    let available-height = after-pos.y - before-pos.y
+      let available-height = after-pos.y - before-pos.y
 
-    style(styles => {
-      layout(container-size => {
-        // Helper function to more easily grab absolute units
-        let get-pts(body, w-or-h) = {
-          let dim = if w-or-h == "w" {container-size.width} else {container-size.height}
-          _size-to-pt(body, styles, dim)
-        }
+      style(
+        styles => {
+          layout(
+            container-size => {
+              // Helper function to more easily grab absolute units
+              let get-pts(body, w-or-h) = {
+                let dim = if w-or-h == "w" { container-size.width } else { container-size.height }
+                _size-to-pt(body, styles, dim)
+              }
 
-        // Provide a sensible initial width, which will define initial scale parameters.
-        // Note this is different from the post-scale width, which is a limiting factor
-        // on the allowable scaling ratio
-        let boxed-content = _limit-content-width(
-          width: prescale-width, body, container-size, styles
-        )
+              // Provide a sensible initial width, which will define initial scale parameters.
+              // Note this is different from the post-scale width, which is a limiting factor
+              // on the allowable scaling ratio
+              let boxed-content = _limit-content-width(width: prescale-width, body, container-size, styles)
 
-        // post-scaling width
-        let mutable-width = width
-        if width == none {
-          mutable-width = container-size.width
-        }
-        mutable-width = get-pts(mutable-width, "w")
+              // post-scaling width
+              let mutable-width = width
+              if width == none {
+                mutable-width = container-size.width
+              }
+              mutable-width = get-pts(mutable-width, "w")
 
-        let size = measure(boxed-content, styles)
-        let h-ratio = available-height / size.height
-        let w-ratio = mutable-width / size.width
-        let ratio = calc.min(h-ratio, w-ratio) * 100%
+              let size = measure(boxed-content, styles)
+              let h-ratio = available-height / size.height
+              let w-ratio = mutable-width / size.width
+              let ratio = calc.min(h-ratio, w-ratio) * 100%
 
-        let new-width = size.width * ratio
-        v(-available-height)
-        // If not boxed, the content can overflow to the next page even though it will fit.
-        // This is because scale doesn't update the layout information.
-        // Boxing in a container without clipping will inform typst that content
-        // will indeed fit in the remaining space
-        box(
-          width: new-width,
-          height: available-height,
-          scale(x: ratio, y: ratio, origin: top + left, boxed-content)
-        )
-      })
-    })
-  })
+              let new-width = size.width * ratio
+              v(-available-height)
+              // If not boxed, the content can overflow to the next page even though it will fit.
+              // This is because scale doesn't update the layout information.
+              // Boxing in a container without clipping will inform typst that content
+              // will indeed fit in the remaining space
+              box(
+                width: new-width,
+                height: available-height,
+                scale(x: ratio, y: ratio, origin: top + left, boxed-content),
+              )
+            },
+          )
+        },
+      )
+    },
+  )
 }
 
 // SIDE BY SIDE
 
 #let side-by-side(columns: none, gutter: 1em, ..bodies) = {
   let bodies = bodies.pos()
-  let columns = if columns ==  none { (1fr,) * bodies.len() } else { columns }
+  let columns = if columns == none { (1fr,) * bodies.len() } else { columns }
   if columns.len() != bodies.len() {
     panic("number of columns must match number of content arguments")
   }
 
   grid(columns: columns, gutter: gutter, ..bodies)
+}
+
+// HELPERS
+
+// Guaranteed array helper. Users often supply a single argument to something that
+// should be an array.
+#let as_array(value) = {
+  if type(value) == array {
+    value
+  } else {
+    (value,)
+  }
 }
