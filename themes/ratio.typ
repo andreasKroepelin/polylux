@@ -373,9 +373,9 @@
   style-headings: true,
   // Whether to apply the custom link style.
   style-links: true,
-  // What to show in the header ("navigation", "progress", none).
+  // What to show in the header ("navigation", "progress", content, none).
   header: "navigation",
-  // What to show in the footer ("navigation", "progress", none).
+  // What to show in the footer ("navigation", "progress", content, none).
   footer: "progress",
   // Title background color.
   title-background-color: palette.secondary-800,
@@ -393,7 +393,7 @@
   title-version-text: (size: 0.8em, weight: "light"),
   // Color for external link anchors.
   link-color: palette.primary-500,
-  // Header color.
+  // Heading color.
   heading-color: palette.secondary-800,
   // Stroke color for tables and such.
   stroke-color: palette.secondary-100,
@@ -404,11 +404,11 @@
   // Navigation text options for all text.
   navigation-text: (fill: palette.secondary-200, size: 0.7em),
   // Navigation text overrides for past sections.
-  navigation-text-past: (weight: "thin"),
+  navigation-text-past: (:),
   // Navigation text overrides for the current section.
-  navigation-text-current: (:),
+  navigation-text-current: (weight: "bold"),
   // Navigation text overrides for future sections.
-  navigation-text-future: (weight: "thin"),
+  navigation-text-future: (:),
   // Navigation shape for past subsections.
   navigation-shape-past: box(height: 3.8pt, circle(
     radius: 1.7pt,
