@@ -98,7 +98,7 @@ You can also manually register a new section using:
 #slide[
 = Overrides
 
-#set text(size: 0.8em)
+#set text(size: 15pt)
 We all know that layouts work all of the time 99% of the time.
 
 The `ratio-update` function works by updating options (dictionaries) recursively

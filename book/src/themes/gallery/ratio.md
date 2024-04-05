@@ -67,7 +67,8 @@ The `options` keyword argument is special, it takes a dictionary with any of the
   - Notice the `s`! It's an array of text styles for increasing heading depth!
 - `heading-alignments`: The alignments to apply to headings.
   - Notice the `s`! It's an array of alignments for increasing heading depth!
-- `slide-padding`: Padding for content slides (arguments to `pad()`).
+- `slide-box`: Arguments for the slide content's box container.
+- `slide-align`: Slide content alignment for content slides.
 - `link-color`: The color to apply to the link anchor.
 - `stroke-color`: The color to apply to strokes such as in tables.
 - `fill-color`: The color to apply in fills such as in code blocks.
@@ -102,9 +103,10 @@ The `options` keyword argument is special, it takes a dictionary with any of the
   - `title`: Section title will be added as a heading, too. Mostly for compatibility purposes with other themes.
   - `header`: Header content override. Default is `auto` which draws the header according to the theme options. Set it to `none` to disable for this slide.
   - `footer`: Footer content override. Default is `auto` which draws the footer according to the theme options. Set it to `none` to disable for this slide.
+  - `box`: Arguments to the slide's box. Set it to `auto` which draws from theme options, `none` to disable the use of a box or some other arguments to the `box()` function.
+  - `align`: Slide content alignment. Set it to `auto` to draw from theme options, `none` to disable further alignment.
   - `body`: Your content such that you can type `#slide[my foo is my bar]`
-- `centered-slide(header, footer)[body]`
-
+- `centered-slide(header, footer)[body]` same as `slide` with all content `center + horizon`
 - `bare-slide[body]`: For now just an alias of `polylux-slide`
 
 See the [Customization](#customization) feature for ways to change these on the fly!

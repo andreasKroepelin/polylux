@@ -110,8 +110,13 @@
   heading-texts: ((fill: ratio-palette.secondary-800),),
   // Heading alignments in order of heading depth.
   heading-alignments: (center, left),
-  // Slide padding.
-  slide-padding: (left: 2em, right: 2.5em, top: 1em, bottom: 1em),
+  // Slide content box options.
+  slide-box: (
+    width: 100%,
+    height: 100%,
+    inset: (left: 2em, right: 2.5em, top: 1em, bottom: 1em),
+    clip: true,
+  ),
   // Content slide alignment.
   slide-align: left + horizon,
   // Color for external link anchors.
@@ -484,18 +489,39 @@
   context ratio-bar(ratio-options.get().at("footer", default: none))
 }
 
+// Ratio content box helper. Wraps it in a box+align combination.
+#let ratio-content(box-args: auto, align-arg: auto, body) = {
+  context {
+    let options = ratio-options.get()
+    let body = if align-arg == auto {
+      align(options.slide-align, body)
+    } else if align-arg == none {
+      body
+    } else {
+      align(align-arg, body)
+    }
+    let body = if box-args == auto {
+      box(..options.slide-box, body)
+    } else if box-args == none {
+      body
+    } else {
+      box(..box-args, body)
+    }
+    body
+  }
+}
+
 // CONTENT SLIDES
 
 // Ratio style slide.
-#let slide(title: none, header: auto, footer: auto, body) = {
-  let content = context {
-    pad(..ratio-options.get().slide-padding)[
-      #if title != none {
-        heading(level: 1, title)
-      }
-      #body
-    ]
+#let slide(title: none, header: auto, footer: auto, box: auto, align: auto, body) = {
+  let inner = {
+    if title != none {
+      heading(level: 1, title)
+    }
+    body
   }
+  let content = ratio-content(box-args: box, align-arg: align, inner)
   let header = if header == auto {
     ratio-header()
   } else {
@@ -515,11 +541,14 @@
 }
 
 // Ratio style centered slide.
-#let centered-slide(header: auto, footer: auto, body) = {
+#let centered-slide(title: none, header: auto, footer: auto, box: auto, body) = {
   slide(
+    title: title,
     header: header,
     footer: footer,
-    block(width: 100%, height: 100%, place(center + horizon, body)),
+    box: box,
+    align: center + horizon,
+    body,
   )
 }
 
