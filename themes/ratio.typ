@@ -151,7 +151,7 @@
 #let ratio-options = state("ratio-options", ratio-defaults)
 
 // Register new options or replace existing keys.
-#let register-options(options) = {
+#let ratio-register(options) = {
   ratio-options.update(s => {
     s = s + options
     s
@@ -159,7 +159,7 @@
 }
 
 // Update options by replacing values and updating dictionaries.
-#let update-options(options) = {
+#let ratio-update(options) = {
   ratio-options.update(s => utils.update-dict(s, options))
 }
 
@@ -340,7 +340,7 @@
 // CONTENT SLIDE HELPERS
 
 // Ratio style section navigation bar. Draws everything from options.
-#let navigation() = {
+#let ratio-navigation() = {
   locate(
     loc => {
       // Get the variables at this stage or final.
@@ -430,7 +430,7 @@
 }
 
 // Ratio progress bar. Draws everything from options.
-#let progress() = {
+#let ratio-progress() = {
   locate(loc => {
     let options = ratio-options.at(loc)
     let current = loc.page()
@@ -451,9 +451,9 @@
 // Ratio header or footer bar helper.
 #let ratio-bar(kind) = {
   if kind == "navigation" {
-    navigation()
+    ratio-navigation()
   } else if kind == "progress" {
-    progress()
+    ratio-progress()
   } else if kind == none {
     []
   } else {
@@ -571,7 +571,7 @@
     keywords: keywords,
     version: version,
   )
-  update-options(options)
+  ratio-update(options)
 
   // Text setup.
   set par(leading: 0.7em, justify: true, linebreaks: "optimized")

@@ -26,19 +26,19 @@ later.
 By default link styling is on, but let's force it.
 
 ```typ
-#register-options((style-links: true))
+#ratio-register((style-links: true))
 ```
 
-#register-options((style-links: true))
+#ratio-register((style-links: true))
 Results in: #link("https://github.com")[GitHub]
 
 I would like a non-styled link now...
 
 ```typ
-#register-options((style-links: false))
+#ratio-register((style-links: false))
 ```
 
-#register-options((style-links: false))
+#ratio-register((style-links: false))
 Results in: #link("https: //github.com")[GitHub]
 
 Feels good right! No lock in.
@@ -101,19 +101,19 @@ You can also manually register a new section using:
 #set text(size: 0.8em)
 We all know that layouts work all of the time 99% of the time.
 
-The `update-options` function works by updating options (dictionaries)
-recursively and thus only updates what you specify.
+The `ratio-update` function works by updating options (dictionaries) recursively
+and thus only updates what you specify.
 
-The `register-options` function works by replacing values *completely*.
+The `ratio-register` function works by replacing values *completely*.
 
 There's a handy `ratio-palette` variable with a pre-configured color palette,
 but feel free to bring your own!
 
 ```typ
 // Only update the heading color, not it's size:
-#update-options((title-text: (fill: ratio-palette.warning))) // <- Notice the palette!
+#ratio-update((title-text: (fill: ratio-palette.warning))) // <- Notice the palette!
 // Next title slide will feature a green background.
-#register-options((title-hero-color: color.hsl(green)))
+#ratio-register((title-hero-color: color.hsl(green)))
 
 // Let's add some foreground and background content this time. We can place it anywhere!
 #let fg = place(horizon + left, block(inset: 10%, width: 100%)[foreground.])
@@ -126,8 +126,8 @@ but feel free to bring your own!
 // This becomes...=>
 ```
 ]
-#update-options((title-text: (fill: ratio-palette.warning)))
-#register-options((title-hero-color: color.hsl(green)))
+#ratio-update((title-text: (fill: ratio-palette.warning)))
+#ratio-register((title-hero-color: color.hsl(green)))
 #let fg = place(horizon + left, block(inset: 10%, width: 100%)[foreground.])
 #let bg = place(
   horizon + left,

@@ -119,11 +119,11 @@ You can change the options in one of two ways:
 ```typ
 // Register: replaces the option values given in this dictionary completely.
 // For example, this disables the link styling with the little anchor:
-#register-options((style-links: false))
+#ratio-register((style-links: false))
 
 // Update: recursively updates any dictionaries (i.e. for `text()` related items).
 // For example, this only replaces the title text's fill and leaves other options intact.
-#update-options((title-text: (fill: ratio-palette.danger)))
+#ratio-update((title-text: (fill: ratio-palette.danger)))
 ```
 
 You can put these overrides halfway through your document to change things on the fly!
