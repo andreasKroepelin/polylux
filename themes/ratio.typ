@@ -690,11 +690,36 @@
   }
 
   // Set raw font to Fira Code if available.
-  show raw: it => {
+  show raw.where(block: true): it => {
     context {
-      if ratio-options.get().style-raw {
+      let options = ratio-options.get()
+      if options.style-raw {
         set text(font: "Fira Code")
+        block(
+          inset: (x: .3em),
+          fill: options.fill-color.lighten(25%),
+          outset: (y: .5em),
+          radius: .15em,
+          it,
+        )
+      } else {
         it
+      }
+    }
+  }
+
+  show raw.where(block: false): it => {
+    context {
+      let options = ratio-options.get()
+      if options.style-raw {
+        set text(font: "Fira Code")
+        box(
+          fill: options.fill-color,
+          inset: (x: .3em),
+          outset: (y: .3em),
+          radius: .15em,
+          it,
+        )
       } else {
         it
       }
