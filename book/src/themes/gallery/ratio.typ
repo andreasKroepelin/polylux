@@ -13,7 +13,7 @@
   options: (:),
 )
 
-#center-slide[
+#centered-slide[
   = Welcome!
 ]
 

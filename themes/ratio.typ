@@ -500,7 +500,7 @@
 }
 
 // Ratio style centered slide.
-#let center-slide(header: auto, footer: auto, body) = {
+#let centered-slide(header: auto, footer: auto, body) = {
   slide(
     header: header,
     footer: footer,
