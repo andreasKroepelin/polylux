@@ -3,12 +3,14 @@
 #import themes.ratio: *
 
 #show: ratio-theme.with(
+  aspect-ratio: "16-9",
   title: [Ratio theme],
   abstract: [A theme about navigation and customization],
-  authors: (author("Theme Author", "Typst Community", "foo@bar.quux"),),
-  navigation-text: (fill: palette.secondary-200, size: 0.4em),
+  authors: (ratio-author("Theme Author", "Typst Community", "foo@bar.quux"),),
   version: "1.0.0",
   date: datetime(year: 2024, month: 4, day: 4),
+  keywords: ("foo", "bar"),
+  options: (:),
 )
 
 #slide[
@@ -98,23 +100,39 @@ You can also manually register a new section using:
 #slide[
 = Overrides
 
+#set text(size: 0.8em)
 We all know that layouts work all of the time 99% of the time.
 
-To turn off or change some of Ratio's slides on those occasions, you can use:
+The `update-options` function works by updating options (dictionaries)
+recursively and thus only updates what you specify.
+
+The `register-options` function works by replacing values *completely*.
+
+There's a handy `palette` variable with a pre-configured color palette, but feel
+free to bring your own!
 
 ```typ
+// Only update the heading color, not it's size:
+#update-options((title-text: (fill: palette.warning))) // <- Notice the palette!
 // Next title slide will feature a green background.
-#register-options((title-background-color: color.hsl(green)))
+#register-options((title-hero-color: color.hsl(green)))
 
-// Let's add some raw content this time. We can place it anywhere!
-#let raw = align(horizon + center, "raw.")
-#title-slide(title: "Green", register-section: true, content: raw)
+// Let's add some foreground and background content this time. We can place it anywhere!
+#let fg = place(horizon + left, block(inset: 10%, width: 100%)[foreground.])
+#let bg = place(
+  horizon + left,
+  block(inset: 30%, width: 100%)[#text(weight: "bold")[background.]],
+)
+#title-slide(title: "Green", register-section: true, foreground: fg, background: bg)
+
+// This becomes...=>
 ```
 ]
-
-// Next title slide will feature a green background.
-#register-options((title-background-color: color.hsl(green)))
-
-// Let's add some raw content this time. We can place it anywhere!
-#let raw = align(horizon + center, "raw.")
-#title-slide(title: "Green", register-section: true, content: raw)
+#update-options((title-text: (fill: palette.warning)))
+#register-options((title-hero-color: color.hsl(green)))
+#let fg = place(horizon + left, block(inset: 10%, width: 100%)[foreground.])
+#let bg = place(
+  horizon + left,
+  block(inset: 30%, width: 100%)[#text(weight: "bold")[background.]],
+)
+#title-slide(title: "Green", register-section: true, foreground: fg, background: bg)

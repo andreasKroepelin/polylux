@@ -179,10 +179,22 @@
 
 // Guaranteed array helper. Users often supply a single argument to something that
 // should be an array.
-#let as_array(value) = {
+#let as-array(value) = {
   if type(value) == array {
     value
   } else {
     (value,)
   }
+}
+
+// Recursively update a dictionary.
+#let update-dict(dict, update) = {
+  for ((key, value)) in update.pairs() {
+    if type(value) == dictionary {
+      dict.insert(key, update-dict(dict.at(key, default: (:)), value))
+    } else {
+      dict.insert(key, value)
+    }
+  }
+  dict
 }
