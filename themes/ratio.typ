@@ -77,13 +77,17 @@
   keywords: (),
   // The version of your work.
   version: "Draft",
-  // Presentation author
+  // Default font settings.
+  text: (font: ("Cantarell", "Open Sans"), size: 18pt),
   // Whether to apply some heading styling.
   style-headings: true,
   // Whether to apply the custom link style.
   style-links: true,
   // Whether to apply some raw styling.
   style-raw: true,
+  // What to show as the "hero" or background image on title slides. `auto` means
+  // the theme's default background (auto, content, none).
+  hero: auto,
   // What to show in the header ("navigation", "progress", content, none).
   header: "navigation",
   // What to show in the footer ("navigation", "progress", content, none).
@@ -102,10 +106,16 @@
   title-abstract-text: (:),
   // Title date and version text override.
   title-version-text: (size: 0.8em, weight: "light"),
+  // Heading color.
+  heading-texts: ((fill: ratio-palette.secondary-800),),
+  // Heading alignments in order of heading depth.
+  heading-alignments: (center, left),
+  // Slide padding.
+  slide-padding: (left: 2em, right: 2.5em, top: 1em, bottom: 1em),
+  // Content slide alignment.
+  slide-align: left + horizon,
   // Color for external link anchors.
   link-color: ratio-palette.primary-500,
-  // Heading color.
-  heading-text: (fill: ratio-palette.secondary-800),
   // Stroke color for tables and such.
   stroke-color: ratio-palette.secondary-100,
   // Fill color for code blocks and such.
@@ -296,19 +306,22 @@
   foreground: none,
   // Background content to show (behind regular title page content).
   background: none,
-  // Whether to draw the hero image.
-  hero: true,
+  // What to show as the "hero" or background image on title slides.
+  // auto means the theme's default background (auto, content, none).
+  hero: auto,
   // Whether to register this slide title as a section.
   register-section: false,
 ) = {
   let content = context {
     let options = ratio-options.get()
 
-    if hero {
+    if hero == auto {
       let fill = options.title-hero-color
       if fill != none {
         ratio-hero(fill: fill)
       }
+    } else {
+      place(top + left, block(width: 100%, height: 100%, hero))
     }
 
     if background != none {
@@ -475,12 +488,14 @@
 
 // Ratio style slide.
 #let slide(title: none, header: auto, footer: auto, body) = {
-  let content = pad(left: 1em, right: 2em)[
-    #if title != none {
-      heading(level: 1, title)
-    }
-    #body
-  ]
+  let content = context {
+    pad(..ratio-options.get().slide-padding)[
+      #if title != none {
+        heading(level: 1, title)
+      }
+      #body
+    ]
+  }
   let header = if header == auto {
     ratio-header()
   } else {
@@ -493,7 +508,7 @@
   }
   logic.polylux-slide(grid(
     columns: 1,
-    gutter: 1em,
+    gutter: 0em,
     rows: (auto, 1fr, auto),
     ..(header, content, footer),
   ))
@@ -576,7 +591,14 @@
   // Text setup.
   set par(leading: 0.7em, justify: true, linebreaks: "optimized")
   show par: set block(spacing: 1.35em)
-  set text(font: "Cantarell", 18pt)
+
+  // Any text
+  show: it => {
+    context {
+      set text(..ratio-options.get().text)
+      it
+    }
+  }
 
   // Heading setup.
   show heading: it => {
@@ -593,8 +615,28 @@
     context {
       let options = ratio-options.get()
       if options.style-headings {
+        let depth = it.depth - 1
+
+        let alignments = utils.as-array(options.heading-alignments)
+        let value = if depth < alignments.len() {
+          alignments.at(depth)
+        } else if alignments.len() > 0 {
+          alignments.last()
+        } else {
+          none
+        }
+        set align(value)
+
+        let texts = utils.as-array(options.heading-texts)
+        let style = if depth < texts.len() {
+          texts.at(depth)
+        } else if texts.len() > 0 {
+          texts.last()
+        } else {
+          (:)
+        }
         // Do not hyphenate headings.
-        text(hyphenate: false, ..options.heading-text)[#it]
+        text(hyphenate: false, ..style)[#it]
       } else {
         it
       }
@@ -639,6 +681,8 @@
       date: date,
       version: version,
       keywords: keywords,
+      // Pick the option without another context.
+      hero: options.at("hero", default: ratio-defaults.hero),
       register-section: false, // Don't register the cover.
     )
   }
