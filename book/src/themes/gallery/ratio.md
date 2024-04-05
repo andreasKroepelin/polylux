@@ -49,14 +49,25 @@ The essentials are separate keyword arguments to the `ratio-theme` call.
 
 The `options` keyword argument is special, it takes a dictionary with any of the following:
 
+- `text`: Text style for the entire document.
 - `style-headings`: Enable/disable any styling applied to headings.
 - `style-links`: Enable/disable any styling applied to links.
 - `style-raw`: Enable/disable any styling applied to raw content.
+- `hero`: What to show as the "hero" or background image on title slides. `auto` results in the theme's default background.
 - `header`: What to display as the header ("navigation", "progress", content, or `none`).
 - `footer`: What to display as the footer ("navigation", "progress", content, or `none`).
-- `title-background-color`: Tweak the background color for the coming title pages.
+- `title-hero-color`: Tweak the background color for the coming title pages.
 - `title-text`: Styling to apply to the entire title page's text.
-- `heading-text`: The style to apply to heading text.
+- `title-heading-text`: Style of the title page's main title.
+- `title-author-text`: Style of the title slide's author names.
+- `title-affiliation-text`: Style of the title slide's affiliation entries.
+- `title-abstract-text`: Style of the title slide's abstract.
+- `title-version-text`: Style of the title slide's version text.
+- `heading-texts`: The style to apply to heading text.
+  - Notice the `s`! It's an array of text styles for increasing heading depth!
+- `heading-alignments`: The alignments to apply to headings.
+  - Notice the `s`! It's an array of alignments for increasing heading depth!
+- `slide-padding`: Padding for content slides (arguments to `pad()`).
 - `link-color`: The color to apply to the link anchor.
 - `stroke-color`: The color to apply to strokes such as in tables.
 - `fill-color`: The color to apply in fills such as in code blocks.
@@ -79,15 +90,14 @@ The `options` keyword argument is special, it takes a dictionary with any of the
 
 - `title-slide(title, authors, abstract, date, version, keywords, foreground, background, register-section)` with all keyword arguments:
   - `title`: Presentation title content. Defaults to `none`.
-  - `abstract`: An abstract or subtitle for your work. Defaults to `none`.
   - `authors`: An array of objects made with the custom `author(name:, affiliation:, email: )` method. Defaults to `none`.
+  - `abstract`: An abstract or subtitle for your work. Defaults to `none`.
   - `date`: A datetime object, defaults to `none`.
   - `version`: A document version to display on the date line. Something like "Draft" or "1.0". Defaults to `none`.
   - `keywords`: Keywords to display on the date line. Defaults to ().
   - `foreground`: Content to include in front of the default text content.
   - `background`: Content to include behind the default text content.
-  - `hero`: Whether to draw the default hero image (uses `options.title-hero-color`).
-  - `register-section`: Whether the given title should be registered as a section in the outline and navigation.
+  - `hero`: What to show as the "hero" or background image on title slides. `auto` results in the theme's default background.
 - `slide(title, header, footer)[body]` with a title keyword argument and body positional.
   - `title`: Section title will be added as a heading, too. Mostly for compatibility purposes with other themes.
   - `header`: Header content override. Default is `auto` which draws the header according to the theme options. Set it to `none` to disable for this slide.
