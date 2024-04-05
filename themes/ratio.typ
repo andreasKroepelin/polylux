@@ -10,48 +10,46 @@
 
 // GLOBAL HELPERS
 
-#let hsl = color.hsl
-#let transparent = rgb(0, 0, 0, 0)
-
 // Ratio color palette for easy styling.
-#let palette = (
-  primary-900: hsl(rgb("#1f4ac3")),
-  primary-800: hsl(rgb("#2c57ce")),
-  primary-700: hsl(rgb("#3963d9")),
-  primary-600: hsl(rgb("#4370ec")),
-  primary-500: hsl(rgb("#4d7cfe")),
-  primary-400: hsl(rgb("#6890fe")),
-  primary-300: hsl(rgb("#82a3fe")),
-  primary-200: hsl(rgb("#82a3fe")),
-  primary-100: hsl(rgb("#a6beff")),
-  primary-50: hsl(rgb("#eaefff")),
-  secondary-900: hsl(rgb("#0f0f25")),
-  secondary-800: hsl(rgb("#171731")),
-  secondary-700: hsl(rgb("#1e1e3d")),
-  secondary-600: hsl(rgb("#232345")),
-  secondary-500: hsl(rgb("#28284d")),
-  secondary-400: hsl(rgb("#38385b")),
-  secondary-300: hsl(rgb("#484868")),
-  secondary-200: hsl(rgb("#848499")),
-  secondary-100: hsl(rgb("#bfbfca")),
-  secondary-50: hsl(rgb("#e5e5ea")),
+#let ratio-palette = (
+  primary-900: color.hsl(rgb("#1f4ac3")),
+  primary-800: color.hsl(rgb("#2c57ce")),
+  primary-700: color.hsl(rgb("#3963d9")),
+  primary-600: color.hsl(rgb("#4370ec")),
+  primary-500: color.hsl(rgb("#4d7cfe")),
+  primary-400: color.hsl(rgb("#6890fe")),
+  primary-300: color.hsl(rgb("#82a3fe")),
+  primary-200: color.hsl(rgb("#82a3fe")),
+  primary-100: color.hsl(rgb("#a6beff")),
+  primary-50: color.hsl(rgb("#eaefff")),
+  secondary-900: color.hsl(rgb("#0f0f25")),
+  secondary-800: color.hsl(rgb("#171731")),
+  secondary-700: color.hsl(rgb("#1e1e3d")),
+  secondary-600: color.hsl(rgb("#232345")),
+  secondary-500: color.hsl(rgb("#28284d")),
+  secondary-400: color.hsl(rgb("#38385b")),
+  secondary-300: color.hsl(rgb("#484868")),
+  secondary-200: color.hsl(rgb("#848499")),
+  secondary-100: color.hsl(rgb("#bfbfca")),
+  secondary-50: color.hsl(rgb("#e5e5ea")),
   contrast: white,
-  success: hsl(rgb("#8bc34a")),
-  warning: hsl(rgb("#ff9800")),
-  danger: hsl(rgb("#f44336")),
-  error: hsl(rgb("#f44336")),
-  info: hsl(rgb("#4d7cfe")),
-  cat-0: hsl(rgb("#e58606")),
-  cat-1: hsl(rgb("#5d69b1")),
-  cat-2: hsl(rgb("#52bca3")),
-  cat-3: hsl(rgb("#99c945")),
-  cat-4: hsl(rgb("#cc61b0")),
-  cat-5: hsl(rgb("#24796c")),
-  cat-6: hsl(rgb("#daa51b")),
-  cat-7: hsl(rgb("#2f8ac4")),
-  cat-8: hsl(rgb("#764e9f")),
-  cat-9: hsl(rgb("#ed645a")),
-  cat-10: hsl(rgb("#a5aa99")),
+  success: color.hsl(rgb("#8bc34a")),
+  warning: color.hsl(rgb("#ff9800")),
+  danger: color.hsl(rgb("#f44336")),
+  error: color.hsl(rgb("#f44336")),
+  info: color.hsl(rgb("#4d7cfe")),
+  cat-0: color.hsl(rgb("#e58606")),
+  cat-1: color.hsl(rgb("#5d69b1")),
+  cat-2: color.hsl(rgb("#52bca3")),
+  cat-3: color.hsl(rgb("#99c945")),
+  cat-4: color.hsl(rgb("#cc61b0")),
+  cat-5: color.hsl(rgb("#24796c")),
+  cat-6: color.hsl(rgb("#daa51b")),
+  cat-7: color.hsl(rgb("#2f8ac4")),
+  cat-8: color.hsl(rgb("#764e9f")),
+  cat-9: color.hsl(rgb("#ed645a")),
+  cat-10: color.hsl(rgb("#a5aa99")),
+  transparent: color.hsl(rgb(0, 0, 0, 0)),
 )
 
 // Create a Ratio theme author entry.
@@ -91,9 +89,9 @@
   // What to show in the footer ("navigation", "progress", content, none).
   footer: "progress",
   // Title background color.
-  title-hero-color: palette.secondary-800,
+  title-hero-color: ratio-palette.secondary-800,
   // Title text style.
-  title-text: (size: 20pt, fill: palette.contrast),
+  title-text: (size: 20pt, fill: ratio-palette.contrast),
   // Title text heading overrides.
   title-heading-text: (size: 3em, weight: "bold"),
   // Title author text heading overrides.
@@ -105,17 +103,17 @@
   // Title date and version text override.
   title-version-text: (size: 0.8em, weight: "light"),
   // Color for external link anchors.
-  link-color: palette.primary-500,
+  link-color: ratio-palette.primary-500,
   // Heading color.
-  heading-text: (fill: palette.secondary-800),
+  heading-text: (fill: ratio-palette.secondary-800),
   // Stroke color for tables and such.
-  stroke-color: palette.secondary-100,
+  stroke-color: ratio-palette.secondary-100,
   // Fill color for code blocks and such.
-  fill-color: palette.secondary-50,
+  fill-color: ratio-palette.secondary-50,
   // Navigation background color.
-  navigation-bar-color: palette.secondary-50,
+  navigation-bar-color: ratio-palette.secondary-50,
   // Navigation text options for all text.
-  navigation-text: (fill: palette.secondary-200, size: 0.7em),
+  navigation-text: (fill: ratio-palette.secondary-200, size: 0.5em),
   // Navigation text overrides for past sections.
   navigation-text-past: (:),
   // Navigation text overrides for the current section.
@@ -125,28 +123,28 @@
   // Navigation shape for past subsections.
   navigation-shape-past: box(height: 3.8pt, circle(
     radius: 1.7pt,
-    fill: palette.secondary-100,
-    stroke: 0.7pt + palette.secondary-100,
+    fill: ratio-palette.secondary-100,
+    stroke: 0.7pt + ratio-palette.secondary-100,
   )),
   // Navigation shape for current subsections.
   navigation-shape-current: box(height: 3.8pt, circle(
     radius: 1.7pt,
-    fill: palette.primary-500,
-    stroke: 0.7pt + palette.primary-500,
+    fill: ratio-palette.primary-500,
+    stroke: 0.7pt + ratio-palette.primary-500,
   )),
   // Navigation shape for future subsections.
   navigation-shape-future: box(
     height: 3.8pt,
-    circle(radius: 1.7pt, stroke: 0.7pt + palette.secondary-100),
+    circle(radius: 1.7pt, stroke: 0.7pt + ratio-palette.secondary-100),
   ),
   // Progress bar height.
   progress-bar-height: 5pt,
   // Progress bar background color.
-  progress-bar-color: palette.secondary-50,
+  progress-bar-color: ratio-palette.secondary-50,
   // Progress bar overlay color.
-  progress-overlay-color: palette.secondary-100,
+  progress-overlay-color: ratio-palette.secondary-100,
   // Progress bar text color.
-  progress-text-color: palette.secondary-200,
+  progress-text-color: ratio-palette.secondary-200,
 )
 
 // Variable to hold the options state.
@@ -163,6 +161,13 @@
 // Update options by replacing values and updating dictionaries.
 #let update-options(options) = {
   ratio-options.update(s => utils.update-dict(s, options))
+}
+
+// Draw a tiny anchor on the top right of the body text.
+#let ratio-anchor(body, color: ratio-defaults.link-color) = {
+  body
+  h(0.05em)
+  super(box(height: 0.7em, circle(radius: 0.15em, stroke: 0.08em + color)))
 }
 
 // TITLE SLIDE
@@ -332,7 +337,7 @@
   logic.polylux-slide(content)
 }
 
-// CONTENT SLIDES
+// CONTENT SLIDE HELPERS
 
 // Ratio style section navigation bar. Draws everything from options.
 #let navigation() = {
@@ -466,16 +471,26 @@
   context ratio-bar(ratio-options.get().at("footer", default: none))
 }
 
+// CONTENT SLIDES
+
 // Ratio style slide.
-#let slide(title: none, body) = {
+#let slide(title: none, header: auto, footer: auto, body) = {
   let content = pad(left: 1em, right: 2em)[
     #if title != none {
       heading(level: 1, title)
     }
     #body
   ]
-  let header = ratio-header()
-  let footer = ratio-footer()
+  let header = if header == auto {
+    ratio-header()
+  } else {
+    header
+  }
+  let footer = if footer == auto {
+    ratio-footer()
+  } else {
+    footer
+  }
   logic.polylux-slide(grid(
     columns: 1,
     gutter: 1em,
@@ -484,12 +499,17 @@
   ))
 }
 
-// Draw a tiny anchor on the top right of the body text.
-#let anchored(body, color: ratio-defaults.link-color) = {
-  body
-  h(0.05em)
-  super(box(height: 0.7em, circle(radius: 0.15em, stroke: 0.08em + color)))
+// Ratio style centered slide.
+#let center-slide(header: auto, footer: auto, body) = {
+  slide(
+    header: header,
+    footer: footer,
+    block(width: 100%, height: 100%, place(center + horizon, body)),
+  )
 }
+
+// Ratio style bare bones slide.
+#let bare-slide = logic.polylux-slide
 
 // THEME
 
@@ -590,8 +610,8 @@
         if type(it.dest) == label or type(it.dest) == location {
           return it
         }
-        let color = options.at("link-color", default: palette.primary-500)
-        anchored(it)
+        let color = options.at("link-color", default: ratio-palette.primary-500)
+        ratio-anchor(it)
       } else {
         it
       }

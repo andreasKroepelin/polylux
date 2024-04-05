@@ -9,14 +9,12 @@
   authors: (ratio-author("Theme Author", "Typst Community", "foo@bar.quux"),),
   version: "1.0.0",
   date: datetime(year: 2024, month: 4, day: 4),
-  keywords: ("foo", "bar"),
+  keywords: ("navigation", "customization"),
   options: (:),
 )
 
-#slide[
-  #block(width: 100%, height: 100%)[
-    #place(horizon + center)[= Welcome!]
-  ]
+#center-slide[
+  = Welcome!
 ]
 
 #slide[
@@ -108,12 +106,12 @@ recursively and thus only updates what you specify.
 
 The `register-options` function works by replacing values *completely*.
 
-There's a handy `palette` variable with a pre-configured color palette, but feel
-free to bring your own!
+There's a handy `ratio-palette` variable with a pre-configured color palette,
+but feel free to bring your own!
 
 ```typ
 // Only update the heading color, not it's size:
-#update-options((title-text: (fill: palette.warning))) // <- Notice the palette!
+#update-options((title-text: (fill: ratio-palette.warning))) // <- Notice the palette!
 // Next title slide will feature a green background.
 #register-options((title-hero-color: color.hsl(green)))
 
@@ -128,7 +126,7 @@ free to bring your own!
 // This becomes...=>
 ```
 ]
-#update-options((title-text: (fill: palette.warning)))
+#update-options((title-text: (fill: ratio-palette.warning)))
 #register-options((title-hero-color: color.hsl(green)))
 #let fg = place(horizon + left, block(inset: 10%, width: 100%)[foreground.])
 #let bg = place(
