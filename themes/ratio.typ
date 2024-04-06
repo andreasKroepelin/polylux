@@ -78,7 +78,9 @@
   // The version of your work.
   version: "Draft",
   // Default font settings.
-  text: (font: ("Cantarell", "Open Sans"), size: 18pt),
+  text: (font: ("Cantarell", "Noto Sans", "Open Sans"), size: 18pt),
+  // Whether to register headings as sections and subsections.
+  register-headings: true,
   // Whether to apply some heading styling.
   style-headings: true,
   // Whether to apply the custom link style.
@@ -408,13 +410,13 @@
       })
 
       // Subsection shapes.
-      let columns = if subs.len() > 0 {
-        subs.len()
-      } else {
-        1
-      }
       let sub_displays = subs.zip(sub_ends).map(
         ((subs, ends)) => {
+          let columns = if subs.len() > 0 {
+            subs.len()
+          } else {
+            1
+          }
           pad(
             x: .5em,
             grid(columns: columns, gutter: .5em, ..subs.zip(ends).map(((sub, end)) => {
@@ -631,18 +633,20 @@
 
   // Heading setup.
   show heading: it => {
-    // Register sections and subsections.
-    if it.depth == 1 {
-      locate(loc => {
-        utils.register-section(it.body)
-      })
-    } else if it.depth == 2 {
-      locate(loc => {
-        utils.register-subsection(it.body)
-      })
-    }
     context {
       let options = ratio-options.get()
+      if options.register-headings {
+        // Register sections and subsections.
+        if it.depth == 1 {
+          locate(loc => {
+            utils.register-section(it.body)
+          })
+        } else if it.depth == 2 {
+          locate(loc => {
+            utils.register-subsection(it.body)
+          })
+        }
+      }
       if options.style-headings {
         let depth = it.depth - 1
 

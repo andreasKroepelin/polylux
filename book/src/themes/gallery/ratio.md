@@ -50,6 +50,7 @@ The essentials are separate keyword arguments to the `ratio-theme` call.
 The `options` keyword argument is special, it takes a dictionary with any of the following:
 
 - `text`: Text style for the entire document.
+- `register-headings`: Whether to register level 1 and 2 headings automatically as sections and subsections.
 - `style-headings`: Enable/disable any styling applied to headings.
 - `style-links`: Enable/disable any styling applied to links.
 - `style-raw`: Enable/disable any styling applied to raw content.
