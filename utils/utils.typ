@@ -19,6 +19,12 @@
 })
 
 #let register-subsection(name) = locate(loc => {
+  sections-state.update(s => {
+    if s.len() == 0 {
+      s.push((body: [], loc: loc))
+    }
+    s
+  })
   subsections-state.update(s => {
     if s.len() == 0 {
       s.push(())
