@@ -189,9 +189,7 @@
 
 // Draw a tiny anchor on the top right of the body text.
 #let ratio-anchor(body, color: ratio-defaults.link-color) = {
-  body
-  h(0.05em)
-  super(box(height: 0.7em, circle(radius: 0.15em, stroke: 0.08em + color)))
+  box[#body#h(0.05em)#super(box(height: 0.7em, circle(radius: 0.15em, stroke: 0.08em + color)))]
 }
 
 // TITLE SLIDE
