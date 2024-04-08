@@ -133,27 +133,30 @@ but feel free to bring your own!
 
 == Alignment grid
 
-By default Ratio uses a 5x5 `grid` wrapped in a content `box` that fills the
-page's space between the header and footer. The grid has the following
-specifications:
+By default Ratio uses a 7x7 `grid` wrapped in a content `box` that fills the
+page's space \
+between the header and footer. The grid has the following specifications:
 
 ```typ
 #let slide-grid = (
-  rows: (1em, 3fr, auto, 5fr, 1em),
-  columns: (2em, 1fr, auto, 1fr, 2.5em),
+  rows: (auto, 1em, 3fr, auto, 5fr, 1em, auto),
+  columns: (auto, 2em, 1fr, auto, 1fr, 2.5em, auto),
   gutter: 0pt,
 )
 ```
 
 Which achieves:
-- padding at the boundaries
-- content in the `(auto, auto)` cell
+- edge content possible using placements in the first and last columns
+- followed by padding around the main content
+- content in the middle `(auto, auto)` cell
 - "spring-loaded" positioning using the `fr` rows and columns
   - The defaults roughly center the content on screen and push it slightly above the
     horizon.
 ]
 
-#slide[
+#slide(
+  grid-children: (grid.cell(x: 6, rowspan: 7, fill: red, align: horizon)[cell]),
+)[
 == Customizing the grid
 
 The default slide function `#slide` allows for customization of this grid using
@@ -165,9 +168,12 @@ the `grid-args` and `grid-cell` keyword arguments per slide.
   - anything else is treated as keyword arguments to `#grid`
 - `grid-cell` the cell at which to put the body.
   - `auto` means to put it at the cell as defined in theme options.
-  - `none` means to check if the input is an array:
+  - `none` means to check if the body is an array:
     - if it's an array, pass the array to `#grid` as the contents.
     - if not, disable the grid functionality and use body as is.
+- `grid-children` children to place on the grid. The bar on the right was achieved
+  with:\
+  `grid-children: (grid.cell(x: 6, rowspan: 7, fill: red),)`
 ]
 
 #ratio-register((

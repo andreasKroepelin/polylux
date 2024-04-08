@@ -69,7 +69,8 @@ The `options` keyword argument is special, it takes a dictionary with any of the
 - `heading-alignments`: The alignments to apply to headings.
   - Notice the `s`! It's an array of alignments for increasing heading depth!
 - `slide-box`: Arguments for the slide content's box container.
-- `slide-align`: Slide content alignment for content slides.
+- `slide-grid`: Grid specification for the grid inside the box as arguments to `#grid()`.
+- `slide-grid-cell`: Grid cell to use for main body content as arguments to `#grid.cell()`.
 - `link-color`: The color to apply to the link anchor.
 - `stroke-color`: The color to apply to strokes such as in tables.
 - `fill-color`: The color to apply in fills such as in code blocks.

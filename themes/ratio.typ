@@ -122,12 +122,12 @@
   slide-box: (width: 100%, height: 100%, clip: true),
   // Content slide alignment.
   slide-grid: (
-    rows: (1em, 3fr, auto, 5fr, 1em),
-    columns: (2em, 1fr, auto, 1fr, 2.5em),
+    rows: (auto, 1em, 3fr, auto, 5fr, 1em, auto),
+    columns: (auto, 2em, 1fr, auto, 1fr, 2em, auto),
     gutter: 0pt,
   ),
   // Slide grid cell.
-  slide-grid-cell: (x: 2, y: 2),
+  slide-grid-cell: (x: 3, y: 3),
   // Color for external link anchors.
   link-color: ratio-palette.primary-500,
   // Stroke color for tables and such.
@@ -497,9 +497,23 @@ default: none)) }
 default: none)) }
 
 // Ratio content box helper. Wraps it in a box+grid combination.
-#let ratio-content(box-args: auto, grid-args: auto, grid-cell: auto, body) = {
+#let ratio-content(
+  box-args: auto,
+  grid-args: auto,
+  grid-cell: auto,
+  grid-children: auto,
+  body,
+) = {
   context {
     let options = ratio-options.get()
+
+    let grid-children = if grid-children == auto {
+      options.grid-children
+    } else if grid-children == none {
+      ()
+    } else {
+      utils.as-array(grid-children)
+    }
 
     let g = if grid-args == auto {
       grid.with(..options.slide-grid)
@@ -513,15 +527,15 @@ default: none)) }
       body
     } else {
       if grid-cell == auto {
-        g(grid.cell(..options.slide-grid-cell, body))
+        g(grid.cell(..options.slide-grid-cell, body), ..grid-children)
       } else if grid-cell == none {
         if type(body) == array {
-          g(..body)
+          g(..body, ..grid-children)
         } else {
           body
         }
       } else {
-        g(grid.cell(..grid-cell, body))
+        g(grid.cell(..grid-cell, body), ..grid-children)
       }
     }
 
@@ -547,6 +561,7 @@ default: none)) }
   box-args: auto,
   grid-args: auto,
   grid-cell: auto,
+  grid-children: (),
   body,
 ) = {
   let inner = {
@@ -555,7 +570,13 @@ default: none)) }
     }
     body
   }
-  let content = ratio-content(box-args: box-args, grid-args: grid-args, grid-cell: grid-cell, inner)
+  let content = ratio-content(
+    box-args: box-args,
+    grid-args: grid-args,
+    grid-cell: grid-cell,
+    grid-children: grid-children,
+    inner,
+  )
   let header = if header == auto {
     ratio-header()
   } else {
