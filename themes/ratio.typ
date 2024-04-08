@@ -78,7 +78,7 @@
   // The version of your work.
   version: "Draft",
   // Default font settings.
-  text: (font: ("Cantarell", "Noto Sans", "Open Sans"), size: 18pt),
+  text: (font: ("Noto Sans", "Open Sans"), size: 18pt),
   // Whether to register headings as sections and subsections.
   register-headings: true,
   // Whether to apply some heading styling.
@@ -97,7 +97,11 @@
   // Title background color.
   title-hero-color: ratio-palette.secondary-800,
   // Title text style.
-  title-text: (size: 20pt, fill: ratio-palette.contrast),
+  title-text: (
+    font: ("Cantarell", "Noto Sans", "Open Sans"),
+    size: 20pt,
+    fill: ratio-palette.contrast,
+  ),
   // Title text heading overrides.
   title-heading-text: (size: 3em, weight: "bold"),
   // Title author text heading overrides.
@@ -108,19 +112,22 @@
   title-abstract-text: (:),
   // Title date and version text override.
   title-version-text: (size: 0.8em, weight: "light"),
-  // Heading color.
+  // Common heading text style.
+  heading-text: (font: ("Cantarell", "Noto Sans", "Open Sans"), hyphenate: false),
+  // Heading text style overrides in order of heading depth.
   heading-texts: ((fill: ratio-palette.secondary-800),),
   // Heading alignments in order of heading depth.
-  heading-alignments: (center, left),
+  heading-alignments: (left,),
   // Slide content box options.
-  slide-box: (
-    width: 100%,
-    height: 100%,
-    inset: (left: 2em, right: 2.5em, top: 1em, bottom: 1em),
-    clip: true,
-  ),
+  slide-box: (width: 100%, height: 100%, clip: true),
   // Content slide alignment.
-  slide-align: left + horizon,
+  slide-grid: (
+    rows: (1em, 3fr, auto, 5fr, 1em),
+    columns: (2em, 1fr, auto, 1fr, 2.5em),
+    gutter: 0pt,
+  ),
+  // Slide grid cell.
+  slide-grid-cell: (x: 2, y: 2),
   // Color for external link anchors.
   link-color: ratio-palette.primary-500,
   // Stroke color for tables and such.
@@ -482,26 +489,42 @@
 }
 
 // Ratio header helper.
-#let ratio-header() = {
-  context ratio-bar(ratio-options.get().at("header", default: none))
-}
+#let ratio-header() = context { ratio-bar(ratio-options.get().at("header",
+default: none)) }
 
 // Ratio footer helper.
-#let ratio-footer() = {
-  context ratio-bar(ratio-options.get().at("footer", default: none))
-}
+#let ratio-footer() = context { ratio-bar(ratio-options.get().at("footer",
+default: none)) }
 
-// Ratio content box helper. Wraps it in a box+align combination.
-#let ratio-content(box-args: auto, align-arg: auto, body) = {
+// Ratio content box helper. Wraps it in a box+grid combination.
+#let ratio-content(box-args: auto, grid-args: auto, grid-cell: auto, body) = {
   context {
     let options = ratio-options.get()
-    let body = if align-arg == auto {
-      align(options.slide-align, body)
-    } else if align-arg == none {
+
+    let g = if grid-args == auto {
+      grid.with(..options.slide-grid)
+    } else if grid-args == none {
+      none
+    } else {
+      grid.with(..grid-args)
+    }
+
+    let body = if g == none {
       body
     } else {
-      align(align-arg, body)
+      if grid-cell == auto {
+        g(grid.cell(..options.slide-grid-cell, body))
+      } else if grid-cell == none {
+        if type(body) == array {
+          g(..body)
+        } else {
+          body
+        }
+      } else {
+        g(grid.cell(..grid-cell, body))
+      }
     }
+
     let body = if box-args == auto {
       box(..options.slide-box, body)
     } else if box-args == none {
@@ -516,14 +539,23 @@
 // CONTENT SLIDES
 
 // Ratio style slide.
-#let slide(title: none, header: auto, footer: auto, box: auto, align: auto, body) = {
+#let slide(
+  title: none,
+  depth: 1,
+  header: auto,
+  footer: auto,
+  box-args: auto,
+  grid-args: auto,
+  grid-cell: auto,
+  body,
+) = {
   let inner = {
     if title != none {
-      heading(level: 1, title)
+      heading(depth: depth, box(width: 100%, align(center, title)))
     }
     body
   }
-  let content = ratio-content(box-args: box, align-arg: align, inner)
+  let content = ratio-content(box-args: box-args, grid-args: grid-args, grid-cell: grid-cell, inner)
   let header = if header == auto {
     ratio-header()
   } else {
@@ -536,21 +568,29 @@
   }
   logic.polylux-slide(grid(
     columns: 1,
-    gutter: 0em,
+    gutter: 0pt,
     rows: (auto, 1fr, auto),
     ..(header, content, footer),
   ))
 }
 
 // Ratio style centered slide.
-#let centered-slide(title: none, header: auto, footer: auto, box: auto, body) = {
+#let centered-slide(
+  title: none,
+  depth: 1,
+  header: auto,
+  footer: auto,
+  box-args: auto,
+  body,
+) = {
   slide(
     title: title,
+    depth: depth,
     header: header,
     footer: footer,
-    box: box,
-    align: center + horizon,
-    body,
+    box-args: box-args,
+    grid-args: none,
+    align(horizon + center, box(body)),
   )
 }
 
@@ -624,109 +664,95 @@
   show par: set block(spacing: 1.35em)
 
   // Any text
-  show: it => {
-    context {
-      set text(..ratio-options.get().text)
+  show: it => context {
+    set text(..ratio-options.get().text)
+    it
+  }
+
+  // Heading setup.
+  show heading: it => context {
+    let options = ratio-options.get()
+    if options.register-headings and logic.subslide.get().first() == 1 {
+      // Register sections and subsections.
+      if it.depth == 1 {
+        utils.register-section(it.body)
+      } else if it.depth == 2 {
+        utils.register-subsection(it.body)
+      }
+    }
+    if options.style-headings {
+      let depth = it.depth - 1
+
+      let alignments = utils.as-array(options.heading-alignments)
+      let value = if depth < alignments.len() {
+        alignments.at(depth)
+      } else if alignments.len() > 0 {
+        alignments.last()
+      } else {
+        none
+      }
+      set align(value)
+
+      let texts = utils.as-array(options.heading-texts)
+      let style = if depth < texts.len() {
+        texts.at(depth)
+      } else if texts.len() > 0 {
+        texts.last()
+      } else {
+        (:)
+      }
+      // Do not hyphenate headings.
+      text(..options.heading-text, ..style)[#it]
+    } else {
       it
     }
   }
 
-  // Heading setup.
-  show heading: it => {
-    context {
-      let options = ratio-options.get()
-      if options.register-headings {
-        // Register sections and subsections.
-        if it.depth == 1 {
-          locate(loc => {
-            utils.register-section(it.body)
-          })
-        } else if it.depth == 2 {
-          locate(loc => {
-            utils.register-subsection(it.body)
-          })
-        }
-      }
-      if options.style-headings {
-        let depth = it.depth - 1
-
-        let alignments = utils.as-array(options.heading-alignments)
-        let value = if depth < alignments.len() {
-          alignments.at(depth)
-        } else if alignments.len() > 0 {
-          alignments.last()
-        } else {
-          none
-        }
-        set align(value)
-
-        let texts = utils.as-array(options.heading-texts)
-        let style = if depth < texts.len() {
-          texts.at(depth)
-        } else if texts.len() > 0 {
-          texts.last()
-        } else {
-          (:)
-        }
-        // Do not hyphenate headings.
-        text(hyphenate: false, ..style)[#it]
-      } else {
-        it
-      }
-    }
-  }
-
   // Style links if set.
-  show link: it => {
-    context {
-      let options = ratio-options.get()
-      if options.style-links {
-        // Don't style for internal links.
-        if type(it.dest) == label or type(it.dest) == location {
-          return it
-        }
-        let color = options.at("link-color", default: ratio-palette.primary-500)
-        ratio-anchor(it)
-      } else {
-        it
+  show link: it => context {
+    let options = ratio-options.get()
+    if options.style-links {
+      // Don't style for internal links.
+      if type(it.dest) == label or type(it.dest) == location {
+        return it
       }
+      let color = options.at("link-color", default: ratio-palette.primary-500)
+      ratio-anchor(it)
+    } else {
+      it
     }
   }
 
   // Set raw font to Fira Code if available.
-  show raw.where(block: true): it => {
-    context {
-      let options = ratio-options.get()
-      if options.style-raw {
-        set text(font: "Fira Code")
-        block(
-          inset: (x: .3em),
-          fill: options.fill-color.lighten(25%),
-          outset: (y: .5em),
-          radius: .15em,
-          it,
-        )
-      } else {
-        it
-      }
+  show raw.where(block: true): it => context {
+    let options = ratio-options.get()
+    if options.style-raw {
+      set text(font: "Fira Code")
+      block(
+        inset: (x: .3em),
+        fill: options.fill-color.lighten(25%),
+        outset: (y: .5em),
+        radius: .15em,
+        it,
+      )
+    } else {
+      it
     }
   }
 
-  show raw.where(block: false): it => {
-    context {
-      let options = ratio-options.get()
-      if options.style-raw {
-        set text(font: "Fira Code")
-        box(
-          fill: options.fill-color,
-          inset: (x: .3em),
-          outset: (y: .3em),
-          radius: .15em,
-          it,
-        )
-      } else {
-        it
-      }
+  show raw.where(block: false): it => context {
+    let options = ratio-options.get()
+    if options.style-raw {
+      set text(font: "Fira Code")
+      box(
+        fill: options.fill-color,
+        inset: (x: .3em),
+        outset: (y: .3em),
+        radius: .15em,
+        it,
+      )
+    } else {
+      it
     }
   }
 

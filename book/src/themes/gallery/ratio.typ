@@ -18,93 +18,86 @@
 ]
 
 #slide[
-== Overrides
-
-You can override almost any setting of the theme as you go and switch back
-later.
-
-By default link styling is on, but let's force it.
+== Theme setup
+The title page was the result of:
 
 ```typ
-#ratio-register((style-links: true))
+#import themes.ratio: *
+
+#show: ratio-theme.with(
+  cover: true,
+  aspect-ratio: "16-9",
+  title: [Ratio theme],
+  abstract: [A theme about navigation and customization],
+  authors: (ratio-author("Theme Author", "Typst Community", "foo@bar.quux"),),
+  version: "1.0.0",
+  date: datetime(year: 2024, month: 4, day: 4),
+  keywords: ("navigation", "customization"),
+  options: (:),
+)
 ```
 
-#ratio-register((style-links: true))
-Results in: #link("https://github.com")[GitHub]
-
-I would like a non-styled link now...
-
-```typ
-#ratio-register((style-links: false))
-```
-
-#ratio-register((style-links: false))
-Results in: #link("https: //github.com")[GitHub]
-
-Feels good right! No lock in.
-]
-
-#slide[
-  = Customizations
-
-  Some random text at the top of the page to check the margins for non-headers.
-
-  == So much text
-
-  #lorem(50)
-]
-
-#slide[
-  == Important subsection here!
-
-  - Test an unordered list
-    + As well as some enumerations
-    + I'm second!
-  - More list
-
-  + Followed by more enum at top level
+Which automatically generates a cover page if `cover` is set to `true`.
 ]
 
 #slide[
   = Navigation
-  Have you noticed the navigation at the top?
+  Have you noticed the navigation bar at the top?
 
   You can press the main section titles, or just one of the subsection dots.
 
+  Also, there's a progress bar at the bottom by default.
+
   == Subsections become dots
+
+  The current section's dot is always "alight".
 
   == So there's two dots for "Navigation"!
 
   And they're both alight since we're on this page.
+
 ]
 
 #slide[
-  And the last subsection is still active because we haven't registered a new
-  section yet!
+  The last subsection is still active because we haven't registered a new section
+  yet!
 ]
 
 #slide[
+
+#utils.register-section("Manual sections")
+#utils.register-subsection("Manual subsection")
+
+== Adding manual subsections
+
 You can also manually register a new section using:
 
 ```typ
-#utils.register-section("Hello world!")
-#utils.register-subsection("With a subsec.")
+#utils.register-section("Manual sections")
+#utils.register-subsection("Manual subsection")
 ```
 
-#utils.register-section("Hello world!")
-#utils.register-subsection("With a subsec.")
+Which is what we did at the start of this slide's code.
+
+== Toggle headings registration
+If you don't want headings to be registered by default, you can switch it
+on/off:
+
+```typ
+#ratio-update((register-headings: false))
+```
 ]
 
 #slide[
-= Overrides
+= Customization
 
 #set text(size: 15pt)
 We all know that layouts work all of the time 99% of the time.
 
-The `ratio-update` function works by updating options (dictionaries) recursively
-and thus only updates what you specify.
+The `ratio-update` function updates option dictionaries *recursively* and thus
+only updates what you specify.
 
-The `ratio-register` function works by replacing values *completely*.
+The `ratio-register` function replaces values *completely*.
 
 There's a handy `ratio-palette` variable with a pre-configured color palette,
 but feel free to bring your own!
@@ -134,3 +127,70 @@ but feel free to bring your own!
   block(inset: 30%, width: 100%)[#text(weight: "bold")[background.]],
 )
 #title-slide(title: "Green", register-section: true, foreground: fg, background: bg)
+
+#slide[
+= Slide layout
+
+== Alignment grid
+
+By default Ratio uses a 5x5 `grid` wrapped in a content `box` that fills the
+page's space between the header and footer. The grid has the following
+specifications:
+
+```typ
+#let slide-grid = (
+  rows: (1em, 3fr, auto, 5fr, 1em),
+  columns: (2em, 1fr, auto, 1fr, 2.5em),
+  gutter: 0pt,
+)
+```
+
+Which achieves:
+- padding at the boundaries
+- content in the `(auto, auto)` cell
+- "spring-loaded" positioning using the `fr` rows and columns
+  - The defaults roughly center the content on screen and push it slightly above the
+    horizon.
+]
+
+#slide[
+== Customizing the grid
+
+The default slide function `#slide` allows for customization of this grid using
+the `grid-args` and `grid-cell` keyword arguments per slide.
+
+- `grid-args` fully customize the grid.
+  - `auto` means to use the grid settings from theme options.
+  - `none` means to disable the grid.
+  - anything else is treated as keyword arguments to `#grid`
+- `grid-cell` the cell at which to put the body.
+  - `auto` means to put it at the cell as defined in theme options.
+  - `none` means to check if the input is an array:
+    - if it's an array, pass the array to `#grid` as the contents.
+    - if not, disable the grid functionality and use body as is.
+]
+
+#ratio-register((
+  slide-grid: (columns: (5em, auto, 10em), rows: (1em, auto, 2em)),
+  slide-grid-cell: (x: 1, y: 1),
+))
+
+#slide[
+== Custom grid
+
+If you're not satisfied with the default grid, you can tweak things in the init
+function, too.
+
+```typ
+#show: ratio-theme.with(
+  //..,
+  options: (
+    slide-grid: (
+      columns: (5em, auto, 10em),
+      rows: (1em, auto, 2em),
+    ),
+    slide-grid-cell: (x: 1, y: 1),
+  ),
+)
+```
+]
