@@ -112,6 +112,8 @@
   title-abstract-text: (:),
   // Title date and version text override.
   title-version-text: (size: 0.8em, weight: "light"),
+  // Title vertical spacing.
+  title-gutter: 5%,
   // Common heading text style.
   heading-text: (font: ("Cantarell", "Noto Sans", "Open Sans"), hyphenate: false),
   // Heading text style overrides in order of heading depth.
@@ -235,13 +237,15 @@
   affiliation-text: ratio-defaults.title-affiliation-text,
   abstract-text: ratio-defaults.title-abstract-text,
   version-text: ratio-defaults.title-version-text,
+  gutter: ratio-defaults.title-gutter,
   register-section: false,
 ) = {
-  let v-space = v(1.5em, weak: true)
   set text(..title-text)
 
+  let rows = ()
+
   if title != none {
-    text(..heading-text)[#title]
+    rows.push(text(..heading-text)[#title])
     if register-section {
       utils.register-section(title)
     }
@@ -249,29 +253,31 @@
 
   if authors != none and authors.len() > 0 {
     for author in utils.as-array(authors) {
-      v-space
       let name = author.at("name", default: none)
       let email = author.at("email", default: none)
       let affiliation = author.at("affiliation", default: none)
+      let content = {
+        let author-text = text(..author-text)[#name]
+        if email == none {
+          author-text
+        } else {
+          link("mailto:" + email)[#author-text]
+        }
 
-      let author-text = text(..author-text)[#name]
-      if email == none {
-        author-text
-      } else {
-        link("mailto:" + email)[#author-text]
+        if affiliation != none {
+          v(0.3em, weak: true)
+          text(..affiliation-text)[#affiliation]
+        }
       }
-
-      if affiliation != none {
-        linebreak()
-        text(..affiliation-text)[#affiliation]
-      }
+      rows.push(content)
     }
   }
 
   if abstract != none {
-    v-space
-    set text(..abstract-text)
-    par(leading: 0.78em, justify: true, linebreaks: "optimized")[#abstract]
+    rows.push([
+      #set text(..abstract-text)
+      #abstract
+    ])
   }
 
   let date-line = ()
@@ -281,22 +287,25 @@
   if version != none {
     date-line.push(version)
   }
-  if keywords != none {
+  if keywords != none and keywords.len() > 0 {
     let keywords = utils.as-array(keywords)
     date-line.push(keywords.join(", "))
   }
 
   if date-line.len() > 0 {
-    v-space
     let sep = [
       #h(1.6pt)
       |
       #h(1.6pt)
     ]
-    set text(..version-text)
 
-    date-line.join(sep)
+    rows.push([
+      #set text(..version-text)
+      #date-line.join(sep)
+    ])
   }
+
+  grid(columns: (auto), gutter: gutter, ..rows)
 }
 
 // Ratio style title slide.
@@ -353,6 +362,7 @@
       affiliation-text: options.title-affiliation-text,
       abstract-text: options.title-abstract-text,
       version-text: options.title-version-text,
+      gutter: options.title-gutter,
     )))
 
     if foreground != none {
@@ -651,6 +661,13 @@ default: none)) }
   // Presentation contents.
   body,
 ) = {
+  let keywords = {
+    if keywords == none {
+      ()
+    } else {
+      keywords
+    }
+  }
   // Set document properties.
   set document(
     title: title,
