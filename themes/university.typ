@@ -121,12 +121,13 @@
   })
 
   let header-text = {
+    if new-section != none {
+      utils.register-section(new-section)
+    }
+
     if header != none {
       header
-    } else if title != none {
-      if new-section != none {
-        utils.register-section(new-section)
-      }
+    } else if title != none or utils.current-section != none {
       locate( loc => {
         let colors = uni-colors.at(loc)
         block(fill: colors.c, inset: (x: .5em), grid(
