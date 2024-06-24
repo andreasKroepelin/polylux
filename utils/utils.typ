@@ -131,12 +131,12 @@
 
 // SIDE BY SIDE
 
-#let side-by-side(columns: none, gutter: 1em, ..bodies) = {
+#let side-by-side(columns: none, gutter: 1em, align: auto, ..bodies) = {
   let bodies = bodies.pos()
   let columns = if columns ==  none { (1fr,) * bodies.len() } else { columns }
   if columns.len() != bodies.len() {
     panic("number of columns must match number of content arguments")
   }
 
-  grid(columns: columns, gutter: gutter, ..bodies)
+  grid(columns: columns, gutter: gutter, align: align, ..bodies)
 }
