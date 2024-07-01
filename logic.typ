@@ -281,19 +281,6 @@
   repetitions.update(1)
   pause-counter.update(0)
 
-  show par: paused-content
-  show math.equation: paused-content
-  show box: paused-content
-  show block: paused-content
-  show path: paused-content
-  show rect: paused-content
-  show square: paused-content
-  show circle: paused-content
-  show ellipse: paused-content
-  show line: paused-content
-  show polygon: paused-content
-  show image: paused-content
-
   // Having this here is a bit unfortunate concerning separation of concerns
   // but I'm not comfortable with logic depending on pdfpc...
   let pdfpc-slide-markers(curr-subslide) = locate( loc => [
