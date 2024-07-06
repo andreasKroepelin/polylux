@@ -1,0 +1,29 @@
+name: Update Tests images
+on:
+  workflow_dispatch:
+
+jobs:
+  update-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: imagemagick cargo
+          version: 1.0
+      - name: Install just from crates.io
+        uses: baptiste0928/cargo-install@v2
+        with:
+          crate: just
+      - uses: yusancky/setup-typst@v2
+        id: setup-typst
+        with:
+          version: 'v0.6.0'
+      - run: |
+          just update-test
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: tests
+          path: |
+            tests
