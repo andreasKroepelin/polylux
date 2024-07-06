@@ -66,6 +66,16 @@ All functions described on this page have such a `position` argument.
 Similar to `#one-by-one`, `#alternatives` also has an optional `start` argument
 that works just the same.
 
+### Block mode
+
+By default, `#alternatives` lays out elements as if they are inline (it wraps
+them in a `#box`). Sometimes, this will not be desirable, such as when laying
+out images using `#alternatives`.
+
+If the `block_mode` argument is set to `true`, then `#alternatives` will lay
+out elements as block level elements, taking up the full available width and
+adjusting to use the height of the largest element.
+
 ## `#alternatives-match`
 `#alternatives` has a couple of "cousins" that might be more convenient in some
 situations.
