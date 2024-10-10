@@ -12,32 +12,32 @@
   })
 })
 
-#let current-section = locate( loc => {
-  let sections = sections-state.at(loc)
+#let current-section = context {
+  let sections = sections-state.get()
   if sections.len() > 0 {
     sections.last().body
   } else {
     []
   }
-})
+}
 
-#let polylux-outline(enum-args: (:), padding: 0pt) = locate( loc => {
-  let sections = sections-state.final(loc)
+#let polylux-outline(enum-args: (:), padding: 0pt) = context {
+  let sections = sections-state.final()
   pad(padding, enum(
     ..enum-args,
     ..sections.map(section => link(section.loc, section.body))
   ))
-})
+}
 
 
 // PROGRESS
 
-#let polylux-progress(ratio-to-content) = locate( loc => {
-  let ratio = logic.logical-slide.at(loc).first() / logic.logical-slide.final(loc).first()
+#let polylux-progress(ratio-to-content) = context {
+  let ratio = logic.logical-slide.get().first() / logic.logical-slide.final().first()
   ratio-to-content(ratio)
-})
+}
 
-#let last-slide-number = locate(loc => logic.logical-slide.final(loc).first())
+#let last-slide-number = context { logic.logical-slide.final().first() }
 
 
 // HEIGHT FITTING

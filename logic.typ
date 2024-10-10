@@ -249,14 +249,14 @@
 #let pause = {
   // We need two separate `locate`s because `repetitions` needs to be updated
   // using the new value of `pause-counter`.
-  locate( loc => {
-    if not handout-mode.at(loc) {
+  context {
+    if not handout-mode.get() {
       pause-counter.step()
     }
-  })
-  locate( loc => {
-    repetitions.update(rep => calc.max(rep, pause-counter.at(loc).first() + 1))
-  })
+  }
+  context {
+    repetitions.update(rep => calc.max(rep, pause-counter.get().first() + 1))
+  }
 }
 
 #let paused-content(body) = locate( loc => {
@@ -271,11 +271,11 @@
 })
 
 #let polylux-slide(body) = {
-  locate( loc => {
-    if logical-slide.at(loc).first() > 0 {
+  context {
+    if logical-slide.get().first() > 0 {
       pagebreak(weak: true)
     }
-  })
+  }
   logical-slide.step()
   subslide.update(1)
   repetitions.update(1)
@@ -283,12 +283,12 @@
 
   // Having this here is a bit unfortunate concerning separation of concerns
   // but I'm not comfortable with logic depending on pdfpc...
-  let pdfpc-slide-markers(curr-subslide) = locate( loc => [
+  let pdfpc-slide-markers(curr-subslide) = context [
     #metadata((t: "NewSlide")) <pdfpc>
-    #metadata((t: "Idx", v: counter(page).at(loc).first() - 1)) <pdfpc>
+    #metadata((t: "Idx", v: counter(page).get().first() - 1)) <pdfpc>
     #metadata((t: "Overlay", v: curr-subslide - 1)) <pdfpc>
-    #metadata((t: "LogicalSlide", v: logical-slide.at(loc).first())) <pdfpc>
-  ])
+    #metadata((t: "LogicalSlide", v: logical-slide.get().first())) <pdfpc>
+  ]
 
   pdfpc-slide-markers(1)
 
@@ -297,8 +297,8 @@
   subslide.step()
   set heading(outlined: false)
 
-  locate( loc => {
-    let reps = repetitions.at(loc).first()
+  context {
+    let reps = repetitions.get().first()
     for curr-subslide in range(2, reps + 1) {
       pause-counter.update(0)
       pagebreak(weak: true)
@@ -308,5 +308,5 @@
       body
       subslide.step()
     }
-  })
+  }
 }
