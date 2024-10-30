@@ -39,3 +39,23 @@
 
   #alternatives-fn(count: 5, subslide => numbering("(i)", subslide))
 ]
+
+#polylux-slide[
+  == Test that block mode works
+
+  #alternatives(block_mode: true)[
+    This is inline content
+  ][
+    #rect(width: 100%, height: 60pt, fill: red)[
+      This rectangle should fill the page and have a red background
+    ]
+  ]
+
+  #alternatives(position: horizon + center, block_mode: true)[
+    #rect(width: 100%, height: 60pt, fill: green)[
+      This rectangle should fill the page and have a green background and
+      be `horizon + center` centered.
+    ]
+  ]
+
+]
