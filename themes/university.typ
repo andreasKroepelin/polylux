@@ -23,6 +23,7 @@
   color-b: rgb("#A63446"),
   color-c: rgb("#FBFEF9"),
   progress-bar: true,
+  size: 25pt,
   body
 ) = {
   set page(
@@ -31,7 +32,7 @@
     header: none,
     footer: none,
   )
-  set text(size: 25pt)
+  set text(size: size)
   show footnote.entry: set text(size: .6em)
 
   uni-progress-bar.update(progress-bar)
