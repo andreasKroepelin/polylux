@@ -130,11 +130,18 @@
       }
       context{
         let colors = uni-colors.at(here())
-        block(fill: colors.c, inset: (x: .5em), grid(
-          columns: (60%, 40%),
-          align(top + left, heading(level: 2, text(fill: colors.a, title))),
-          align(top + right, text(fill: colors.a.lighten(65%), utils.current-section))
-        ))
+        block(
+          fill: colors.c,
+          inset: (x: .5em),
+          grid(
+            columns: (1fr, auto),
+            align(top + left, heading(level: 2, text(fill: colors.a, title))),
+            align(
+              top + right,
+              text(fill: colors.a.lighten(65%), utils.current-section),
+            ),
+          ),
+        )
       }
     } else { [] }
   }
