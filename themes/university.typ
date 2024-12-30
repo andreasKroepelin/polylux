@@ -23,6 +23,7 @@
   color-b: rgb("#A63446"),
   color-c: rgb("#FBFEF9"),
   progress-bar: true,
+  size: 25pt,
   body
 ) = {
   set page(
@@ -31,7 +32,7 @@
     header: none,
     footer: none,
   )
-  set text(size: 25pt)
+  set text(size: size)
   show footnote.entry: set text(size: .6em)
 
   uni-progress-bar.update(progress-bar)
@@ -53,8 +54,8 @@
 ) = {
   let authors = if type(authors) ==  "array" { authors } else { (authors,) }
 
-  let content = locate( loc => {
-    let colors = uni-colors.at(loc)
+  let content = context{
+    let colors = uni-colors.at(here())
 
     if logo != none {
       align(right, logo)
@@ -89,7 +90,7 @@
         text(size: .8em, date)
       }
     })
-  })
+  }
 
   logic.polylux-slide(content)
 }
@@ -105,10 +106,10 @@
 
   let body = pad(x: 2em, y: .5em, body)
   
-  let progress-barline = locate( loc => {
-    if uni-progress-bar.at(loc) {
+  let progress-barline = context{
+    if uni-progress-bar.at(here()) {
       let cell = block.with( width: 100%, height: 100%, above: 0pt, below: 0pt, breakable: false )
-      let colors = uni-colors.at(loc)
+      let colors = uni-colors.at(here())
 
       utils.polylux-progress( ratio => {
         grid(
@@ -118,7 +119,7 @@
         )
       })
     } else { [] }
-  })
+  }
 
   let header-text = {
     if header != none {
@@ -127,14 +128,21 @@
       if new-section != none {
         utils.register-section(new-section)
       }
-      locate( loc => {
-        let colors = uni-colors.at(loc)
-        block(fill: colors.c, inset: (x: .5em), grid(
-          columns: (60%, 40%),
-          align(top + left, heading(level: 2, text(fill: colors.a, title))),
-          align(top + right, text(fill: colors.a.lighten(65%), utils.current-section))
-        ))
-      })
+      context{
+        let colors = uni-colors.at(here())
+        block(
+          fill: colors.c,
+          inset: (x: .5em),
+          grid(
+            columns: (1fr, auto),
+            align(top + left, heading(level: 2, text(fill: colors.a, title))),
+            align(
+              top + right,
+              text(fill: colors.a.lighten(65%), utils.current-section),
+            ),
+          ),
+        )
+      }
     } else { [] }
   }
 
@@ -153,19 +161,19 @@
     if footer != none {
       footer
     } else {
-      locate( loc => {
-        let colors = uni-colors.at(loc)
+      context{
+        let colors = uni-colors.at(here())
 
         show: block.with(width: 100%, height: auto, fill: colors.b)
         grid(
           columns: (25%, 1fr, 15%, 10%),
           rows: (1.5em, auto),
-          cell(fill: colors.a, uni-short-author.display()),
-          cell(uni-short-title.display()),
-          cell(uni-short-date.display()),
+          cell(fill: colors.a, uni-short-author.get()),
+          cell(uni-short-title.get()),
+          cell(uni-short-date.get()),
           cell(logic.logical-slide.display() + [~/~] + utils.last-slide-number)
         )
-      })
+      }
     }
   }
 
