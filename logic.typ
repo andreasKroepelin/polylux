@@ -10,7 +10,7 @@
   if mode == "invisible" {
     hide(body)
   } else if mode == "transparent" {
-    text(gray.lighten(50%), body)
+    text(text.fill.transparentize(50%), body)
   } else {
     panic("Illegal cover mode: " + mode)
   }
