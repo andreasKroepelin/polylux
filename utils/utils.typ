@@ -5,12 +5,13 @@
 // SECTIONS
 
 #let sections-state = state("polylux-sections", ())
-#let register-section(name) = locate( loc => {
+#let register-section(name) = context{
+  let loc = here()
   sections-state.update(sections => {
     sections.push((body: name, loc: loc))
     sections
   })
-})
+}
 
 #let current-section = context {
   let sections = sections-state.get()
@@ -78,10 +79,10 @@
     hidden#after-label
   ]
 
-  locate(loc => {
-    let before = query(selector(before-label).before(loc), loc)
+  context{
+    let before = query(selector(before-label).before(here()), here())
     let before-pos = before.last().location().position()
-    let after = query(selector(after-label).before(loc), loc)
+    let after = query(selector(after-label).before(here()), here())
     let after-pos = after.last().location().position()
 
     let available-height = after-pos.y - before-pos.y
@@ -126,7 +127,7 @@
         )
       })
     })
-  })
+  }
 }
 
 // SIDE BY SIDE
