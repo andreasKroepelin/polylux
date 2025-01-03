@@ -247,7 +247,7 @@
 }
 
 #let pause = {
-  // We need two separate `locate`s because `repetitions` needs to be updated
+  // We need two separate `context`s because `repetitions` needs to be updated
   // using the new value of `pause-counter`.
   context {
     if not handout-mode.get() {
@@ -255,7 +255,8 @@
     }
   }
   context {
-    repetitions.update(rep => calc.max(rep, pause-counter.get().first() + 1))
+    let tmp-counter = pause-counter.get().first()
+    repetitions.update(rep => calc.max(rep, tmp-counter + 1))
   }
 }
 
