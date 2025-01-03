@@ -46,10 +46,10 @@
 #let slide(body) = {
   let deco-format(it) = text(size: .6em, fill: gray, it)
   set page(
-    header: locate( loc => {
-      let sections = query(heading.where(level: 1, outlined: true).before(loc), loc)
+    header: context{
+      let sections = query(heading.where(level: 1, outlined: true).before(here()), here())
       if sections == () [] else { deco-format(sections.last().body) }
-    }),
+    },
     footer: deco-format({
       simple-footer.display(); h(1fr); logic.logical-slide.display()
     }),

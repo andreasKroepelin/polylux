@@ -44,9 +44,9 @@
   watermark: none,
   secondlogo: none,
 ) = {
-  let content = locate( loc => {
-    let color = clean-color.at(loc)
-    let logo = clean-logo.at(loc)
+  let content = context{
+    let color = clean-color.at(here())
+    let logo = clean-logo.at(here())
     let authors = if type(authors) in ("string", "content") {
       ( authors, )
     } else {
@@ -100,15 +100,15 @@
       #v(1em)
       #date
     ]
-  })
+  }
   logic.polylux-slide(content)
 }
 
 #let slide(title: none, body) = {
-  let header = align(top, locate( loc => {
-    let color = clean-color.at(loc)
-    let logo = clean-logo.at(loc)
-    let short-title = clean-short-title.at(loc)
+  let header = align(top, context{
+    let color = clean-color.at(here())
+    let logo = clean-logo.at(here())
+    let short-title = clean-short-title.at(here())
 
     show: block.with(stroke: (bottom: 1mm + color), width: 100%, inset: (y: .3em))
     set text(size: .5em)
@@ -130,10 +130,10 @@
         align(horizon + right, utils.current-section)
       }
     )
-  }))
+  })
 
-  let footer = locate( loc => {
-    let color = clean-color.at(loc)
+  let footer = context{
+    let color = clean-color.at(here())
 
     block(
       stroke: ( top: 1mm + color ), width: 100%, inset: ( y: .3em ),
@@ -143,7 +143,7 @@
         logic.logical-slide.display()
       })
     )
-  })
+  }
 
   set page(
     margin: ( top: 4em, bottom: 2em, x: 1em ),
@@ -176,13 +176,13 @@
 
 #let new-section-slide(name) = {
   set page(margin: 2em)
-  let content = locate( loc => {
-    let color = clean-color.at(loc)
+  let content = context{
+    let color = clean-color.at(here())
     set align(center + horizon)
     show: block.with(stroke: ( bottom: 1mm + color ), inset: 1em,)
     set text(size: 1.5em)
     strong(name)
     utils.register-section(name)
-  })
+  }
   logic.polylux-slide(content)
 }
