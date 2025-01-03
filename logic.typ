@@ -98,19 +98,19 @@
 }
 
 #let _conditional-display(visible-subslides, reserve-space, mode, body) = {
-  locate( loc => {
-    let vs = if reserve-space and handout-mode.at(loc) {
+  context{
+    let vs = if reserve-space and handout-mode.at(here()) {
       (:)
     } else {
       visible-subslides
     }
     repetitions.update(rep => calc.max(rep, _last-required-subslide(vs)))
-    if _check-visible(subslide.at(loc).first(), vs) {
+    if _check-visible(subslide.at(here()).first(), vs) {
       body
     } else if reserve-space {
       _slides-cover(mode, body)
     }
-  })
+  }
 }
 
 #let uncover(visible-subslides, mode: "invisible", body) = {
@@ -127,7 +127,7 @@
   }
 }
 
-#let alternatives-match(subslides-contents, position: bottom + left) = {
+#let alternatives-match(subslides-contents, position: bottom + left, width: none, stroke: none, outset: none) = {
   let subslides-contents = if type(subslides-contents) == "dictionary" {
     subslides-contents.pairs()
   } else {
@@ -136,8 +136,8 @@
 
   let subslides = subslides-contents.map(it => it.first())
   let contents = subslides-contents.map(it => it.last())
-  style(styles => {
-    let sizes = contents.map(c => measure(c, styles))
+  context{
+    let sizes = contents.map(c => measure(c))
     let max-width = calc.max(..sizes.map(sz => sz.width))
     let max-height = calc.max(..sizes.map(sz => sz.height))
     for (subslides, content) in subslides-contents {
@@ -147,7 +147,7 @@
         align(position, content)
       ))
     }
-  })
+  }
 }
 
 #let alternatives(
@@ -262,16 +262,16 @@
   }
 }
 
-#let paused-content(body) = locate( loc => {
-  let current-subslide = subslide.at(loc).first()
-  let current-pause-counter = pause-counter.at(loc).first()
+#let paused-content(body) = context{
+  let current-subslide = subslide.at(here()).first()
+  let current-pause-counter = pause-counter.at(here()).first()
 
   if current-subslide > current-pause-counter {
     body
   } else {
     hide(body)
   }
-})
+}
 
 #let polylux-slide(body) = {
   context {
