@@ -49,14 +49,14 @@
 }
 
 #let _check-visible(idx, visible-subslides) = {
-  if type(visible-subslides) == "integer" {
+  if type(visible-subslides) == integer {
     idx == visible-subslides
-  } else if type(visible-subslides) == "array" {
+  } else if type(visible-subslides) == array {
     visible-subslides.any(s => _check-visible(idx, s))
-  } else if type(visible-subslides) == "string" {
+  } else if type(visible-subslides) == string {
     let parts = _parse-subslide-indices(visible-subslides)
     _check-visible(idx, parts)
-  } else if type(visible-subslides) == "dictionary" {
+  } else if type(visible-subslides) == dictionary {
     let lower-okay = if "beginning" in visible-subslides {
       visible-subslides.beginning <= idx
     } else {
@@ -76,14 +76,14 @@
 }
 
 #let _last-required-subslide(visible-subslides) = {
-  if type(visible-subslides) == "integer" {
+  if type(visible-subslides) == integer {
     visible-subslides
-  } else if type(visible-subslides) == "array" {
+  } else if type(visible-subslides) == array {
     calc.max(..visible-subslides.map(s => _last-required-subslide(s)))
-  } else if type(visible-subslides) == "string" {
+  } else if type(visible-subslides) == string {
     let parts = _parse-subslide-indices(visible-subslides)
     _last-required-subslide(parts)
-  } else if type(visible-subslides) == "dictionary" {
+  } else if type(visible-subslides) == dictionary {
     let last = 0
     if "beginning" in visible-subslides {
       last = calc.max(last, visible-subslides.beginning)
@@ -128,7 +128,7 @@
 }
 
 #let alternatives-match(subslides-contents, position: bottom + left) = {
-  let subslides-contents = if type(subslides-contents) == "dictionary" {
+  let subslides-contents = if type(subslides-contents) == dictionary {
     subslides-contents.pairs()
   } else {
     subslides-contents
