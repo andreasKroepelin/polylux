@@ -1,4 +1,6 @@
-# Polylux ![logo](assets/polylux-logo.svg)
+![logo](assets/polylux-logo.svg)
+
+# Polylux
 This is a package for creating presentation slides in [Typst](https://typst.app/).
 Read the [book](https://polylux.dev/book) to learn all
 about it and click [here](https://polylux.dev/book/changelog.html)
