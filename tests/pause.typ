@@ -2,61 +2,64 @@
 
 #set page(paper: "presentation-16-9")
 
-#polylux-slide[
+// #enable-handout-mode(true)
+
+#slide[
   == Text like content
 
   Hello
-  #pause
+  #show: later
   $a + b$
-  #pause
+  #uncover("4-")[uncovered]
+  #show: later
   $ integral f(x) dif x $
-  #pause
+  #show: later
 
   - *item1*
   - _item2_
+  #show: later
   - `item3`
 
-  #pause
+  #show: later
   
   + #underline[item1]
   + #strike[item2]
   + #overline[item3]
 
-  #pause
+  #show: later
 
   / def1: abc
   / def2: ghi
 
-  #pause
+  #show: later
 
   #box(stroke: 2pt + aqua, inset: 2pt)[boxed!]
 
-  #pause
+  #show: later
 
   #block(stroke: 2pt + lime, inset: 2pt)[blocked!]
 ]
 
-#polylux-slide[
+#slide[
   == Inside grid
   
   #grid(columns: 4 * (1fr,))[
     abc
-    #pause
   ][
+    #show: later
     def
-    #pause
   ][
+    #show: later.with(strand: 2)
     ghi
-    #pause
   ][
     jkl
   ]
 ]
 
-#polylux-slide[
+#slide[
   == Visuals
 
-  #pause
+  #show: later
   
   // Fails to be hidden as of Typst 0.7.0
   #path(
@@ -81,6 +84,6 @@
     (0cm, 0cm), (1cm, 0cm), (1cm, 1cm)
   )
 
-  #image("../assets/logo.png", width: 3em)
+  #image("../assets/polylux-logo.svg", width: 3em)
 ]
 

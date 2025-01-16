@@ -1,5 +1,5 @@
 #let subslide = counter("subslide")
-#let pause-counter = counter("pause-counter")
+#let later-counter = counter("later-counter")
 #let logical-slide = counter("logical-slide")
 #let repetitions = counter("repetitions")
 #let handout-mode = state("handout-mode", false)
@@ -49,11 +49,11 @@
 }
 
 #let _check-visible(idx, visible-subslides) = {
-  if type(visible-subslides) == integer {
+  if type(visible-subslides) == int {
     idx == visible-subslides
   } else if type(visible-subslides) == array {
     visible-subslides.any(s => _check-visible(idx, s))
-  } else if type(visible-subslides) == string {
+  } else if type(visible-subslides) == str {
     let parts = _parse-subslide-indices(visible-subslides)
     _check-visible(idx, parts)
   } else if type(visible-subslides) == dictionary {
@@ -76,11 +76,11 @@
 }
 
 #let _last-required-subslide(visible-subslides) = {
-  if type(visible-subslides) == integer {
+  if type(visible-subslides) == int {
     visible-subslides
   } else if type(visible-subslides) == array {
     calc.max(..visible-subslides.map(s => _last-required-subslide(s)))
-  } else if type(visible-subslides) == string {
+  } else if type(visible-subslides) == str {
     let parts = _parse-subslide-indices(visible-subslides)
     _last-required-subslide(parts)
   } else if type(visible-subslides) == dictionary {
@@ -192,25 +192,6 @@
   alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
-#let line-by-line(start: 1, mode: "invisible", body) = {
-  let items = if repr(body.func()) == "sequence" {
-    body.children
-  } else {
-    ( body, )
-  }
-
-  let idx = start
-  for item in items {
-    if repr(item.func()) != "space" {
-      uncover((beginning: idx), mode: mode, item)
-      idx += 1
-    } else {
-      item
-    }
-  }
-}
-
-
 #let _items-one-by-one(fn, start: 1, mode: "invisible", ..args) = {
   let kwargs = args.named()
   let items = args.pos()
@@ -246,32 +227,24 @@
   )
 }
 
-#let pause = {
-  // We need two separate `context`s because `repetitions` needs to be updated
-  // using the new value of `pause-counter`.
-  context {
-    if not handout-mode.get() {
-      pause-counter.step()
-    }
-  }
-  context {
-    let tmp-counter = pause-counter.get().first()
-    repetitions.update(rep => calc.max(rep, tmp-counter + 1))
-  }
-}
-
-#let paused-content(body) = context{
-  let current-subslide = subslide.at(here()).first()
-  let current-pause-counter = pause-counter.at(here()).first()
-
-  if current-subslide > current-pause-counter {
+#let later(body, strand: 1) = {
+  context if handout-mode.get() {
     body
   } else {
-    hide(body)
+    later-counter.step(level: strand)
+    context {
+      let curr-lc = later-counter.get().at(strand - 1)
+      repetitions.update(r => calc.max(r, curr-lc + 1))
+      if curr-lc < subslide.get().first() {
+        body
+      } else {
+        hide(body)
+      }
+    }
   }
 }
 
-#let polylux-slide(body) = {
+#let slide(body) = {
   context {
     if logical-slide.get().first() > 0 {
       pagebreak(weak: true)
@@ -280,7 +253,7 @@
   logical-slide.step()
   subslide.update(1)
   repetitions.update(1)
-  pause-counter.update(0)
+  later-counter.update(0)
 
   // Having this here is a bit unfortunate concerning separation of concerns
   // but I'm not comfortable with logic depending on pdfpc...
@@ -301,7 +274,7 @@
   context {
     let reps = repetitions.get().first()
     for curr-subslide in range(2, reps + 1) {
-      pause-counter.update(0)
+      later-counter.update(0)
       pagebreak(weak: true)
 
       pdfpc-slide-markers(curr-subslide)
