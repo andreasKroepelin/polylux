@@ -1,4 +1,4 @@
-# Polylux <img src="https://andreaskroepelin.github.io/polylux/book/logo.png" style="width: 3em;"></img>
+# Polylux ![logo](assets/polylux-logo.svg)
 This is a package for creating presentation slides in [Typst](https://typst.app/).
 Read the [book](https://polylux.dev/book) to learn all
 about it and click [here](https://polylux.dev/book/changelog.html)
