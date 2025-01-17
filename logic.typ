@@ -127,6 +127,18 @@
   }
 }
 
+#let item-by-item(start: 1, mode: "invisible", body) = {
+  let is-item(it) = type(it) == content and it.func() in (
+    list.item, enum.item, terms.item
+  )
+  let children = if type(body) == content and body.has("children") {
+    body.children
+  } else {
+    body
+  }
+  one-by-one(start: start, mode: mode, ..children.filter(is-item))
+}
+
 #let alternatives-match(subslides-contents, position: bottom + left) = {
   let subslides-contents = if type(subslides-contents) == dictionary {
     subslides-contents.pairs()

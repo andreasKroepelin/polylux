@@ -1,7 +1,7 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 30pt)
+#set text(size: 30pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
+#slide[
   #uncover((1, 2, 4))[uncovered only on subslides 1, 2, and 4]
 ]

@@ -1,10 +1,10 @@
 #import "../../../polylux.typ": *
 
 #set page(paper: "presentation-16-9", fill: teal.lighten(90%))
-#set text(size: 25pt, font: "Blogger Sans")
+#set text(size: 25pt, font: "Lato")
 
-#polylux-slide[
-  #set align(horizon + center)
+#slide[
+  #set align(horizon)
   = My fabulous talk
 
   Jane Doe
@@ -12,15 +12,16 @@
   Conference on Advances in Slide Making
 ]
 
-#polylux-slide[
+#slide[
   == My slide title
   Hello, world!
 ]
 
-#polylux-slide[
+#slide[
   == A quiz
 
   What is the capital of the Republic of Benin?
 
-  #uncover(2)[Porto-Novo]
+  #show: later
+  Porto-Novo
 ]

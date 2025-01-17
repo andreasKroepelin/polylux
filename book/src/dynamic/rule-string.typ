@@ -1,7 +1,7 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 40pt)
+#set text(size: 40pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
-#uncover("-2, 4, 6-8, 10-")[polylux]
+#slide[
+#uncover("-2, 4, 6-8, 10-")[Polylux]
 ]

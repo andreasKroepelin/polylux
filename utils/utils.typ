@@ -40,6 +40,8 @@
 
 #let last-slide-number = context { logic.logical-slide.final().first() }
 
+#let slide-number = context { logic.logical-slide.display() }
+
 
 // HEIGHT FITTING
 

@@ -1,4 +1,6 @@
-![logo](logo2.png)
+![logo](polylux-logo.svg)
+
+# Polylux
 
 **Polylux** is a package for the typesetting system [*Typst*](https://typst.app)
 to create presentation slides, just like you would use the _beamer_ package in LaTeX.
@@ -14,7 +16,8 @@ Polylux gives you:
 - Fully customisable slides.
 - Dynamic slides (or *overlays* or (dis-)appearing content, or however you want
   to call it).
-- Decently looking themes.
+- Some [templates](https://typst.app/universe/search/?q=polylux&kind=templates)
+  to get you up to speed quickly.
 
 If you like it, consider [giving a star on GitHub](https://github.com/andreasKroepelin/polylux)!
 

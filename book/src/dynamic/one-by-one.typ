@@ -1,7 +1,7 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 50pt)
+#set text(size: 50pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
+#slide[
 #one-by-one[Do you know ][$pi$ ][to a thousand decimal places?]
 ]

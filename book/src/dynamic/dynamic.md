@@ -7,7 +7,7 @@ for one slide, each with slightly different content.
 This enables us to have some basic dynamic elements on our slides.
 
 In this book, we will use the term _logical slide_ for a section of content that
-was created by one call to `#polylux-slide`, and _subslide_ for a resulting PDF
+was created by one call to `#slide`, and _subslide_ for a resulting PDF
 page.
 Each logical side can have an arbitrary amount of subslides and every subslide
 is part of exactly one logical slide.
@@ -29,6 +29,3 @@ This results in 6 PDF pages for this logical slide.
 
 In the LaTeX beamer package, the functionalities described in this part are
 called "overlays".
-
-Everything discussed here works just as well when you use themes.
-For simplicity, we will work through the material without them, though.

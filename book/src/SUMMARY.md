@@ -8,7 +8,7 @@
   - [General syntax](./dynamic/syntax.md)
   - [Complex rules](./dynamic/complex.md)
   - [Helper functions](./dynamic/helper.md)
-    - [pause](./dynamic/pause.md)
+    - [later](./dynamic/later.md)
     - [one-by-one and friends](./dynamic/obo-lbl.md)
     - [alternatives](./dynamic/alternatives.md)
   - [Cover mode](./dynamic/cover.md)

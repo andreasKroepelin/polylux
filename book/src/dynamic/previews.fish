@@ -1,0 +1,9 @@
+typst-compose only-uncover 2 gray --root ../../..
+typst-compose rule-array 2 gray --root ../../..
+typst-compose rule-interval 3 gray --root ../../..
+typst-compose rule-string 4 gray --root ../../..
+typst-compose later 3 gray --root ../../..
+typst-compose one-by-one 3 gray --root ../../..
+typst-compose one-by-one-start 3 gray --root ../../..
+typst-compose item-by-item 3 gray --root ../../..
+typst-compose item-by-item-complex 3 gray --root ../../..
