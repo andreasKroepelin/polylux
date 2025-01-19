@@ -1,8 +1,14 @@
 #import "../polylux.typ": *
 
 #set page(paper: "presentation-16-9")
+#slide[
+  == Test that `start` works
 
-#polylux-slide[
+  #alternatives(start: 2)[abc ][def ][ghi ]
+
+]
+
+#slide[
   == Test that `repeat-last` works
 
   #alternatives[abc ][def ][ghi ]
@@ -12,7 +18,7 @@
   #uncover(5)[You can go now.]
 ]
 
-#polylux-slide[
+#slide[
   == Test that `alternatives-match` works
 
   #alternatives-match(position: center, (
@@ -25,7 +31,20 @@
   #uncover("1-8")[I am always here, for technical reasons.]
 ]
 
-#polylux-slide[
+#slide[
+  == Another test that `alternatives-match` works
+
+  #alternatives-match(position: center, (
+    (2,  [beginning]),
+    ((3, 5), [main part]),
+    (4, [short break]),
+    ("6-" , [end])
+  ))
+
+  #uncover("1-8")[I am always here, for technical reasons.]
+]
+
+#slide[
   == Test that `alternatives-cases` works
 
   #alternatives-cases(("1,3,4", "2,5", "6"), case => {
@@ -34,8 +53,12 @@
   })
 ]
 
-#polylux-slide[
-  == Test that `alternatives-fn` works
+#slide[
+  // == Test that `alternatives-fn` works
 
-  #alternatives-fn(count: 5, subslide => numbering("(i)", subslide))
+  // #raw(lang: "typ", repr(range(1, 6)))
+  
+  // #alternatives-fn(start: 2, count: 5, subslide => numbering("(i)", subslide))
+
+  #only(2)[abc]
 ]

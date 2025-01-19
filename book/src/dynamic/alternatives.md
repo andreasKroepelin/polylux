@@ -1,5 +1,6 @@
 # `#alternatives` to substitute content
-The so far discussed helpers `#pause`, `#one-by-one` etc. all build upon `#uncover`.
+The so far discussed helpers `#later`, `#one-by-one` etc. all build upon
+`#uncover`.
 There is an analogon to `#one-by-one` that is based on `#only`, namely
 `#alternatives`.
 You can use it to show some content on one subslide, then substitute it by
@@ -41,7 +42,7 @@ of `#alternatives` are exhausted, you might want to not have the `#alternatives`
 element disappear but instead continue to show its last content argument.
 To achieve this, you can use the `repeat-last` parameter:
 ```typ
-{{#include alternatives-repeat-last.typ:6:9}}
+{{#include alternatives-repeat-last.typ:6:8}}
 ```
 resulting in
 
@@ -115,7 +116,7 @@ So exactly one of them is necessary.
 
 For example:
 ```typ
-{{#include alternatives-fn.typ:6:8}}
+{{#include alternatives-fn.typ:6:9}}
 ```
 resulting in
 

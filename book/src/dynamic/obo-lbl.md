@@ -26,9 +26,9 @@ This optional `start` argument exists for all functions displayed on this page.
 ## `#item-by-item`
 `#one-by-one` is especially useful for arbitrary contents that you want to display
 in that manner.
-Sometimes, it produces a bit too much syntactical noise again with
-all the brackets between content, though.
-That is especially true lists, enums, and term lists.
+Sometimes, it produces a bit too much syntactical noise with all the brackets
+between content, though.
+That is especially true for lists, enums, and term lists.
 Instead of
 ```typ
 #one-by-one[
@@ -54,6 +54,3 @@ A more complex example involving enums and term lists:
 
 ![item-by-item-complex](item-by-item-complex.png)
 
-You will realise that the markers and numbers in the lists and enums are not
-hidden for technical reasons, respectively.
-You can truly consider this either a bug or a feature...

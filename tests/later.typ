@@ -41,18 +41,18 @@
 ]
 
 #slide[
-  == Inside grid
-  
-  #grid(columns: 4 * (1fr,))[
+  == Multiple scopes
+
+  #grid(columns: 2, gutter: 1em)[
     abc
-  ][
     #show: later
     def
   ][
-    #show: later.with(strand: 2)
     ghi
-  ][
+    #show: later.with(strand: 2)
     jkl
+    #show: later.with(strand: 2)
+    mno
   ]
 ]
 

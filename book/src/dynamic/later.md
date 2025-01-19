@@ -29,3 +29,26 @@ This results in
 `#show: later` should mainly be used when you want to distribute a lot of code
 onto different subslides.
 For smaller pieces of code, consider one of the functions described next.
+
+## Multiple scopes
+
+Note that, like every `show`-rule, `#show: later` only affects the rest of its
+surrounding scope.
+For other (potentially conceptually later) content in a different scope, you
+have to use a new `#show: later` rule.
+If you see weird interactions between different scopes using `#show: later`
+or you get a warning from Typst that layouting did not converge, you can make
+use of the optional argument `strand` (set to `1` by default):
+```typ
+#[
+  this is scope 1
+  #show: later
+  still scope 1
+]
+#[
+  this is scope 2
+  #show: later.with(strand: 2)
+  still scope 2
+]
+```
+Every strand works independently of every other.

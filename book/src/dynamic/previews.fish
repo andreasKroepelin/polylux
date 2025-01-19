@@ -7,3 +7,10 @@ typst-compose one-by-one 3 gray --root ../../..
 typst-compose one-by-one-start 3 gray --root ../../..
 typst-compose item-by-item 3 gray --root ../../..
 typst-compose item-by-item-complex 3 gray --root ../../..
+typst-compose poor-alternatives 3 gray --root ../../..
+typst-compose alternatives 3 gray --root ../../..
+typst-compose alternatives-repeat-last 3 gray --root ../../..
+typst-compose alternatives-position 2 gray --root ../../..
+typst-compose alternatives-match 3 gray --root ../../..
+typst-compose alternatives-cases 3 gray --root ../../..
+typst-compose alternatives-fn 4 gray --root ../../..

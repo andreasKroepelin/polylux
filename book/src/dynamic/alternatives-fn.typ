@@ -1,8 +1,9 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 60pt)
+#set text(size: 50pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
+#slide[
+We are on subslide:
 #alternatives-fn(start: 2, count: 7, subslide => {
   numbering("(i)", subslide)
 })
