@@ -269,6 +269,15 @@
 
   pdfpc-slide-markers(1)
 
+  // Workaround for typst showing list ticks and enum numbers when it should not.
+  // See https://github.com/andreasKroepelin/polylux/issues/186
+  show hide: it => {
+    set list(marker: none)
+    set enum(numbering: n => none)
+
+    it
+  }
+
   body
 
   subslide.step()
