@@ -9,3 +9,11 @@
     + ghi
   ]
 ]
+
+#slide[
+  - abc
+  #show: later
+  - def
+  #show: later
+  - ghi
+]
