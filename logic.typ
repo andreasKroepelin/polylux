@@ -206,7 +206,6 @@
 
 #let reveal-code(start: 1, lines: (), before: gray, after: hide, body) = {
   lines.insert(0, 0)
-  // lines.push(1000000)
   let (before-action, after-action) = (before, after).map(c => {
     if type(c) == color {
       it => text(fill: c, it.text)
