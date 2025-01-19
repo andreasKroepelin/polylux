@@ -296,7 +296,7 @@
   // See https://github.com/andreasKroepelin/polylux/issues/186
   show hide: it => {
     set list(marker: none)
-    set enum(numbering: n => [])
+    set enum(numbering: n => none)
 
     it
   }
