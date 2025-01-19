@@ -204,39 +204,31 @@
   alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
-#let _items-one-by-one(fn, start: 1, mode: "invisible", ..args) = {
-  let kwargs = args.named()
-  let items = args.pos()
-  let covered-items = items.enumerate().map(
-    ((idx, item)) => uncover((beginning: idx + start), mode: mode, item)
-  )
-  fn(
-    ..kwargs,
-    ..covered-items
-  )
-}
-
-#let list-one-by-one(start: 1, mode: "invisible", ..args) = {
-  _items-one-by-one(list, start: start, mode: mode, ..args)
-}
-
-#let enum-one-by-one(start: 1, mode: "invisible", ..args) = {
-  _items-one-by-one(enum, start: start, mode: mode, ..args)
-}
-
-#let terms-one-by-one(start: 1, mode: "invisible", ..args) = {
-  let kwargs = args.named()
-  let items = args.pos()
-  let covered-items = items.enumerate().map(
-    ((idx, item)) => terms.item(
-      item.term,
-      uncover((beginning: idx + start), mode: mode, item.description)
-    )
-  )
-  terms(
-    ..kwargs,
-    ..covered-items
-  )
+#let reveal-code(start: 1, lines: (), before: gray, after: hide, body) = {
+  lines.insert(0, 0)
+  // lines.push(1000000)
+  let (before-action, after-action) = (before, after).map(c => {
+    if type(c) == color {
+      it => text(fill: c, it.text)
+    } else if c == hide {
+      hide
+    } else {
+      panic("Illegal mode: " + str(c))
+    }
+  })
+  for (idx, (from , to)) in lines.windows(2).enumerate() {
+    show raw.line: it => {
+      if it.number <= from {
+        before-action(it)
+      } else if it.number > to {
+        after-action(it)
+      } else {
+        it
+      }
+    }
+    only(start + idx, body)
+  }
+  only((beginning: start + lines.len()), body)
 }
 
 #let later(body, strand: 1) = {
