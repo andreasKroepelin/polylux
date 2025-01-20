@@ -271,9 +271,19 @@
 
   // Workaround for typst showing list ticks and enum numbers when it should not.
   // See https://github.com/andreasKroepelin/polylux/issues/186
+  let no-par-spacing(it) = (
+    context {
+      set par(spacing: par.leading)
+      it
+    }
+  )
+
+  show list: no-par-spacing
+  show enum: no-par-spacing
+
   show hide: it => {
-    set list(marker: none)
-    set enum(numbering: n => none)
+    show list.item: list
+    show enum.item: enum
 
     it
   }
