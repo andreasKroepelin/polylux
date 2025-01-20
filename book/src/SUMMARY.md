@@ -11,6 +11,7 @@
     - [later](./dynamic/later.md)
     - [one-by-one and friends](./dynamic/obo-lbl.md)
     - [alternatives](./dynamic/alternatives.md)
+    - [reveal-code](./dynamic/reveal-code.md)
   - [Cover mode](./dynamic/cover.md)
   - [Handout mode](./dynamic/handout.md)
   - [Internals](./dynamic/internals.md)
