@@ -1,16 +1,18 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 30pt)
+#set text(size: 40pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
-#uncover(3, mode: "transparent")[abc]
+#slide[
+#uncover(3, mode: gray)[abc]
 
-#one-by-one(start: 2, mode: "transparent")[def ][ghi]
+#one-by-one(start: 2, mode: gray)[def ][ghi]
 
-#line-by-line(mode: "transparent")[
+#item-by-item(mode: gray)[
   - jkl
   - mno
 ]
 
-#enum-one-by-one(mode: "transparent", tight: false)[pqr][stu][vwx]
+#show: later.with(mode: gray)
+pqr
+
 ]

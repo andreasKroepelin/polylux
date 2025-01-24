@@ -14,3 +14,6 @@ typst-compose alternatives-position 2 gray --root ../../..
 typst-compose alternatives-match 3 gray --root ../../..
 typst-compose alternatives-cases 3 gray --root ../../..
 typst-compose alternatives-fn 4 gray --root ../../..
+typst-compose reveal-code 3 gray --root ../../..
+typst-compose cover 3 gray --root ../../..
+typst-compose handout 1 gray --root ../../..

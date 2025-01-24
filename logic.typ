@@ -7,10 +7,10 @@
 #let enable-handout-mode(flag) = handout-mode.update(flag)
 
 #let _slides-cover(mode, body) = {
-  if mode == "invisible" {
+  if mode == hide {
     hide(body)
-  } else if mode == "transparent" {
-    text(text.fill.transparentize(50%), body)
+  } else if type(mode) == color {
+    text(fill: mode, body)
   } else {
     panic("Illegal cover mode: " + mode)
   }
@@ -113,7 +113,7 @@
   }
 }
 
-#let uncover(visible-subslides, mode: "invisible", body) = {
+#let uncover(visible-subslides, mode: hide, body) = {
   _conditional-display(visible-subslides, true, mode, body)
 }
 
@@ -121,13 +121,13 @@
   _conditional-display(visible-subslides, false, "doesn't even matter", body)
 }
 
-#let one-by-one(start: 1, mode: "invisible", ..children) = {
+#let one-by-one(start: 1, mode: hide, ..children) = {
   for (idx, child) in children.pos().enumerate() {
     uncover((beginning: start + idx), mode: mode, child)
   }
 }
 
-#let item-by-item(start: 1, mode: "invisible", body) = {
+#let item-by-item(start: 1, mode: hide, body) = {
   let is-item(it) = type(it) == content and it.func() in (
     list.item, enum.item, terms.item
   )
@@ -204,7 +204,14 @@
   alternatives-match(cases.zip(contents), ..kwargs.named())
 }
 
-#let reveal-code(start: 1, lines: (), before: gray, after: hide, body) = {
+#let reveal-code(
+  start: 1,
+  lines: (),
+  before: gray,
+  after: hide,
+  full: true,
+  body,
+) = {
   lines.insert(0, 0)
   let (before-action, after-action) = (before, after).map(c => {
     if type(c) == color {
@@ -227,10 +234,12 @@
     }
     only(start + idx, body)
   }
-  only((beginning: start + lines.len()), body)
+  if full {
+    only((beginning: start + lines.len()), body)
+  }
 }
 
-#let later(body, strand: 1) = {
+#let later(body, strand: 1, mode: hide) = {
   context if handout-mode.get() {
     body
   } else {
@@ -241,7 +250,7 @@
       if curr-lc < subslide.get().first() {
         body
       } else {
-        hide(body)
+        _slides-cover(mode, body)
       }
     }
   }

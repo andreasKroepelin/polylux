@@ -14,7 +14,6 @@
     - [reveal-code](./dynamic/reveal-code.md)
   - [Cover mode](./dynamic/cover.md)
   - [Handout mode](./dynamic/handout.md)
-  - [Internals](./dynamic/internals.md)
 - [Themes](./themes/themes.md)
   - [Gallery](./themes/gallery/index.md)
     - [Simple](./themes/gallery/simple.md)
