@@ -1,9 +1,9 @@
 #import "../../../polylux.typ": *
 #set page(paper: "presentation-16-9")
-#set text(size: 40pt)
+#set text(size: 40pt, font: "Atkinson Hyperlegible")
 
-#polylux-slide[
-#side-by-side[
+#slide[
+#toolbox.side-by-side[
   #lorem(7)
 ][
   #lorem(10)
