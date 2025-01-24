@@ -13,37 +13,36 @@ If you like it, consider [giving a star on GitHub](https://github.com/andreasKro
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
 ![GitHub Repo stars](https://img.shields.io/github/stars/andreasKroepelin/polylux)
 [![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
-![Themes badge](https://img.shields.io/badge/themes-5-aqua)
+![Templates badge](https://img.shields.io/badge/templates-5-aqua)
 
 
 ## Quickstart
 For the bare-bones, do-it-yourself experience, all you need is:
 ```typ
 // Get Polylux from the official package repository
-#import "@preview/polylux:0.3.1": *
+#import "@preview/polylux:0.4.0": *
 
 // Make the paper dimensions fit for a presentation and the text larger
 #set page(paper: "presentation-16-9")
-#set text(size: 25pt)
+#set text(size: 25pt, font: "Lato")
 
-// Use #polylux-slide to create a slide and style it using your favourite Typst functions
-#polylux-slide[
-  #align(horizon + center)[
-    = Very minimalist slides
+// Use #slide to create a slide and style it using your favourite Typst functions
+#slide[
+  #set align(horizon)
+  = Very minimalist slides
 
-    A lazy author
+  A lazy author
 
-    July 23, 2023
-  ]
+  July 23, 2023
 ]
 
-#polylux-slide[
+#slide[
   == First slide
 
   Some static text on this slide.
 ]
 
-#polylux-slide[
+#slide[
   == This slide changes!
 
   You can always see this.
@@ -52,74 +51,20 @@ For the bare-bones, do-it-yourself experience, all you need is:
 ]
 ```
 This code produces these PDF pages:
-![minimal example](https://polylux.dev/book/minimal.png)
+![minimal example](examples/minimal.png)
 
 From there, you can either start creatively adapting the looks to your likings
-or you can use one of the provided themes.
-The simplest one of them is called `simple` (what a coincidence!).
-It is still very unintrusive but gives you some sensible defaults:
-```typ
-#import "@preview/polylux:0.3.1": *
-
-#import themes.simple: *
-
-#set text(font: "Inria Sans")
-
-#show: simple-theme.with(
-  footer: [Simple slides],
-)
-
-#title-slide[
-  = Keep it simple!
-  #v(2em)
-
-  Alpha #footnote[Uni Augsburg] #h(1em)
-  Bravo #footnote[Uni Bayreuth] #h(1em)
-  Charlie #footnote[Uni Chemnitz] #h(1em)
-
-  July 23
-]
-
-#slide[
-  == First slide
-
-  #lorem(20)
-]
-
-#focus-slide[
-  _Focus!_
-
-  This is very important.
-]
-
-#centered-slide[
-  = Let's start a new section!
-]
-
-#slide[
-  == Dynamic slide
-  Did you know that...
-
-  #pause
-  ...you can see the current section at the top of the slide?
-]
-```
-This time, we obtain these PDF pages:
-![simple example](https://polylux.dev/book/themes/gallery/simple.png)
-
-As you can see, a theme can introduce its own types of slides (here: `title-slide`,
-`slide`, `focus-slide`, `centered-slide`) to let you quickly switch between
-different layouts.
-The book
-[has more infos](https://polylux.dev/book/themes/themes.html)
-on how to use (and create your own) themes.
-
+or you directly start by using a
+[template](https://typst.app/universe/search/?q=polylux&kind=templates).
+The simplest one of them is called
+["basic"](https://github.com/polylux-typ/basic).
+It is still very unintrusive but gives you some sensible defaults.
 
 For dynamic content, Polylux also provides [a convenient API for complex
 overlays](https://polylux.dev/book/dynamic/dynamic.html).
 
-If you use [pdfpc](https://pdfpc.github.io/) to display your slides, you can rely
-on [Polylux' support for it](https://polylux.dev/book/external/pdfpc.html)
+If you use [pdfpc](https://pdfpc.github.io/) to display your slides, you can
+rely on [Polylux' support for it](https://polylux.dev/book/external/pdfpc.html)
 and create speaker notes, hide slides, configure the timer and more!
 
 Visit the
@@ -132,13 +77,12 @@ where you can see the features of this template in action.
 compatibility guarantees!**
 
 ## Acknowledgements
-Thank you to...
-- [@drupol](https://github.com/drupol) for the `university` theme
-- [@Enivex](https://github.com/Enivex) for the `metropolis` theme
-- [@MarkBlyth](https://github.com/MarkBlyth) for contributing to the `clean` theme
-- [@ntjess](https://github.com/ntjess) for contributing to the height fitting
-  feature
-- [@JuliusFreudenberger](https://github.com/JuliusFreudenberger) for maintaining
-  the `polylux2pdfpc` AUR package
-- [@fncnt](https://github.com/fncnt) for coming up with the name "Polylux"
-- the Typst authors and contributors for this refreshing piece of software
+Various people have contributed to this package and I will certainly forget
+someone here, but amongst others I would like to thank
+[@rmburg](https://github.com/rmburg),
+[@drupol](https://github.com/drupol),
+[@Enivex](https://github.com/Enivex),
+[@MarkBlyth](https://github.com/MarkBlyth),
+[@ntjess](https://github.com/ntjess),
+[@JuliusFreudenberger](https://github.com/JuliusFreudenberger), and
+[@fncnt](https://github.com/fncnt) (who came up with the name _Polylux_).

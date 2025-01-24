@@ -1,27 +1,30 @@
+// Get Polylux from the official package repository
 #import "../polylux.typ": *
 
+// Make the paper dimensions fit for a presentation and the text larger
 #set page(paper: "presentation-16-9")
-#set text(size: 25pt)
+#set text(size: 25pt, font: "Lato")
 
-#polylux-slide[
-  #align(horizon + center)[
-    = Very minimalist slides
+// Use #slide to create a slide and style it using your favourite Typst functions
+#slide[
+  #set align(horizon)
+  = Very minimalist slides
 
-    A lazy author
+  A lazy author
 
-    July 23, 2023
-  ]
+  July 23, 2023
 ]
 
-#polylux-slide[
+#slide[
   == First slide
 
   Some static text on this slide.
 ]
 
-#polylux-slide[
+#slide[
   == This slide changes!
 
   You can always see this.
+  // Make use of features like #uncover, #only, and others to create dynamic content
   #uncover(2)[But this appears later!]
 ]
