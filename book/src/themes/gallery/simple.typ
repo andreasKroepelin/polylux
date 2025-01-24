@@ -1,4 +1,4 @@
-#import "../../../../polylux.typ": *
+#import "../../../../src/polylux.typ": *
 
 #import themes.simple: *
 

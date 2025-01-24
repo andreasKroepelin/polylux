@@ -1,4 +1,4 @@
-#import "../../../polylux.typ": *
+#import "../../../src/polylux.typ": *
 
 // ANCHOR: init
 #let science-slam-theme(aspect-ratio: "16-9", darkness: "dark", body) = {
@@ -56,4 +56,3 @@
   You didn't expect that!
 ]
 // ANCHOR_END: use-slide
-

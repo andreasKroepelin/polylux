@@ -1,4 +1,4 @@
-#import "../../../polylux.typ": *
+#import "../../../src/polylux.typ": *
 
 #set page(paper: "presentation-16-9", fill: teal.lighten(90%))
 #set text(size: 25pt, font: "Lato")

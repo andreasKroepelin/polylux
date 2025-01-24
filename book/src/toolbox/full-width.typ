@@ -1,4 +1,4 @@
-#import "../../../polylux.typ": *
+#import "../../../src/polylux.typ": *
 #set text(size: 30pt, font: "Atkinson Hyperlegible")
 
 #set page(
@@ -11,4 +11,3 @@
 #slide[
   #lorem(10)
 ]
-
