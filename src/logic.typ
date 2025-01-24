@@ -235,7 +235,7 @@
     only(start + idx, body)
   }
   if full {
-    only((beginning: start + lines.len()), body)
+    only((beginning: start + lines.len() - 1), body)
   }
 }
 
