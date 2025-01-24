@@ -13,7 +13,7 @@ If you like it, consider [giving a star on GitHub](https://github.com/andreasKro
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/andreasKroepelin/polylux)
 ![GitHub Repo stars](https://img.shields.io/github/stars/andreasKroepelin/polylux)
 [![Demo badge](https://img.shields.io/badge/demo-pdf-blue)](https://github.com/andreasKroepelin/polylux/releases/latest/download/demo.pdf)
-![Templates badge](https://img.shields.io/badge/templates-5-aqua)
+[![Templates badge](https://img.shields.io/badge/templates-5-aqua)](https://typst.app/universe/search/?q=polylux&kind=templates)
 
 
 ## Quickstart
