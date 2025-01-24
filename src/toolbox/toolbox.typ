@@ -8,5 +8,6 @@
   last-slide-number,
   big,
   side-by-side,
-  full-width-block
+  full-width-block,
+  next-heading,
 )

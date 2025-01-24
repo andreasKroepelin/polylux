@@ -95,3 +95,14 @@
   show: move.with(dx: -margin.left)
   block(width: 100% + margin-x, ..args)
 }
+
+#let next-heading(level: 1, fn) = context {
+  let hs = query(heading.where(level: level).after(here()))
+  if hs.len() > 0 {
+    let h = hs.first().body
+    if h != [] {
+      fn(h)
+    }
+  }
+}
+
