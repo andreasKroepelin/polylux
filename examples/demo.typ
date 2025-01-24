@@ -1,9 +1,15 @@
 #import "../src/polylux.typ": *    
 
 #show link: set text(blue)
-#set text(font: "Lato", size: 20pt)
-#show raw: set text(font: "JuliaMono")
+#set text(font: "Andika", size: 20pt)
+#show raw: set text(font: "Fantasque Sans Mono")
 #show math.equation: set text(font: "Lete Sans Math")
+
+#let my-stroke = stroke(
+  thickness: 2pt,
+  paint: blue.lighten(50%),
+  cap: "round",
+)
 
 #set page(
   paper: "presentation-16-9",
@@ -14,10 +20,10 @@
 
     Andreas Kröpelin, January 2025 #h(1fr) #toolbox.slide-number
   ],
-  header: box(stroke: (bottom: 2pt + blue.lighten(20%)), inset: 8pt)[
+  header: box(stroke: (bottom: my-stroke), inset: 8pt)[
     #set text(size: .6em)
     #set align(horizon)
-    #box(image("../assets/polylux-logo.svg", height: 2em))
+    // #box(image("../assets/polylux-logo.svg", height: 2em))
     #h(1fr)
     Polylux demo | #toolbox.current-section
   ]
@@ -30,6 +36,7 @@
   #set align(horizon)
   #set text(size: 1.5em)
   #strong(title)
+  #line(stroke: my-stroke, length: 50%)
   #toolbox.register-section(title)
 ]
 
@@ -37,8 +44,14 @@
   #set page(footer: none, header: none)
   #set align(horizon)
   #text(size: 2em, weight: "bold")[
-    Polylux: Easily creating slides in Typst
+    #toolbox.side-by-side(columns: (auto, 1fr))[
+      #image("../assets/polylux-logo.svg", height: 2em)
+    ][
+      Polylux \ Easily creating slides in Typst
+    ]
   ]
+
+  #line(stroke: my-stroke, length: 100%)
 
   An overview over all the features
 
@@ -62,7 +75,7 @@
 
   On the top of this slide, you can see the slide title.
 
-  We used a simple level-1 heading for that.
+  We used a simple level-one heading for that.
 ]
 
 #slide[
@@ -172,7 +185,6 @@
   = Convenient rules as strings
 As as short hand option, you can also specify rules as strings in a special
 syntax.
-
 Comma separated, you can use rules of the form
   #table(
     columns: (auto, auto),
@@ -311,7 +323,7 @@ Comma separated, you can use rules of the form
   ]
 ]
 
-#new-section-slide("Toolbox")
+#new-section-slide[Toolbox #emoji.wrench]
 
 #slide[
   = The `toolbox` module
