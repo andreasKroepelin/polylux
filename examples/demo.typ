@@ -1,380 +1,369 @@
-#import "../polylux.typ": *    
-#import themes.clean: *
+#import "../src/polylux.typ": *    
 
 #show link: set text(blue)
-#set text(font: "Inria Sans")
-// #show heading: set text(font: "Vollkorn")
+#set text(font: "Lato", size: 20pt)
 #show raw: set text(font: "JuliaMono")
+#show math.equation: set text(font: "Lete Sans Math")
 
-#show: clean-theme.with(
-    footer: [Andreas Kröpelin, July 2023],
-    short-title: [Polylux demo],
-    logo: image("../assets/logo.png"),
+#set page(
+  paper: "presentation-16-9",
+  margin: 2cm,
+  footer: [
+    #set text(size: .6em)
+    #set align(horizon)
+
+    Andreas Kröpelin, January 2025 #h(1fr) #toolbox.slide-number
+  ],
+  header: box(stroke: (bottom: 2pt + blue.lighten(20%)), inset: 8pt)[
+    #set text(size: .6em)
+    #set align(horizon)
+    #box(image("../assets/polylux-logo.svg", height: 2em))
+    #h(1fr)
+    Polylux demo | #toolbox.current-section
+  ]
 )
 
-#set text(size: 20pt)
+#show heading: set block(below: 2em)
 
-#title-slide(
-    title: [`Polylux`: Easily creating slides in Typst],
-    subtitle: "An overview over all the features",
-    authors: "Andreas Kröpelin",
-    date: "April 2023",
-)
-
-#new-section-slide("Introduction")
-
-#slide(title: "About this presentation")[
-    This presentation is supposed to briefly showcase what you can do with this
-    package.
-
-    For a full documentation, read the
-    #link("https://polylux.dev/book/")[online book].
-]
-
-#slide(title: "A title")[
-    Let's explore what we have here.
-
-    On the top of this slide, you can see the slide title.
-
-    We used the `title` argument of the `#slide` function for that:
-    ```typ
-    #slide(title: "First slide")[
-        ...
-    ]
-    ```
-    (This works because we utilise the `clean` theme; more on that later.)
+#let new-section-slide(title) = slide[
+  #set page(footer: none, header: none)
+  #set align(horizon)
+  #set text(size: 1.5em)
+  #strong(title)
+  #toolbox.register-section(title)
 ]
 
 #slide[
-    Titles are not mandatory, this slide doesn't have one.
+  #set page(footer: none, header: none)
+  #set align(horizon)
+  #text(size: 2em, weight: "bold")[
+    Polylux: Easily creating slides in Typst
+  ]
 
-    But did you notice that the current section name is displayed above that
-    top line?
+  An overview over all the features
 
-    We defined it using
-    #raw("#new-section-slide(\"Introduction\")", lang: "typst", block: false).
-
-    This helps our audience with not getting lost after a microsleep.
-
-    You can also spot a short title above that.
+  Andreas Kröpelin, January 2025
 ]
 
-#slide(title: "The bottom of the slide")[
-    Now, look down!
+#new-section-slide("Introduction")
 
-    There we have some general info for the audience about what talk they are
-    actually attending right now.
+#slide[
+  = About this presentation
+  This presentation is supposed to briefly showcase what you can do with this
+  package.
 
-    You can also see the slide number there.
+  For a full documentation, read the
+  #link("https://polylux.dev/book/")[online book].
+]
+
+#slide[
+  = A title
+  Let's explore what we have here.
+
+  On the top of this slide, you can see the slide title.
+
+  We used a simple level-1 heading for that.
+]
+
+#slide[
+  Titles are not mandatory, this slide doesn't have one.
+
+  But did you notice that the current section name is displayed above that top
+  line?
+
+  We defined it using
+  #raw("#toolbox.register-section(\"Introduction\")", lang: "typst", block: false).
+
+  This helps our audience with not getting lost after a microsleep.
+
+  You can also spot a short title next to that.
+]
+
+#slide[
+  = The bottom of the slide
+  Now, look down!
+
+  There we have some general info for the audience about what talk they are
+  actually attending right now.
+
+  You can also see the slide number there.
 ]
 
 
 #new-section-slide("Dynamic content")
 
 
-#slide(title: [A dynamic slide with `pause`s])[
-    Sometimes we don't want to display everything at once.
-    #pause
+#slide[
+  = A dynamic slide with `#show: later`
+  Sometimes we don't want to display everything at once.
+  #show: later
 
-    That's what the `#pause` function is there for!
-    #pause
+  That's what the `#show: later` feature is there for!
+  #show: later
 
-    It makes everything after it appear at the next subslide.
+  It makes everything after it appear at the next subslide.
 
-    #text(.6em)[(Also note that the slide number does not change while we are here.)]
+  #set text(size: .6em)
+  (Also note that the slide number does not change while we are here.)
 ]
 
-#slide(title: "Fine-grained control")[
-    When `#pause` does not suffice, you can use more advanced commands to show
-    or hide content.
+#slide[
+  = Fine-grained control
+  When `#show: later` does not suffice, you can use more advanced commands to
+  show or hide content.
 
-    These are some of your options:
-    - `#uncover`
-    - `#only`
-    - `#alternatives`
-    - `#one-by-one`
-    - `#line-by-line`
+  These are some of your options:
+  - `#uncover`
+  - `#only`
+  - `#alternatives`
+  - `#one-by-one`
+  - `#item-by-item`
 
-    Let's explore them in more detail!
+  Let's explore them in more detail!
 ]
 
 #let example(body) = block(
-    width: 100%,
-    inset: .5em,
-    fill: aqua.lighten(80%),
-    radius: .5em,
-    text(size: .8em, body)
+  width: 100%,
+  inset: .5em,
+  fill: aqua.lighten(80%),
+  radius: .5em,
+  text(size: .8em, body)
 )
 
-#slide(title: [`#uncover`: Reserving space])[
-    With `#uncover`, content still occupies space, even when it is not displayed.
+#slide[
+  = `#uncover`: Reserving space
+  With `#uncover`, content still occupies space, even when it is not displayed.
 
-    For example, #uncover(2)[these words] are only visible on the second "subslide".
+  For example, #uncover(2)[these words] are only visible on the second
+  "subslide".
 
-    In `()` behind `#uncover`, you specify _when_ to show the content, and in
-    `[]` you then say _what_ to show:
-    #example[
-        ```typ
-        #uncover(3)[Only visible on the third "subslide"]
-        ```
-        #uncover(3)[Only visible on the third "subslide"]
-    ]
+  In `()` behind `#uncover`, you specify _when_ to show the content, and in
+  `[]` you then say _what_ to show:
+  #example[
+    ```typ
+    #uncover(3)[Only visible on the third "subslide"]
+    ```
+    #uncover(3)[Only visible on the third "subslide"]
+  ]
 ]
 
-#slide(title: "Complex display rules")[
-    So far, we only used single subslide indices to define when to show something.
+#slide[
+  = Complex display rules
+  So far, we only used single subslide indices to define when to show something.
 
-    We can also use arrays of numbers...
-    #example[
-        ```typ
-        #uncover((1, 3, 4))[Visible on subslides 1, 3, and 4]
-        ```
-        #uncover((1, 3, 4))[Visible on subslides 1, 3, and 4]
-    ]
+  We can also use arrays of numbers...
+  #example[
+    ```typ
+    #uncover((1, 3, 4))[Visible on subslides 1, 3, and 4]
+    ```
+    #uncover((1, 3, 4))[Visible on subslides 1, 3, and 4]
+  ]
 
-    ...or a dictionary with `beginning` and/or `until` keys:
-    #example[
-        ```typ
-        #uncover((beginning: 2, until: 4))[Visible on subslides 2, 3, and 4]
-        ```
-        #uncover((beginning: 2, until: 4))[Visible on subslides 2, 3, and 4]
-    ]
+  ...or a dictionary with `beginning` and/or `until` keys:
+  #example[
+    ```typ
+    #uncover((beginning: 2, until: 4))[Visible on subslides 2, 3, and 4]
+    ```
+    #uncover((beginning: 2, until: 4))[Visible on subslides 2, 3, and 4]
+  ]
 ]
 
-#slide(title: "Convenient rules as strings")[
-    As as short hand option, you can also specify rules as strings in a special
-    syntax.
+#slide[
+  = Convenient rules as strings
+As as short hand option, you can also specify rules as strings in a special
+syntax.
 
-    Comma separated, you can use rules of the form
-    #table(
-        columns: (auto, auto),
-        column-gutter: 1em,
-        stroke: none,
-        align: (x, y) => (right, left).at(x),
-        [`1-3`], [from subslide 1 to 3 (inclusive)],
-        [`-4`], [all the time until subslide 4 (inclusive)],
-        [`2-`], [from subslide 2 onwards],
-        [`3`], [only on subslide 3],
+Comma separated, you can use rules of the form
+  #table(
+    columns: (auto, auto),
+    column-gutter: 1em,
+    stroke: none,
+    align: (x, y) => (right, left).at(x),
+    [`1-3`], [from subslide 1 to 3 (inclusive)],
+    [`-4`], [all the time until subslide 4 (inclusive)],
+    [`2-`], [from subslide 2 onwards],
+    [`3`], [only on subslide 3],
+  )
+  #example[
+    ```typ
+    #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
+    ```
+    #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
+  ]
+]
+
+#slide[
+  = `#only`: Reserving no space
+  Everything that works with `#uncover` also works with `#only`.
+
+  However, content is completely gone when it is not displayed.
+
+  For example, #only(2)[#text(red)[see how]] the rest of this sentence moves.
+
+  Again, you can use complex string rules, if you want.
+  #example[
+   ```typ
+   #only("2-4, 6")[Visible on subslides 2, 3, 4, and 6]
+   ```
+   #only("2-4, 6")[Visible on subslides 2, 3, 4, and 6]
+  ]
+]
+
+#slide[
+  = `#alternatives`: Substituting content
+  You might be tempted to try
+  #example[
+   ```typ
+   #only(1)[Ann] #only(2)[Bob] #only(3)[Christopher] likes #only(1)[chocolate] #only(2)[strawberry] #only(3)[vanilla] ice cream.
+   ```
+   #only(1)[Ann] #only(2)[Bob] #only(3)[Christopher]
+   likes
+   #only(1)[chocolate] #only(2)[strawberry] #only(3)[vanilla]
+   ice cream.
+  ]
+
+  But it is hard to see what piece of text actually changes because everything
+  moves around.
+  Better:
+  #example[
+    ```typ
+    #alternatives[Ann][Bob][Christopher] likes #alternatives[chocolate][strawberry][vanilla] ice cream.
+    ```
+    #alternatives[Ann][Bob][Christopher] likes #alternatives[chocolate][strawberry][vanilla] ice cream.
+  ]
+]
+
+#slide[
+  = `#one-by-one`: An alternative for `#show: later`
+  #set text(size: .9em)
+  `#alternatives` is to `#only` what `#one-by-one` is to `#uncover`.
+
+  `#one-by-one` behaves similar to using `#show: later` but you can additionally
+  state when uncovering should start.
+  #example[
+    ```typ
+    #one-by-one(start: 2)[one ][by ][one]
+    ```
+    #one-by-one(start: 2)[one ][by ][one]
+  ]
+
+  `start` can also be omitted, then it starts with the first subside:
+  #example[
+    ```typ
+    #one-by-one[one ][by ][one]
+    ```
+    #one-by-one[one ][by ][one]
+  ]
+]
+
+#slide[
+  = `#item-by-item` for lists
+  Sometimes it is convenient to write the different contents to uncover one
+  at a time in subsequent lines.
+
+  This comes in especially handy for bullet lists, enumerations, and term lists.
+  #example[
+    #toolbox.side-by-side(
+      ```typ
+      #item-by-item(start: 2)[
+        - first
+        - second
+        - third
+      ]
+      ```,
+      item-by-item(start: 2)[
+        - first
+        - second
+        - third
+      ]
     )
-    #example[
-        ```typ
-        #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
-        ```
-        #uncover("-2, 4-6, 8-")[Visible on subslides 1, 2, 4, 5, 6, and from 8 onwards]
+  ]
+
+  `start` is again optional and defaults to `1`.
+]
+
+#slide[
+  = Reveal code
+
+  You can use the function `#reveal-code` to slowly guide your audience through
+  some code.
+
+  #example[
+    #toolbox.side-by-side[
+      ````typ
+      #reveal-code(lines: (1, 3))[```rs
+      pub fn main() {
+          let x = 42;
+          let y = 6;
+          dbg!(x / y);
+      }
+      ```]
+      ````
+    ][
+      #reveal-code(lines: (1, 3, 5))[```rs
+      pub fn main() {
+          let x = 42;
+          let y = 6;
+          dbg!(x / y);
+      }
+      ```]
     ]
+  ]
 ]
 
-#slide(title: [`#only`: Reserving no space])[
-    Everything that works with `#uncover` also works with `#only`.
+#new-section-slide("Toolbox")
 
-    However, content is completely gone when it is not displayed.
-
-    For example, #only(2)[#text(red)[see how]] the rest of this sentence moves.
-
-    Again, you can use complex string rules, if you want.
-    #example[
-        ```typ
-        #only("2-4, 6")[Visible on subslides 2, 3, 4, and 6]
-        ```
-        #only("2-4, 6")[Visible on subslides 2, 3, 4, and 6]
-    ]
+#slide[
+  = The `toolbox` module
+  Polylux ships a `toolbox` module with solutions for common tasks in slide
+  building.
 ]
 
-#slide(title: [`#alternatives`: Substituting content])[
-    You might be tempted to try
-    #example[
-        ```typ
-        #only(1)[Ann] #only(2)[Bob] #only(3)[Christopher] likes #only(1)[chocolate] #only(2)[strawberry] #only(3)[vanilla] ice cream.
-        ```
-        #only(1)[Ann] #only(2)[Bob] #only(3)[Christopher]
-        likes
-        #only(1)[chocolate] #only(2)[strawberry] #only(3)[vanilla]
-        ice cream.
-    ]
+#slide[
+  = Big
+  You can scale content such that it fills the remaining space using
+  `#toolbox.big`:
 
-    But it is hard to see what piece of text actually changes because everything
-    moves around.
-    Better:
-    #example[
-        ```typ
-        #alternatives[Ann][Bob][Christopher] likes #alternatives[chocolate][strawberry][vanilla] ice cream.
-        ```
-        #alternatives[Ann][Bob][Christopher] likes #alternatives[chocolate][strawberry][vanilla] ice cream.
-    ]
+  #toolbox.big[Wow!]
 ]
 
-#slide(title: [`#one-by-one`: An alternative for `#pause`])[
-    `#alternatives` is to `#only` what `#one-by-one` is to `#uncover`.
+#slide[
+  = Side by side content
+  Often you want to put different content next to each other.
+  We have the function `#toolbox.side-by-side` for that:
 
-    `#one-by-one` behaves similar to using `#pause` but you can additionally
-    state when uncovering should start.
-    #example[
-        ```typ
-        #one-by-one(start: 2)[one ][by ][one]
-        ```
-        #one-by-one(start: 2)[one ][by ][one]
-    ]
-
-    `start` can also be omitted, then it starts with the first subside:
-    #example[
-        ```typ
-        #one-by-one[one ][by ][one]
-        ```
-        #one-by-one[one ][by ][one]
-    ]
+  #toolbox.side-by-side(lorem(10), lorem(20), lorem(15))
 ]
 
-#slide(title: [`#line-by-line`: syntactic sugar for `#one-by-one`])[
-    Sometimes it is convenient to write the different contents to uncover one
-    at a time in subsequent lines.
-
-    This comes in especially handy for bullet lists, enumerations, and term lists.
-    #example[
-        #grid(
-            columns: (1fr, 1fr),
-            gutter: 1em,
-            ```typ
-            #line-by-line(start: 2)[
-                - first
-                - second
-                - third
-            ]
-            ```,
-            line-by-line(start: 2)[
-                - first
-                - second
-                - third
-            ]
-        )
-    ]
-
-    `start` is again optional and defaults to `1`.
-]
-
-#slide(title: [`#list-one-by-one` and Co: when `#line-by-line` doesn't suffice])[
-    While `#line-by-line` is very convenient syntax-wise, it fails to produce
-    more sophisticated bullet lists, enumerations or term lists.
-    For example, non-tight lists are out of reach.
-
-    For that reason, there are `#list-one-by-one`, `#enum-one-by-one`, and 
-    `#terms-one-by-one`, respectively.
-    #example[
-        #grid(
-            columns: (1fr, 1fr),
-            gutter: 1em,
-            ```typ
-            #enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
-            ```,
-            enum-one-by-one(start: 2, tight: false, numbering: "i)")[first][second][third]
-        )
-    ]
-
-    Note that, for technical reasons, the bullet points, numbers, or terms are
-    never covered.
-
-    `start` is again optional and defaults to `1`.
-]
-
-
-/*
-#slide(title: "Different ways of covering content")[
-    When content is covered, it is completely invisible by default.
-
-    However, you can also just display it in light gray by using the
-    `mode` argument with the value `"transparent"`:
-    #let pc = 1
-    #{ pc += 1 } #show: pause(pc, mode: "transparent")
-
-    Covered content is then displayed differently.
-    #{ pc += 1 } #show: pause(pc, mode: "transparent")
-
-    Every `uncover`-based function has an optional `mode` argument:
-    - `#show: pause(...)`
-    - `#uncover(...)[...]`
-    - `#one-by-one(...)[...][...]`
-    - `#line-by-line(...)[...][...]`
-]
-*/
-
-#new-section-slide("Themes")
-
-
-#slide(title: "How a slide looks...")[
-    ... is defined by the _theme_ of the presentation.
-
-    This demo uses the `clean` theme.
-
-    Because of it, the title slide and the decoration on each slide (with
-    section name, short title, slide number etc.) look the way they do.
-
-    Themes can also provide variants, for example ...
-]
-
-#focus-slide[
-    ... this one!
-
-    It's very minimalist and helps the audience focus on an important point.
-]
-
-#slide(title: "Your own theme?")[
-    If you want to create your own design for slides, you can define custom
-    themes!
-
-    #link("https://polylux.dev/book/themes/your-own.html")[The book]
-    explains how to do so.
-]
-
-#new-section-slide("Utilities")
-
-#slide(title: [The `utils` module])[
-    Polylux ships a `utils` module with solutions for common tasks in slide
-    building.
-]
-
-#slide(title: [Fit to height])[
-    You can scale content such that it has a certain height using
-    `#fit-to-height(height, content)`:
-
-    #fit-to-height(2.5cm)[Height is `2.5cm`]
-]
-
-#slide(title: "Fill remaining space")[
-    This function also allows you to fill the remaining space by using fractions
-    as heights, i.e. `fit-to-height(1fr)[...]`:
-
-    #fit-to-height(1fr)[Wow!]
-]
-
-#slide(title: "Side by side content")[
-    Often you want to put different content next to each other.
-    We have the function `#side-by-side` for that:
-
-    #side-by-side(lorem(10), lorem(20), lorem(15))
-]
-
-#slide(title: "Outline")[
-    Why not include an outline?
-    #polylux-outline(padding: 1em, enum-args: (tight: false))
+#slide[
+  = Overview over sections
+  Why not include an outline?
+  #toolbox.all-sections((sections, current) => enum(tight: false, ..sections))
 ]
 
 #new-section-slide("Typst features")
 
-#slide(title: "Use Typst!")[
-    Typst gives us so many cool things #footnote[For example footnotes!].
-    Use them!
+#slide[
+  = Use Typst!
+  Typst gives us so many cool things #footnote[For example footnotes!].
+  Use them!
 ]
 
-#slide(title: "Bibliography")[
-    Let us cite something so we can have a bibliography: @A @B @C
-    #bibliography(title: none, "literature.bib")
+#slide[
+  = Bibliography
+  Let us cite something so we can have a bibliography: @A @B @C
+  #bibliography(title: none, "literature.bib")
 ]
 
 #new-section-slide("Conclusion")
 
-#slide(title: "That's it!")[
-    Hopefully you now have some kind of idea what you can do with this template.
+#slide[
+  = That's it!
+  Hopefully you now have some kind of idea what you can do with this package.
 
-    Consider giving it
-    #link("https://github.com/andreasKroepelin/polylux")[a GitHub star #text(font: "OpenMoji")[#emoji.star]]
-    or open an issue if you run into bugs or have feature requests.
+  Consider giving it
+  #link("https://github.com/andreasKroepelin/polylux")[
+    a GitHub star #text(font: "OpenMoji")[#emoji.star]
+  ]
+  or open an issue if you run into bugs or have feature requests.
 ]
