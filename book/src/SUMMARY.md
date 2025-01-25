@@ -17,6 +17,7 @@
   - [Side by side](./toolbox/side-by-side.md)
   - [Progress](./toolbox/progress.md)
   - [Sections](./toolbox/sections.md)
+  - [Next heading](./toolbox/next-heading.md)
   - [Big](./toolbox/big.md)
   - [Full width](./toolbox/full-width.md)
 - [External tools](./external/external.md)

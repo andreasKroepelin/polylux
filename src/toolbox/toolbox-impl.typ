@@ -99,9 +99,9 @@
 #let next-heading(level: 1, fn) = context {
   let hs = query(heading.where(level: level).after(here()))
   if hs.len() > 0 {
-    let h = hs.first().body
-    if h != [] {
-      fn(h)
+    let h = hs.first()
+    if h.location().page() == here().page() {
+      fn(h.body)
     }
   }
 }
