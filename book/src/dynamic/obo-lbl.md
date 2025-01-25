@@ -54,3 +54,5 @@ A more complex example involving enums and term lists:
 
 ![item-by-item-complex](item-by-item-complex.png)
 
+Note that the list markers and enum numbers are not hidden.
+You can truly consider this a bug or a feature...
