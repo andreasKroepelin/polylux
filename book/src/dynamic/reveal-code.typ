@@ -4,14 +4,14 @@
 
 #slide[
   #reveal-code(lines: (1, 3, 6, 7))[```rust
-      pub fn main() {
-        let x = vec![3, 4, 1];
-        let y = &x;
-        if let Some(a) = x.first() {
-          dbg!(a);
-        } else {
-          println!("x is empty.");
-        }
+    pub fn main() {
+      let x = vec![3, 4, 1];
+      let y = &x;
+      if let Some(a) = x.first() {
+        dbg!(a);
+      } else {
+        println!("x is empty.");
       }
+    }
     ```]
 ]
