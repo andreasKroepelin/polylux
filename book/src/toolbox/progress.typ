@@ -9,7 +9,7 @@
   toolbox.progress-ratio(ratio => {
     stack(
       dir: ltr,
-      rect(stroke: blue, fill: blue, width: ratio       * 8cm),
+      rect(stroke: blue, fill: blue, width: ratio * 8cm),
       rect(stroke: blue, fill: none, width: (1 - ratio) * 8cm),
     )
   })
